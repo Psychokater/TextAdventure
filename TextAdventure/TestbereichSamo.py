@@ -13,3 +13,4 @@ def call_item_list():
     print ('     Item       ATK DEF HP VL PR')
     for (key,value) in (all_items.items()):
         print (key,':',value)
+call_item_list()
