@@ -10,7 +10,10 @@ all_items = {
 9:["ItemName8",(9),(8),(7),(6),(5)],
 }
 def call_item_list():
-    print ('     Item       ATK DEF HP VL PR')
+    print ('\u2009____________________________________')
+    print ('\uFF5C     Item       ATK DEF HP VL PR  \uFF5C')
     for (key,value) in (all_items.items()):
-        print (key,':',value)
+        print ('\uFF5C',key,':',value,'\uFF5C')
+    print (end='\u2009')
+    print ('\u203e'*36)
 call_item_list()
