@@ -12,22 +12,22 @@ def Encounter(_startLocation, _location, _playerLevel):
     
 
     if location == startLocation:
-        locationIndex = 10
+        locationIndex = 1        
     elif location == "the town":
-        locationIndex = 10
-    elif location == "the flatlands":
-        locationIndex = 8
-    elif location == "the forrest":
-        locationIndex = 8
-    elif location == "the islands":
-        locationIndex = 4
-    elif location == "the mountains":
-        locationIndex = 2
-    elif location == "the castle":
         locationIndex = 1
+    elif location == "the flatlands":
+        locationIndex = 2
+    elif location == "the forrest":
+        locationIndex = 2
+    elif location == "the islands":
+        locationIndex = 6
+    elif location == "the mountains":
+        locationIndex = 8
+    elif location == "the castle":
+        locationIndex = 10
     
     luck = random.randint(1,100)
-    encounterIndex = round(luck / playerLevel * locationIndex) # high = good, low = bad, max = 1000 (lvl 1, location 1)
+    encounterIndex = round(luck / (playerLevel * locationIndex)) # high = good, low = bad, max = 100 (lvl 1, location 1)
     return encounterIndex
 
     StartLocation()
@@ -39,13 +39,13 @@ def Encounter(_startLocation, _location, _playerLevel):
     Castle()
 
 #
-#  def grabEncounter(location, playerLevel)
+#  def grabEncounter(location)
 #      global encounterIndex
 #       if encounterIndex >= ???
 #            Gold ++
 #       if encounterIndex  >=??? and encounterIndex <???:
 #           Gold +
-#       if encounterIndex 
+#       if encounterIndex
 
 
 ############################################ Start Location ################################
