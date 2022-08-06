@@ -1,6 +1,3 @@
-from multiprocessing.dummy import Value
-
-
 all_items = {
 1:["Apple    ",(0),(0),(7),(6),(5)],
 2:["ItemName1",(9),(8),(0),(6),(5)],
