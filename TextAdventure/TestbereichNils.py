@@ -58,7 +58,7 @@
 
 # print(listPlayer)
 # y = int(input("bitte Anzahl auswählen!"))
-
+#
 # for i in range(0,y):
 #     x = int(input("bitte 1 auswählen"))
 #     listTemp.append(x)

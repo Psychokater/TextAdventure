@@ -16,6 +16,7 @@ def Encounter(_startLocation, _location, _playerLevel):
             1003 : ["Bandit", 6, 4, 20, 4]
             } #Name, ATK, DEF, HP, Dropvalue
 
+#
     monsterLevel = 1
     monsterName = ""
     monsterATK = 0
