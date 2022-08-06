@@ -7,25 +7,44 @@ def Encounter(_startLocation, _location, _playerLevel):
     global encounterIndex
     startLocation = _startLocation
     location = _location
-    playerLevel = _playerLevel    
-    encounterIndex = 0
+    playerLevel = _playerLevel  
+    locationIndex = 0
+    
 
     if location == startLocation:
-        StartLocation()
+        locationIndex = 1
     elif location == "the town":
-        TheTown()
+        locationIndex = 2
     elif location == "the flatlands":
-        Flatlands()
+        locationIndex = 3
     elif location == "the forrest":
-        Forrest()
+        locationIndex = 4
     elif location == "the islands":
-        Islands()
+        locationIndex = 5
     elif location == "the mountains":
-        Mountains()
+        locationIndex = 6
     elif location == "the castle":
-        Castle()
+        locationIndex = 7
+    
+    luck = random.randint(1,100)
+    encounterIndex = round(playerLevel * 10 * locationIndex / luck)
     return encounterIndex
 
+    StartLocation()
+    TheTown()
+    Flatlands()
+    Forrest()
+    Islands()
+    Mountains()
+    Castle()
+
+#
+#  def grabEncounter(location, playerLevel)
+#      global encounterIndex
+#      
+#
+#
+#
 
 
 ############################################ Start Location ################################
