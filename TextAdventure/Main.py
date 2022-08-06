@@ -71,7 +71,7 @@ import Encounter
 #
 
 playerStatPoints = 0
-playerLevel = 0
+playerLevel = 1
 playerExp = 0
 playerHP = 20
 playerAtk = 1
@@ -82,13 +82,14 @@ playerInventoryItems = {"Butterknife":[1, 0, 0, 2], "Apple":[0, 0, 2, 1], "Hat":
 merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe add a counter for "Days" which increment with every Move()? More Days = More/Better Items (Monster Loot and Merchant)
 playerName = ''
 location = ''
+playerStats = [playerLevel, playerHP, playerAtk, playerDef, playerExp]
 
 
 
 ### Main Game
 def Main():
     global playerName
-    Intro.Intro()
+    #Intro.Intro()
     sleep(2)
     MainMenu()    
     if playerName == '':
@@ -220,7 +221,8 @@ def Move():
     sleep(2)
     EncounterSelection()
     if location == "the town":
-        EncounterMerchant()
+        #EncounterMerchant()
+        pass
     LevelUp()
 
 
@@ -276,9 +278,10 @@ def World(_location, _direction):
 
 
 def EncounterSelection():    
-    encounterIndex = Encounter.Encounter(startLocation, location, playerLevel)
-    if encounterIndex == 100:
-        pass
+   global startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney 
+   location, playerStats, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
+    startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney)
+
 
 
 def EncounterMerchant():
