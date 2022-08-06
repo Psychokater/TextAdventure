@@ -80,43 +80,103 @@
 # # print("Item\t\tATK\tDEF\tHeal\tValue")
 # # print(test[1][0],end = "\t ")
 # # print(test[1][1],end = "\t ")
-# # print(test[1][2],end = "\t ")
-# # print(test[1][3],end = "\t ")
-# # print(test[1][4])
+# # # print(test[1][2],end = "\t ")
+# # # print(test[1][3],end = "\t ")
+# # # print(test[1][4])
 
-# # print(test[2][0],end = "\t ")
-# # print(test[2][1],end = "\t ")
-# # print(test[2][2],end = "\t ")
-# # print(test[2][3],end = "\t ")
-# # print(test[2][4],end = "\t ")
+# # # print(test[2][0],end = "\t ")
+# # # print(test[2][1],end = "\t ")
+# # # print(test[2][2],end = "\t ")
+# # # print(test[2][3],end = "\t ")
+# # # print(test[2][4],end = "\t ")
 
-# # MonsterHP -= test[1][1]# * critchance
+# # # MonsterHP -= test[1][1]# * critchance
 
-# # input("Which Item to use/equip?")
-# # input = "1" (for Apple)
-# # HP += test[0][3]
-# # inventory -= test[1]
+# # # input("Which Item to use/equip?")
+# # # input = "1" (for Apple)
+# # # HP += test[0][3]
+# # # inventory -= test[1]
 
-from math import ceil
-import random
-encounterIndex = 0
-playerLevel = 0
-locationIndex = 0
+# from math import ceil
+# import random
+# encounterIndex = 0
+# playerLevel = 0
+# locationIndex = 0
 
-luck = 1 #random.randint(1,100)
-lucklist = [1,2,3,4,10,20,40,50,60,70,80,90,100]
+# luck = 1 #random.randint(1,100)
+# lucklist = [1,2,3,4,10,20,40,50,60,70,80,90,100]
 
 
-for i in range(1,11):
-    print(f"\n\n##################### Level = {i} ##########################")
-    playerLevel = i
-    for j in range(1,11):
-        locationIndex = j
-        #print(f"--- location = {j}\n")
-        print(f"\n\nLuck / Level: {playerLevel } * Location: {locationIndex}\n")
-        for k in range (1,101):
-            luck = k    
-            encounterIndex = ceil(luck / (playerLevel * locationIndex))
-            print(encounterIndex, end = " ")
+# for i in range(1,11):
+#     print(f"\n\n##################### Level = {i} ##########################")
+#     playerLevel = i
+#     for j in range(1,11):
+#         locationIndex = j
+#         #print(f"--- location = {j}\n")
+#         print(f"\n\nLuck / Level: {playerLevel } * Location: {locationIndex}\n")
+#         for k in range (1,101):
+#             luck = k    
+#             encounterIndex = ceil(luck / (playerLevel * locationIndex))
+#             print(encounterIndex, end = " ")
 
+
+
+
+def PicWolf():
+    print("""oh no, Wolf!
+                /^._        Bark
+  ,___,--~~~~--' /'~ Bark
+  `~--~\ )___,)/'               Bark
+      (/\\\_  (/\\\_
+       """)
+    
+
+
+def PicRat():
+    print("""look, rats!
+    
+     ~~(  )8:>    <;3(  )~~
+     """)
+
+def PicBandit():
+    print("""
+    
+    ToDo: Make a Pic of Bandit
+    
+    """)
+
+
+def PicDragon():
+    print("""
+    'It does not do to leave a live dragon out of your calculations, if you live near him.'      
+
+                     __/>^^^;:,
+                    /-.       :,/|/|
+                 __/ `c        :,/ \__
+                (~             ;/ /  /
+                 `-'--._       / / ,<     _
+                       /=\     /  _/     | '.
+                      / ',\ \\    \_     ,| |"       
+                     |=|  E_  |     \. ,/  |
+                     \=\   ""       `,,/   |
+                      \=\            ||    /
+                       \=\____       |\    \\
+                      / \/    `     <__)    \\
+                      | |                    |
+                    ,__\,\                   /
+                   ,--____>    /\.         ./
+                   '-__________>  \.______/
+                   
+                   """)
+
+
+
+enemyDict = {
+        1001 : ["Rats", 1, 0, 2, 1, PicRat],
+        1002 : ["Wolf", 3, 1, 10, 2, PicWolf],
+        1003 : ["Bandit", 6, 4, 20, 4, PicBandit],
+        1004 : ["Dragon", 20, 10, 50, 10, PicDragon]
+        } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+
+enemyDict[1001][5]()
 
