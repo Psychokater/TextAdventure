@@ -42,30 +42,30 @@
 # Merchantsell()
 
 
-ItemDic = {
-        10011 : ["Sword     ",0 , 2 , 4 , 5],
-        10101 : ["Shield    ",0 , 2 , 4 , 5],
-        10001 : ["Apple     ",0 , 2 , 4 , 5]}
+# ItemDic = {
+#         10011 : ["Sword     ",0 , 2 , 4 , 5],
+#         10101 : ["Shield    ",0 , 2 , 4 , 5],
+#         10001 : ["Apple     ",0 , 2 , 4 , 5]}
 
 
-listMerchant = ()
+# listMerchant = ()
 
-print(listMerchant)
+# print(listMerchant)
 
-listPlayer = []
-listPlayer = []
-listTemp = []
+# listPlayer = []
+# listPlayer = []
+# listTemp = []
 
-print(listPlayer)
-y = int(input("bitte Anzahl auswählen!"))
+# print(listPlayer)
+# y = int(input("bitte Anzahl auswählen!"))
 
-for i in range(0,y):
-    x = int(input("bitte 1 auswählen"))
-    listTemp.append(x)
-for j in range(0,y):
-    testindex = 10000 + listTemp[j]
-    listMerchant = (ItemDic[testindex][0])
-    print(listMerchant)
+# for i in range(0,y):
+#     x = int(input("bitte 1 auswählen"))
+#     listTemp.append(x)
+# for j in range(0,y):
+#     testindex = 10000 + listTemp[j]
+#     listMerchant = (ItemDic[testindex][0])
+#     print(listMerchant)
 
 
 
@@ -96,3 +96,27 @@ for j in range(0,y):
 # # input = "1" (for Apple)
 # # HP += test[0][3]
 # # inventory -= test[1]
+
+from math import ceil
+import random
+encounterIndex = 0
+playerLevel = 0
+locationIndex = 0
+
+luck = 1 #random.randint(1,100)
+lucklist = [1,2,3,4,10,20,40,50,60,70,80,90,100]
+
+
+for i in range(1,11):
+    print(f"\n\n##################### Level = {i} ##########################")
+    playerLevel = i
+    for j in range(1,11):
+        locationIndex = j
+        #print(f"--- location = {j}\n")
+        print(f"\n\nLuck / Level: {playerLevel } * Location: {locationIndex}\n")
+        for k in range (1,101):
+            luck = k    
+            encounterIndex = ceil(luck / (playerLevel * locationIndex))
+            print(encounterIndex, end = " ")
+
+

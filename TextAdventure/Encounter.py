@@ -9,210 +9,235 @@ def Encounter(_startLocation, _location, _playerLevel):
     location = _location
     playerLevel = _playerLevel  
     locationIndex = 0
+
+    monsterDict = {
+            1001 : ["Rats", 1, 0, 2, 1],
+            1002 : ["Wulf", 3, 1, 10, 2],
+            1003 : ["Bandit", 6, 4, 20, 4]
+            } #Name, ATK, DEF, HP, Dropvalue
+
+    monsterLevel = 1
+    monsterName = ""
+    monsterATK = 0
+    monsterDEF = 0
+    monsterHP = 0
+    
     
 
     if location == startLocation:
-        locationIndex = 1
+        locationIndex = 1        
     elif location == "the town":
-        locationIndex = 2
+        locationIndex = 1
     elif location == "the flatlands":
-        locationIndex = 3
+        locationIndex = 2
     elif location == "the forrest":
-        locationIndex = 4
+        locationIndex = 2
     elif location == "the islands":
-        locationIndex = 5
-    elif location == "the mountains":
         locationIndex = 6
+    elif location == "the mountains":
+        locationIndex = 8
     elif location == "the castle":
-        locationIndex = 7
+        locationIndex = 10
     
     luck = random.randint(1,100)
-    encounterIndex = round(playerLevel * 10 * locationIndex / luck)
-    return encounterIndex
+    encounterIndex = round(luck / (playerLevel * locationIndex)) # high = good, low = bad, max = 100 (lvl 1, location 1)
+    
+    if encounterIndex <= 10:
+        EncounterNothing()
+    if encounterIndex >= 10 or encounterIndex <= 100:
+        Encounter
 
-    StartLocation()
-    TheTown()
-    Flatlands()
-    Forrest()
-    Islands()
-    Mountains()
-    Castle()
+
+
+    # StartLocation()
+    # TheTown()
+    # Flatlands()
+    # Forrest()
+    # Islands()
+    # Mountains()
+    # Castle()
 
 #
-#  def grabEncounter(location, playerLevel)
+#  def grabEncounter(location)
 #      global encounterIndex
-#      
-#
-#
-#
+#       if luck >= ???
+#            Gold ++
+#       if luck  >=??? and luck <???:
+#           Gold +
+#       if encounterIndex
+
+
+
+
+              
 
 
 ############################################ Start Location ################################
 
-def StartLocation():
-    global encounterIndex
+# def StartLocation():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
 
 
-################################################ The Town ###########################################
+# ################################################ The Town ###########################################
 
-def TheTown():
-    global encounterIndex    
-    Merchant()
-    encounterIndex = 1
+# def TheTown():
+#     global encounterIndex    
+#     Merchant()
+#     encounterIndex = 1
     
 
-################################################ The Flatlands ###########################################
+# ################################################ The Flatlands ###########################################
 
-def Flatlands():
-    global encounterIndex
+# def Flatlands():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0        
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0        
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
-################################################ The Forrest ###########################################
+# ################################################ The Forrest ###########################################
 
-def Forrest():
-    global encounterIndex
+# def Forrest():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
-################################################ The Islands ###########################################
+# ################################################ The Islands ###########################################
 
-def Islands():
-    global encounterIndex
+# def Islands():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0        
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0        
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
-################################################ The Mountains ###########################################
+# ################################################ The Mountains ###########################################
 
-def Mountains():
-    global encounterIndex
+# def Mountains():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0        
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0        
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
-################################################ THe Castle #######################################
+# ################################################ THe Castle #######################################
 
-def Castle():
-    global encounterIndex
+# def Castle():
+#     global encounterIndex
     
-    luck = random.randint(1,100)
-    if luck == 100 and playerLevel > 5:
-        print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-        encounterIndex = 20        
-    if luck <= 10 and playerLevel > 5:
-        EncounterWolf()
-        encounterIndex = 2
-    if luck > 10 and luck <= 30 and playerLevel > 5:
-        EncounterRat()
-        encounterIndex = 3
-    if luck > 30 and luck <= 80 and playerLevel > 5:
-        Nothing()
-        encounterIndex = 0
-    if luck > 80 and luck < 100 and playerLevel > 5:
-        EncounterWanderer() 
-        encounterIndex = 10
-    if playerLevel < 5:
-        LowLevel()
+#     luck = random.randint(1,100)
+#     if luck == 100 and playerLevel > 5:
+#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
+#         encounterIndex = 20        
+#     if luck <= 10 and playerLevel > 5:
+#         EncounterWolf()
+#         encounterIndex = 2
+#     if luck > 10 and luck <= 30 and playerLevel > 5:
+#         EncounterRat()
+#         encounterIndex = 3
+#     if luck > 30 and luck <= 80 and playerLevel > 5:
+#         Nothing()
+#         encounterIndex = 0
+#     if luck > 80 and luck < 100 and playerLevel > 5:
+#         EncounterWanderer() 
+#         encounterIndex = 10
+#     if playerLevel < 5:
+#         LowLevel()
 
 
 
-########################################## No Encounter ##################################
+# ########################################## No Encounter ##################################
 
-def LowLevel():
+def EncounterLowLevel():
     print("You couldn't find anything here, maybe you come back when you are stronger?")
 
-def Nothing():
+def EncounterNothing():
     print("Phew, nothing happened here.")
 
 
-######################################## Friends ################################################
+# ######################################## Friends ################################################
 
 def EncounterWanderer(): 
     print("""A mystic old man wanders through this valley, maybe he has something for you?
@@ -261,32 +286,32 @@ def EncounterWolf():
 def EncounterRat():
     print("""look, ra3s!
     
-     ~~(  )8\:"> <";3(   )~~""")
+     ~~(  )8:>    <;3(  )~~
+     """)
 
 
 
-def EncounterDragon():
-    print("""
+# def EncounterDragon():
+#     print("""
+#     'It does not do to leave a live dragon out of your calculations, if you live near him.'      
 
-    'It does not do to leave a live dragon out of your calculations, if you live near him.'      
-            ,                      \,   
-            /|           \    ,     |\         
-            [ ,          |\  /|     | | 
-            | |       ,.`  `,` `,  /  | 
-            \  \  __ ,-` `  ,  , `/  /
-            \  \_\,``,   ` , ,  /  /
-            \  '  `  ,_ _`_,-,<._.<
-                ', `>.,`  `  `   ,., |_
-                \/`  `,   `   ,`  | /_
-            -,-..\  _  \  `  /  ,  / `._)
-            \_,,.) /\    ` /  / ) (-,, |
-                )  | \_\       '-`  |  `(
-                /```(   , --, ,' \   |`<` 
-            /_,--`\   <\  V /> ,` )<_/)
-            `   (_,\ \    |   /) / __/ 
-                    ) \ ('_.-._)/ /,`   
-                    `/ \\\ V    V ,/` \   
-                    <_/`\\\       /|`\_>   
-                        \-A.A-`|     
-                        -,,_-`""")
+#                      __/>^^^;:,
+#                     /-.       :,/|/|
+#                  __/ `c        :,/ \__
+#                 (~             ;/ /  /
+#                  `-'--._       / / ,<     _
+#                        /=\     /  _/     | '.
+#                       / ',\ \\    \_     ,| |"       
+#                      |=|  E_  |     \. ,/  |
+#                      \=\   ""       `,,/   |
+#                       \=\            ||    /
+#                        \=\____       |\    \\
+#                       / \/    `     <__)    \\
+#                       | |                    |
+#                     ,__\,\                   /
+#                    ,--____>    /\.         ./
+#                    '-__________>  \.______/
+                   
+#                    """)
+
 
