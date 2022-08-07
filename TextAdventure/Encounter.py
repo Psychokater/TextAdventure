@@ -9,7 +9,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     global enemyDict
     playerInventoryItems = _playerInventoryItems
     playerInventoryMoney = _playerInventoryMoney
-    playerStats = _playerStats #Level, Atk, Def, HP    
+    playerStats = _playerStats #Level, HP, Atk, Def, Exp  
     startLocation = _startLocation
     location = _location
     locationIndex = 0
@@ -92,15 +92,11 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     lootItem = "lootItem" #(add Item later!!!)
     tempMoney = 0.00
-    tempExp = 0
-    global tempPlayerHP
-    global tempEnemyHP
-    tempPlayerHP = _playerStats[1]
-    tempEnemyHP = _enemyDict[_enemyID][3]
+    tempExp = 0.00
 
     while True:
 
-        if tempPlayerHP <= 0:                                               # if player dead
+        if _playerStats[1] <= 0:                                                        # if player dead
             sleep(2)
             PicDeath()
             sleep(2)
@@ -108,42 +104,45 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             _playerInventoryMoney -= _playerInventoryMoney * 0.1
             _playerStats[4] *= 0.25
             _location = "the town"
-            _playerStats[1] = 0
+            _playerStats[1] = 1
             break
 
-        if tempEnemyHP <= 0:                                                # if enemy dead
+        elif _enemyDict[_enemyID][3] <= 0:                                                # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
-            _playerInventoryItems.append(lootItem)
             tempMoney += (_enemyDict[_enemyID][1] + _enemyDict[_enemyID][2] + _enemyDict[_enemyID][3]) / 2
             tempExp += _enemyDict[_enemyID][4] * 100
             print(f"\nYou received {lootItem}, {tempMoney} Gold and {tempExp} Experience.")
             _playerInventoryMoney = tempMoney
             _playerStats[4] = tempExp
-            _playerStats[1] = tempPlayerHP
+            _playerStats[1] = _playerStats[1]
             break
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input("\n(1) Attack\t(2) Inventory\t(3) Flee\n")                                   # Fight (P = Player, M = Monster)
-        if UserInputFight == "1":                                                                           # Player attacks first:
-            if  _enemyDict[_enemyID][2] - _playerStats[2] >= 0:                                             # P_ATK > M_DEF?
-                tempEnemyHP -=  (_enemyDict[_enemyID][2] - _playerStats[2])                                 # M_HP -= M_DEF - P_ATK
+        if UserInputFight == "1":                                                                           # Player attacks first
             print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[2]} Points.")
             sleep(1)
             print(f"{_enemyDict[_enemyID][0]} defends himself with {_enemyDict[_enemyID][2]} Points.")
             sleep(1)
-            print(f"{_enemyDict[_enemyID][0]} has {tempEnemyHP} HP left.")
+            if  _enemyDict[_enemyID][2] < _playerStats[2]:                                                 # P_DEF < M_ATK?
+                _enemyDict[_enemyID][3] += (_enemyDict[_enemyID][2] - _playerStats[2])                     # M_HP += M_DEF - P_ATK
+            else:
+                print("Attack blocked")
+            print(f"{_enemyDict[_enemyID][0]} has {_enemyDict[_enemyID][3]} HP left.")
             sleep(2)
-
-            if _playerStats[3] - _enemyDict[_enemyID][1] >= 0:                                              # M_ATK > P_DEF? (Monster)
-                 tempPlayerHP -= (_playerStats[3] - _enemyDict[_enemyID][1])                                # P_HP -= P_DEF - M_ATK 
-            print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")
+            
+            print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")          # Monster attacks second
             sleep(1)
             print(f"You defend yourself with {_playerStats[3]} Points.")
             sleep(1)
-            print(f"You have {tempPlayerHP} HP left.")
+            if _playerStats[3] < _enemyDict[_enemyID][1]:                                                   # M_DEF < P_ATK?
+                 _playerStats[1] += (_playerStats[3] - _enemyDict[_enemyID][1])                             # P_HP += P_DEF - M_ATK 
+            else:
+                print("Attack blocked")
+            print(f"You have {_playerStats[1]} HP left.")
             sleep(1)
                         
         #elif UserInputFight == "2":
