@@ -16,10 +16,13 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     enemyID = 0
 
     enemyDict = {
-            1001 : ["Rats", 1, 0, 2, 1, PicRat],
+            1001 : ["Pack of Rats", 1, 0, 2, 1, PicRat],
             1002 : ["Wolf", 3, 1, 10, 2, PicWolf],
             1003 : ["Bandit", 6, 4, 20, 4, PicBandit],
-            1004 : ["Dragon", 20, 10, 50, 10, PicDragon]
+            1004 : ["Troll", 2, 1, 30, 10, PicTroll],
+            1005 : ["Centaur", 8, 10, 20, 15, PicCentaur],
+            1006 : ["Minotaur", 10, 4, 20, 15, PicMinotaur],
+            1007 : ["Dragon", 20, 30, 50, 10, PicDragon]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
     
@@ -48,9 +51,9 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     
     luck = random.randint(1,100)
     encounterIndex = round(luck / (playerStats[0] * locationIndex)) # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID = EnemySelection(encounterIndex)
+    enemyID = EnemySelection(encounterIndex)                        
     if enemyID != 0:
-        (enemyDict[enemyID][5]())
+        (enemyDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
             UserInputChoose = input("\nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
@@ -72,6 +75,18 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
         
     return _location, _playerStats, _playerInventoryItems, _playerInventoryMoney
 
+
+def EnemySelection(_encounterIndex):
+    enemyID = 0
+    
+    if _encounterIndex <= 10:
+        EncounterNothing()
+    elif _encounterIndex > 10 or _encounterIndex <= 100:
+        _luck = random.randint(1,len(enemyDict))
+        enemyID = 1000 + _luck
+    return enemyID
+
+
 def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location):
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
@@ -85,21 +100,18 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
 
     while True:
 
-        if tempPlayerHP <= 0:
-            print("\n---You have been defeated---")
+        if tempPlayerHP <= 0:                                               # if player dead
             sleep(2)
-            print("""
-            Your head feels dizzy.
-            A beautiful (fully naked) angel brought you back to the town.
-            She thankfully took some of your gold in advance.
-            """)
+            PicDeath()
+            sleep(2)
+            PicFairie()
             _playerInventoryMoney -= _playerInventoryMoney * 0.1
             _playerStats[4] *= 0.25
             _location = "the town"
             _playerStats[1] = 0
             break
 
-        if tempEnemyHP <= 0:
+        if tempEnemyHP <= 0:                                                # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
             _playerInventoryItems.append(lootItem)
@@ -114,10 +126,10 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
-        UserInputFight = input("\n(1) Attack\t(2) Inventory\t(3) Flee\n")
-        if UserInputFight == "1":
-            if  _enemyDict[_enemyID][2] - _playerStats[2] >= 0:
-                tempEnemyHP -=  (_enemyDict[_enemyID][2] - _playerStats[2])
+        UserInputFight = input("\n(1) Attack\t(2) Inventory\t(3) Flee\n")                                   # Fight (P = Player, M = Monster)
+        if UserInputFight == "1":                                                                           # Player attacks first:
+            if  _enemyDict[_enemyID][2] - _playerStats[2] >= 0:                                             # P_ATK > M_DEF?
+                tempEnemyHP -=  (_enemyDict[_enemyID][2] - _playerStats[2])                                 # M_HP -= M_DEF - P_ATK
             print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[2]} Points.")
             sleep(1)
             print(f"{_enemyDict[_enemyID][0]} defends himself with {_enemyDict[_enemyID][2]} Points.")
@@ -125,8 +137,8 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             print(f"{_enemyDict[_enemyID][0]} has {tempEnemyHP} HP left.")
             sleep(2)
 
-            if _playerStats[3] - _enemyDict[_enemyID][1] >= 0:
-                 tempPlayerHP -= (_playerStats[3] - _enemyDict[_enemyID][1])
+            if _playerStats[3] - _enemyDict[_enemyID][1] >= 0:                                              # M_ATK > P_DEF? (Monster)
+                 tempPlayerHP -= (_playerStats[3] - _enemyDict[_enemyID][1])                                # P_HP -= P_DEF - M_ATK 
             print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")
             sleep(1)
             print(f"You defend yourself with {_playerStats[3]} Points.")
@@ -136,8 +148,8 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
                         
         #elif UserInputFight == "2":
             #Main.InventoryMenu()
-        elif UserInputFight == "3":
-            _temp1 = (_playerStats[0] * 2)
+        elif UserInputFight == "3":                                                                          # Flee (loose Gold + Monster
+            _temp1 = (_playerStats[0] * 2)                                                                   #        hits with 1 atk)
             _playerInventoryMoney -= (_playerStats[0] * 2)
             _temp2 = (_enemyDict[_enemyID][1])
             _playerStats[3] -= _enemyDict[_enemyID][1]
@@ -149,17 +161,6 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
 
     return _playerInventoryMoney, _playerStats, _playerInventoryItems, _location
 
-
-
-def EnemySelection(_encounterIndex):
-    enemyID = 0
-    
-    if _encounterIndex <= 10:
-        EncounterNothing()
-    elif _encounterIndex > 10 or _encounterIndex <= 100:
-        _luck = random.randint(1,4)
-        enemyID = 1000 + _luck
-    return enemyID
 
 # def Mountains():
 #     global encounterIndex
@@ -232,7 +233,8 @@ def PicMerchant():
 
 
 def PicWolf():
-    print("""oh no, Wolf!
+    print("""
+    oh no, wolf!
                 /^._        Bark
   ,___,--~~~~--' /'~ Bark
   `~--~\ )___,)/'               Bark
@@ -242,40 +244,181 @@ def PicWolf():
 
 
 def PicRat():
-    print("""look, rats!
+    print("""
+    look, rats!
     
      ~~(  )8:>    <;3(  )~~
      """)
 
 def PicBandit():
     print("""
-    
-    ToDo: Make a Pic of Bandit
-    
+    this thug wants your money!
+  <=======]}======
+    --.   /|
+   _\\\"/_.'/
+ .'._._,.'
+ :/ \{}/
+(L  /--',
+   /  A \\
+  ( /|| |
+   \\ V\ |
     """)
+
+def PicCentaur():
+    print("""
+    mythical creatures everywhere!
+                __
+               / _\ #
+               \c /  #
+               / \___ #
+               \`----`#==>  
+               |  \  #
+    ,%.-\"\"\"---'`--'\#_
+   %%/             |__`\\
+  .%'\     |   \   /  //
+  ,%' >   .'----\ |  [/
+     < <<`       ||
+      `\\\\       ||
+        )\\\      )\\
+    """)
+
+def PicTroll():
+    print("""
+    serious trolling here!
+        .-\"\"\"\".
+       /       \\
+   __ /   .-.  .\\
+  /  `\  /   \/  \\
+  |  _ \/   .==.==.
+  | (   \  /____\__\\
+   \ \      (_()(_()
+    \ \            '---._
+     \                   \_
+  /\ |`       (__)________/
+ /  \|     /\___/
+|    \     \||VV
+|     \     \|\"\"\"\",
+|      \     ______)
+\       \  /`
+ \\       \(
+
+    """)
+
+def PicMinotaur():
+    print("""
+    mythical creautures Everywhere!
+     .      .
+     |\____/|
+    (\|----|/)
+     \ 0  0 /
+      |    |
+   ___/\../\____
+  /     --       \\
+ /  \         /   \\
+|    \___/___/(   |
+\   /|  }{   | \  )
+ \  ||__}{__|  |  |
+  \  |;;;;;;;\  \ / \_______
+   \ /;;;;;;;;| [,,[|======'
+     |;;;;;;/ |     /
+     ||;;|\   |
+     ||;;/|   /
+     \_|:||__|
+      \ ;||  /
+      |= || =|
+      |= /\ =|
+      /_/  \_\\
+
+        """)
 
 
 def PicDragon():
     print("""
     'It does not do to leave a live dragon out of your calculations, if you live near him.'      
 
-                     __/>^^^;:,
-                    /-.       :,/|/|
-                 __/ `c        :,/ \__
-                (~             ;/ /  /
-                 `-'--._       / / ,<     _
-                       /=\     /  _/     | '.
-                      / ',\ \\    \_     ,| |"       
-                     |=|  E_  |     \. ,/  |
-                     \=\   ""       `,,/   |
-                      \=\            ||    /
-                       \=\____       |\    \\
-                      / \/    `     <__)    \\
-                      | |                    |
-                    ,__\,\                   /
-                   ,--____>    /\.         ./
-                   '-__________>  \.______/
+                                             ,--,  ,.-.
+               ,                   \,       '-,-`,'-.' | ._
+              /|           \    ,   |\         }  )/  / `-,',
+              [ ,          |\  /|   | |        /  \|  |/`  ,`
+              | |       ,.`  `,` `, | |  _,...(   (      .',
+              \  \  __ ,-` `  ,  , `/ |,'      Y     (   /_L\\
+               \  \_\,``,   ` , ,  /  |         )         _,/
+                \  '  `  ,_ _`_,-,<._.<        /         /
+                 ', `>.,`  `  `   ,., |_      |         /
+                   \/`  `,   `   ,`  | /__,.-`    _,   `\\
+               -,-..\  _  \  `  /  ,  / `._) _,-\`       \\
+                \_,,.) /\    ` /  / ) (-,, ``    ,        |
+               ,` )  | \_\       '-`  |  `(               \\
+              /  /```(   , --, ,' \   |`<`    ,            |
+             /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)
+       ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`
+      (-, \           ) \ ('_.-._)/ /,`    /
+      | /  `          `/ \\\ V   V, /`     /
+   ,--\(        ,     <_/`\\\     ||      /
+  (   ,``-     \/|         \-A.A-`|     /
+ ,>,_ )_,..(    )\          -,,_-`  _--`
+(_ \|`   _,/_  /  \_            ,--`
+ \( `   <.,../`     `-.._   _,-`
                    
                    """)
 
 
+######################################## Death ##################################################
+
+def PicDeath():
+    print("""
+            ---You have been defeated---
+
+     .... NO! ...                  ... MNO! ...
+   ..... MNO!! ...................... MNNOO! ...
+ ..... MMNO! ......................... MNNOO!! .
+.... MNOONNOO!   MMMMMMMMMMPPPOII!   MNNO!!!! .
+ ... !O! NNO! MMMMMMMMMMMMMPPPOOOII!! NO! ....
+    ...... ! MMMMMMMMMMMMMPPPPOOOOIII! ! ...
+   ........ MMMMMMMMMMMMPPPPPOOOOOOII!! .....
+   ........ MMMMMOOOOOOPPPPPPPPOOOOMII! ...  
+    ....... MMMMM..    OPPMMP    .,OMI! ....
+     ...... MMMM::   o.,OPMP,.o   ::I!! ...
+         .... NNM:::.,,OOPM!P,.::::!! ....
+          .. MMNNNNNOOOOPMO!!IIPPO!!O! .....
+         ... MMMMMNNNNOO:!!:!!IPPPPOO! ....
+           .. MMMMMNNOOMMNNIIIPPPOO!! ......
+          ...... MMMONNMMNNNIIIOO!..........
+       ....... MN MOMMMNNNIIIIIO! OO ..........
+    ......... MNO! IiiiiiiiiiiiI OOOO ...........
+  ...... NNN.MNO! . O!!!!!!!!!O . OONO NO! ........
+   .... MNNNNNO! ...OOOOOOOOOOO .  MMNNON!........
+   ...... MNNNNO! .. PPPPPPPPP .. MMNON!........
+      ...... OO! ................. ON! .......
+         ................................
+         """)
+
+
+def PicFairie():
+    print("""
+                Your head feels dizzy.
+            A beautiful (fully naked) fairie brought you back to the town.
+            She thankfully took some of your gold in advance.
+      .--.   _,
+  .--;    \ /(_
+ /    '.   |   '-._    . ' .
+|       \  \    ,-.)  -= * =-
+ \ /\_   '. \((` .(    '/. '
+  )\ /     \ )\  _/   _/
+ /  \\\    .-'   '--. /_\\
+|    \\\_.' ,        \/||
+\     \_.-';,_) _)'\ \||
+ '.       /`\   (   '._/
+   `\   .;  |  . '.
+     ).'  )/|      \\
+     `    ` |  \|   |
+             \  |   |
+              '.|   |
+                 \  '\__
+                  `-._  '. _
+                     \`;-.` `._
+                      \ \ `'-._\\
+                       \ |
+                        \ )
+                         \_\\    
+    """)
