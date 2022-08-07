@@ -94,12 +94,12 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             She thankfully took some of your gold in advance.
             """)
             _playerInventoryMoney -= _playerInventoryMoney * 0.1
-            _playerStats[4] -= _playerStats * 0.25
+            _playerStats[4] *= 0.25
             _location = "the town"
-            _playerStats[1] = tempPlayerHP
+            _playerStats[1] = 0
             break
 
-        if tempPlayerHP <= 0:
+        if tempEnemyHP <= 0:
             print("\n---Enemy has been eleminated---")
             sleep(2)
             _playerInventoryItems.append(lootItem)
@@ -110,24 +110,26 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             _playerStats[4] = tempExp
             _playerStats[1] = tempPlayerHP
             break
-
+  
+    #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
+    #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input("\n(1) Attack\t(2) Inventory\t(3) Flee\n")
         if UserInputFight == "1":
-            if  _playerStats[3] - _enemyDict[_enemyID][1] >= 0:
-                tempEnemyHP -= _playerStats[3] - _enemyDict[_enemyID][1]
-            print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[1]} Points.")
+            if  _enemyDict[_enemyID][2] - _playerStats[2] >= 0:
+                tempEnemyHP -=  (_enemyDict[_enemyID][2] - _playerStats[2])
+            print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[2]} Points.")
             sleep(1)
             print(f"{_enemyDict[_enemyID][0]} defends himself with {_enemyDict[_enemyID][2]} Points.")
             sleep(1)
             print(f"{_enemyDict[_enemyID][0]} has {tempEnemyHP} HP left.")
             sleep(2)
 
-            if _enemyDict[_enemyID][2] - _playerStats[2] >= 0:
-                 tempPlayerHP -= _enemyDict[_enemyID][2] - _playerStats[2]
+            if _playerStats[3] - _enemyDict[_enemyID][1] >= 0:
+                 tempPlayerHP -= (_playerStats[3] - _enemyDict[_enemyID][1])
             print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")
             sleep(1)
-            print(f"You defend yourself with {_playerStats[1]} Points.")
+            print(f"You defend yourself with {_playerStats[3]} Points.")
             sleep(1)
             print(f"You have {tempPlayerHP} HP left.")
             sleep(1)
