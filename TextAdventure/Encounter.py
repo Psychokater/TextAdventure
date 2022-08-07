@@ -151,7 +151,7 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             _temp1 = (_playerStats[0] * 2)                                                                   #        hits with 1 atk)
             _playerInventoryMoney -= (_playerStats[0] * 2)
             _temp2 = (_enemyDict[_enemyID][1])
-            _playerStats[3] -= _enemyDict[_enemyID][1]
+            _playerStats[1] -= _enemyDict[_enemyID][1]
             print(f"""You managed to flee while you distracted the enemy with {_temp1} gold,
             but {_enemyDict[_enemyID][0]} got a hit. You received {_temp2} dmg!""")
             break
