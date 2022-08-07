@@ -1,4 +1,20 @@
-#Textadventure
+##################################
+# Textadventure                  #
+#                                # 
+# Author: Nils aka Psychokater   #
+# CoAuthor: Samo aka Samoooooooo #
+#                                #
+################################## 
+
+#----------------------------
+#           ToDo:  
+#----------------------------
+#
+# -Encounter (Minor Improvements) (Nils)
+# -Inventory, Items, Merchant (Samo)
+# -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils)
+#       
+
 import random
 import Helpfile
 from time import sleep
@@ -6,11 +22,6 @@ import Intro
 import Encounter
 
 
-#ToDo:  Encounter
-#       Fehleingaben
-#       Inventar
-#       Monster / Fight
-#       
 
 #erl. Menu
 #   Start
