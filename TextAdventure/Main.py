@@ -217,7 +217,7 @@ def Move():
         if temp != "x":
             location = temp
             break        
-    print(f"\nYou moved to {location}")       
+    print(f"\nYou moved to {location}\n")       
     sleep(2)
     EncounterSelection()
     if location == "the town":
