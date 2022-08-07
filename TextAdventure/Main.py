@@ -209,6 +209,7 @@ def Move():
     temp = "x"
     global location
     print(f"\nLocation: {location}")
+    sleep(2)
     while temp == "x":
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\n").lower()
         direction = userInput[:1]

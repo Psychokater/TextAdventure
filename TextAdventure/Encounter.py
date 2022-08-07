@@ -99,7 +99,7 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
         if _playerStats[1] <= 0:                                                        # if player dead
             sleep(2)
             PicDeath()
-            sleep(2)
+            sleep(4)
             PicFairie()
             _playerInventoryMoney -= _playerInventoryMoney * 0.1
             _playerStats[4] *= 0.25
@@ -198,7 +198,8 @@ def EncounterNothing():
 # ######################################## Friends ################################################
 
 def PicWanderer(): 
-    print("""A mystic old man wanders through this valley, maybe he has something for you?
+    print("""
+    A mystic old man wanders through this valley, maybe he has something for you?
      
                      .x    
                      .    x    
@@ -366,8 +367,7 @@ def PicDragon():
 
 def PicDeath():
     print("""
-            ---You have been defeated---
-
+           
      .... NO! ...                  ... MNO! ...
    ..... MNO!! ...................... MNNOO! ...
  ..... MMNO! ......................... MNNOO!! .
@@ -390,14 +390,18 @@ def PicDeath():
    ...... MNNNNO! .. PPPPPPPPP .. MMNON!........
       ...... OO! ................. ON! .......
          ................................
+
+          ---You have been defeated---
+
          """)
 
 
 def PicFairie():
+    print("\nYour head feels dizzy.")
+    sleep(2) 
+    print("A beautiful (fully naked) fairie helps you back to the town.")
+    sleep(4)
     print("""
-                Your head feels dizzy.
-            A beautiful (fully naked) fairie brought you back to the town.
-            She thankfully took some of your gold in advance.
       .--.   _,
   .--;    \ /(_
  /    '.   |   '-._    . ' .
@@ -421,3 +425,6 @@ def PicFairie():
                         \ )
                          \_\\    
     """)
+
+    print("She thankfully took some of your gold in advance.")
+    sleep(2)
