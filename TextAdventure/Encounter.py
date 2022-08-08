@@ -84,7 +84,7 @@ def EnemySelection(_encounterIndex):                                            
     return enemyID
 
 
-def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location, _playerName):
+def Fight(_playerStats, _playerStatPoints, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location, _playerName):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     lootItem = "lootItem" #(add Item later!!!)

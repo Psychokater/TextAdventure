@@ -106,6 +106,7 @@ def Start():
 
 ### overall ingameMenu #############################
 def IngameMenu():
+    global playerStatPoints, playerStats
     while True:
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
@@ -126,7 +127,7 @@ def InventoryMenu():
 ### Move() -> World()
 def Move():
     temp = "x"
-    global location
+    global location, playerStats, playerStatPoints
     print(f"\nLocation: {location}")
     sleep(2)
     while temp == "x":
