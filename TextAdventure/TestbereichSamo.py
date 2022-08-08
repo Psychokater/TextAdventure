@@ -18,8 +18,8 @@ while True:
         print ('Merchant Items : ')
         print ('\u2009_________________________________________')
         print ('\uFF5C ItemNumber   Item    ATK DEF HP VL PR \uFF5C')
-        for y,(key,value) in enumerate (all_items.items(),start=1):
-            print ('\uFF5C',y,key,':',value,'\uFF5C')
+        for y,(key1,value1) in enumerate (all_items.items(),start=1):
+            print ('\uFF5C',y,key1,':',value1,'\uFF5C')
         print (end='\u2009')
         print ('\u203e'*41)
 
@@ -28,8 +28,8 @@ while True:
         print ('Your Items : ')
         print ('\u2009_________________________________________')
         print ('\uFF5C ItemNumber   Item    ATK DEF HP VL QTY\uFF5C')
-        for y,(key,value) in enumerate (sorted(player_items.items()),start=1):
-            print ('\uFF5C',y,key,'==>',value,'\uFF5C')
+        for z,(key,value) in enumerate (sorted(player_items.items()),start=1):
+            print ('\uFF5C',z,key,'==>',value,'\uFF5C')
         print (end='\u2009')
         print ('\u203e'*41)
 
@@ -40,9 +40,9 @@ while True:
             player_items[x][5]+=1
             call_player_list()
         elif x not in player_items.keys():
-            sold_item = dict ({ x : all_items[x]})
+            sold_item = { x : all_items[x]}
             player_items.update(sold_item)
-            player_items[x][5]-= (player_items[x][5]-1)            
+            player_items[x][5]-= 1      
             call_player_list()
         else :
             pass
@@ -55,7 +55,7 @@ while True:
                 x = int (input ('pick an item number to buy : '))
                 if x in all_items.keys():
                     print ('           ItemNumber   Item    ATK DEF HP VL PR ')
-                    sold_item = dict ({ x : all_items[x]})
+                    sold_item = { x : all_items[x]}
                     print ('Sold Item : ',sold_item)
                     break
                 if x not in all_items.keys():
@@ -89,7 +89,7 @@ while True:
                 x = int (input ('pick an ItemNumber to sell : '))
                 if x in player_items.keys():
                     print ('             ItemNumber   Item    ATK DEF HP VL PR ')
-                    bought_item = dict ({ x : all_items[x]})
+                    bought_item = { x : all_items[x]}
                     print ('Bought Item : ',bought_item)
                     break
                 if x not in player_items.keys():
