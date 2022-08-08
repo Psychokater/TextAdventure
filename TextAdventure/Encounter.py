@@ -2,7 +2,7 @@ import random
 #import Main
 from time import sleep
 
-def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _playerInventoryMoney):
+def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _playerInventoryMoney, _playerName):
     global startLocation
     global location
     global encounterIndex
@@ -12,6 +12,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     playerStats = _playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     startLocation = _startLocation
     location = _location
+    playerName = _playerName
     locationIndex = 0
     enemyID = 0
 
@@ -24,14 +25,6 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
             1006 : ["Minotaur", 10, 4, 20, 15, PicMinotaur],
             1007 : ["Dragon", 20, 30, 50, 10, PicDragon]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
-
-    
-    # enemyHP = 0
-    # enemyLevel = 1
-    # enemyName = ""
-    # enemyATK = 0
-    # enemyDEF = 0
-    
     
 
     if location == startLocation:
@@ -56,10 +49,12 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
         (enemyDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
-            UserInputChoose = input("\nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
+            UserInputChoose = input(f"""
+            {_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 _playerInventoryMoney, _playerStats, _playerInventoryItems, _location = Fight(
-                    playerStats, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location)
+                    playerStats, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
                 break
             #elif UserInputChoose == "2": 
                 #Main.InventoryMenu()
@@ -68,7 +63,9 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
-                print(f"\nYou managed to escape the fight, you used up {_temp} gold to distract your enemy")
+                print(f"""
+                You managed to escape the fight, you used up {_temp} gold to distract your enemy.
+                You have {playerStats[2]} HP left.""")
                 break
             else: 
                 print("You can't choose that?!")
@@ -76,7 +73,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     return _location, _playerStats, _playerInventoryItems, _playerInventoryMoney
 
 
-def EnemySelection(_encounterIndex):
+def EnemySelection(_encounterIndex):                                                                                  #Edit this function later to config chances for Encounter
     enemyID = 0
     
     if _encounterIndex <= 10:
@@ -87,7 +84,7 @@ def EnemySelection(_encounterIndex):
     return enemyID
 
 
-def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location):
+def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location, _playerName):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     lootItem = "lootItem" #(add Item later!!!)
@@ -121,7 +118,9 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
-        UserInputFight = input("\n(1) Attack\t(2) Inventory\t(3) Flee\n")                                   # Fight (P = Player, E = Enemy)
+        UserInputFight = input(f"""
+        {_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+        (1) Attack\t(2) Inventory\t(3) Flee\n""")                                   # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first

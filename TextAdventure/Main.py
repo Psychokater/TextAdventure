@@ -10,60 +10,16 @@
 #           ToDo:  
 #----------------------------
 #
-# -Encounter (Minor Improvements) (Nils)
+# -Encounter (Minor Improvements) (Nils) --- DONE
 # -Inventory, Items, Merchant (Samo)
-# -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils)
-#       
+# -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils) --- DONE
+# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter)      
 
 import random
 import Helpfile
 from time import sleep
 import Intro
 import Encounter
-
-
-
-#erl. Menu
-#   Start
-#   Help
-#   Exit
-
-#erl. Game
-#   Move
-#   Inventar
-#   Stats
-#   Exit to main menu
-
-#Inventar
-#   Geld
-#   Gegenstand
-
-#erl. Stats
-#   Level
-#   Atk
-#   Def
-#   HP
-
-#####################
-
-# erl.
-#   Town
-#   Forrest
-#   Desert
-#   Islands
-#   Mountains
-
-#   Monster
-#       Level
-#       HP
-#       Atk
-#       Loot
-
-#   Händler
-#       Geld
-#       Gegenstand
-
-
 
 
 # MAP:
@@ -287,7 +243,7 @@ def World(_location, _direction):
 def EncounterSelection():    
    global startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney 
    location, playerStats, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
-    startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney)
+    startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney, playerName)
 
 
 
