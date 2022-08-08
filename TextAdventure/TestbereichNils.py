@@ -121,6 +121,42 @@
 
 
 
+# all_items = {
+# 1001:["Apple    ",(0),(0),(7),(6),(5)],
+# 1010:["ItemName1",(9),(8),(0),(6),(5)],
+# 1011:["ItemName2",(9),(8),(0),(6),(5)],
+# 1100:["ItemName3",(9),(8),(0),(6),(5)],
+# 1101:["ItemName4",(9),(8),(0),(6),(5)],
+# 1110:["ItemName5",(9),(8),(0),(6),(5)],
+# 1111:["ItemName6",(9),(8),(0),(6),(5)],
+# 2000:["ItemName7",(9),(8),(0),(6),(5)],
+# 2001:["ItemName8",(9),(8),(0),(6),(5)]}
+# # ItemNumber   1 Item    2 ATK,  3 DEF, 4 HP, 5 VL, 6 PR 
+
+# merchantItems = []
+# playerItems = []
+
+# #buy
+# ####################################################################### print Shop
+# merchantItems += 1001,1010,1011    #Items nur Testweise zugefügt
+# playerItems += 2001, 2000          #
+# for i in range(0,len(merchantItems)):
+#     print(all_items[merchantItems[i]])
+# print("")
+# for j in range(0,len(playerItems)):
+#     print(all_items[playerItems[j]])
+# ####################################################################### buy
+# buyItem = int(input("welches Item? "))
+# playerItems.append(buyItem)
+# merchantItems.remove(buyItem)
+# all_items[buyItem][5] = 1           # 1 kann auch über eine variable ermittelt werden!!!
+# ####################################################################### print Shop
+# for i in range(0,len(merchantItems)):
+#     print(all_items[merchantItems[i]])
+# print("")
+# for j in range(0,len(playerItems)):
+#     print(all_items[playerItems[j]])
+
 all_items = {
 1001:["Apple    ",(0),(0),(7),(6),(5)],
 1010:["ItemName1",(9),(8),(0),(6),(5)],
@@ -131,29 +167,103 @@ all_items = {
 1111:["ItemName6",(9),(8),(0),(6),(5)],
 2000:["ItemName7",(9),(8),(0),(6),(5)],
 2001:["ItemName8",(9),(8),(0),(6),(5)]}
-# ItemNumber   1 Item    2 ATK,  3 DEF, 4 HP, 5 VL, 6 PR 
+player_items= {
+1001:["Apple    ",(0),(0),(7),(3),(2)],
+1010:["ItemName1",(1),(1),(0),(3),(1)]}
 
-merchantItems = []
-playerItems = []
+while True:
 
-#buy
-####################################################################### print Shop
-merchantItems += 1001,1010,1011    #Items nur Testweise zugefügt
-playerItems += 2001, 2000          #
-for i in range(0,len(merchantItems)):
-    print(all_items[merchantItems[i]])
-print("")
-for j in range(0,len(playerItems)):
-    print(all_items[playerItems[j]])
-####################################################################### buy
-buyItem = int(input("welches Item? "))
-playerItems.append(buyItem)
-merchantItems.remove(buyItem)
-all_items[buyItem][5] = 1           # 1 kann auch über eine variable ermittelt werden!!!
-####################################################################### print Shop
-for i in range(0,len(merchantItems)):
-    print(all_items[merchantItems[i]])
-print("")
-for j in range(0,len(playerItems)):
-    print(all_items[playerItems[j]])
+    def call_item_list():
+        print ('Merchant Items : ')
+        print ('\u2009_________________________________________')
+        print ('\uFF5C ItemNumber   Item    ATK DEF HP VL PR \uFF5C')
+        for y,(key1,value1) in enumerate (all_items.items(),start=1):
+            print ('\uFF5C',y,key1,':',value1,'\uFF5C')
+        print (end='\u2009')
+        print ('\u203e'*41)
 
+
+    def call_player_list():
+        print ('Your Items : ')
+        print ('\u2009_________________________________________')
+        print ('\uFF5C ItemNumber   Item    ATK DEF HP VL QTY\uFF5C')
+        for z,(key,value) in enumerate (sorted(player_items.items()),start=1):
+            print ('\uFF5C',z,key,'==>',value,'\uFF5C')
+        print (end='\u2009')
+        print ('\u203e'*41)
+
+            
+        
+    def merchant_sell(x):
+        if x in player_items.keys():
+            player_items[x][5]+=1
+            call_player_list()
+        elif x not in player_items.keys():
+            sold_item = { x : all_items[x]}
+            player_items.update(sold_item)
+            player_items[x][5]-= 1      
+            call_player_list()
+        else :
+            pass
+
+    
+    def buy_an_item():
+        call_item_list()
+        while True:
+            try :
+                x = int (input ('pick an item number to buy : '))
+                if x in all_items.keys():
+                    print ('           ItemNumber   Item    ATK DEF HP VL PR ')
+                    sold_item = { x : all_items[x]}
+                    print ('Sold Item : ',sold_item)
+                    break
+                if x not in all_items.keys():
+                    print ('pick an Item number from the Items list ! ')
+                    call_item_list()
+                continue
+            except ValueError:
+                print ('pick an Item number from the Items list ! ')
+                call_item_list()
+                continue
+        merchant_sell(x)
+
+
+    def merchant_buy(x):
+        if x not in player_items.keys():
+            print ('Pick an Item number from your Items list !')
+            sell_an_item()
+        elif x in player_items.keys() and player_items[x][5]==1:
+            del player_items[x]
+            call_player_list()
+        else:
+            x in player_items.keys() and player_items[x][5]>1
+            player_items[x][5]-=1
+            call_player_list()
+
+
+    def sell_an_item():
+        call_player_list()
+        while True:
+            try :
+                x = int (input ('pick an ItemNumber to sell : '))
+                if x in player_items.keys():
+                    print ('             ItemNumber   Item    ATK DEF HP VL PR ')
+                    bought_item = { x : all_items[x]}
+                    print ('Bought Item : ',bought_item)
+                    break
+                if x not in player_items.keys():
+                    print ('pick an Item number from the Items list ! ')
+                    call_player_list()
+                    continue
+            except ValueError:
+                print ('pick an Item number from the Items list ! ')
+                call_player_list()
+                continue
+        merchant_buy(x)
+
+    while True:
+        x = input (' bey 1 , sell 2 : \n')
+        if '1' in x :
+            buy_an_item()
+        elif '2' in x :
+            sell_an_item()
