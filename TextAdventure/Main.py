@@ -116,18 +116,6 @@ def IngameMenu():
             case _: print("\nCouldn't understand you?!")
 
 
-### Level Up ???
-def LevelUp():
-    global playerStats, playerStatPoints # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-
-    if playerStats[5] == playerStats[0] * round((2**(playerStats[0]*0.6))):
-        playerStats[0] += 1
-        if playerStats[0] % 5 == 0:
-            playerStatPoints += 4
-        else:
-            playerStatPoints += 2
-        print("\nYay, Level Up!")
-
 
 def InventoryMenu():
     global playerInventoryItems
@@ -155,7 +143,7 @@ def Move():
     if location == "the town":
         #EncounterMerchant()
         pass
-    LevelUp()
+    playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints)
 
 
 ### MOVE() -> WORLD()
