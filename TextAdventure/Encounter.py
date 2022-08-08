@@ -1,19 +1,11 @@
 import random
 from time import sleep
 import Stats
+import Inventory
 
-def Encounter(_startLocation, _location, _playerStats, _playerStatPoints, _playerInventoryItems, _playerInventoryMoney, _playerName):
-    global startLocation
-    global location
-    global encounterIndex
-    global enemyDict
-    playerInventoryItems = _playerInventoryItems
-    playerInventoryMoney = _playerInventoryMoney
-    playerStats = _playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
-    playerStatPoints = _playerStatPoints
-    startLocation = _startLocation
-    location = _location
-    playerName = _playerName
+def Encounter(startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName):
+ 
+   # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
     enemyID = 0
 
@@ -45,21 +37,26 @@ def Encounter(_startLocation, _location, _playerStats, _playerStatPoints, _playe
     
     luck = random.randint(1,100)
     encounterIndex = round(luck / (playerStats[0] * locationIndex)) # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID = EnemySelection(encounterIndex)                        
+    enemyID = EnemySelection(encounterIndex, enemyDict)                        
     if enemyID != 0:
         (enemyDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
-            UserInputChoose = input(f"""\n{_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            UserInputChoose = input(f"""\n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
-                _playerInventoryMoney, _playerStats, _playerStatPoints, _playerInventoryItems, _location = Fight(
+                playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
                     playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
                 break
-            #elif UserInputChoose == "2":
-                #Inventory()                
+            
+            elif UserInputChoose == "2":
+                playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
+                playerInventoryItems, playerInventoryMoney, playerName)   
+
             elif UserInputChoose == "3": 
-                _playerStats, _playerStatPoints = Stats.StatMenu(_playerStats, _playerStatPoints)
+                playerStats, playerStatPoints = Stats.StatMenu(
+                playerStats, playerStatPoints, playerName)
+
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
@@ -67,84 +64,84 @@ def Encounter(_startLocation, _location, _playerStats, _playerStatPoints, _playe
                 \nYou have {playerStats[2]} HP left.""")
                 break
             else: 
-                print("You can't choose that?!")
+                print("\nYou can't choose that?!")
         
-    return _location, _playerStats, _playerStatPoints, _playerInventoryItems, _playerInventoryMoney
+    return location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
 
 
-def EnemySelection(_encounterIndex):                                                                                  #Edit this function later to config chances for Encounter
+def EnemySelection(encounterIndex, enemyDict):                                                                                  #Edit this function later to config chances for Encounter
     enemyID = 0
     
-    if _encounterIndex <= 10:
+    if encounterIndex <= 10:
         EncounterNothing()
-    elif _encounterIndex > 10 or _encounterIndex <= 100:
+    elif encounterIndex > 10 or encounterIndex <= 100:
         _luck = random.randint(1,len(enemyDict))
         enemyID = 1000 + _luck
     return enemyID
 
 
-def Fight(_playerStats, _playerStatPoints, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location, _playerName):
+def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
-    lootItem = "lootItem" #(add Item later!!!)
-    tempMoney = 0.00
-    tempExp = 0.00
+    _lootItem = "lootItem" #(add Item later!!!)
+    _tempMoney = 0.00
+    _tempExp = 0.00
 
     while True:
 
-        if _playerStats[2] <= 0:                                                            	    # if player dead
+        if playerStats[2] <= 0:                                                            	    # if player dead
             sleep(2)
             PicDeath()
             sleep(4)
             PicFairie()
-            _playerInventoryMoney -= _playerInventoryMoney * 0.1
-            _playerStats[5] *= 0.25
-            _location = "the town"
-            _playerStats[2] = 1
+            playerInventoryMoney -= playerInventoryMoney * 0.1
+            playerStats[5] *= 0.25
+            location = "the town"
+            playerStats[2] = 1
             break
 
-        elif _enemyDict[_enemyID][3] <= 0:                                                         # if enemy dead
+        elif enemyDict[enemyID][3] <= 0:                                                         # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
-            tempMoney += (_enemyDict[_enemyID][1] + _enemyDict[_enemyID][2] + _enemyDict[_enemyID][3]) / 2
-            tempExp += _enemyDict[_enemyID][4] * 100
-            print(f"\nYou received {lootItem}, {tempMoney} Gold and {tempExp} Experience.")
-            _playerInventoryMoney = tempMoney
-            _playerStats[5] = tempExp
-            _playerStats[2] = _playerStats[1]
+            _tempMoney += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][3]) / 2
+            _tempExp += enemyDict[enemyID][4] * 100
+            print(f"\nYou received {_lootItem}, {_tempMoney} Gold and {_tempExp} Experience.")
+            playerInventoryMoney = _tempMoney
+            playerStats[5] = _tempExp
+            playerStats[2] = playerStats[1]
             break
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input(f"""
-        \n{_playerName}: LVL {_playerStats[0]}\tHP {_playerStats[2]}/{_playerStats[1]}
+        \n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
         \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                   # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[3]} Points.")
+            print(f"\nYou attack {enemyDict[enemyID][0]} with {playerStats[3]} Points.")
             sleep(1)
-            print(f"{_enemyDict[_enemyID][0]} defends himself with {_enemyDict[_enemyID][2]} Points.")
+            print(f"{enemyDict[enemyID][0]} defends himself with {enemyDict[enemyID][2]} Points.")
             sleep(1)
-            if  _enemyDict[_enemyID][2] < _playerStats[3]:                                                  # P_DEF < E_ATK?
-                _enemyDict[_enemyID][3] += (_enemyDict[_enemyID][2] - _playerStats[3])                      # E_HP += E_DEF - P_ATK
+            if  enemyDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
+                enemyDict[enemyID][3] += (enemyDict[enemyID][2] - playerStats[3])                      # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
-            print(f"{_enemyDict[_enemyID][0]} has {_enemyDict[_enemyID][3]} HP left.")
+            print(f"{enemyDict[enemyID][0]} has {enemyDict[enemyID][3]} HP left.")
             sleep(2)
 
-            if _enemyDict[_enemyID][3] > 0:                                                                 # Enemy alive?
+            if enemyDict[enemyID][3] > 0:                                                                 # Enemy alive?
 
-                print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")      # Enemy attacks second
+                print(f"{enemyDict[enemyID][0]} attacks you with {enemyDict[enemyID][1]} Points.")      # Enemy attacks second
                 sleep(1)
-                print(f"You defend yourself with {_playerStats[4]} Points.")
+                print(f"You defend yourself with {playerStats[4]} Points.")
                 sleep(1)
-                if _playerStats[4] < _enemyDict[_enemyID][1]:                                               # E_DEF < P_ATK?
-                    _playerStats[2] += (_playerStats[4] - _enemyDict[_enemyID][1])                          # P_HP += P_DEF - E_ATK 
+                if playerStats[4] < enemyDict[enemyID][1]:                                               # E_DEF < P_ATK?
+                    playerStats[2] += (playerStats[4] - enemyDict[enemyID][1])                          # P_HP += P_DEF - E_ATK 
                 else:
                     print("Attack blocked")
-                print(f"You have {_playerStats[2]} HP left.")
+                print(f"You have {playerStats[2]} HP left.")
                 sleep(1)
 
     ################ 2 Inventory #############                    
@@ -153,58 +150,32 @@ def Fight(_playerStats, _playerStatPoints, _enemyDict, _enemyID, _playerInventor
     ################ 3 Stats #################
 
         elif UserInputFight == "3":
-            _playerStats, _playerStatPoints = Stats.StatMenu(_playerStats, _playerStatPoints)
+            playerStats, playerStatPoints = Stats.StatMenu(playerStats, playerStatPoints, playerName)
 
     ################ 4 Flee ################
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
-            _temp1 = (_playerStats[0] * 2)                                                                  #        hits with 1 atk)
-            _playerInventoryMoney -= (_playerStats[0] * 2)
-            _temp2 = (_enemyDict[_enemyID][1])
-            _playerStats[2] -= _enemyDict[_enemyID][1]
+            _temp1 = (playerStats[0] * 2)                                                                   #        hits with 1 atk)
+            playerInventoryMoney -= (playerStats[0] * 2)
+            _temp2 = (enemyDict[enemyID][1])
+            playerStats[2] -= enemyDict[enemyID][1]
             print(f"""You managed to flee while you distracted the enemy with {_temp1} gold,
-            but {_enemyDict[_enemyID][0]} got a hit. You received {_temp2} dmg!
-            You have {_playerStats[2]} HP left.""")
-            if _playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
+            but {enemyDict[enemyID][0]} got a hit. You received {_temp2} dmg!
+            You have {playerStats[2]} HP left.""")
+            if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
                 PicDeath()
                 sleep(4)
                 PicFairie()
-                _playerInventoryMoney -= _playerInventoryMoney * 0.1
-                _playerStats[5] *= 0.25
-                _location = "the town"
-                _playerStats[2] = 1
+                playerInventoryMoney -= playerInventoryMoney * 0.1
+                playerStats[5] *= 0.25
+                location = "the town"
+                playerStats[2] = 1
                 break
             break
         else: 
-            print("You can't choose that?!")
+            print("\nYou can't choose that?!")
 
-    return _playerInventoryMoney, _playerStats, _playerStatPoints, _playerInventoryItems, _location
-
-
-# def Mountains():
-#     global encounterIndex
-    
-#     luck = random.randint(1,100)
-#     if luck == 100 and playerLevel > 5:
-#         print("☆*:・ﾟnice, what a lucky day! (20 Gold found")
-#         encounterIndex = 20        
-#     if luck <= 10 and playerLevel > 5:
-#         EncounterWolf()
-#         encounterIndex = 2
-#     if luck > 10 and luck <= 30 and playerLevel > 5:
-#         EncounterRat()
-#         encounterIndex = 3
-#     if luck > 30 and luck <= 80 and playerLevel > 5:
-#         Nothing()
-#         encounterIndex = 0        
-#     if luck > 80 and luck < 100 and playerLevel > 5:
-#         EncounterWanderer() 
-#         encounterIndex = 10
-#     if playerLevel < 5:
-#         LowLevel()
-
-
-
+    return playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location
 
 # ########################################## No Encounter ##################################
 
