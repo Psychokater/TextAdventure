@@ -1,4 +1,5 @@
 import random
+import TestbereichSamo
 #import Main
 from time import sleep
 
@@ -55,8 +56,8 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
                 _playerInventoryMoney, _playerStats, _playerInventoryItems, _location = Fight(
                     playerStats, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
                 break
-            #elif UserInputChoose == "2": 
-                #Main.InventoryMenu()
+            elif UserInputChoose == "2": 
+                TestbereichSamo.all_items()
             #elif UserInputChoose == "3": 
                 #Main.StatMenu()
             elif UserInputChoose == "4": 

@@ -158,17 +158,17 @@
 #     print(all_items[playerItems[j]])
 
 itemsDict = {
-1001:[1,"Apple    ",(0),(0),(7),(6),(5),(3)],
-1010:[2,"ItemName1",(9),(8),(0),(6),(5),(1)],
-1011:[3,"ItemName2",(9),(8),(0),(6),(5),(1)],
-1100:[4,"ItemName3",(9),(8),(0),(6),(5),(1)],
-1101:[5,"ItemName4",(9),(8),(0),(6),(5),(1)],
-1110:[6,"ItemName5",(9),(8),(0),(6),(5),(1)],
-1111:[7,"ItemName6",(9),(8),(0),(6),(5),(1)],
-2000:[8,"ItemName7",(9),(8),(0),(6),(5),(1)],
-2001:[9,"ItemName8",(9),(8),(0),(6),(5),(1)]}
+1001:["Apple    ",(0),(0),(7),(6),(5),(3)],
+1010:["ItemName1",(9),(8),(0),(6),(5),(1)],
+1011:["ItemName2",(9),(8),(0),(6),(5),(1)],
+1100:["ItemName3",(9),(8),(0),(6),(5),(1)],
+1101:["ItemName4",(9),(8),(0),(6),(5),(1)],
+1110:["ItemName5",(9),(8),(0),(6),(5),(1)],
+1111:["ItemName6",(9),(8),(0),(6),(5),(1)],
+2000:["ItemName7",(9),(8),(0),(6),(5),(1)],
+2001:["ItemName8",(9),(8),(0),(6),(5),(1)]}
 
-############################## 6 Merchant, 7 Player
+############################## 5 Merchant, 6 Player
 
 playerInventory = [1001, 1100, 1101]
 merchantInventory = [1001, 1010, 1111]
@@ -177,16 +177,17 @@ merchantInventory = [1001, 1010, 1111]
 print("Player:")
 print("ID\tItem\t\tATK\tDEF\tHP\tVL\tQT")
 for i in range(0,len(playerInventory)):
-    for j in range(0,8):
-        if j == 6:            
+    for j in range(0,7):
+        if j == 5:            
             continue
         print(itemsDict[playerInventory[i]][j], end='\t')
     print("")
 print("\nMerchant")
 print("ID\tItem\t\tATK\tDEF\tHP\tVL\tQT")
-for k in range(0,len(merchantInventory)):
-    for l in range(0,8):
-        if l == 7:
+for y,(k) in enumerate (range(0,len(merchantInventory)),start=1):
+    print (y,end='==>')
+    for l in range(0,7):
+        if l == 6:
             continue
         print(itemsDict[merchantInventory[k]][l], end='\t')
     print("")
@@ -196,4 +197,8 @@ for k in range(0,len(merchantInventory)):
 userInput = int(input("zahl eingeben"))
 for x in range(0,len(merchantInventory)):
     if userInput == itemsDict[merchantInventory[x]][0]:
-        print("yay: ", itemsDict[merchantInventory[x]][0])
+        if merchantInventory[x] not in playerInventory:
+            playerInventory.append(merchantInventory[x])
+            merchantInventory.remove(merchantInventory[x])
+        print (merchantInventory,playerInventory)
+
