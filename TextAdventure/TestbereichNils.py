@@ -157,113 +157,36 @@
 # for j in range(0,len(playerItems)):
 #     print(all_items[playerItems[j]])
 
-all_items = {
-1001:["Apple    ",(0),(0),(7),(6),(5)],
-1010:["ItemName1",(9),(8),(0),(6),(5)],
-1011:["ItemName2",(9),(8),(0),(6),(5)],
-1100:["ItemName3",(9),(8),(0),(6),(5)],
-1101:["ItemName4",(9),(8),(0),(6),(5)],
-1110:["ItemName5",(9),(8),(0),(6),(5)],
-1111:["ItemName6",(9),(8),(0),(6),(5)],
-2000:["ItemName7",(9),(8),(0),(6),(5)],
-2001:["ItemName8",(9),(8),(0),(6),(5)]}
-player_items= {
-1001:["Apple    ",(0),(0),(7),(3),(2)],
-1010:["ItemName1",(1),(1),(0),(3),(1)]}
-############################## 4 qt # 5 prc
-while True:
+itemsDict = {
+1001:[1,"Apple    ",(0),(0),(7),(6),(5),(3)],
+1010:[2,"ItemName1",(9),(8),(0),(6),(5),(1)],
+1011:[3,"ItemName2",(9),(8),(0),(6),(5),(1)],
+1100:[4,"ItemName3",(9),(8),(0),(6),(5),(1)],
+1101:[5,"ItemName4",(9),(8),(0),(6),(5),(1)],
+1110:[6,"ItemName5",(9),(8),(0),(6),(5),(1)],
+1111:[7,"ItemName6",(9),(8),(0),(6),(5),(1)],
+2000:[8,"ItemName7",(9),(8),(0),(6),(5),(1)],
+2001:[9,"ItemName8",(9),(8),(0),(6),(5),(1)]}
 
-    def call_item_list():
-        print ('Merchant Items : ')
-        print ('\u2009_________________________________________')
-        print ('\uFF5C ItemNumber   Item    ATK DEF HP VL PR \uFF5C')
-        for y,(key,value) in enumerate (all_items.items(),start=1):
-            print ('\uFF5C',y,key,':',value,'\uFF5C')
-        print (end='\u2009')
-        print ('\u203e'*41)
+############################## 6 Merchant, 7 Player
 
+playerInventory = [1001, 1100, 1101]
+merchantInventory = [1001, 1010, 1111]
 
-    def call_player_list():
-        print ('Your Items : ')
-        print ('\u2009_________________________________________')
-        print ('\uFF5C ItemNumber   Item    ATK DEF HP VL QTY\uFF5C')
-        for y,(key,value) in enumerate (sorted(player_items.items()),start=1):
-            print ('\uFF5C',y,key,'==>',value,'\uFF5C')
-        print (end='\u2009')
-        print ('\u203e'*41)
+print("Player:")
+print("ID\tItem\t\tATK\tDEF\tHP\tVL\tQT")
+for i in range(0,len(playerInventory)):
+    for j in range(0,8):
+        if j == 6:            
+            continue
+        print(itemsDict[playerInventory[i]][j], end='\t')
+    print("")
+print("\nMerchant")
+print("ID\tItem\t\tATK\tDEF\tHP\tVL\tQT")
+for k in range(0,len(merchantInventory)):
+    for l in range(0,8):
+        if l == 7:
+            continue
+        print(itemsDict[merchantInventory[k]][l], end='\t')
+    print("")
 
-            
-        
-    def merchant_sell(x):
-        if x in player_items.keys():
-            player_items[x][5]+=1
-            call_player_list()
-        elif x not in player_items.keys():
-            sold_item = { x : all_items[x]}
-            player_items.update(sold_item)
-            player_items[x][5]-= 1      
-            call_player_list()
-        else :
-            pass
-
-    
-    def buy_an_item():
-        call_item_list()
-        while True:
-            try :
-                x = int (input ('pick an item number to buy : '))
-                if x in all_items.keys():
-                    print ('           ItemNumber   Item    ATK DEF HP VL PR ')
-                    sold_item = { x : all_items[x]}
-                    print ('Sold Item : ',sold_item)
-                    break
-                if x not in all_items.keys():
-                    print ('pick an Item number from the Items list ! ')
-                    call_item_list()
-                continue
-            except ValueError:
-                print ('pick an Item number from the Items list ! ')
-                call_item_list()
-                continue
-        merchant_sell(x)
-
-
-    def merchant_buy(x):
-        if x not in player_items.keys():
-            print ('Pick an Item number from your Items list !')
-            sell_an_item()
-        elif x in player_items.keys() and player_items[x][5]==1:
-            del player_items[x]
-            call_player_list()
-        else:
-            x in player_items.keys() and player_items[x][5]>1
-            player_items[x][5]-=1
-            call_player_list()
-
-
-    def sell_an_item():
-        call_player_list()
-        while True:
-            try :
-                x = int (input ('pick an ItemNumber to sell : '))
-                if x in player_items.keys():
-                    print ('             ItemNumber   Item    ATK DEF HP VL PR ')
-                    bought_item = { x : all_items[x]}
-                    print ('Bought Item : ',bought_item)
-                    break
-                if x not in player_items.keys():
-                    print ('pick an Item number from the Items list ! ')
-                    call_player_list()
-                    continue
-            except ValueError:
-                print ('pick an Item number from the Items list ! ')
-                call_player_list()
-                continue
-        merchant_buy(x)
-
-    while True:
-        x = input (' bey 1 , sell 2 : \n')
-        if '1' in x :
-            buy_an_item()
-        elif '2' in x :
-            sell_an_item()
