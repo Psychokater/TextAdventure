@@ -12,9 +12,9 @@
 #----------------------------
 #
 # -Encounter (Minor Improvements) (Nils) --- DONE
-# -Inventory, Items, Merchant (Samo)
+# -Inventory, Items, Merchant, Loot(?!) (Samo)
 # -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils) --- DONE
-# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter)      
+# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils)     
 
 import random
 import Helpfile
@@ -22,6 +22,7 @@ from time import sleep
 #import Intro
 import Encounter
 import Stats
+import Inventory
 
 
 # MAP:
@@ -39,39 +40,37 @@ import Stats
 #
 #
 
-playerStatPoints = 0
-playerInventoryMoney = 10
-merchantInventoryMoney = 200
-playerInventoryItems = {"Butterknife":[1, 0, 0, 2], "Apple":[0, 0, 2, 1], "Hat":[0, 2, 0, 2]} # {Item:[ATK,DEF,HEAL,VALUE]}
-merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe add a counter for "Days" which increment with every Move()? More Days = More/Better Items (Monster Loot and Merchant)
-playerName = ''
-location = ''
-playerStats = [1, 20, 20, 4, 5, 0] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
 
+merchantInventoryMoney = 200
+
+merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe add a counter for "Days" which increment with every Move()? More Days = More/Better Items (Monster Loot and Merchant)
 
 
 ### Main Game
 def Main():
-    global playerName
+    playerName = ''
     #Intro.Intro()
     sleep(2)
-    MainMenu()    
+    MainMenu(playerName)    
     if playerName == '':
-       Start()
-    IngameMenu()
+       playerName, startLocation, location = Start()
+    IngameMenu(playerName, startLocation, location)
 
 
 
 
 ### MainMENU: START/EXIT
-def MainMenu():
+def MainMenu(playerName):
         while True:
+            if playerName == "":
+                userInput = input('\n(1) New Game\t(2) Help\t(3) Exit\n')
+            else:
+                userInput = input('\n(1) Continue\t(2) Help\t(3) Exit\n')
 
-            userInput = int(input('\n(1) Play\t(2) Help\t(3) Exit\n'))
             match userInput:
-                case 1: break                        
-                case 2: Helpfile.HelpTxt()
-                case 3: exit(f"\nGoodbye {playerName}")
+                case "1": break                        
+                case "2": Helpfile.HelpTxt()
+                case "3": exit(f"\nGoodbye {playerName}")
                 case _: print("\nCouldn't understand you?!")
             sleep(2)   
 
@@ -79,9 +78,6 @@ def MainMenu():
 
 ### PICK A NAME, GET FIRST LOCATION (One Timer)
 def Start():
-    global location
-    global playerName
-    global startLocation
     _startLocations = ["a small homestead", "a comfy cabin", "a small tent", "a cave"]
     sleep(2)
     startLocation = _startLocations[random.randint(0,len(_startLocations)-1)]
@@ -104,60 +100,73 @@ def Start():
     print(f"\nYou wake up in {location}")
     sleep(2)
 
+    return playerName, startLocation, location
+
 
 ### overall ingameMenu #############################
-def IngameMenu():
-    global playerStatPoints, playerStats
+def IngameMenu(playerName, startLocation, location):
+    playerStatPoints = 0
+    playerStats = [1, 20, 20, 4, 5, 0] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    playerInventoryMoney = 10
+    playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
+
     while True:
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
-            case "1": Move()
-            case "2": InventoryMenu()
-            case "3": playerStats, playerStatPoints = Stats.StatMenu(playerStats, playerStatPoints)
-            case "4": MainMenu()
+            case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Move(
+                    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
+
+            case "2": playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
+                    playerInventoryItems, playerInventoryMoney, playerName)
+
+            case "3": playerStats, playerStatPoints = Stats.StatMenu(
+                    playerStats, playerStatPoints, playerName)
+
+            case "4": MainMenu(playerName)
             case _: print("\nCouldn't understand you?!")
 
 
 
-def InventoryMenu():
-    global playerInventoryItems
-    print(f"\nInventory: {playerInventoryItems}")
-    sleep(2)       
+    
 
 
 ### Move() -> World()
-def Move():
-    temp = "x"
-    global location, playerStats, playerStatPoints
+def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName):
+    _temp = "x"
     print(f"\nLocation: {location}")
     sleep(2)
-    while temp == "x":
+    while _temp == "x":
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\n").lower()
         direction = userInput[:1]
-        temp = World(location, direction)        
+        _temp = World(startLocation, location, direction)        
         sleep(2)        
-        if temp != "x":
-            location = temp
+        if _temp != "x":
+            location = _temp
             break        
     print(f"\nYou moved to {location}\n")       
     sleep(2)
-    EncounterSelection()
+    
+    location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
+    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
+    
     if location == "the town":
-        #EncounterMerchant()
+        #Inventory.EncounterMerchant()
         pass
-    playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints)
+    playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
+
+    return startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
 
 
-### MOVE() -> WORLD()
-def World(_location, _direction): 
+### Move() -> World()
+def World(startLocation, location, direction): 
    
     worldmap = [startLocation,"the town","the flatlands","the forrest","the islands","the mountains","the castle"]
     
     for i in range(0,7):
-        if worldmap[i] == _location:
+        if worldmap[i] == location:
             break
  
-    if _direction == "n":
+    if direction == "n":
         if i == 0:
             i += 3
         elif i == 3:
@@ -168,14 +177,14 @@ def World(_location, _direction):
             print("\nYou can't move there, try a different direction!")
             return "x"
       
-    elif _direction == "e":
+    elif direction == "e":
         if i == 1 or i == 2 or i == 3:
             i +=1
         else:
             print("\nYou can't move there, try a different direction!")
             return "x"
 
-    elif _direction == "s":
+    elif direction == "s":
         if i == 5:
             i -= 2
         elif i == 6:
@@ -186,7 +195,7 @@ def World(_location, _direction):
             print("\nYou can't move there, try a different direction!")  
             return "x"      
    
-    elif _direction == "w":
+    elif direction == "w":
         if i == 2 or i == 3 or i == 4:
             i -= 1
         else:
@@ -197,56 +206,6 @@ def World(_location, _direction):
         print("\nCouldn't understand you?!")
         return "x"
     return worldmap[i]
-
-
-def EncounterSelection():    
-   global startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney 
-   location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
-    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
-
-
-
-def EncounterMerchant():
-    while True:
-        userInput = input(f"\nYour Inventory: {playerInventoryItems}\n(1) Buy\t(2) Sell\t(3) Return\n")
-        match userInput:
-            case "1": MerchantBuy()
-            case "2": MerchantSell()
-            case "3": break
-            case _: print("\nCouldn't understand you?!")
-
-def MerchantBuy():
-    print("\nWhat do you want to buy?")
-    sleep(2)
-    print(f"Your Gold: {playerInventoryMoney}")
-    print(f"Merchant Gold: {merchantInventoryMoney}")    
-    print(merchantInventoryItems)
-    print(playerInventoryItems)
-
-    ### maybe print Inventory like this:
-    ###                 ATK     DEF     HEAL     Value
-    ### (1) "Item1"      2       0       0         2
-    ### (2) "Item2"      0       0       4         5
-
-    ### "Buy "Item": = Int User Input
-    ### if Money >= Value: 
-    ### playerInventoryMoney -= Value Item
-    ### merchantInventoryMoney += Value Item
-    ### playerInventoryItem += Item
-    ### MerchantInventoryItem -= Item
-
-    ### maybe Option for "equip" and "use" ?
-
-def MerchantSell():
-    print("\nWhat do you want to sell?")
-    sleep(2)
-    print(f"Your Gold: {playerInventoryMoney}")
-    print(f"Merchant Gold: {merchantInventoryMoney}")
-    print(merchantInventoryItems)
-    print(playerInventoryItems)
-    
-    #see MerchantBuy()
-
 
 
 
