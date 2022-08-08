@@ -11,7 +11,7 @@ all_items = {
 player_items= {
 1001:["Apple    ",(0),(0),(7),(3),(2)],
 1010:["ItemName1",(1),(1),(0),(3),(1)]}
-sold_item = {}
+
 while True:
 
     def call_item_list():
@@ -40,22 +40,22 @@ while True:
             player_items[x][5]+=1
             call_player_list()
         elif x not in player_items.keys():
+            sold_item = dict ({ x : all_items[x]})
             player_items.update(sold_item)
-            player_items[x][5] -= (player_items[x][5]-1)            
+            player_items[x][5]-= (player_items[x][5]-1)            
             call_player_list()
         else :
             pass
 
     
     def buy_an_item():
-        global sold_item
         call_item_list()
         while True:
             try :
                 x = int (input ('pick an item number to buy : '))
                 if x in all_items.keys():
                     print ('           ItemNumber   Item    ATK DEF HP VL PR ')
-                    sold_item = { x : all_items[x]}
+                    sold_item = dict ({ x : all_items[x]})
                     print ('Sold Item : ',sold_item)
                     break
                 if x not in all_items.keys():
