@@ -198,7 +198,7 @@ def World(_location, _direction):
 
 
 def EncounterSelection():    
-   global startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney 
+   global startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney 
    location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
     startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
 
