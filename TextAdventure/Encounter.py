@@ -1,9 +1,9 @@
 import random
-import TestbereichSamo
 #import Main
 from time import sleep
+import Stats
 
-def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _playerInventoryMoney, _playerName):
+def Encounter(_startLocation, _location, _playerStats, _playerStatPoints, _playerInventoryItems, _playerInventoryMoney, _playerName):
     global startLocation
     global location
     global encounterIndex
@@ -11,6 +11,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     playerInventoryItems = _playerInventoryItems
     playerInventoryMoney = _playerInventoryMoney
     playerStats = _playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
+    playerStatPoints = _playerStatPoints
     startLocation = _startLocation
     location = _location
     playerName = _playerName
@@ -53,13 +54,13 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
             UserInputChoose = input(f"""\n{_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
-                _playerInventoryMoney, _playerStats, _playerInventoryItems, _location = Fight(
-                    playerStats, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
+                _playerInventoryMoney, _playerStats, _playerStatPoints, _playerInventoryItems, _location = Fight(
+                    playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
                 break
-            elif UserInputChoose == "2": 
-                TestbereichSamo.all_items()
-            #elif UserInputChoose == "3": 
-                #Main.StatMenu()
+            #elif UserInputChoose == "2":
+                #Inventory()                
+            elif UserInputChoose == "3": 
+                _playerStatPoints, _playerStats = Stats.StatMenu(playerStatPoints, playerStats)
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
@@ -69,7 +70,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
             else: 
                 print("You can't choose that?!")
         
-    return _location, _playerStats, _playerInventoryItems, _playerInventoryMoney
+    return _location, _playerStats, _playerStatPoints, _playerInventoryItems, _playerInventoryMoney
 
 
 def EnemySelection(_encounterIndex):                                                                                  #Edit this function later to config chances for Encounter
@@ -119,7 +120,7 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
 
         UserInputFight = input(f"""
         \n{_playerName}: LVL {_playerStats[0]}\tHP {_playerStats[2]}/{_playerStats[1]}
-        \n(1) Attack\t(2) Inventory\t(3) Flee\n""")                                   # Fight (P = Player, E = Enemy)
+        \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                   # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
@@ -150,9 +151,13 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     ################ 2 Inventory #############                    
         #elif UserInputFight == "2":
             #Main.InventoryMenu()
+    ################ 3 Stats #################
 
-    ################ 3 Flee ################
-        elif UserInputFight == "3":                                                                         # Flee (loose Gold + Enemy
+        elif UserInputFight == "3":
+            _playerStatPoints, _playerStats = Stats.StatMenu(_playerStatPoints, _playerStats)
+
+    ################ 4 Flee ################
+        elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (_playerStats[0] * 2)                                                                  #        hits with 1 atk)
             _playerInventoryMoney -= (_playerStats[0] * 2)
             _temp2 = (_enemyDict[_enemyID][1])
@@ -174,7 +179,7 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
         else: 
             print("You can't choose that?!")
 
-    return _playerInventoryMoney, _playerStats, _playerInventoryItems, _location
+    return _playerInventoryMoney, _playerStats, _playerStatPoints, _playerInventoryItems, _location
 
 
 # def Mountains():
