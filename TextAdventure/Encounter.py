@@ -119,7 +119,7 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input(f"""
-        {_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+        {_playerName}: LVL {_playerStats[0]}\tHP {_playerStats[2]}/{_playerStats[1]}
         (1) Attack\t(2) Inventory\t(3) Flee\n""")                                   # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
