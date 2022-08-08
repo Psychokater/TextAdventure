@@ -18,7 +18,7 @@
 import random
 import Helpfile
 from time import sleep
-import Intro
+#import Intro
 import Encounter
 import Stats
 
