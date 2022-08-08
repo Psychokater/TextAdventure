@@ -20,6 +20,7 @@ import Helpfile
 from time import sleep
 import Intro
 import Encounter
+import Stats
 
 
 # MAP:
@@ -110,40 +111,8 @@ def IngameMenu():
         match userInput:
             case "1": Move()
             case "2": InventoryMenu()
-            case "3": StatMenu()
+            case "3": playerStatPoints, playerStats = Stats.StatMenu(playerStatPoints, playerStats)
             case "4": MainMenu()
-            case _: print("\nCouldn't understand you?!")
-
-
-
-def StatMenu():
-    global playerStatPoints, playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    while True:
-        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
-        if playerStatPoints == 0:  
-            userInput = input("\n(1) Return\n")
-            if userInput == "1":
-                break
-            else: print("\nCouldn't understand you?!")
-        else: 
-            userInput = input(f"\n(1) Edit Stats ({playerStatPoints} P)\t(2) Return\n")
-            if userInput == "1":
-                EditStats()
-            elif userInput == "2":
-                return
-            else: print("\nCouldn't understand you?!")
-
-            
-def EditStats():
-    global playerStats, playerStatPoints # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    while True:
-        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
-        userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
-        match userInput:
-            case "1": playerStats[1] += 10 ; playerStatPoints -= 1
-            case "2": playerStats[3] += 1 ; playerStatPoints -= 1
-            case "3": playerStats[4] += 1; playerStatPoints -= 1
-            case "4": break
             case _: print("\nCouldn't understand you?!")
 
 
@@ -242,8 +211,8 @@ def World(_location, _direction):
 
 def EncounterSelection():    
    global startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney 
-   location, playerStats, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
-    startLocation, location, playerStats, playerInventoryItems, playerInventoryMoney, playerName)
+   location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
+    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
 
 
 
