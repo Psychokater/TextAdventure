@@ -1,5 +1,4 @@
 import random
-#import Main
 from time import sleep
 import Stats
 

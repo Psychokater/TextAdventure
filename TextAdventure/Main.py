@@ -1,10 +1,11 @@
-##################################
-# Textadventure                  #
-#                                # 
-# Author: Nils aka Psychokater   #
-# CoAuthor: Samo aka Samoooooooo #
-#                                #
-################################## 
+####################################
+#                                  #
+#     ~~~ TEXTADVENTURE ~~~        #
+#                                  # 
+#  Author: Nils aka Psychokater    #
+#  CoAuthor: Samo aka Samoooooooo  #
+#                                  #
+#################################### 
 
 #----------------------------
 #           ToDo:  
