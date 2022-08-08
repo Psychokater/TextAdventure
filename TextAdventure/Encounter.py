@@ -144,9 +144,12 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
                 print(f"You have {playerStats[2]} HP left.")
                 sleep(1)
 
-    ################ 2 Inventory #############                    
-        #elif UserInputFight == "2":
-            #Main.InventoryMenu()
+    ################ 2 Inventory ##############      
+                  
+        elif UserInputFight == "2":
+               playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
+                playerInventoryItems, playerInventoryMoney, playerName)  
+
     ################ 3 Stats #################
 
         elif UserInputFight == "3":
