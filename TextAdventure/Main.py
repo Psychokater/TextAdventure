@@ -82,18 +82,13 @@ import Encounter
 #
 
 playerStatPoints = 0
-playerLevel = 1
-playerExp = 0
-playerHP = 20
-playerAtk = 4
-playerDef = 5
 playerInventoryMoney = 10
 merchantInventoryMoney = 200
 playerInventoryItems = {"Butterknife":[1, 0, 0, 2], "Apple":[0, 0, 2, 1], "Hat":[0, 2, 0, 2]} # {Item:[ATK,DEF,HEAL,VALUE]}
 merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe add a counter for "Days" which increment with every Move()? More Days = More/Better Items (Monster Loot and Merchant)
 playerName = ''
 location = ''
-playerStats = [playerLevel, playerHP, playerAtk, playerDef, playerExp]
+playerStats = [1, 20, 20, 4, 5, 0] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
 
 
 
@@ -166,9 +161,9 @@ def IngameMenu():
 
 
 def StatMenu():
-    global playerStatPoints,playerAtk,playerDef,playerHP
+    global playerStatPoints, playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     while True:
-        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerHP}\nATK: {playerAtk}\nDEF: {playerDef}")
+        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
             if userInput == "1":
@@ -184,25 +179,25 @@ def StatMenu():
 
             
 def EditStats():
-    global playerHP, playerAtk, playerDef, playerStatPoints
+    global playerStats, playerStatPoints # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     while True:
-        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerHP}\nATK: {playerAtk}\nDEF: {playerDef}")
+        print(f"\nPoints: {playerStatPoints}\n\n HP: {playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
         match userInput:
-            case "1": playerHP += 10 ; playerStatPoints -= 1
-            case "2": playerAtk += 1 ; playerStatPoints -= 1
-            case "3": playerDef += 1; playerStatPoints -= 1
+            case "1": playerStats[1] += 10 ; playerStatPoints -= 1
+            case "2": playerStats[3] += 1 ; playerStatPoints -= 1
+            case "3": playerStats[4] += 1; playerStatPoints -= 1
             case "4": break
             case _: print("\nCouldn't understand you?!")
 
 
 ### Level Up ???
 def LevelUp():
-    global playerLevel, playerExp, playerStatPoints
+    global playerStats, playerStatPoints # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
 
-    if playerExp == playerLevel * round((2**(playerLevel*0.6))):
-        playerLevel += 1
-        if playerLevel % 5 == 0:
+    if playerStats[5] == playerStats[0] * round((2**(playerStats[0]*0.6))):
+        playerStats[0] += 1
+        if playerStats[0] % 5 == 0:
             playerStatPoints += 4
         else:
             playerStatPoints += 2

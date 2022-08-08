@@ -9,7 +9,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
     global enemyDict
     playerInventoryItems = _playerInventoryItems
     playerInventoryMoney = _playerInventoryMoney
-    playerStats = _playerStats #Level, HP, Atk, Def, Exp  
+    playerStats = _playerStats # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     startLocation = _startLocation
     location = _location
     locationIndex = 0
@@ -88,7 +88,7 @@ def EnemySelection(_encounterIndex):
 
 
 def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInventoryItems, _location):
-    #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
+    #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     lootItem = "lootItem" #(add Item later!!!)
     tempMoney = 0.00
@@ -96,15 +96,15 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
 
     while True:
 
-        if _playerStats[1] <= 0:                                                            	    # if player dead
+        if _playerStats[2] <= 0:                                                            	    # if player dead
             sleep(2)
             PicDeath()
             sleep(4)
             PicFairie()
             _playerInventoryMoney -= _playerInventoryMoney * 0.1
-            _playerStats[4] *= 0.25
+            _playerStats[5] *= 0.25
             _location = "the town"
-            _playerStats[1] = 1
+            _playerStats[2] = 1
             break
 
         elif _enemyDict[_enemyID][3] <= 0:                                                         # if enemy dead
@@ -114,8 +114,8 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             tempExp += _enemyDict[_enemyID][4] * 100
             print(f"\nYou received {lootItem}, {tempMoney} Gold and {tempExp} Experience.")
             _playerInventoryMoney = tempMoney
-            _playerStats[4] = tempExp
-            _playerStats[1] = _playerStats[1]
+            _playerStats[5] = tempExp
+            _playerStats[2] = _playerStats[1]
             break
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
@@ -125,12 +125,12 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[2]} Points.")
+            print(f"\nYou attack {_enemyDict[_enemyID][0]} with {_playerStats[3]} Points.")
             sleep(1)
             print(f"{_enemyDict[_enemyID][0]} defends himself with {_enemyDict[_enemyID][2]} Points.")
             sleep(1)
-            if  _enemyDict[_enemyID][2] < _playerStats[2]:                                                  # P_DEF < E_ATK?
-                _enemyDict[_enemyID][3] += (_enemyDict[_enemyID][2] - _playerStats[2])                      # E_HP += E_DEF - P_ATK
+            if  _enemyDict[_enemyID][2] < _playerStats[3]:                                                  # P_DEF < E_ATK?
+                _enemyDict[_enemyID][3] += (_enemyDict[_enemyID][2] - _playerStats[3])                      # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             print(f"{_enemyDict[_enemyID][0]} has {_enemyDict[_enemyID][3]} HP left.")
@@ -140,13 +140,13 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
 
                 print(f"{_enemyDict[_enemyID][0]} attacks you with {_enemyDict[_enemyID][1]} Points.")      # Enemy attacks second
                 sleep(1)
-                print(f"You defend yourself with {_playerStats[3]} Points.")
+                print(f"You defend yourself with {_playerStats[4]} Points.")
                 sleep(1)
-                if _playerStats[3] < _enemyDict[_enemyID][1]:                                               # E_DEF < P_ATK?
-                    _playerStats[1] += (_playerStats[3] - _enemyDict[_enemyID][1])                          # P_HP += P_DEF - E_ATK 
+                if _playerStats[4] < _enemyDict[_enemyID][1]:                                               # E_DEF < P_ATK?
+                    _playerStats[2] += (_playerStats[4] - _enemyDict[_enemyID][1])                          # P_HP += P_DEF - E_ATK 
                 else:
                     print("Attack blocked")
-                print(f"You have {_playerStats[1]} HP left.")
+                print(f"You have {_playerStats[2]} HP left.")
                 sleep(1)
 
     ################ 2 Inventory #############                    
@@ -158,19 +158,19 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
             _temp1 = (_playerStats[0] * 2)                                                                  #        hits with 1 atk)
             _playerInventoryMoney -= (_playerStats[0] * 2)
             _temp2 = (_enemyDict[_enemyID][1])
-            _playerStats[1] -= _enemyDict[_enemyID][1]
+            _playerStats[2] -= _enemyDict[_enemyID][1]
             print(f"""You managed to flee while you distracted the enemy with {_temp1} gold,
             but {_enemyDict[_enemyID][0]} got a hit. You received {_temp2} dmg!
-            You have {_playerStats[1]} HP left.""")
-            if _playerStats[1] <= 0:                                                                        # if player dead (from 1 atk)
+            You have {_playerStats[2]} HP left.""")
+            if _playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
                 PicDeath()
                 sleep(4)
                 PicFairie()
                 _playerInventoryMoney -= _playerInventoryMoney * 0.1
-                _playerStats[4] *= 0.25
+                _playerStats[5] *= 0.25
                 _location = "the town"
-                _playerStats[1] = 1
+                _playerStats[2] = 1
                 break
             break
         else: 
