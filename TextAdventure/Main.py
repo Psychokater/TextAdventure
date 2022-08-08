@@ -112,7 +112,7 @@ def IngameMenu():
         match userInput:
             case "1": Move()
             case "2": InventoryMenu()
-            case "3": playerStatPoints, playerStats = Stats.StatMenu(playerStatPoints, playerStats)
+            case "3": playerStats, playerStatPoints = Stats.StatMenu(playerStats, playerStatPoints)
             case "4": MainMenu()
             case _: print("\nCouldn't understand you?!")
 

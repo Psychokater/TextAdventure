@@ -60,7 +60,7 @@ def Encounter(_startLocation, _location, _playerStats, _playerStatPoints, _playe
             #elif UserInputChoose == "2":
                 #Inventory()                
             elif UserInputChoose == "3": 
-                _playerStatPoints, _playerStats = Stats.StatMenu(playerStatPoints, playerStats)
+                _playerStats, _playerStatPoints = Stats.StatMenu(_playerStats, _playerStatPoints)
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
@@ -154,7 +154,7 @@ def Fight(_playerStats, _playerStatPoints, _enemyDict, _enemyID, _playerInventor
     ################ 3 Stats #################
 
         elif UserInputFight == "3":
-            _playerStatPoints, _playerStats = Stats.StatMenu(_playerStatPoints, _playerStats)
+            _playerStats, _playerStatPoints = Stats.StatMenu(_playerStats, _playerStatPoints)
 
     ################ 4 Flee ################
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy

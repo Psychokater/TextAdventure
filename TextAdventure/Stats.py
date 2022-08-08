@@ -1,4 +1,4 @@
-def StatMenu(playerStatPoints, playerStats):
+def StatMenu(playerStats, playerStatPoints):
      # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     while True:
         print(f"\nPoints: {playerStatPoints}\n\n HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
@@ -14,7 +14,7 @@ def StatMenu(playerStatPoints, playerStats):
             elif userInput == "2":
                 return
             else: print("\nCouldn't understand you?!")
-    return playerStatPoints, playerStats
+    return playerStats, playerStatPoints
 
 def EditStats(playerStats, playerStatPoints):
      # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
