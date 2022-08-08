@@ -103,12 +103,11 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
         elif enemyDict[enemyID][3] <= 0:                                                         # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
-            _tempMoney += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][3]) / 2
+            _tempMoney += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][4]) / 2
             _tempExp += enemyDict[enemyID][4] * 100
             print(f"\nYou received {_lootItem}, {_tempMoney} Gold and {_tempExp} Experience.")
-            playerInventoryMoney = _tempMoney
-            playerStats[5] = _tempExp
-            playerStats[2] = playerStats[1]
+            playerInventoryMoney += _tempMoney
+            playerStats[5] += _tempExp            
             break
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
@@ -125,22 +124,26 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
             print(f"{enemyDict[enemyID][0]} defends himself with {enemyDict[enemyID][2]} Points.")
             sleep(1)
             if  enemyDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
-                enemyDict[enemyID][3] += (enemyDict[enemyID][2] - playerStats[3])                      # E_HP += E_DEF - P_ATK
+                enemyDict[enemyID][3] += (enemyDict[enemyID][2] - playerStats[3])                        # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
+            if enemyDict[enemyID][3] < 0:                                                                    # HP < 0? Then HP 0
+                enemyDict[enemyID][3] = 0
             print(f"{enemyDict[enemyID][0]} has {enemyDict[enemyID][3]} HP left.")
             sleep(2)
 
             if enemyDict[enemyID][3] > 0:                                                                 # Enemy alive?
 
-                print(f"{enemyDict[enemyID][0]} attacks you with {enemyDict[enemyID][1]} Points.")      # Enemy attacks second
+                print(f"{enemyDict[enemyID][0]} attacks you with {enemyDict[enemyID][1]} Points.")        # Enemy attacks second
                 sleep(1)
                 print(f"You defend yourself with {playerStats[4]} Points.")
                 sleep(1)
-                if playerStats[4] < enemyDict[enemyID][1]:                                               # E_DEF < P_ATK?
-                    playerStats[2] += (playerStats[4] - enemyDict[enemyID][1])                          # P_HP += P_DEF - E_ATK 
-                else:
+                if playerStats[4] < enemyDict[enemyID][1]:                                                # E_DEF < P_ATK?
+                    playerStats[2] += (playerStats[4] - enemyDict[enemyID][1])                            # P_HP += P_DEF - E_ATK 
+                else:   
                     print("Attack blocked")
+                if playerStats[2] < 0:
+                    playerStats[2] = 0                                                                       # HP < 0? Then HP 0
                 print(f"You have {playerStats[2]} HP left.")
                 sleep(1)
 
@@ -157,12 +160,14 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
 
     ################ 4 Flee ################
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
-            _temp1 = (playerStats[0] * 2)                                                                   #        hits with 1 atk)
+            _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
             playerInventoryMoney -= (playerStats[0] * 2)
-            _temp2 = (enemyDict[enemyID][1])
-            playerStats[2] -= enemyDict[enemyID][1]
+            _temp2 = (enemyDict[enemyID][1] / 2)
+            playerStats[2] -= (enemyDict[enemyID][1] / 2)
+            if playerStats[2] < 0:
+                    playerStats[2] = 0 
             print(f"""You managed to flee while you distracted the enemy with {_temp1} gold,
-            but {enemyDict[enemyID][0]} got a hit. You received {_temp2} dmg!
+            but {enemyDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!
             You have {playerStats[2]} HP left.""")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
