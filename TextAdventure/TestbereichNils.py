@@ -170,15 +170,15 @@ all_items = {
 player_items= {
 1001:["Apple    ",(0),(0),(7),(3),(2)],
 1010:["ItemName1",(1),(1),(0),(3),(1)]}
-
+############################## 4 qt # 5 prc
 while True:
 
     def call_item_list():
         print ('Merchant Items : ')
         print ('\u2009_________________________________________')
         print ('\uFF5C ItemNumber   Item    ATK DEF HP VL PR \uFF5C')
-        for y,(key1,value1) in enumerate (all_items.items(),start=1):
-            print ('\uFF5C',y,key1,':',value1,'\uFF5C')
+        for y,(key,value) in enumerate (all_items.items(),start=1):
+            print ('\uFF5C',y,key,':',value,'\uFF5C')
         print (end='\u2009')
         print ('\u203e'*41)
 
@@ -187,8 +187,8 @@ while True:
         print ('Your Items : ')
         print ('\u2009_________________________________________')
         print ('\uFF5C ItemNumber   Item    ATK DEF HP VL QTY\uFF5C')
-        for z,(key,value) in enumerate (sorted(player_items.items()),start=1):
-            print ('\uFF5C',z,key,'==>',value,'\uFF5C')
+        for y,(key,value) in enumerate (sorted(player_items.items()),start=1):
+            print ('\uFF5C',y,key,'==>',value,'\uFF5C')
         print (end='\u2009')
         print ('\u203e'*41)
 
