@@ -49,9 +49,8 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
         (enemyDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
-            UserInputChoose = input(f"""
-            {_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
-            What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
+            UserInputChoose = input(f"""\n{_playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 _playerInventoryMoney, _playerStats, _playerInventoryItems, _location = Fight(
                     playerStats, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
@@ -63,9 +62,8 @@ def Encounter(_startLocation, _location, _playerStats, _playerInventoryItems, _p
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
-                print(f"""
-                You managed to escape the fight, you used up {_temp} gold to distract your enemy.
-                You have {playerStats[2]} HP left.""")
+                print(f"""\nYou managed to escape the fight, you used up {_temp} gold to distract your enemy.
+                \nYou have {playerStats[2]} HP left.""")
                 break
             else: 
                 print("You can't choose that?!")
@@ -119,8 +117,8 @@ def Fight(_playerStats, _enemyDict, _enemyID, _playerInventoryMoney, _playerInve
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input(f"""
-        {_playerName}: LVL {_playerStats[0]}\tHP {_playerStats[2]}/{_playerStats[1]}
-        (1) Attack\t(2) Inventory\t(3) Flee\n""")                                   # Fight (P = Player, E = Enemy)
+        \n{_playerName}: LVL {_playerStats[0]}\tHP {_playerStats[2]}/{_playerStats[1]}
+        \n(1) Attack\t(2) Inventory\t(3) Flee\n""")                                   # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
