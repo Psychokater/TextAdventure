@@ -40,7 +40,7 @@ while True:
             player_items[x][5]+=1
             call_player_list()
         elif x not in player_items.keys():
-            sold_item = dict ({ x : all_items[x]})
+            sold_item = { x : all_items[x]}
             player_items.update(sold_item)
             player_items[x][5]-= (player_items[x][5]-1)            
             call_player_list()
@@ -55,7 +55,7 @@ while True:
                 x = int (input ('pick an item number to buy : '))
                 if x in all_items.keys():
                     print ('           ItemNumber   Item    ATK DEF HP VL PR ')
-                    sold_item = dict ({ x : all_items[x]})
+                    sold_item = { x : all_items[x]}
                     print ('Sold Item : ',sold_item)
                     break
                 if x not in all_items.keys():
@@ -89,7 +89,7 @@ while True:
                 x = int (input ('pick an ItemNumber to sell : '))
                 if x in player_items.keys():
                     print ('             ItemNumber   Item    ATK DEF HP VL PR ')
-                    bought_item = dict ({ x : all_items[x]})
+                    bought_item = { x : all_items[x]}
                     print ('Bought Item : ',bought_item)
                     break
                 if x not in player_items.keys():
