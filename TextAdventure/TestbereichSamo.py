@@ -29,24 +29,24 @@ while True:
         print ('\u2009_________________________________________')
         print ('\uFF5C ItemNumber   Item    ATK DEF HP VL QTY\uFF5C')
         for y,(key,value) in enumerate (sorted(player_items.items()),start=1):
-            print ('\uFF5C',y,key,':',value,'\uFF5C')
+            print ('\uFF5C',y,key,'==>',value,'\uFF5C')
         print (end='\u2009')
         print ('\u203e'*41)
 
-
+            
+        
     def merchant_sell(x):
         if x in player_items.keys():
             player_items[x][5]+=1
             call_player_list()
         elif x not in player_items.keys():
-            sold_item = { x : all_items[x]}
             player_items.update(sold_item)
-            player_items[x][5]-=(sold_item[x][5]-1)
+            player_items[x][5]-= (player_items[x][5]-1)            
             call_player_list()
         else :
             pass
 
-
+    
     def buy_an_item():
         call_item_list()
         while True:
@@ -107,6 +107,4 @@ while True:
             buy_an_item()
         elif '2' in x :
             sell_an_item()
-        else :
-            continue
 
