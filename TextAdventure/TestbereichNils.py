@@ -173,6 +173,7 @@ itemsDict = {
 playerInventory = [1001, 1100, 1101]
 merchantInventory = [1001, 1010, 1111]
 
+### print 
 print("Player:")
 print("ID\tItem\t\tATK\tDEF\tHP\tVL\tQT")
 for i in range(0,len(playerInventory)):
@@ -190,3 +191,9 @@ for k in range(0,len(merchantInventory)):
         print(itemsDict[merchantInventory[k]][l], end='\t')
     print("")
 
+
+### acess Item
+userInput = int(input("zahl eingeben"))
+for x in range(0,len(merchantInventory)):
+    if userInput == itemsDict[merchantInventory[x]][0]:
+        print("yay: ", itemsDict[merchantInventory[x]][0])
