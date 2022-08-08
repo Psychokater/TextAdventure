@@ -16,7 +16,7 @@ def InventoryMenu(playerInventoryItems, playerInventoryMoney, playerName):
     while True:
         userInput = input(f"""
 {playerName}
-\nGold: {playerInventoryMoney}
+\nGold: {round(playerInventoryMoney,2)}
 Inventory: {playerInventoryItems}
 
 (1) Return\n
@@ -26,7 +26,7 @@ Inventory: {playerInventoryItems}
             case "1": break
             case _: print("\nCouldn't understand you?!")     
                                                                                      
-    return playerInventoryItems, playerInventoryMoney
+    return playerInventoryItems, round(playerInventoryMoney,2)
 
 
 

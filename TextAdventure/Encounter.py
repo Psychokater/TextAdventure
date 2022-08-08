@@ -60,7 +60,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
-                print(f"""\nYou managed to escape the fight, you used up {_temp} gold to distract your enemy.
+                print(f"""\nYou managed to escape the fight, you used up {round(_temp,2)} gold to distract your enemy.
                 \nYou have {playerStats[2]} HP left.""")
                 break
             else: 
@@ -103,9 +103,9 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
         elif enemyDict[enemyID][3] <= 0:                                                         # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
-            _tempMoney += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][4]) / 2
+            _tempMoney, += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][4]) / 2
             _tempExp += enemyDict[enemyID][4] * 100
-            print(f"\nYou received {_lootItem}, {_tempMoney} Gold and {_tempExp} Experience.")
+            print(f"\nYou received {_lootItem}, {round(_tempMoney,2)} Gold and {round(_tempExp,2)} Experience.")
             playerInventoryMoney += _tempMoney
             playerStats[5] += _tempExp            
             break
@@ -166,9 +166,9 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
             playerStats[2] -= (enemyDict[enemyID][1] / 2)
             if playerStats[2] < 0:
                     playerStats[2] = 0 
-            print(f"""You managed to flee while you distracted the enemy with {_temp1} gold,
-            but {enemyDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!
-            You have {playerStats[2]} HP left.""")
+            print(f"You managed to flee while you distracted the enemy with {round(_temp1,2)} gold,")
+            print(f"but {enemyDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!")
+            print(f"You have {playerStats[2]} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
                 PicDeath()
