@@ -121,62 +121,39 @@
 
 
 
+all_items = {
+1001:["Apple    ",(0),(0),(7),(6),(5)],
+1010:["ItemName1",(9),(8),(0),(6),(5)],
+1011:["ItemName2",(9),(8),(0),(6),(5)],
+1100:["ItemName3",(9),(8),(0),(6),(5)],
+1101:["ItemName4",(9),(8),(0),(6),(5)],
+1110:["ItemName5",(9),(8),(0),(6),(5)],
+1111:["ItemName6",(9),(8),(0),(6),(5)],
+2000:["ItemName7",(9),(8),(0),(6),(5)],
+2001:["ItemName8",(9),(8),(0),(6),(5)]}
+# ItemNumber   1 Item    2 ATK,  3 DEF, 4 HP, 5 VL, 6 PR 
 
-def PicWolf():
-    print("""oh no, Wolf!
-                /^._        Bark
-  ,___,--~~~~--' /'~ Bark
-  `~--~\ )___,)/'               Bark
-      (/\\\_  (/\\\_
-       """)
-    
+merchantItems = []
+playerItems = []
 
-
-def PicRat():
-    print("""look, rats!
-    
-     ~~(  )8:>    <;3(  )~~
-     """)
-
-def PicBandit():
-    print("""
-    
-    ToDo: Make a Pic of Bandit
-    
-    """)
-
-
-def PicDragon():
-    print("""
-    'It does not do to leave a live dragon out of your calculations, if you live near him.'      
-
-                     __/>^^^;:,
-                    /-.       :,/|/|
-                 __/ `c        :,/ \__
-                (~             ;/ /  /
-                 `-'--._       / / ,<     _
-                       /=\     /  _/     | '.
-                      / ',\ \\    \_     ,| |"       
-                     |=|  E_  |     \. ,/  |
-                     \=\   ""       `,,/   |
-                      \=\            ||    /
-                       \=\____       |\    \\
-                      / \/    `     <__)    \\
-                      | |                    |
-                    ,__\,\                   /
-                   ,--____>    /\.         ./
-                   '-__________>  \.______/
-                   
-                   """)
-
-
-
-enemyDict = {
-        1001 : ["Rats", 1, 0, 2, 1, PicRat],
-        1002 : ["Wolf", 3, 1, 10, 2, PicWolf],
-        1003 : ["Bandit", 6, 4, 20, 4, PicBandit],
-        1004 : ["Dragon", 20, 10, 50, 10, PicDragon]
-        } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
-
-enemyDict[1001][5]()
+#buy
+####################################################################### print Shop
+merchantItems += 1001,1010,1011    #Items nur Testweise zugefügt
+playerItems += 2001, 2000          #
+for i in range(0,len(merchantItems)):
+    print(all_items[merchantItems[i]])
+print("")
+for j in range(0,len(playerItems)):
+    print(all_items[playerItems[j]])
+####################################################################### buy
+buyItem = int(input("welches Item? "))
+playerItems.append(buyItem)
+merchantItems.remove(buyItem)
+all_items[buyItem][5] = 1           # 1 kann auch über eine variable ermittelt werden!!!
+####################################################################### print Shop
+for i in range(0,len(merchantItems)):
+    print(all_items[merchantItems[i]])
+print("")
+for j in range(0,len(playerItems)):
+    print(all_items[playerItems[j]])
 
