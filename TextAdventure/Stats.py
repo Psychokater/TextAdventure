@@ -13,7 +13,7 @@ def StatMenu(playerStats, playerStatPoints, playerName):
             if userInput == "1":
                 playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName)
             elif userInput == "2":
-                return
+                break
             else: print("\nCouldn't understand you?!")
     return playerStats, playerStatPoints
 
@@ -28,11 +28,12 @@ def EditStats(playerStats, playerStatPoints, playerName):
         if userInput == "1":
             playerStats[1] += 10
             playerStatPoints -= 1
+            playerStats[2] = playerStats[1]
         elif userInput == "2":
-            playerStats[3] += 10
+            playerStats[3] += 1
             playerStatPoints -= 1
         elif userInput == "3":
-            playerStats[4] += 10 
+            playerStats[4] += 1
             playerStatPoints -= 1
         elif userInput == "4":
             break
@@ -45,7 +46,7 @@ def EditStats(playerStats, playerStatPoints, playerName):
 def LevelUp(playerStats, playerStatPoints, playerName):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
-    if playerStats[5] == nextLevelExp:
+    if playerStats[5] >= nextLevelExp:
         playerStats[0] += 1
         if playerStats[0] % 5 == 0:
             playerStatPoints += 4

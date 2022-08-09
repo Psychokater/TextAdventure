@@ -112,6 +112,7 @@ def IngameMenu(playerName, startLocation, location):
     playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
+        playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Move(
