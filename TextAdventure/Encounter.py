@@ -78,10 +78,10 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     return location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
 
 
-def EnemySelection(encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):                                                                                  #Edit this function later to config chances for Encounter
+def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):                                                                                  #Edit this function later to config chances for Encounter
     enemyID = 0
     selectedDict = None
-
+    #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     if encounterIndex <= 10:
         EncounterNothing()       
     elif encounterIndex >10 and encounterIndex <= 25:
@@ -96,6 +96,12 @@ def EnemySelection(encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard
         _luck = random.randint(1,len(enemyDictEasy))
         enemyID = 1000 + _luck
         selectedDict = enemyDictHard
+    
+    if selectedDict == enemyDictHard and playerStats[0] < 10:
+        EncounterLowLevel()
+    elif selectedDict == enemyDictMedium and playerStats[0] < 5:
+        EncounterLowLevel()
+
     return enemyID, selectedDict
 
 
@@ -207,7 +213,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 # ########################################## No Encounter ##################################
 
 def EncounterLowLevel():
-    print("You couldn't find anything here, maybe you come back when you are stronger?")
+    print("A dangerous sphere approaches you, but as you turn around, it disappears.\n Maybe you escaped your downfall this time.")
 
 def EncounterNothing():
     print("Phew, nothing happened here.")
