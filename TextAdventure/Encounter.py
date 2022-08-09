@@ -48,7 +48,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex) # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                        
     if enemyID != 0:
-        (selectedDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
+        (selectedDict[enemyID][5]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
             UserInputChoose = input(f"""\n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
@@ -80,8 +80,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
 def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
     enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
-    selectedDict = None
-    print(f"TEST1:::EC: ",encounterIndex)
+    selectedDict = {}
+    print(f"TEST1:::EC::: ",encounterIndex)
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     if encounterIndex <= 10:
         EncounterNothing()
@@ -93,22 +93,20 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     elif encounterIndex > 33 and encounterIndex <= 66:
         _luck = random.randint(1,len(enemyDictMedium))
         enemyID = 1010 + _luck
-        selectedDict = enemyDictHard
+        selectedDict = enemyDictMedium
     elif encounterIndex > 66 and encounterIndex <= 100:
         _luck = random.randint(1,len(enemyDictEasy))
         enemyID = 1000 + _luck
-        selectedDict = enemyDictHard
-    print("TEST2::: ",enemyID,selectedDict)
-    if selectedDict == enemyDictHard and playerStats[0] < 10:
-        EncounterLowLevel()
-        selectedDict = None
+        selectedDict = enemyDictEasy
+    
+    if selectedDict == enemyDictHard and playerStats[0] < 10 and playerStats[0] >= 5:
+        EncounterLowLevel()        
         enemyID = 0
     elif selectedDict == enemyDictMedium and playerStats[0] < 5:
-        EncounterLowLevel()
-        selectedDict = None
+        EncounterLowLevel()        
         enemyID = 0
 
-    print("TEST3::: ",enemyID,selectedDict)
+    print("TEST2::: ID, SELECTDICT  :::",enemyID,selectedDict)
     return enemyID, selectedDict
 
 
@@ -272,8 +270,8 @@ def PicRat():
 
 def PicWolf():
     print("""
-    'What do you call a wolf with Stockholm Syndrome?
-    A Dog.'
+    'What do you call a wolf with Stockholm Syndrome?...
+    ...a Dog.'
 
                 /^._        Bark
   ,___,--~~~~--' /'~ Bark
