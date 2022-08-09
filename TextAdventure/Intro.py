@@ -12,7 +12,7 @@ def Intro():
     print(x * i)
     print("\u203e"*50)   
     i += 1
-    sleep(0.25)
+    sleep(0.05)
     if j == ".":
       j = ".."
     elif j == ".." and i % 2 == 0:
@@ -39,7 +39,7 @@ def Intro():
         print(x * round(k/2))
         print("\u203e"*50)
         sleep(0.05) 
-        if k == 106:
+        if k == 100:
           print("""
       ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
       ░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
@@ -57,18 +57,18 @@ def Intro():
       ░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░
       ░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░
                 """)
-          sleep(1)
+          sleep(1.5)
           os.system('cls')
-    
+          break
       os.system('cls')
       break
 
-
+Intro()
   #### need function to "stop" the Loading Animation with Key Input!
 
 
 
-  print('''
+print('''
 *    ___       _______ *____    ____  _______ .__ * __. .___________. __    __  .______*      _______ 
     /   \  *  |       \ \   \ */   / |   ____||  \ |  | |           ||  | *|  | |   _  \     |   ____|
    /  ^  \    |  .--.  | \   \/   /  |  |_*   |   \|  | `---|  |----`|  |  |  | |  |_)  |    |  |_*   
