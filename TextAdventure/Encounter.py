@@ -9,14 +9,23 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
 
-    enemyDict = {
+    enemyDictEasy = {
             1001 : ["Pack of Rats", 1, 0, 2, 1, PicRat],
-            1002 : ["Wolf", 3, 1, 10, 2, PicWolf],
-            1003 : ["Bandit", 6, 4, 20, 4, PicBandit],
-            1004 : ["Troll", 2, 1, 30, 10, PicTroll],
-            1005 : ["Centaur", 8, 10, 20, 15, PicCentaur],
-            1006 : ["Minotaur", 10, 4, 20, 15, PicMinotaur],
-            1007 : ["Dragon", 20, 30, 50, 10, PicDragon]
+            1002 : ["Wolf", 2, 1, 10, 2, PicWolf],
+            1003 : ["Skeleton", 2, 2, 5, 2, PicSkeleton]
+            } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+
+    enemyDictMedium = {
+            1011 : ["Ghost", 4, 5, 15, 6, PicGhost],
+            1012 : ["Bandit", 6, 4, 20, 8, PicBandit],
+            1013 : ["Troll", 2, 1, 30, 8, PicTroll],
+            1014 : ["Centaur", 8, 10, 20, 10, PicCentaur]
+            } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+
+    enemyDictHard = {
+            1101 : ["Minotaur", 10, 4, 20, 15, PicMinotaur],
+            1102 : ["Gryphon", 15, 8, 25, 20, PicGryphon],
+            1103 : ["Dragon", 20, 30, 50, 30, PicDragon]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     
 
@@ -37,16 +46,16 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     
     luck = random.randint(1,100)
     encounterIndex = round(luck / (playerStats[0] * locationIndex)) # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID = EnemySelection(encounterIndex, enemyDict)                        
+    enemyID, selectedDict = EnemySelection(encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                        
     if enemyID != 0:
-        (enemyDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
+        (selectedDict[enemyID][5]())                                   # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
             UserInputChoose = input(f"""\n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
-                    playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
+                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
                 break
             
             elif UserInputChoose == "2":
@@ -69,18 +78,28 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     return location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
 
 
-def EnemySelection(encounterIndex, enemyDict):                                                                                  #Edit this function later to config chances for Encounter
+def EnemySelection(encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):                                                                                  #Edit this function later to config chances for Encounter
     enemyID = 0
-    
+    selectedDict = None
+
     if encounterIndex <= 10:
-        EncounterNothing()
-    elif encounterIndex > 10 or encounterIndex <= 100:
-        _luck = random.randint(1,len(enemyDict))
+        EncounterNothing()       
+    elif encounterIndex >10 and encounterIndex <= 25:
+        _luck = random.randint(1,len(enemyDictHard))
+        enemyID = 1100 + _luck
+        selectedDict = enemyDictHard
+    elif encounterIndex > 50 and encounterIndex <= 75:
+        _luck = random.randint(1,len(enemyDictMedium))
+        enemyID = 1010 + _luck
+        selectedDict = enemyDictHard
+    elif encounterIndex > 75 and encounterIndex <= 100:
+        _luck = random.randint(1,len(enemyDictEasy))
         enemyID = 1000 + _luck
-    return enemyID
+        selectedDict = enemyDictHard
+    return enemyID, selectedDict
 
 
-def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName):
+def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     _lootItem = "lootItem" #(add Item later!!!)
@@ -100,11 +119,11 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
             playerStats[2] = 1
             break
 
-        elif enemyDict[enemyID][3] <= 0:                                                         # if enemy dead
+        elif selectedDict[enemyID][3] <= 0:                                                         # if enemy dead
             print("\n---Enemy has been eleminated---")
             sleep(2)
-            _tempMoney, += (enemyDict[enemyID][1] + enemyDict[enemyID][2] + enemyDict[enemyID][4]) / 2
-            _tempExp += enemyDict[enemyID][4] * 100
+            _tempMoney += (selectedDict[enemyID][1] + selectedDict[enemyID][2] + selectedDict[enemyID][4]) / 2
+            _tempExp += selectedDict[enemyID][4] * 100
             print(f"\nYou received {_lootItem}, {round(_tempMoney,2)} Gold and {round(_tempExp,2)} Experience.")
             playerInventoryMoney += _tempMoney
             playerStats[5] += _tempExp            
@@ -119,27 +138,27 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {enemyDict[enemyID][0]} with {playerStats[3]} Points.")
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3]} Points.")
             sleep(1)
-            print(f"{enemyDict[enemyID][0]} defends himself with {enemyDict[enemyID][2]} Points.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][2]} Points.")
             sleep(1)
-            if  enemyDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
-                enemyDict[enemyID][3] += (enemyDict[enemyID][2] - playerStats[3])                        # E_HP += E_DEF - P_ATK
+            if  selectedDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
+                selectedDict[enemyID][3] += (selectedDict[enemyID][2] - playerStats[3])                        # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
-            if enemyDict[enemyID][3] < 0:                                                                    # HP < 0? Then HP 0
-                enemyDict[enemyID][3] = 0
-            print(f"{enemyDict[enemyID][0]} has {enemyDict[enemyID][3]} HP left.")
+            if selectedDict[enemyID][3] < 0:                                                                    # HP < 0? Then HP 0
+                selectedDict[enemyID][3] = 0
+            print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][3]} HP left.")
             sleep(2)
 
-            if enemyDict[enemyID][3] > 0:                                                                 # Enemy alive?
+            if selectedDict[enemyID][3] > 0:                                                                 # Enemy alive?
 
-                print(f"{enemyDict[enemyID][0]} attacks you with {enemyDict[enemyID][1]} Points.")        # Enemy attacks second
+                print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][1]} Points.")        # Enemy attacks second
                 sleep(1)
                 print(f"You defend yourself with {playerStats[4]} Points.")
                 sleep(1)
-                if playerStats[4] < enemyDict[enemyID][1]:                                                # E_DEF < P_ATK?
-                    playerStats[2] += (playerStats[4] - enemyDict[enemyID][1])                            # P_HP += P_DEF - E_ATK 
+                if playerStats[4] < selectedDict[enemyID][1]:                                                # E_DEF < P_ATK?
+                    playerStats[2] += (playerStats[4] - selectedDict[enemyID][1])                            # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
@@ -162,12 +181,12 @@ def Fight(playerStats, playerStatPoints, enemyDict, enemyID, playerInventoryMone
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
             playerInventoryMoney -= (playerStats[0] * 2)
-            _temp2 = (enemyDict[enemyID][1] / 2)
-            playerStats[2] -= (enemyDict[enemyID][1] / 2)
+            _temp2 = (selectedDict[enemyID][1] / 2)
+            playerStats[2] -= (selectedDict[enemyID][1] / 2)
             if playerStats[2] < 0:
                     playerStats[2] = 0 
             print(f"You managed to flee while you distracted the enemy with {round(_temp1,2)} gold,")
-            print(f"but {enemyDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!")
+            print(f"but {selectedDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!")
             print(f"You have {playerStats[2]} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
@@ -198,7 +217,7 @@ def EncounterNothing():
 
 def PicWanderer(): 
     print("""
-    A mystic old man wanders through this valley, maybe he has something for you?
+    A mystic old man wanders through this valley, maybe he has some free candys?
      
                      .x    
                      .    x    
@@ -216,6 +235,7 @@ def PicWanderer():
 
 def PicMerchant():
     print("""
+    'buy two Potions, pay for three and get one for free!'
     
             /'''''''''''''''''''\\
            /_____/Merchant\\______\\     
@@ -229,29 +249,64 @@ def PicMerchant():
 
 ######################################## Enemys ##################################################
 
-
-
-def PicWolf():
-    print("""
-    oh no, wolf!
-                /^._        Bark
-  ,___,--~~~~--' /'~ Bark
-  `~--~\ )___,)/'               Bark
-      (/\\\_  (/\\\_
-       """)
-    
-
-
 def PicRat():
     print("""
-    look, rats!
+    'Two rats walk into a bar...
+    ...the bar had to be shut down due to health violations.'
     
      ~~(  )8:>    <;3(  )~~
      """)
 
+def PicWolf():
+    print("""
+    'What do you call a wolf with Stockholm Syndrome?
+    A Dog.'
+
+                /^._        Bark
+  ,___,--~~~~--' /'~ Bark
+  `~--~\ )___,)/'               Bark
+      (/\\\_  (/\\\_
+       """)   
+
+
+def PicSkeleton():
+    print("""
+    'The average human body contains enough bones...
+    ...to make an entire human skeleton'
+
+      .-.
+     (o.o)
+      |=|
+     __|__
+   //.=|=.\\\\
+  // .=|=. \\\\
+  \\\\ .=|=. //
+   \\\\(_=_)//
+    (:| |:)
+     || ||
+     () ()
+     || ||
+     || ||
+     
+     """)
+
+def PicGhost():
+    print("""
+    'What is your religion? Mine is Boo-ddhism'
+       .-.
+      ( " )
+   /\_.' '._/\\
+   |         |
+    \       /
+     \    /`
+   (__)  /
+   `.__.'
+    """)
+
 def PicBandit():
     print("""
-    this thug wants your money!
+    'Broke into someones home last night, searching for money.
+    He woke up, but started searching with me'
   <=======]}======
     --.   /|
    _\\\"/_.'/
@@ -263,27 +318,12 @@ def PicBandit():
    \\ V\ |
     """)
 
-def PicCentaur():
-    print("""
-    mythical creatures everywhere!
-                __
-               / _\ #
-               \c /  #
-               / \___ #
-               \`----`#==>  
-               |  \  #
-    ,%.-\"\"\"---'`--'\#_
-   %%/             |__`\\
-  .%'\     |   \   /  //
-  ,%' >   .'----\ |  [/
-     < <<`       ||
-      `\\\\       ||
-        )\\\      )\\
-    """)
 
 def PicTroll():
     print("""
-    serious trolling here!
+    'How do you kill a troll?
+    Deactivate his LAN Adapter'
+
         .-\"\"\"\".
        /       \\
    __ /   .-.  .\\
@@ -303,9 +343,29 @@ def PicTroll():
 
     """)
 
+def PicCentaur():
+    print("""
+    'Shopping is quite a hassle.
+    Shirts are not the problem, 
+    but how the fuck am I supposed to find fitting pants?'
+                __
+               / _\ #
+               \c /  #
+               / \___ #
+               \`----`#==>  
+               |  \  #
+    ,%.-\"\"\"---'`--'\#_
+   %%/             |__`\\
+  .%'\     |   \   /  //
+  ,%' >   .'----\ |  [/
+     < <<`       ||
+      `\\\\       ||
+        )\\\      )\\
+    """)
+
 def PicMinotaur():
     print("""
-    mythical creautures Everywhere!
+    'I am so fuckin horny'
      .      .
      |\____/|
     (\|----|/)
@@ -330,6 +390,24 @@ def PicMinotaur():
 
         """)
 
+def PicGryphon():
+    print(""" 
+    'Yeah do not pretend we are free air carrier for some hobbits
+    to throw this stupid ring into lava.' 
+                        ______
+             ______,---'__,---'
+         _,-'---_---__,---'
+  /_    (,  ---____',
+ /  ',,   `, ,-'
+;/)   ,',,_/,'
+| /\   ,.'//\\
+`-` \ ,,'    `.
+     `',   ,-- `.
+     '/ / |      `,         _
+     //'',.\_    .\\\\      ,{==>-
+  __//   __;_`-  \ `;.__,;'
+((,--,) (((,------;  `--'
+""")
 
 def PicDragon():
     print("""
