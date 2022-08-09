@@ -47,12 +47,13 @@ def LevelUp(playerStats, playerStatPoints, playerName):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
     if playerStats[5] >= nextLevelExp:
+        playerStats[5] -= nextLevelExp
         playerStats[0] += 1
         if playerStats[0] % 5 == 0:
             playerStatPoints += 4
         else:
             playerStatPoints += 2
         print(f"\nYay, {playerName} got a new Level!")
-        playerStats[5] = 0
+        
         
     return playerStats, playerStatPoints
