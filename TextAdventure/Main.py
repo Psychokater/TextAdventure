@@ -134,7 +134,7 @@ def IngameMenu(playerName, startLocation, location):
 def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName):
     _temp = "x"
     print(f"\nLocation: {location}")
-    sleep(2)
+    sleep(1)
     while _temp == "x":
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\n").lower()
         direction = userInput[:1]
