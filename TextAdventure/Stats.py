@@ -39,5 +39,6 @@ def LevelUp(playerStats, playerStatPoints, playerName):
         else:
             playerStatPoints += 2
         print(f"\nYay, {playerName} got a new Level!")
+        playerStats[5] = 0
         
     return playerStats, playerStatPoints

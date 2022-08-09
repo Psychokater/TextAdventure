@@ -106,7 +106,7 @@ def Start():
 ### overall ingameMenu #############################
 def IngameMenu(playerName, startLocation, location):
     playerStatPoints = 0
-    playerStats = [1, 20, 20, 4, 5, 0] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    playerStats = [1, 20.00, 20.00, 4.00, 5.00, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     playerInventoryMoney = 10
     playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
 
@@ -124,10 +124,6 @@ def IngameMenu(playerName, startLocation, location):
 
             case "4": MainMenu(playerName)
             case _: print("\nCouldn't understand you?!")
-
-
-
-    
 
 
 ### Move() -> World()
