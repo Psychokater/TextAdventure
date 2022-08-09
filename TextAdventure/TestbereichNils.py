@@ -1,12 +1,6 @@
- 
-playerName = ".aasd"
-playerInventoryMoney = 2.5512312
 
 
-print(f"""
-{playerName}
-\nGold: {round(playerInventoryMoney,2)}
-In
+x = 5
 
-(1) Return\n
-""")            
+
+print(10/(((0.1*x))))
