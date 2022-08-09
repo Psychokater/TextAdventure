@@ -98,7 +98,7 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
         enemyID = 1000 + _luck
         selectedDict = enemyDictEasy
     
-    if selectedDict == enemyDictHard and playerStats[0] < 10 and playerStats[0] >= 5:
+    if selectedDict == enemyDictHard and playerStats[0] < 10:
         EncounterLowLevel()        
         enemyID = 0
     elif selectedDict == enemyDictMedium and playerStats[0] < 5:
