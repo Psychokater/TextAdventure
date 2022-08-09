@@ -81,7 +81,6 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
     enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
     selectedDict = {}
-    print(f"TEST1:::EC::: ",encounterIndex)
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     if encounterIndex <= 10:
         EncounterNothing()
@@ -106,7 +105,6 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
         EncounterLowLevel()        
         enemyID = 0
 
-    print("TEST2::: ID, SELECTDICT  :::",enemyID,selectedDict)
     return enemyID, selectedDict
 
 
@@ -149,32 +147,32 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {selectedDict[enemyID][0]} with {round(playerStats[3],2)} Points.")
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3]} Points.")
             sleep(1)
-            print(f"{selectedDict[enemyID][0]} defends himself with {round(selectedDict[enemyID][2],2)} Points.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][2]} Points.")
             sleep(1)
             if  selectedDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
-                selectedDict[enemyID][3] += (round(selectedDict[enemyID][2],2) - round(playerStats[3],2))                        # E_HP += E_DEF - P_ATK
+                selectedDict[enemyID][3] += (selectedDict[enemyID][2] - playerStats[3])                        # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             if selectedDict[enemyID][3] < 0:                                                                    # HP < 0? Then HP 0
                 selectedDict[enemyID][3] = 0
-            print(f"{selectedDict[enemyID][0]} has {round(selectedDict[enemyID][3],2)} HP left.")
+            print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][3]} HP left.")
             sleep(2)
 
             if selectedDict[enemyID][3] > 0:                                                                 # Enemy alive?
 
-                print(f"{selectedDict[enemyID][0]} attacks you with {round(selectedDict[enemyID][1],2)} Points.")        # Enemy attacks second
+                print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][1]} Points.")        # Enemy attacks second
                 sleep(1)
-                print(f"You defend yourself with {round(playerStats[4],2)} Points.")
+                print(f"You defend yourself with {playerStats[4]} Points.")
                 sleep(1)
                 if playerStats[4] < selectedDict[enemyID][1]:                                                # E_DEF < P_ATK?
-                    playerStats[2] += (round(playerStats[4],2) - round(selectedDict[enemyID][1],2))                            # P_HP += P_DEF - E_ATK 
+                    playerStats[2] += (playerStats[4] - selectedDict[enemyID][1])                            # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
                     playerStats[2] = 0                                                                       # HP < 0? Then HP 0
-                print(f"You have {round(playerStats[2],2)} HP left.")
+                print(f"You have {playerStats[2]} HP left.")
                 sleep(1)
 
     ################ 2 Inventory ##############      

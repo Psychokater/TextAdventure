@@ -1,7 +1,8 @@
 def StatMenu(playerStats, playerStatPoints, playerName):
      # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     while True:
-        print(f"\n{playerName}\n\nPoints: {playerStatPoints}\n\nHP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
+        nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
+        print(f"\n{playerName}\n\nPoints: {playerStatPoints}\t\t\tEXP: {playerStats[5]}/{nextLevelExp}\n\nHP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
             if userInput == "1":
@@ -31,8 +32,8 @@ def EditStats(playerStats, playerStatPoints, playerName):
 
 def LevelUp(playerStats, playerStatPoints, playerName):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-
-    if playerStats[5] == playerStats[0] * round((100*(playerStats[0]**1.5)),2):
+    nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
+    if playerStats[5] == nextLevelExp:
         playerStats[0] += 1
         if playerStats[0] % 5 == 0:
             playerStatPoints += 4

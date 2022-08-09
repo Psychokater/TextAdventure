@@ -103,14 +103,14 @@ def Start():
     return playerName, startLocation, location
 
 
-### overall ingameMenu #############################
+# MAIN GAME LOOP #
+
 def IngameMenu(playerName, startLocation, location):
-    playerStatPoints = 0
+    playerStatPoints = 1
     playerStats = [1, 20.00, 20.00, 4.00, 5.00, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    playerInventoryMoney = 10
     playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
 
-    while True:
+    while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Move(
@@ -144,16 +144,13 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
     
     location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
     startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
-    
-    if location == "the town":
-        #Inventory.EncounterMerchant()
-        pass
+
     playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
 
     return startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
 
 
-### Move() -> World()
+### Move() <- World()
 def World(startLocation, location, direction): 
    
     worldmap = [startLocation,"the town","the flatlands","the forrest","the islands","the mountains","the castle"]
