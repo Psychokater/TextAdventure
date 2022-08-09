@@ -10,22 +10,22 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     enemyID = 0
 
     enemyDictEasy = {
-            1001 : ["Pack of Rats", 1.00, 0.00, 2.00, 1.00, PicRat],
-            1002 : ["Wolf", 2.00, 1.00, 10.00, 2.00, PicWolf],
-            1003 : ["Skeleton", 2.00, 2.00, 5.00, 2.00, PicSkeleton]
+            1001 : ["Pack of Rats", 1, 0, 2, 1.00, PicRat],
+            1002 : ["Wolf", 2, 1, 10, 2.00, PicWolf],
+            1003 : ["Skeleton", 2, 2, 5, 2.00, PicSkeleton]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
     enemyDictMedium = {
-            1011 : ["Ghost", 4.00, 5.00, 15.00, 6.00, PicGhost],
-            1012 : ["Bandit", 6.00, 4.00, 20.00, 8.00, PicBandit],
-            1013 : ["Troll", 2.00, 1.00, 30.00, 8.00, PicTroll],
-            1014 : ["Centaur", 8.00, 10.00, 20.00, 10.00, PicCentaur]
+            1011 : ["Ghost", 4, 5, 15, 6.00, PicGhost],
+            1012 : ["Bandit", 6, 4, 20, 8.00, PicBandit],
+            1013 : ["Troll", 2, 1, 30, 8.00, PicTroll],
+            1014 : ["Centaur", 8, 10, 20, 10.00, PicCentaur]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
     enemyDictHard = {
-            1101 : ["Minotaur", 10.00, 4.00, 20.00, 15.00, PicMinotaur],
-            1102 : ["Gryphon", 15.00, 8.00, 25.00, 20.00, PicGryphon],
-            1103 : ["Dragon", 20.00, 30.00, 50.00, 30.00, PicDragon]
+            1101 : ["Minotaur", 10, 4, 20, 15.00, PicMinotaur],
+            1102 : ["Gryphon", 10, 8, 25, 20.00, PicGryphon],
+            1103 : ["Dragon", 20, 30, 50, 30.00, PicDragon]
             } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
     
 

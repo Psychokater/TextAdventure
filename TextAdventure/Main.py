@@ -106,8 +106,9 @@ def Start():
 # MAIN GAME LOOP #
 
 def IngameMenu(playerName, startLocation, location):
+    playerInventoryMoney = 0
     playerStatPoints = 1
-    playerStats = [1, 20.00, 20.00, 4.00, 5.00, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
