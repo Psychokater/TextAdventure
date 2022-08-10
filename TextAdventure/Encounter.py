@@ -8,25 +8,27 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
     enemyID = 0
+    enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
 
     enemyDictEasy = {
-            1001 : ["Pack of Rats", 1, 0, 2, 1.00, PicRat],
-            1002 : ["Wolf", 2, 1, 10, 2.00, PicWolf],
-            1003 : ["Skeleton", 2, 2, 5, 2.00, PicSkeleton]
-            } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+            1001 : ["Pack of Rats", enemyLevel, 2, 1, 0, 1.00, PicRat],
+            1002 : ["Wolf", enemyLevel, 10, 2, 1, 2.00, PicWolf],
+            1003 : ["Skeleton", enemyLevel, 5, 2, 2, 2.00, PicSkeleton]
+            } # 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+            
 
     enemyDictMedium = {
-            1011 : ["Ghost", 4, 5, 15, 6.00, PicGhost],
-            1012 : ["Bandit", 6, 4, 20, 8.00, PicBandit],
-            1013 : ["Troll", 2, 1, 30, 8.00, PicTroll],
-            1014 : ["Centaur", 8, 10, 20, 10.00, PicCentaur]
-            } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+            1011 : ["Ghost", enemyLevel, 15, 4, 5, 6.00, PicGhost],
+            1012 : ["Bandit", enemyLevel, 20, 6, 4, 8.00, PicBandit],
+            1013 : ["Troll", enemyLevel, 30, 2, 1, 8.00, PicTroll],
+            1014 : ["Centaur", enemyLevel, 20, 8, 10, 10.00, PicCentaur]
+            } # 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
     enemyDictHard = {
-            1101 : ["Minotaur", 10, 4, 20, 15.00, PicMinotaur],
-            1102 : ["Gryphon", 10, 8, 25, 20.00, PicGryphon],
-            1103 : ["Dragon", 20, 30, 50, 30.00, PicDragon]
-            } # 0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+            1101 : ["Minotaur", enemyLevel, 20, 10, 4, 15.00, PicMinotaur],
+            1102 : ["Gryphon", enemyLevel, 25, 10, 8, 20.00, PicGryphon],
+            1103 : ["Dragon", enemyLevel, 50, 20, 30, 30.00, PicDragon]
+            }# 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
     
 
     if location == startLocation:
@@ -46,16 +48,19 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                        
+    enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
+    enemyMaxHP = selectedDict[enemyID][2]                       
     if enemyID != 0:
-        (selectedDict[enemyID][5]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
+        (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
-
-            UserInputChoose = input(f"""\n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            
+            UserInputChoose = input(f"""
+            \n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            {selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][1]/enemyMaxHP} 
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
-                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName)
+                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName, enemyMaxHP)
                 break
             
             elif UserInputChoose == "2":
@@ -108,13 +113,13 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     return enemyID, selectedDict
 
 
-def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName):
+def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName, enemyMaxHP):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
     _lootItem = "lootItem" #(add Item later!!!)
     _tempMoney = 0.00
     _tempExp = 0.00
-
+    
     while True:
 
         if playerStats[2] <= 0:                                                            	    # if player dead
@@ -128,46 +133,47 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             playerStats[2] = 1
             break
 
-        elif selectedDict[enemyID][3] <= 0:                                                         # if enemy dead
-            print("\n---Enemy has been eleminated---")
+        elif selectedDict[enemyID][2] <= 0:                                                         # if enemy dead
+            print(f"\n--- {selectedDict[enemyID][0]} has been eleminated ---")
             sleep(2)
-            _tempMoney += (selectedDict[enemyID][1] + selectedDict[enemyID][2] + selectedDict[enemyID][4]) / 2
-            _tempExp += selectedDict[enemyID][4] * 100
+            _tempMoney += (selectedDict[enemyID][3] + selectedDict[enemyID][2] + selectedDict[enemyID][5]) / 2
+            _tempExp += selectedDict[enemyID][5] * 100
             print(f"\nYou received {_lootItem}, {round(_tempMoney,2)} Gold and {round(_tempExp,2)} Experience.")
             playerInventoryMoney += _tempMoney
             playerStats[5] += _tempExp            
             break
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
-    #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
+    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
         UserInputFight = input(f"""
         \n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+        {selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][1]/enemyMaxHP} 
         \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                             # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3]} Points.")
             sleep(1)
-            print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][2]} Points.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][4]} Points.")
             sleep(1)
-            if  selectedDict[enemyID][2] < playerStats[3]:                                                  # P_DEF < E_ATK?
-                selectedDict[enemyID][3] += (selectedDict[enemyID][2] - playerStats[3])                        # E_HP += E_DEF - P_ATK
+            if  selectedDict[enemyID][4] < playerStats[3]:                                                  # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (selectedDict[enemyID][4] - playerStats[3])                        # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
-            if selectedDict[enemyID][3] < 0:                                                                    # HP < 0? Then HP 0
-                selectedDict[enemyID][3] = 0
-            print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][3]} HP left.")
+            if selectedDict[enemyID][2] < 0:                                                                    # HP < 0? Then HP 0
+                selectedDict[enemyID][2] = 0
+            print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][2]} HP left.")
             sleep(2)
 
-            if selectedDict[enemyID][3] > 0:                                                                 # Enemy alive?
+            if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
-                print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][1]} Points.")        # Enemy attacks second
+                print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][3]} Points.")        # Enemy attacks second
                 sleep(1)
                 print(f"You defend yourself with {playerStats[4]} Points.")
                 sleep(1)
-                if playerStats[4] < selectedDict[enemyID][1]:                                                # E_DEF < P_ATK?
-                    playerStats[2] += (playerStats[4] - selectedDict[enemyID][1])                            # P_HP += P_DEF - E_ATK 
+                if playerStats[4] < selectedDict[enemyID][3]:                                                # E_DEF < P_ATK?
+                    playerStats[2] += (playerStats[4] - selectedDict[enemyID][3])                            # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
@@ -187,15 +193,19 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             playerStats, playerStatPoints = Stats.StatMenu(playerStats, playerStatPoints, playerName)
 
     ################ 4 Flee ################
+
+    #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
+    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
             playerInventoryMoney -= (playerStats[0] * 2)
-            _temp2 = (selectedDict[enemyID][1] / 2)
-            playerStats[2] -= (selectedDict[enemyID][1] / 2)
+            _temp2 = (selectedDict[enemyID][3] / 2)
+            playerStats[2] -= round(_temp2,2)
             if playerStats[2] < 0:
                     playerStats[2] = 0 
             print(f"You managed to flee while you distracted the enemy with {round(_temp1,2)} gold,")
-            print(f"but {selectedDict[enemyID][0]} got a hit on you. You received {_temp2} dmg!")
+            print(f"but {selectedDict[enemyID][0]} got a hit on you. You received {round(_temp2,2)} dmg!")
             print(f"You have {playerStats[2]} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
