@@ -12,9 +12,9 @@
 #----------------------------
 #
 # -Encounter (Minor Improvements) (Nils) --- DONE
-# -Inventory, Items, Merchant, Loot(?!) (Samo)
+# -Inventory, Items, Merchant, Loot(?!) (Samo) half DONE
 # -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils) --- DONE
-# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils)     
+# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils and Samo)     
 
 import random
 import Helpfile
