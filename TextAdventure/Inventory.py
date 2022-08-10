@@ -1,72 +1,158 @@
-from time import sleep
+import os
+
+#ENTRYPOINT (change later?!) (Choose where to go -> Merchant or Inventory)
+def ShopMenu(itemsDict, playerName):
+
+        while True:   
+            userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Inventory\t(3) Exit\n")      
+            match userInput:
+                case "1": itemsDict = MerchantShop(itemsDict, playerName)                                                           
+                case "2": itemsDict = InventoryMenu(itemsDict, playerName)                                                          
+                case "3": break
+
+                case _: print("\nCouldn't understand you?!")
 
 
-
-
-
-
-
- # SAMOOOO CAN YOU FINALLY MAKE THIS FUCKIN FEATURE SO WE CAN FINISH THIS GAME?!?!?!
-
-
-
-
-
-def InventoryMenu(playerInventoryItems, playerInventoryMoney, playerName):
+# Merchant                                (Print Merchant+PlayerInventory - Choose if Buy or Sell)
+def MerchantShop(itemsDict, playerName):
+    PicMerchant()
+    playerItemIDs = []
+    merchantItemIDs = []
     while True:
-        userInput = input(f"""
-{playerName}
-\nGold: {round(playerInventoryMoney,2)}
-Inventory: {playerInventoryItems}
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName)
 
-(1) Return\n
-""")                                                                             
-
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Merchant\n")      
         match userInput:
-            case "1": break
-            case _: print("\nCouldn't understand you?!")     
-                                                                                     
-    return playerInventoryItems, round(playerInventoryMoney,2)
-
-
-
-# def EncounterMerchant():
-#     while True:
-#         userInput = input(f"\nYour Inventory: {playerInventoryItems}\n(1) Buy\t(2) Sell\t(3) Return\n")
-#         match userInput:
-#             case "1": MerchantBuy()
-#             case "2": MerchantSell()
-#             case "3": break
-#             case _: print("\nCouldn't understand you?!")
-
-# def MerchantBuy():
-#     print("\nWhat do you want to buy?")
-#     sleep(2)
-#     print(f"Your Gold: {playerInventoryMoney}")
-#     print(f"Merchant Gold: {merchantInventoryMoney}")    
-#     print(merchantInventoryItems)
-#     print(playerInventoryItems)
-
-    ### maybe print Inventory like this:
-    ###                 ATK     DEF     HEAL     Value
-    ### (1) "Item1"      2       0       0         2
-    ### (2) "Item2"      0       0       4         5
-
-    ### "Buy "Item": = Int User Input
-    ### if Money >= Value: 
-    ### playerInventoryMoney -= Value Item
-    ### merchantInventoryMoney += Value Item
-    ### playerInventoryItem += Item
-    ### MerchantInventoryItem -= Item
-
-    ### maybe Option for "equip" and "use" ?
-
-# def MerchantSell():
-#     print("\nWhat do you want to sell?")
-#     sleep(2)
-#     print(f"Your Gold: {playerInventoryMoney}")
-#     print(f"Merchant Gold: {merchantInventoryMoney}")
-#     print(merchantInventoryItems)
-#     print(playerInventoryItems)
+            case "1": itemsDict, playerItemIDs, merchantItemIDs = MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName)
+            case "2": itemsDict, playerItemIDs, merchantItemIDs = MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName)
+            case "3": break
+            case _: print("\nCouldn't understand you?!")
     
-    #see MerchantBuy()
+    return itemsDict
+
+# PlayerInventory                      (Choose "Equip", "Remove"---- function for later)
+def InventoryMenu(itemsDict, playerName):
+    os.system('cls')
+    playerItemIDs = []
+    while True:
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName)
+        userInput = input("\n(1) Equip\t\t(2) Remove from Inventory\t(3) Leave Inventory\n")
+        if userInput == "1":
+            pass
+        elif userInput == "2":
+            pass
+        elif userInput == "3": break
+        else: print("\nCouldn't understand you?!")
+    
+    return itemsDict
+
+# print PlayerInventory + getting ID's
+def GetInventoryPlayer(itemsDict, playerItemIDs, playerName):
+    print(f'{playerName} Items: ')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
+    '------------------------------------------------------------------------')
+    z = 1
+    for i in range (0,len(itemsDict)):
+        k = i + 1001
+        playerItemIDs = []
+        if itemsDict[k][9] > 0:
+            itemsDict[k][1] = z
+            z += 1            
+            playerItemIDs.append(i)
+            print('\u2009 ',itemsDict[k][1],end='\t:\t')
+            for j in range (2,len(itemsDict[k])-3):
+                print(itemsDict[k][j],end='\t')
+            print(itemsDict[k][9])
+    print('------------------------------------------------------------------------\n')
+    return itemsDict, playerItemIDs
+    
+# print MerchantInventory + getting iD's
+def GetInventoryMerchant(itemsDict, merchantItemIDs):
+    print('Merchant Items:')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
+    '------------------------------------------------------------------------')
+    z = 1
+    for i in range (0,len(itemsDict)):
+        i += 1001
+        if itemsDict[i][8] > 0:
+            itemsDict[i][0] = z
+            z += 1            
+            merchantItemIDs.append(i)
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')
+            for j in range (1,len(itemsDict[i])):
+                if j == 1 or j == 7 or j == 9:
+                    continue
+                if j == 6:                                       
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                
+                    continue
+                print (itemsDict[i][j],end='\t')
+            print()
+    print('------------------------------------------------------------------------\n')
+    return itemsDict, merchantItemIDs
+
+
+def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName):
+    os.system('cls')
+    itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName)
+    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
+    for i in range (0,len(itemsDict)):
+        i +=1001       
+        if userInputItemNumber == itemsDict[i][0]:
+            itemsDict[i][8] -= 1
+            itemsDict[i][9] += 1
+            if itemsDict[i][8] == 0:
+                itemsDict[i][0] = 0
+
+    return itemsDict, playerItemIDs, merchantItemIDs
+
+
+def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName):
+    os.system('cls')
+    itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName)    
+    userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
+    for i in range (0,len(itemsDict)):
+        i +=1001
+        if userInputItemNumber == itemsDict[i][1]:
+            itemsDict[i][8] += 1
+            itemsDict[i][9] -= 1
+            if itemsDict[i][9] == 0:
+                itemsDict[i][1] = 0
+                               
+    return itemsDict, playerItemIDs, merchantItemIDs
+
+
+# ######################################## Friends ################################################
+
+def PicWanderer(): 
+    print("""
+    A mystic old man wanders through this valley, maybe he has some free candys?
+     
+                     .x    
+                     .    x    
+                       x`  
+            /\       .x   .
+            / />        o        
+           /  \}      .o x             ____ _____   
+          /`---\   .-`---'-.        ,-'  ,-'_ ,-'|   
+          |  \__D  \`--.--'/       |""-'" ,-'|   |   
+         /     /    \     /        ||"\"""|   |,-'   
+        /_____/\   _//^-^\\\\_._      |____|,-'   
+    """)
+
+
+
+def PicMerchant():
+    print("""
+    'buy two Potions, pay for three and get one for free!'
+    
+            /'''''''''''''''''''\\
+           /_____/Merchant\\______\\     
+            |       ____ _,       |
+            |      |_|_|_||       |
+        ;,_<|_--_----__----___--|\_
+              \\_/        \\_/     
+    """)    
+

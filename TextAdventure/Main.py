@@ -103,23 +103,37 @@ def Start():
     return playerName, startLocation, location
 
 
-# MAIN GAME LOOP #
+# MAIN GAME LOOP --- MAIN DEKLARATIONS AND INITIALISATIONS!#
 
 def IngameMenu(playerName, startLocation, location):
     playerInventoryMoney = 0
     playerStatPoints = 1
     playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    playerInventoryItems = {"Make a":[1, 1, 1, 1, 1], "Fuckin":[1, 1, 1, 1, 1], "Inventory!!!":[1, 1, 1, 1, 1]} # Items =: 1 ATK, 2 DEF, 3 HEAL, 4 VALUE, 5 QUANTITY
+
+    itemsDict = {
+    #                         atk def  hp val  qnt  qnt  
+    #                                          Max   P
+    1001:[(0),(0),"Apple    ",(0),(0),(4),(1),(99),(10),(1)],
+    1002:[(0),(0),"ItemName1",(9),(8),(1),(6),(99),(98),(0)],
+    1003:[(0),(0),"ItemName2",(9),(8),(1),(6),(99),(99),(0)],
+    1004:[(0),(0),"ItemName3",(9),(8),(1),(6),(99),(98),(0)],
+    1005:[(0),(0),"ItemName4",(9),(8),(0),(6),(99),(99),(3)],
+    1006:[(0),(0),"ItemName5",(5),(8),(1),(6),(99),(99),(0)],
+    1007:[(0),(0),"ItemName6",(9),(8),(0),(6),(99),(99),(2)],
+    1008:[(0),(0),"ItemName7",(9),(8),(0),(6),(99),(99),(0)],
+    1009:[(0),(0),"ItemName8",(9),(8),(1),(6),(99),(98),(0)],
+    1010:[(0),(0),"ItemName9",(9),(8),(1),(6),(99),(10),(0)]}
+        
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
-            case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Move(
-                    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
+            case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
+                    startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
-            case "2": playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
-                    playerInventoryItems, playerInventoryMoney, playerName)
+            case "2": itemsDict = Inventory.InventoryMenu(
+                    itemsDict, playerName)
 
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName)
@@ -129,7 +143,7 @@ def IngameMenu(playerName, startLocation, location):
 
 
 ### Move() -> World()
-def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName):
+def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
     _temp = "x"
     print(f"\nLocation: {location}")
     sleep(1)
@@ -144,12 +158,12 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
     print(f"\nYou moved to {location}\n")       
     sleep(2)
     
-    location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney = Encounter.Encounter(
-    startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName)
+    location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Encounter.Encounter(
+    startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
     playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
 
-    return startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
+    return startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
 
 ### Move() <- World()

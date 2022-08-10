@@ -3,7 +3,7 @@ from time import sleep
 import Stats
 import Inventory
 
-def Encounter(startLocation, location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney, playerName):
+def Encounter(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
  
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
@@ -32,13 +32,15 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     
 
     if location == startLocation:
-        locationIndex = 1        
+        locationIndex = 1
     elif location == "the town":
-        locationIndex = 1
+        PicTheTown()
+        itemsDict = Inventory.ShopMenu(itemsDict, playerName)
+        return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict   
     elif location == "the flatlands":
-        locationIndex = 2
-    elif location == "the forrest":
         locationIndex = 1
+    elif location == "the forrest":
+        locationIndex = 2
     elif location == "the islands":
         locationIndex = 6
     elif location == "the mountains":
@@ -49,6 +51,10 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
+    
+ 
+
+
     if enemyID != 0:
         enemyMaxHP = (selectedDict[enemyID][2])  
         (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
@@ -61,13 +67,13 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
 
             if UserInputChoose == "1":
-                playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
-                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName, enemyMaxHP)
+                playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
+                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP)
                 break
             
             elif UserInputChoose == "2":
-                playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
-                playerInventoryItems, playerInventoryMoney, playerName)   
+                itemsDict = Inventory.InventoryMenu(
+                    itemsDict, playerName)  
 
             elif UserInputChoose == "3": 
                 playerStats, playerStatPoints = Stats.StatMenu(
@@ -82,7 +88,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             else: 
                 print("\nYou can't choose that?!")
         
-    return location, playerStats, playerStatPoints, playerInventoryItems, playerInventoryMoney
+    return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
 
 def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
@@ -115,7 +121,7 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     return enemyID, selectedDict
 
 
-def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, playerInventoryItems, location, playerName, enemyMaxHP):
+def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
     _lootItem = "lootItem" #(add Item later!!!)
@@ -187,8 +193,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################ 2 Inventory ##############      
                   
         elif UserInputFight == "2":
-               playerInventoryItems, playerInventoryMoney = Inventory.InventoryMenu(
-                playerInventoryItems, playerInventoryMoney, playerName)  
+               itemsDict = Inventory.InventoryMenu(
+                    itemsDict, playerName)
 
     ################ 3 Stats #################
 
@@ -224,7 +230,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         else: 
             print("\nYou can't choose that?!")
 
-    return playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location
+    return playerInventoryMoney, playerStats, playerStatPoints, location
 
 # ########################################## No Encounter ##################################
 
@@ -234,38 +240,6 @@ def EncounterLowLevel():
 def EncounterNothing():
     print("Phew, nothing happened here.")
 
-
-# ######################################## Friends ################################################
-
-def PicWanderer(): 
-    print("""
-    A mystic old man wanders through this valley, maybe he has some free candys?
-     
-                     .x    
-                     .    x    
-                       x`  
-            /\       .x   .
-            / />        o        
-           /  \}      .o x             ____ _____   
-          /`---\   .-`---'-.        ,-'  ,-'_ ,-'|   
-          |  \__D  \`--.--'/       |""-'" ,-'|   |   
-         /     /    \     /        ||"\"""|   |,-'   
-        /_____/\   _//^-^\\\\_._      |____|,-'   
-    """)
-
-
-
-def PicMerchant():
-    print("""
-    'buy two Potions, pay for three and get one for free!'
-    
-            /'''''''''''''''''''\\
-           /_____/Merchant\\______\\     
-            |       ____        |
-            |      |_|_|        |
-        ;,_<|_--_----__----___--|\_
-              \\_/        \\_/     
-    """)    
 
 
 
@@ -527,3 +501,18 @@ def PicFairie():
 
     print("She thankfully took some of your gold in advance.")
     sleep(2)
+
+def PicTheTown():
+    print(""" 
+~         ~~          __
+       _T      .,,.    ~--~ ^^
+ ^^   // \                    ~
+      ][O]    ^^      ,-~ ~
+   /''-I_I         _II____
+__/_  /   \ ______/ ''   /'\_,__
+  | II--'''' \,--:--..,_/,.-{ },
+; '/__\,.--';|   |[] .-.| O{ _ }
+:' |  | []  -|   ''--:.;[,.'\,/
+'  |[]|,.--'' '',   ''-,.    |
+  ..    ..-''    ;       ''. ' """)
+
