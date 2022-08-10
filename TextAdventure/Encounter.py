@@ -45,13 +45,13 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         locationIndex = 10
     
     luck = random.randint(1,100)
-    encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex) # high = good, low = bad, max = 100 (lvl 1, location 1)    
+    encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                        
     if enemyID != 0:
         (selectedDict[enemyID][5]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
 
-            UserInputChoose = input(f"""\n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+            UserInputChoose = input(f"""\n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
@@ -142,8 +142,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     #EnemyDict:  0 Name, 1 ATK, 2 DEF, 3 HP, 4 Dropvalue, 5 Pic
 
         UserInputFight = input(f"""
-        \n{playerName}: LVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
-        \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                   # Fight (P = Player, E = Enemy)
+        \n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
+        \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                             # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
@@ -216,7 +216,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 # ########################################## No Encounter ##################################
 
 def EncounterLowLevel():
-    print("A dangerous sphere approaches you, but as you turn around, it disappears.\n Maybe you escaped your downfall this time.")
+    print("'A dangerous sphere approaches you, but as you turn around, it disappears.\nMaybe you escaped your downfall this time.'")
 
 def EncounterNothing():
     print("Phew, nothing happened here.")
