@@ -3,18 +3,18 @@ import os
 #ENTRYPOINT (change later?!) (Choose where to go -> Merchant or Inventory)
 def ShopMenu():
         itemsDict = {
-        #                             atk def  hp val  pr  qnt  qnt  
-        #                                                   M    P
-        1001:[(0),(0),"Apple     ==>",(0),(0),(4),(1),(99),(1),(1)],
-        1002:[(0),(0),"ItemName1 ==>",(9),(8),(1),(6),(99),(98),(0)],
-        1003:[(0),(0),"ItemName2 ==>",(9),(8),(1),(6),(99),(99),(0)],
-        1004:[(0),(0),"ItemName3 ==>",(9),(8),(1),(6),(99),(98),(0)],
-        1005:[(0),(0),"ItemName4 ==>",(9),(8),(0),(6),(99),(99),(1)],
-        1006:[(0),(0),"ItemName5 ==>",(5),(8),(1),(6),(99),(99),(0)],
-        1007:[(0),(0),"ItemName6 ==>",(9),(8),(0),(6),(99),(99),(1)],
-        1008:[(0),(0),"ItemName7 ==>",(9),(8),(0),(6),(99),(99),(0)],
-        1009:[(0),(0),"ItemName8 ==>",(9),(8),(1),(6),(99),(98),(0)],
-        1010:[(0),(0),"ItemName9 ==>",(9),(8),(1),(6),(99),(1),(0)]}
+        #                             atk def  hp val  qnt  qnt  
+        #                                              Max   P
+        1001:[(0),(0),"Apple    ",(0),(0),(4),(1),(99),(10),(1)],
+        1002:[(0),(0),"ItemName1",(9),(8),(1),(6),(99),(98),(0)],
+        1003:[(0),(0),"ItemName2",(9),(8),(1),(6),(99),(99),(0)],
+        1004:[(0),(0),"ItemName3",(9),(8),(1),(6),(99),(98),(0)],
+        1005:[(0),(0),"ItemName4",(9),(8),(0),(6),(99),(99),(3)],
+        1006:[(0),(0),"ItemName5",(5),(8),(1),(6),(99),(99),(0)],
+        1007:[(0),(0),"ItemName6",(9),(8),(0),(6),(99),(99),(2)],
+        1008:[(0),(0),"ItemName7",(9),(8),(0),(6),(99),(99),(0)],
+        1009:[(0),(0),"ItemName8",(9),(8),(1),(6),(99),(98),(0)],
+        1010:[(0),(0),"ItemName9",(9),(8),(1),(6),(99),(10),(0)]}
         
         while True:   
             userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Inventory\t(3) Exit\n")      
@@ -62,8 +62,9 @@ def InventoryMenu(itemsDict):
 
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs):
-    print ('Your Items : ')
-    print (' Item.NR      Item    Attack  Defence  Heal   Quantity ')
+    print('Player Items: ')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
+    '------------------------------------------------------------------------')
     z = 1
     for i in range (0,len(itemsDict)):
         k = i + 1001
@@ -72,17 +73,18 @@ def GetInventoryPlayer(itemsDict, playerItemIDs):
             itemsDict[k][1] = z
             z += 1            
             playerItemIDs.append(i)
-            print ('\u2009 ',itemsDict[k][1],end='  :  ')
-            for j in range (2,len(itemsDict[k])-4):
-                print (itemsDict[k][j],end='\t')
-            print (itemsDict[k][9])
-
+            print('\u2009 ',itemsDict[k][1],end='\t:\t')
+            for j in range (2,len(itemsDict[k])-3):
+                print(itemsDict[k][j],end='\t')
+            print(itemsDict[k][9])
+    print('------------------------------------------------------------------------\n')
     return itemsDict, playerItemIDs
-
+    
 # print MerchantInventory + getting iD's
 def GetInventoryMerchant(itemsDict, merchantItemIDs):
-    print ('Merchant Items : ')
-    print ('  Item.NR      Item    Attack  Defence   Heal   Value   Price  Quantity ')
+    print('Merchant Items:')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
+    '------------------------------------------------------------------------')
     z = 1
     for i in range (0,len(itemsDict)):
         i += 1001
@@ -90,13 +92,16 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
             itemsDict[i][0] = z
             z += 1            
             merchantItemIDs.append(i)
-            print ('\u2009 ',itemsDict[i][0],end='  :  ')
-            for j in range (1,len(itemsDict[i])-1):
-                if j == 1:
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')
+            for j in range (1,len(itemsDict[i])):
+                if j == 1 or j == 7 or j == 9:
+                    continue
+                if j == 6:                                       
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                
                     continue
                 print (itemsDict[i][j],end='\t')
-            print ()
-
+            print()
+    print('------------------------------------------------------------------------\n')
     return itemsDict, merchantItemIDs
 
 
