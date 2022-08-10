@@ -56,7 +56,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             
             UserInputChoose = input(f"""
             \n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
-            \n{selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][1]/enemyMaxHP} 
+            \n{selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][2]/enemyMaxHP} 
             \nWhat do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n""")
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, playerInventoryItems, location = Fight(
@@ -148,7 +148,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
         UserInputFight = input(f"""
         \n{playerName}\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}
-        \n{selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][1]/enemyMaxHP} 
+        \n{selectedDict[enemyID][0]}\tLVL {selectedDict[enemyID][1]}\tHP{selectedDict[enemyID][2]/enemyMaxHP} 
         \n(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n""")                                             # Fight (P = Player, E = Enemy)
         
     ################# 1 Attack ############    
