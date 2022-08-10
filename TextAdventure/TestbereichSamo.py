@@ -16,25 +16,31 @@ while True:
     def call_P_list():
         print ('Your Items : ')
         print ('  Item.NR      Item          Attack  Defence   Heal   Value  Quantity ')
+        x = 1
         for i in range (0,len(all_items)):
-            i +=1001
-            print ('\u2009 ',i,end='  :  ')
-            if all_items[i][7] > 0 :
-                for j in range (0,len(all_items[i])-3):
-                    print (all_items[i][j],end='\t')
-                print (all_items[i][7])
+            match all_items[i+1001][7] == 0:
+                case False:
+                    i+=1001
+                    print ('\u2009 ',x,end='  :  ')
+                    x += 1
+                    for j in range (0,len(all_items[i])-3):
+                        print (all_items[i][j],end='\t')
+                    print (all_items[i][7])
 
 
     def call_M_list():
         print ('Merchant Items : ')
         print ('  Item.NR      Item          Attack  Defence   Heal   Value   Price  Quantity ')
+        x = 1
         for i in range (0,len(all_items)):
-            i +=1001
-            if all_items[i][6] > 0:
-                print ('\u2009 ',i,end='  :  ')
-                for j in range (0,len(all_items[i])-1):
-                    print (all_items[i][j],end='\t')
-                print ()
+            match all_items[i+1001][6] == 0:
+                case False:
+                    i+=1001
+                    print ('\u2009 ',x,end='  :  ')
+                    x += 1
+                    for j in range (0,len(all_items[i])-3):
+                        print (all_items[i][j],end='\t')
+                    print (all_items[i][6])
 
     def buy_anItem():
         call_M_list()
