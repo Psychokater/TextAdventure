@@ -48,9 +48,9 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
-    enemyMaxHP = selectedDict[enemyID][2]                       
+    enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
     if enemyID != 0:
+        enemyMaxHP = (selectedDict[enemyID][2])  
         (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
             
