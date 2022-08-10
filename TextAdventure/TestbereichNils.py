@@ -40,8 +40,8 @@ def call_M_list(all_items):
 
 def buy_anItem(all_items):
     os.system('cls')
-    inputlisteP, all_items = call_P_list(all_items)
     inputlisteM, all_items = call_M_list(all_items)
+    inputlisteP, all_items = call_P_list(all_items)
     Item_number = int (input ('Pick an Item number to buy it : \n'))
     for i in range (0,len(all_items)):
         i +=1001       
@@ -54,8 +54,8 @@ def buy_anItem(all_items):
 
 def sell_anItem(all_items):
     os.system('cls')
-    inputlisteP, all_items = call_P_list(all_items)
     inputlisteM, all_items = call_M_list(all_items)
+    inputlisteP, all_items = call_P_list(all_items)    
     Item_number = int (input ('Pick an Item number to sell it : \n'))
     for i in range (0,len(all_items)):
         i +=1001
@@ -81,8 +81,8 @@ def shop_menu():
             
         while True:
             os.system('cls')
-            inputlisteP, all_items = call_P_list(all_items)
             inputlisteM, all_items = call_M_list(all_items)
+            inputlisteP, all_items = call_P_list(all_items)
             userInput = input("\nWhat whould you like ?\n(1) Buy an Item\t\t(2) Sell an Item\t(3) Inventory\t  (4) Exit to main menu\n")
             match userInput:
                 case "1": all_items = buy_anItem(all_items)
