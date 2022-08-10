@@ -7,10 +7,10 @@ def call_P_list(all_items):
     z = 1
     for i in range (0,len(all_items)):
         k = i + 1001
+        inputlisteP = []
         if all_items[k][9] > 0:
             all_items[k][1] = z
-            z += 1
-            inputlisteP = []
+            z += 1            
             inputlisteP.append(i)
             print ('\u2009 ',all_items[k][1],end='  :  ')
             for j in range (2,len(all_items[k])-4):
@@ -26,10 +26,10 @@ def call_M_list(all_items):
     z = 1
     for i in range (0,len(all_items)):
         i += 1001
+        inputlisteM = []
         if all_items[i][8] > 0:
             all_items[i][0] = z
-            z += 1
-            inputlisteM = []
+            z += 1            
             inputlisteM.append(i)
             print ('\u2009 ',all_items[i][0],end='  :  ')
             for j in range (1,len(all_items[i])-1):
@@ -74,16 +74,16 @@ def shop_menu():
         all_items = {
         #                             atk def  hp val  pr  qnt  qnt  
         #                                                   M    P
-        1001:[(0),(0),"Apple     ==>",(0),(0),(2),(6),(99),(97),(2)],
+        1001:[(0),(0),"Apple     ==>",(0),(0),(4),(1),(99),(1),(1)],
         1002:[(0),(0),"ItemName1 ==>",(9),(8),(1),(6),(99),(98),(0)],
         1003:[(0),(0),"ItemName2 ==>",(9),(8),(1),(6),(99),(99),(0)],
         1004:[(0),(0),"ItemName3 ==>",(9),(8),(1),(6),(99),(98),(0)],
-        1005:[(0),(0),"ItemName4 ==>",(9),(8),(0),(6),(99),(99),(0)],
+        1005:[(0),(0),"ItemName4 ==>",(9),(8),(0),(6),(99),(99),(1)],
         1006:[(0),(0),"ItemName5 ==>",(5),(8),(1),(6),(99),(99),(0)],
-        1007:[(0),(0),"ItemName6 ==>",(9),(8),(0),(6),(99),(99),(0)],
+        1007:[(0),(0),"ItemName6 ==>",(9),(8),(0),(6),(99),(99),(1)],
         1008:[(0),(0),"ItemName7 ==>",(9),(8),(0),(6),(99),(99),(0)],
         1009:[(0),(0),"ItemName8 ==>",(9),(8),(1),(6),(99),(98),(0)],
-        1010:[(0),(0),"ItemName9 ==>",(9),(8),(1),(6),(99),(0),(0)]}
+        1010:[(0),(0),"ItemName9 ==>",(9),(8),(1),(6),(99),(1),(0)]}
             
         while True:
             os.system('cls')
