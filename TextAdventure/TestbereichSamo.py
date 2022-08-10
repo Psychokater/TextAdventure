@@ -1,7 +1,7 @@
 all_items = {
 #                     atk def  hp val  pr  qnt  qnt  
 #                                           M    P
-1001:["Apple     ==>",(0),(0),(2),(6),(99),(99),(2)],
+1001:["Apple     ==>",(0),(0),(2),(10),(99),(99),(2)],
 1002:["ItemName1 ==>",(9),(8),(1),(6),(99),(99),(1)],
 1003:["ItemName2 ==>",(9),(8),(1),(6),(99),(99),(0)],
 1004:["ItemName3 ==>",(9),(8),(1),(6),(99),(99),(1)],
@@ -18,8 +18,8 @@ while True:
         print ('  Item.NR      Item          Attack  Defence   Heal   Value  Quantity ')
         for i in range (0,len(all_items)):
             i +=1001
+            print ('\u2009 ',i,end='  :  ')
             if all_items[i][7] > 0 :
-                print ('\u2009 ',i,end='  :  ')
                 for j in range (0,len(all_items[i])-3):
                     print (all_items[i][j],end='\t')
                 print (all_items[i][7])
