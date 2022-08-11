@@ -44,7 +44,7 @@ def MerchantShop(itemsDict, playerName, playerInventoryMoney):
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
     print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}')
-    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\tUse/Equip\n'\
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
     for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary
@@ -56,14 +56,10 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
             print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 7, 9, 10]                              #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue
-                if j == 11:
-                    match itemsDict[i][j]:
-                        case 0: print("use")
-                        case 1: print("equip")
-                        case 2: print("equipped")                               #
+                                                                                #
                 print (itemsDict[i][j],end='\t')                                #           print Value in this line 
             print()                                                             #   new Line of Inventory        
     print('------------------------------------------------------------------------\n')
@@ -114,6 +110,10 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
             itemsDict[i][8] += 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][0] = 0
+            else: 
+                print("\nNot enough money, fool!\n")
+                sleep(2)
+                break
 
     return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
 
@@ -204,6 +204,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
         else: 
             print("\nNot enough money, fool!\n")
             sleep(2)
+            break
 
     return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
 
