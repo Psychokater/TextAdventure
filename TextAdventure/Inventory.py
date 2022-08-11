@@ -69,17 +69,20 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName):
     '------------------------------------------------------------------------')
     z = 1
     for i in range (0,len(itemsDict)):
-        i + 1001
+        i += 1001
         playerItemIDs = []
+        
         if itemsDict[i][8] > 0:
             itemsDict[i][1] = z
             z += 1            
             playerItemIDs.append(i)
             print('\u2009 ',itemsDict[i][1],end='\t:\t')
-            for j in range (2,len(itemsDict[i])):
-                if j == 0 or 7 or 9 or 10:
+            for j in range (0,len(itemsDict[i])):
+                _tempListIndexJ = [0, 7, 9, 10]
+                if j in _tempListIndexJ:
                     continue
-            print(itemsDict[i][j],end='\t')            
+                print (itemsDict[i][j],end='\t')
+            print (itemsDict[i][6])      
     print('------------------------------------------------------------------------\n')
     return itemsDict, playerItemIDs
     
@@ -91,14 +94,16 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
     '------------------------------------------------------------------------')
     z = 1
     for i in range (0,len(itemsDict)):
-        i += 1001        
-        if itemsDict[i][10] == 1 or 2 or 3 or 10 or 11 or 12:
+        i += 1001 
+        _tempListIndexValue = [1, 2, 3, 10, 11, 12]       
+        if itemsDict[i][10] in _tempListIndexValue:
             itemsDict[i][0] = z
             z += 1            
             merchantItemIDs.append(i)
             print ('\u2009 ',itemsDict[i][0],end='\t:\t')
-            for j in range (1,len(itemsDict[i])):
-                if j == 1 or 8 or 9 or 10:
+            for j in range (0,len(itemsDict[i])):
+                _tempListIndexJ = [1,8,9,10]
+                if j in _tempListIndexJ:
                     continue
                 if j == 6:                                       
                     print(itemsDict[i][j]* 1.5 + 2,end='\t')             
