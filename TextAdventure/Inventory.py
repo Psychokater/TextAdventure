@@ -278,10 +278,11 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList:  
                     if userInputItemNumber == itemsDict[i][1]:
-                        itemsDict[i][8] -= 1            
+                        itemsDict[i][8] -= 1 
+                        print(f"\n{itemsDict[i][2]} has brought back to his owner!\n")           
                         if itemsDict[i][8] == 0:
                             itemsDict[i][1] = 0
-                print(f"\n{itemsDict[i][2]} has brought back to his owner!\n")
+                        
 ############### Items #### Break ####################################
             elif userInput == "3":
                 break
