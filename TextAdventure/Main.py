@@ -18,7 +18,7 @@
 
 import random
 import Helpfile
-from time import sleep
+# from time import sleep
 #import Intro
 import Encounter
 import Stats
@@ -50,7 +50,7 @@ merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe ad
 def Main():
     playerName = ''
     #Intro.Intro()
-    sleep(2)
+    # sleep(2)
     MainMenu(playerName)    
     if playerName == '':
        playerName, startLocation, location = Start()
@@ -72,33 +72,33 @@ def MainMenu(playerName):
                 case "2": Helpfile.HelpTxt()
                 case "3": exit(f"\nGoodbye {playerName}")
                 case _: print("\nCouldn't understand you?!")
-            sleep(2)   
+            # sleep(2)   
 
 
 
 ### PICK A NAME, GET FIRST LOCATION (One Timer)
 def Start():
     _startLocations = ["a small homestead", "a comfy cabin", "a small tent", "a cave"]
-    sleep(2)
+    # sleep(2)
     startLocation = _startLocations[random.randint(0,len(_startLocations)-1)]
     location = "the flatlands"                                                                                                      # !!!!!!!!!!!!! CHANGE "the flatlands" TO "startLocation" FOR RELEASE!!!!!!!!!!!! ONLY FOR TESTING!!!!!!!!!!
     while True:
         playerName = input("\nWhat's your name adventurer?\n").capitalize()
         if playerName.isdigit():
             print ("Enter a real warrior name you're not a number! ")
-            sleep(2)
+            # sleep(2)
             continue
         elif playerName == "":
             print("Hey, get a name! You are not 'nothing'!")
-            sleep(2)
+            # sleep(2)
             continue
         else:
             break
-    sleep(1)
+    # sleep(1)
     print(f"\nWelcome to your first adventure {playerName}!")
-    sleep(2)
+    # sleep(2)
     print(f"\nYou wake up in {location}")
-    sleep(2)
+    # sleep(2)
 
     return playerName, startLocation, location
 
@@ -147,17 +147,17 @@ def IngameMenu(playerName, startLocation, location):
 def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
     _temp = "x"
     print(f"\nLocation: {location}")
-    sleep(1)
+    # sleep(1)
     while _temp == "x":
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\n").lower()
         direction = userInput[:1]
         _temp = World(startLocation, location, direction)        
-        sleep(2)        
+        # sleep(2)        
         if _temp != "x":
             location = _temp
             break        
     print(f"\nYou moved to {location}\n")       
-    sleep(2)
+    # sleep(2)
     
     location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Encounter.Encounter(
     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)

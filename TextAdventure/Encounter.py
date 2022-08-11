@@ -1,5 +1,5 @@
 import random
-from time import sleep
+# from time import sleep
 import Stats
 import Inventory
 
@@ -131,9 +131,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     while True:
 
         if playerStats[2] <= 0:                                                            	    # if player dead
-            sleep(2)
+            # sleep(2)
             PicDeath()
-            sleep(4)
+            # sleep(4)
             PicFairie()
             playerInventoryMoney -= playerInventoryMoney * 0.1
             playerStats[5] *= 0.25
@@ -143,7 +143,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
         elif selectedDict[enemyID][2] <= 0:                                                         # if enemy dead
             print(f"\n--- {selectedDict[enemyID][0]} has been eleminated ---")
-            sleep(2)
+            # sleep(2)
             _tempMoney += (selectedDict[enemyID][3] + selectedDict[enemyID][2] + selectedDict[enemyID][5]) / 2
             _tempExp += selectedDict[enemyID][5] * 100
             print(f"\nYou received {_lootItem}, {round(_tempMoney,2)} Gold and {round(_tempExp,2)} Experience.")
@@ -163,9 +163,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3]} Points.")
-            sleep(1)
+            # sleep(1)
             print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][4]} Points.")
-            sleep(1)
+            # sleep(1)
             if  selectedDict[enemyID][4] < playerStats[3]:                                                  # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += (selectedDict[enemyID][4] - playerStats[3])                        # E_HP += E_DEF - P_ATK
             else:
@@ -173,14 +173,14 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             if selectedDict[enemyID][2] < 0:                                                                    # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
             print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][2]} HP left.")
-            sleep(2)
+            # sleep(2)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
                 print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][3]} Points.")        # Enemy attacks second
-                sleep(1)
+                # sleep(1)
                 print(f"You defend yourself with {playerStats[4]} Points.")
-                sleep(1)
+                # sleep(1)
                 if playerStats[4] < selectedDict[enemyID][3]:                                                # E_DEF < P_ATK?
                     playerStats[2] += (playerStats[4] - selectedDict[enemyID][3])                            # P_HP += P_DEF - E_ATK 
                 else:   
@@ -188,7 +188,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 if playerStats[2] < 0:
                     playerStats[2] = 0                                                                       # HP < 0? Then HP 0
                 print(f"You have {playerStats[2]} HP left.")
-                sleep(1)
+                # sleep(1)
 
     ################ 2 Inventory ##############      
                   
@@ -217,9 +217,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             print(f"but {selectedDict[enemyID][0]} got a hit on you. You received {round(_temp2,2)} dmg!")
             print(f"You have {playerStats[2]} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
-                sleep(2)
+                # sleep(2)
                 PicDeath()
-                sleep(4)
+                # sleep(4)
                 PicFairie()
                 playerInventoryMoney -= playerInventoryMoney * 0.1
                 playerStats[5] *= 0.25
@@ -471,9 +471,9 @@ def PicDeath():
 
 def PicFairie():
     print("\nYour head feels dizzy.")
-    sleep(2) 
+    # sleep(2) 
     print("A beautiful (fully naked) fairie helps you back to the town.")
-    sleep(4)
+    # sleep(4)
     print("""
       .--.   _,
   .--;    \ /(_
@@ -500,7 +500,7 @@ def PicFairie():
     """)
 
     print("She thankfully took some of your gold in advance.")
-    sleep(2)
+    # sleep(2)
 
 def PicTheTown():
     print(""" 

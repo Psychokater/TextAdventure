@@ -1,4 +1,4 @@
-from time import sleep
+# from time import sleep
 from math import ceil
 import os
 
@@ -113,7 +113,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
-                sleep(1)
+                # sleep(1)
                 break     
             else: 
                 playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
@@ -209,7 +209,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
-                sleep(1)
+                # sleep(1)
                 break
             else:
                 playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
@@ -330,11 +330,11 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                     if userInputItemNumber == itemsDict[j][1]:
                         if itemsDict[j][11] == 0:
                             print(f"You can't equip {itemsDict[j][2]}")
-                            sleep(1)
+                            # sleep(1)
                             break 
                         elif itemsDict[j][11] >= 10:
                             print(f"{itemsDict[j][2]} item is already equipped!")
-                            sleep(1)
+                            # sleep(1)
                             break 
                         else:
                             itemsDict[j][11] += 10
@@ -354,12 +354,12 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                     if userInputItemNumber == itemsDict[o][1]:
                         if itemsDict[o][11] < 10:
                             print(f"You can't unequip {itemsDict[i][2]}")
-                            sleep(1)
+                            # sleep(1)
                             break 
                         elif itemsDict[o][11] >= 10: 
                             itemsDict[o][11] -= 10
                             print(f"You unequipped {itemsDict[o][2]}")
-                            sleep(1)
+                            # sleep(1)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
                 userInputItemNumber = int (input ('Select item to remove: \n'))
@@ -371,7 +371,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         if itemsDict[n][8] == 0:
                             itemsDict[n][1] = 0
                 print(f"\n{itemsDict[n][2]} has brought back to his owner!\n")
-                sleep(1)
+                # sleep(1)
 ################################## 4 Return#### #############################     
             elif userInput == "4":
                 break 
