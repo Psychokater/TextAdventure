@@ -47,8 +47,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
-    itemKeyList = []
-
+    
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:                                                       #       i = Item ID
         playerItemIDs = []        
@@ -74,8 +73,7 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1   
-    itemKeyList = []
-
+    
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:                                                       #       i = Item ID
         _tempListIndexValue = [1, 2, 3]                                         #       List of ID to Sell at Merchant
@@ -107,7 +105,6 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))       
-    itemKeyList = []
 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:    
@@ -131,7 +128,6 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
-    itemKeyList = []
 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
@@ -171,8 +167,7 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
     print('Wizard:\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
-    z = 1                                           
-    itemKeyList = []                                                           
+    z = 1                                         
 
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:                                                       #       i = Item ID
@@ -205,7 +200,6 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
-    itemKeyList = []
 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
@@ -230,8 +224,7 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
-    itemKeyList = []
-
+ 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][1]:
@@ -262,8 +255,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
 ################ Items #### Use Item #################################
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to use: \n'))
-                itemKeyList = []
-
+             
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList: 
                     if userInputItemNumber == itemsDict[i][1]:
@@ -278,8 +270,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
                 userInputItemNumber = int (input ('Select item to remove: \n'))
-                itemKeyList = []
-
+                
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList:  
                     if userInputItemNumber == itemsDict[i][1]:
@@ -304,8 +295,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
             print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
             '------------------------------------------------------------------------')
             z = 1
-            itemKeyList = []
-
+       
             itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
             for i in itemKeyList:                                                       #       i = Item ID
                 playerItemIDs = []        
@@ -329,8 +319,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 1 equip Item #############################   
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to equip: \n'))
-                itemKeyList = []
-
+                
                 itemKeyList = [key for key in itemsDict]
                 for j in itemKeyList: 
                     if userInputItemNumber == itemsDict[j][1]:
@@ -357,8 +346,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
                 userInputItemNumber = int (input ('Select item to unequip: \n'))
-                itemKeyList = []
-
+                
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
                     if userInputItemNumber == itemsDict[o][1]:
@@ -374,8 +362,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
                 userInputItemNumber = int (input ('Select item to remove: \n'))
-                itemKeyList = []
-
+                
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
                     if userInputItemNumber == itemsDict[n][1]:
