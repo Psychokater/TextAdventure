@@ -1,72 +1,21 @@
-from time import sleep
+
+itemsDict = {
+#      0   1        2          3     4       5      6         7        8       9       10     11
+#                  Name       atk    def     hp      val      qnt      qnt      ID    ID_ON  use/eq                        Quantity Merchant resets every lvlUp (qnt Max / 2 - qnt P)
+#                                                            Max       P                                                    qnt Max = Max qnt in Game
+1001:[(0),(0),"Apple",       (0),   (0),    (4),    (1),    (100),    (5),    (10),   (10),  (0)],                          # ID (row 9 and 10)
+1002:[(0),(0),"Fish",        (9),   (8),    (1),    (6),     (10),    (5),    (1),    (1),    (0)],                          # 1, 2, 3 = Merchant Inv lvl 5, 10, 20+
+1003:[(0),(0),"Cabbage",     (9),   (8),    (1),    (6),      (2),    (0),    (4),    (4),   (0)],                          # 4, 5, 6 = Wizard Inv lvl 5, 10, 20+   
+1004:[(0),(0),"Sword",       (9),   (8),    (1),    (6),      (4),    (0),    (6),    (0),   (2)],                          # 7, 8, 9 = Loot Inv lvl 5, 10, 20+                          
+1005:[(0),(0),"Shield",      (9),   (8),    (0),    (6),      (4),    (0),    (3),    (0),   (2)],                          # 
+1006:[(0),(0),"10 HP Potion",(5),   (8),    (1),    (6),      (2),    (0),    (8),    (0),   (0)],                          # use = 0, equip = 1, equipped = 2
+1007:[(0),(0),"20 HP Potion",(9),   (8),    (0),    (6),      (2),    (1),    (10),   (10),  (0)],                          # 
+1008:[(0),(0),"ItemName7",   (9),   (8),    (0),    (6),      (2),    (0),    (11),   (0),   (0)],                          # IF lvl "x" Then itemsDict(10) = itemsDict(9)
+1009:[(0),(0),"ItemName8",   (9),   (8),    (1),    (6),      (2),    (0),    (12),   (0),   (1)],                          # IF itemsDict(10)  = Value = Item is in game!
+1010:[(0),(0),"ItemName9",   (9),   (8),    (1),    (6),      (2),    (0),    (10),   (10),  (1)]}                          # IF itemsDict(10)  = 0 = Item is NOT in game!
+#Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+testliste = []
 
 
-
-
-
-
-
- # SAMOOOO CAN YOU FINALLY MAKE THIS FUCKIN FEATURE SO WE CAN FINISH THIS GAME?!?!?!
-
-
-
-
-
-def InventoryMenu(playerInventoryItems, playerInventoryMoney, playerName):
-    while True:
-        userInput = input(f"""
-{playerName}
-\nGold: {round(playerInventoryMoney,2)}
-Inventory: {playerInventoryItems}
-
-(1) Return\n
-""")                                                                             
-
-        match userInput:
-            case "1": break
-            case _: print("\nCouldn't understand you?!")     
-                                                                                     
-    return playerInventoryItems, round(playerInventoryMoney,2)
-
-
-
-# def EncounterMerchant():
-#     while True:
-#         userInput = input(f"\nYour Inventory: {playerInventoryItems}\n(1) Buy\t(2) Sell\t(3) Return\n")
-#         match userInput:
-#             case "1": MerchantBuy()
-#             case "2": MerchantSell()
-#             case "3": break
-#             case _: print("\nCouldn't understand you?!")
-
-# def MerchantBuy():
-#     print("\nWhat do you want to buy?")
-#     sleep(2)
-#     print(f"Your Gold: {playerInventoryMoney}")
-#     print(f"Merchant Gold: {merchantInventoryMoney}")    
-#     print(merchantInventoryItems)
-#     print(playerInventoryItems)
-
-    ### maybe print Inventory like this:
-    ###                 ATK     DEF     HEAL     Value
-    ### (1) "Item1"      2       0       0         2
-    ### (2) "Item2"      0       0       4         5
-
-    ### "Buy "Item": = Int User Input
-    ### if Money >= Value: 
-    ### playerInventoryMoney -= Value Item
-    ### merchantInventoryMoney += Value Item
-    ### playerInventoryItem += Item
-    ### MerchantInventoryItem -= Item
-
-    ### maybe Option for "equip" and "use" ?
-
-# def MerchantSell():
-#     print("\nWhat do you want to sell?")
-#     sleep(2)
-#     print(f"Your Gold: {playerInventoryMoney}")
-#     print(f"Merchant Gold: {merchantInventoryMoney}")
-#     print(merchantInventoryItems)
-#     print(playerInventoryItems)
-    
-    #see MerchantBuy()
+testliste = [key for key in itemsDict]
+print(testliste)
