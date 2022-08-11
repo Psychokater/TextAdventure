@@ -8,7 +8,7 @@ def ShopMenu(itemsDict, playerName, playerInventoryMoney):
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney)                                                           
-            case "2": pass #itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney)
             case "3": itemsDict = InventoryMenu(itemsDict, playerName, playerInventoryMoney)                                                          
             case "4": break
 
