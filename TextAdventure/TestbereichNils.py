@@ -18,4 +18,5 @@ testliste = []
 
 
 testliste = [key for key in itemsDict]
-print(testliste)
+for i in testliste:
+    print(i)

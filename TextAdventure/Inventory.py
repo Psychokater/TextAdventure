@@ -104,16 +104,16 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
     for i in range (0,len(itemsDict)):
-        i +=1001       
-        if userInputItemNumber == itemsDict[i][0] and playerInventoryMoney >= itemsDict[i][6] * 1.5 + 2:
+        i +=1001
+        if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+            print("\nNot enough money, fool!\n")
+            sleep(2)       
+            return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney           
+        if userInputItemNumber == itemsDict[i][0]:
             playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
             itemsDict[i][8] += 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][0] = 0
-            else: 
-                print("\nNot enough money, fool!\n")
-                sleep(2)
-                break
 
     return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
 
@@ -195,16 +195,18 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
     for i in range (0,len(itemsDict)):
-        i +=1001       
-        if userInputItemNumber == itemsDict[i][0] and playerInventoryMoney >= itemsDict[i][6] * 1.5 + 2:
+        i +=1001  
+        if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+            print("\nNot enough money, fool!\n")
+            sleep(2)
+            return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
+
+        elif userInputItemNumber == itemsDict[i][0]:
             playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
             itemsDict[i][8] += 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][0] = 0
-        else: 
-            print("\nNot enough money, fool!\n")
-            sleep(2)
-            break
+       
 
     return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
 
@@ -233,7 +235,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
     playerItemIDs = []
     while True:
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
-        userInput = input("\n(1) Equip\t\t(2) Use\t(2) Remove from Inventory\t(3) Leave Inventory\n")
+        userInput = input("\n(1) Equip\t\t(2) Remove from Inventory\t(3) Leave Inventory\n")
         if userInput == "1":
             pass
         elif userInput == "2":
