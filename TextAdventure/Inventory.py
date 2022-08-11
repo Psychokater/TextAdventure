@@ -43,12 +43,14 @@ def MerchantShop(itemsDict, playerName, playerInventoryMoney):
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}')
+    print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
-    for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary
-        i += 1001                                                               #       i = Item ID
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:                                                       #       i = Item ID
         playerItemIDs = []        
         if itemsDict[i][8] > 0:                                                 #   Quantity Player > 0 for that ItemID?
             itemsDict[i][1] = z                                                 #   Enumerate Itemline
@@ -68,7 +70,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
 # print MerchantInventory + getting iD's
 def GetInventoryMerchant(itemsDict, merchantItemIDs):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print('Merchant Items:')
+    print('Merchant:\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1   
@@ -112,7 +114,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
-                sleep(2)
+                sleep(1)
                 break     
             else: 
                 playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
@@ -166,7 +168,7 @@ def WizardShop(itemsDict, playerName, playerInventoryMoney):
 # print MerchantInventory + getting iD's
 def GetInventoryWizard(itemsDict, wizardItemIDs):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print('Merchant Items:')
+    print('Wizard:\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1                                           
@@ -210,7 +212,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
-                sleep(2)
+                sleep(1)
                 break
             else:
                 playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
@@ -241,6 +243,7 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
     return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
 
 ####################################### INVENTORY ##################################
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 
 # PlayerInventory                      (Add "Equip" and "Use" function for later)
 def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
@@ -248,26 +251,142 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
     playerItemIDs = []
     while True:
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
-        userInput = input("\n(1) Equip\t\t(2) Remove from Inventory\t(3) Leave Inventory\n")
+        userInput = input("\n(1) Equipment\t(2) Items\t(3) Return\n")
+################ Player Equipment ###
         if userInput == "1":
-            pass
+            itemsDict, playerItemIDs = PlayerEquipment(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+################ Items ####
         elif userInput == "2":
-            userInputItemNumber = int (input ('Select Item to Remove: \n'))
-            itemKeyList = []
+            itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+            userInput = input("\n(1) Use\t(2) Remove from Inventory\t(3) Return\n")
+################ Items #### Use Item ####
+            if userInput == "1":
+                userInputItemNumber = int (input ('Select item to use: \n'))
+                itemKeyList = []
 
-            itemKeyList = [key for key in itemsDict]
-            for i in itemKeyList:  
-                if userInputItemNumber == itemsDict[i][1]:
-                    itemsDict[i][8] -= 1            
-                    if itemsDict[i][8] == 0:
-                        itemsDict[i][1] = 0
-            print("\nItem has brought back to his owner!\n")
+                itemKeyList = [key for key in itemsDict]
+                for i in itemKeyList: 
+                    if userInputItemNumber == itemsDict[i][1]:
+                        if itemsDict[i][11] > 0:
+                            print(f"You can't use this {itemsDict[i][2]}")
+                            break  
+                        else:
+                            itemsDict[i][8] -= 1            
+                            if itemsDict[i][8] == 0:
+                                itemsDict[i][1] = 0    
+                    print(f"You used {itemsDict[i][2]}")                                
+############### Items #### Remove Item ####
+            elif userInput == "2":            
+                userInputItemNumber = int (input ('Select item to remove: \n'))
+                itemKeyList = []
 
+                itemKeyList = [key for key in itemsDict]
+                for i in itemKeyList:  
+                    if userInputItemNumber == itemsDict[i][1]:
+                        itemsDict[i][8] -= 1            
+                        if itemsDict[i][8] == 0:
+                            itemsDict[i][1] = 0
+                print(f"\n{itemsDict[i][2]} has brought back to his owner!\n")
+############### Items #### Break ####
+            elif userInput == "3":
+                break
+            else: print("\nCouldn't understand you?!")
+############### Break #### 
         elif userInput == "3": break
         else: print("\nCouldn't understand you?!")
     
     return itemsDict
 
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney):
+        while True:
+            print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}\n')
+            print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
+            '------------------------------------------------------------------------')
+            z = 1
+            itemKeyList = []
+
+            itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+            for i in itemKeyList:                                                       #       i = Item ID
+                playerItemIDs = []        
+                if itemsDict[i][8] > 0 and itemsDict[i][11] > 0:                        #   Quantity Player > 0 for that ItemID AND Equipable?
+                    itemsDict[i][1] = z                                                 #   Enumerate Itemline
+                    z += 1                                                              #   Enumerate + 1
+                    playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
+                    print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
+                    for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                        if j == 11:
+                            if itemsDict[i][j] > 10:
+                                print ("\u25cf",end='') #"Equipped"
+                        _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
+                        if j in _tempListIndexJ:                                        #
+                            continue                   
+                                                                                        #
+                        print (itemsDict[i][j],end='\t')                                #           print Value in this line 
+                    print()                                                             #   new Line of Inventory        
+            print('------------------------------------------------------------------------\n')    
+            userInput = input("\n(1) Equip item \t(2) Unequip item \t(3) Remove item \t(4) Return\n")
+            if userInput == "1":
+                userInputItemNumber = int (input ('Select item to equip: \n'))
+                itemKeyList = []
+
+                itemKeyList = [key for key in itemsDict]
+                for j in itemKeyList: 
+                    if userInputItemNumber == itemsDict[j][1]:
+                        if itemsDict[j][11] == 0:
+                            print(f"You can't equip {itemsDict[j][2]}")
+                            sleep(1)
+                            break 
+                        elif itemsDict[i][11] >= 10:
+                            print(f"{itemsDict[j][2]} item is already equipped!")
+                            sleep(1)
+                            break 
+                        else:
+                            for k in itemKeyList:
+                                if itemsDict[j][11] == itemsDict[k][11] and j != k:
+                                    itemsDict[j][11] += 10
+                                    itemsDict[k][11] -= 10
+                                    break        
+                                else:
+                                    itemsDict[j][11] += 10
+                                    break            
+                
+                            print(f"You equipped {itemsDict[j][2]}")
+                            break                        
+            
+            elif userInput == "2":  
+                userInputItemNumber = int (input ('Select item to equip: \n'))
+                itemKeyList = []
+
+                itemKeyList = [key for key in itemsDict]
+                for o in itemKeyList: 
+                    if userInputItemNumber == itemsDict[o][1]:
+                        if itemsDict[o][11] < 10:
+                            print(f"You can't Unequip {itemsDict[i][2]}")
+                            sleep(1)
+                            break 
+                        elif itemsDict[o][11] >= 10:
+                            print(f"{itemsDict[i][2]} is already equipped!")
+                            sleep(1)
+                            itemsDict[o][11] -= 10
+                            print(f"You unequipped {itemsDict[o][2]}")
+            elif userInput == "3":                         
+                userInputItemNumber = int (input ('Select item to remove: \n'))
+                itemKeyList = []
+
+                itemKeyList = [key for key in itemsDict]
+                for n in itemKeyList:  
+                    if userInputItemNumber == itemsDict[n][1]:
+                        itemsDict[n][8] -= 1            
+                        if itemsDict[n][8] == 0:
+                            itemsDict[n][1] = 0
+                print(f"\n{itemsDict[n][2]} has brought back to his owner!\n")
+                sleep(1)
+            elif userInput == "4":
+                break 
+            else: print("\nCouldn't understand you?!")               
+
+        return itemsDict, playerItemIDs
 
 # ######################################## Friends ################################################
 
