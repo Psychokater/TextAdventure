@@ -270,7 +270,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
                             itemsDict[i][8] -= 1            
                             if itemsDict[i][8] == 0:
                                 itemsDict[i][1] = 0    
-                    print(f"You used {itemsDict[i][2]}")                                
+                        print(f"You used {itemsDict[i][2]}")                                
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
                 userInputItemNumber = int (input ('Select item to remove: \n'))
