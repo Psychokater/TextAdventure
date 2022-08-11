@@ -68,21 +68,20 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName):
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
-    for i in range (0,len(itemsDict)):
-        i += 1001
-        playerItemIDs = []
-        
-        if itemsDict[i][8] > 0:
-            itemsDict[i][1] = z
-            z += 1            
-            playerItemIDs.append(i)
-            print('\u2009 ',itemsDict[i][1],end='\t:\t')
-            for j in range (0,len(itemsDict[i])):
-                _tempListIndexJ = [0, 7, 9, 10]
-                if j in _tempListIndexJ:
-                    continue
-                print (itemsDict[i][j],end='\t')
-            print (itemsDict[i][6])      
+    for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary
+        i += 1001                                                               #       i = Item ID
+        playerItemIDs = []        
+        if itemsDict[i][8] > 0:                                                 #   Quantity Player > 0 for that ItemID?
+            itemsDict[i][1] = z                                                 #   Enumerate Itemline
+            z += 1                                                              #   Enumerate + 1
+            playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
+            print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
+            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                _tempListIndexJ = [0, 1, 7, 9, 10]                              #           except for these Indexes!
+                if j in _tempListIndexJ:                                        #
+                    continue                                                    #
+                print (itemsDict[i][j],end='\t')                                #           print Value in this line 
+            print()                                                             #   new Line of Inventory        
     print('------------------------------------------------------------------------\n')
     return itemsDict, playerItemIDs
     
@@ -92,26 +91,26 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
     print('Merchant Items:')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
-    z = 1
-    for i in range (0,len(itemsDict)):
-        i += 1001 
-        _tempListIndexValue = [1, 2, 3, 10, 11, 12]       
-        if itemsDict[i][10] in _tempListIndexValue:
-            itemsDict[i][0] = z
-            z += 1            
-            merchantItemIDs.append(i)
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')
-            for j in range (0,len(itemsDict[i])):
-                _tempListIndexJ = [1,8,9,10]
-                if j in _tempListIndexJ:
-                    continue
-                if j == 6:                                       
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')             
-                    continue
-                if j == 7:                    
-                    print(((itemsDict[i][j]/2) - itemsDict[i][8]))
-                print (itemsDict[i][j],end='\t')
-            print()
+    z = 1   
+    for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary      
+        i += 1001                                                               #       i = Item ID
+        _tempListIndexValue = [1, 2, 3, 10, 11, 12]                             #       List of ID to Sell at Merchant
+        if itemsDict[i][10] in _tempListIndexValue:                             #       If Item ID of selected Item is activated
+            itemsDict[i][0] = z                                                 #       Enumerate Itemline
+            z += 1                                                              #   Enumerate + 1
+            merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                _tempListIndexJ = [0, 1, 8, 9, 10]                              #           except for these Indexes!
+                if j in _tempListIndexJ:                                        #
+                    continue                                                    #
+                if j == 6:                                                      #           if Index == "Value of Item":
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    continue                                                    #
+                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
+                    print(((itemsDict[i][j]/2) - itemsDict[i][8]))              #           print "MaxQuantity" / 2 (for "Merchant Quantity")
+                print (itemsDict[i][j],end='\t')                                #           print Value in this line
+            print()                                                             #   new Line of Inventory
     print('------------------------------------------------------------------------\n')
     return itemsDict, merchantItemIDs
 
