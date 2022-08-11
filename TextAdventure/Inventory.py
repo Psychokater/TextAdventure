@@ -104,7 +104,7 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
                     print(itemsDict[i][j]* 1.5 + 2,end='\t')             
                     continue
                 if j == 7:                    
-                    print((itemsDict[i][j] - itemsDict[i][8]))
+                    print(((itemsDict[i][j]/2) - itemsDict[i][8]))
                 print (itemsDict[i][j],end='\t')
             print()
     print('------------------------------------------------------------------------\n')
@@ -120,8 +120,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName):
     for i in range (0,len(itemsDict)):
         i +=1001       
         if userInputItemNumber == itemsDict[i][0]:
-            itemsDict[i][8] -= 1
-            itemsDict[i][9] += 1
+            itemsDict[i][8] -= 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][0] = 0
 
@@ -137,9 +136,8 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName):
     for i in range (0,len(itemsDict)):
         i +=1001
         if userInputItemNumber == itemsDict[i][1]:
-            itemsDict[i][8] += 1
-            itemsDict[i][9] -= 1
-            if itemsDict[i][9] == 0:
+            itemsDict[i][8] += 1            
+            if itemsDict[i][8] == 0:
                 itemsDict[i][1] = 0
                                
     return itemsDict, playerItemIDs, merchantItemIDs
