@@ -72,8 +72,10 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1   
-    for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary      
-        i += 1001                                                               #       i = Item ID
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:                                                       #       i = Item ID
         _tempListIndexValue = [1, 2, 3]                                         #       List of ID to Sell at Merchant
         if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
             (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
@@ -102,9 +104,11 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
     os.system('cls')
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
-    for i in range (0,len(itemsDict)):
-        i +=1001          
+    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))       
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:    
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
@@ -125,8 +129,10 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
-    for i in range (0,len(itemsDict)):
-        i +=1001
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][1]:
             playerInventoryMoney += itemsDict[i][6]
             itemsDict[i][8] -= 1            
@@ -163,9 +169,11 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
     print('Merchant Items:')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
-    z = 1   
-    for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary      
-        i += 1001                                                               #       i = Item ID
+    z = 1                                           
+    itemKeyList = []                                                           
+
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:                                                       #       i = Item ID
         _tempListIndexValue = [4, 5, 6]                                         #       List of ID to Sell at Merchant
         if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
             (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
@@ -195,8 +203,10 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
-    for i in range (0,len(itemsDict)):
-        i +=1001 
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][0]:
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
@@ -218,8 +228,10 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
-    for i in range (0,len(itemsDict)):
-        i +=1001
+    itemKeyList = []
+
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][1]:
             playerInventoryMoney += itemsDict[i][6]
             itemsDict[i][8] -= 1            
@@ -241,8 +253,10 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
             pass
         elif userInput == "2":
             userInputItemNumber = int (input ('Select Item to Remove: \n'))
-            for i in range (0,len(itemsDict)):
-                i +=1001
+            itemKeyList = []
+
+            itemKeyList = [key for key in itemsDict]
+            for i in itemKeyList:  
                 if userInputItemNumber == itemsDict[i][1]:
                     itemsDict[i][8] -= 1            
                     if itemsDict[i][8] == 0:

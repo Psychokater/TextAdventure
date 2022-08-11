@@ -14,9 +14,9 @@ itemsDict = {
 1009:[(0),(0),"ItemName8",   (9),   (8),    (1),    (6),      (2),    (0),    (12),   (0),   (1)],                          # IF itemsDict(10)  = Value = Item is in game!
 1010:[(0),(0),"ItemName9",   (9),   (8),    (1),    (6),      (2),    (0),    (10),   (10),  (1)]}                          # IF itemsDict(10)  = 0 = Item is NOT in game!
 #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
-testliste = []
+itemKeyList = []
 
 
-testliste = [key for key in itemsDict]
-for i in testliste:
+itemKeyList = [key for key in itemsDict]
+for i in itemKeyList:
     print(i)
