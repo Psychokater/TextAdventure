@@ -106,20 +106,20 @@ def Start():
 # MAIN GAME LOOP --- MAIN DEKLARATIONS AND INITIALISATIONS!#
 
 def IngameMenu(playerName, startLocation, location):
-    playerInventoryMoney = 0
+    playerInventoryMoney = 0.00
     playerStatPoints = 1
     playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
 
     itemsDict = {
     #                         atk def  hp val  qnt  qnt ID  ID_ON                           Quantity Merchant resets every lvlUp (qnt Max / 2 - qnt P)
     #                                          Max   P                                      qnt Max = Max qnt in Game
-    1001:[(0),(0),"Apple    ",(0),(0),(4),(1),(100),(5),(10),(10)],                            # ID (row 9 and 10)
-    1002:[(0),(0),"ItemName1",(9),(8),(1),(6),(10),(5),(1),(1)],                            # 1, 2, 3 = Merchant Inv lvl 5, 10, 20+
+    1001:[(0),(0),"Apple    ",(0),(0),(4),(1),(100),(5),(10),(10)],                           # ID (row 9 and 10)
+    1002:[(0),(0),"ItemName1",(9),(8),(1),(6),(10),(5),(1),(1)],                           # 1, 2, 3 = Merchant Inv lvl 5, 10, 20+
     1003:[(0),(0),"ItemName2",(9),(8),(1),(6),(2),(0),(4),(4)],                            # 4, 5, 6 = Wizard Inv lvl 5, 10, 20+   
     1004:[(0),(0),"ItemName3",(9),(8),(1),(6),(4),(0),(6),(0)],                            # 7, 8, 9 = Loot Inv lvl 5, 10, 20+                          
     1005:[(0),(0),"ItemName4",(9),(8),(0),(6),(4),(0),(3),(0)],                            #
     1006:[(0),(0),"ItemName5",(5),(8),(1),(6),(2),(0),(8),(0)],                            # 
-    1007:[(0),(0),"ItemName6",(9),(8),(0),(6),(2),(1),(10),(10)],                           
+    1007:[(0),(0),"ItemName6",(9),(8),(0),(6),(2),(1),(10),(10)],                          # 
     1008:[(0),(0),"ItemName7",(9),(8),(0),(6),(2),(0),(11),(0)],                           # IF lvl "x" Then itemsDict(10) = itemsDict(9)
     1009:[(0),(0),"ItemName8",(9),(8),(1),(6),(2),(0),(12),(0)],                           # IF itemsDict(10)  = Value = Item is in game!
     1010:[(0),(0),"ItemName9",(9),(8),(1),(6),(2),(0),(10),(10)]}                           # IF itemsDict(10)  = 0 = Item is NOT in game!
@@ -133,14 +133,14 @@ def IngameMenu(playerName, startLocation, location):
                     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
             case "2": itemsDict = Inventory.InventoryMenu(
-                    itemsDict, playerName)
+                    itemsDict, playerName, playerInventoryMoney)
 
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName)
 
             case "4": MainMenu(playerName)
             case _: print("\nCouldn't understand you?!")
-
+        
 
 ### Move() -> World()
 def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
