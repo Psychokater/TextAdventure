@@ -1,10 +1,11 @@
+from math import ceil
 import os
 
 #ENTRYPOINT (change later?!) (Choose where to go -> Merchant or Inventory)
 def ShopMenu(itemsDict, playerName):
 
         while True:   
-            userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2)\t Wizard \t(3) Inventory\t(4) Exit\n")      
+            userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(4) Exit\n")      
             match userInput:
                 case "1": itemsDict = MerchantShop(itemsDict, playerName)                                                           
                 case "2": itemsDict = InventoryMenu(itemsDict, playerName)                                                          
@@ -95,7 +96,8 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
     for i in range (0,len(itemsDict)):                                          # for every Item in itemsDictionary      
         i += 1001                                                               #       i = Item ID
         _tempListIndexValue = [1, 2, 3, 10, 11, 12]                             #       List of ID to Sell at Merchant
-        if itemsDict[i][10] in _tempListIndexValue:                             #       If Item ID of selected Item is activated
+        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
+            (itemsDict[i][7] - itemsDict[i][8]) > 0):                            #       Item Quantity Merchant > 0
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
@@ -108,9 +110,10 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
                     print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
                     continue                                                    #
                 if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
-                    print(((itemsDict[i][j]/2) - itemsDict[i][8]))              #           print "MaxQuantity" / 2 (for "Merchant Quantity")
+                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
+                    continue                                                    #           
                 print (itemsDict[i][j],end='\t')                                #           print Value in this line
-            print()                                                             #   new Line of Inventory
+                                                                                #   new Line of Inventory
     print('------------------------------------------------------------------------\n')
     return itemsDict, merchantItemIDs
 
@@ -124,7 +127,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName):
     for i in range (0,len(itemsDict)):
         i +=1001       
         if userInputItemNumber == itemsDict[i][0]:
-            itemsDict[i][8] -= 1            
+            itemsDict[i][8] += 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][0] = 0
 
@@ -140,7 +143,7 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName):
     for i in range (0,len(itemsDict)):
         i +=1001
         if userInputItemNumber == itemsDict[i][1]:
-            itemsDict[i][8] += 1            
+            itemsDict[i][8] -= 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][1] = 0
                                
