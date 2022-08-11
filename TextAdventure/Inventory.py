@@ -42,7 +42,7 @@ def MerchantShop(itemsDict, playerName, playerInventoryMoney):
 
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
@@ -67,7 +67,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
     
 # print MerchantInventory + getting iD's
 def GetInventoryMerchant(itemsDict, merchantItemIDs):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     print('Merchant Items:')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
@@ -98,7 +98,7 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
 
 # +ItemPlayer -MoneyPlayer
 def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
@@ -119,7 +119,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
 
 # -ItemPlayer +MoneyPlayer
 def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
@@ -158,7 +158,7 @@ def WizardShop(itemsDict, playerName, playerInventoryMoney):
 
 # print MerchantInventory + getting iD's
 def GetInventoryWizard(itemsDict, wizardItemIDs):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     print('Merchant Items:')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
     '------------------------------------------------------------------------')
@@ -189,7 +189,7 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
 
 # +ItemPlayer -MoneyPlayer
 def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
@@ -210,7 +210,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
 
 # -ItemPlayer +MoneyPlayer
 def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON  
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
