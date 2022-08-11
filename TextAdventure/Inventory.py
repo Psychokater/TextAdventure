@@ -337,13 +337,10 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             sleep(1)
                             break 
                         else:
+                            itemsDict[j][11] += 10
                             for k in itemKeyList:
                                 if itemsDict[j][11] == itemsDict[k][11] and j != k:
-                                    itemsDict[k][11] -= 10
-                                    itemsDict[j][11] += 10
-                                    break        
-                                elif itemsDict[j][11] != itemsDict[k][11] and j == k:
-                                    itemsDict[j][11] += 10
+                                    itemsDict[k][11] -= 10                        
                                     break            
                 
                             print(f"You equipped {itemsDict[j][2]}")
