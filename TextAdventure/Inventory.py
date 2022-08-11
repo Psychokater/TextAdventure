@@ -368,10 +368,10 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
                     if userInputItemNumber == itemsDict[n][1]:
-                        itemsDict[n][8] -= 1            
+                        itemsDict[n][8] -= 1
+                        print(f"\n{itemsDict[n][2]} has brought back to his owner!\n")            
                         if itemsDict[n][8] == 0:
-                            itemsDict[n][1] = 0
-                print(f"\n{itemsDict[n][2]} has brought back to his owner!\n")
+                            itemsDict[n][1] = 0                
                 # sleep(1)
 ################################## 4 Return#### #############################     
             elif userInput == "4":
