@@ -1,7 +1,7 @@
 def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     itemAddStats = []
-    itemAddStats = AdditionalStats(itemAddStats, itemsDict) 
+    itemAddStats, itemPlayerPrimary, itemPlayerSecondary  = AdditionalStats(itemAddStats, itemsDict) 
     while True:
         nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
@@ -28,7 +28,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
 def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
      # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP    
     itemAddStats = []
-    itemAddStats = AdditionalStats(itemAddStats, itemsDict) 
+    itemAddStats, itemPlayerPrimary, itemPlayerSecondary = AdditionalStats(itemAddStats, itemsDict) 
     while True:
         if playerStatPoints == 0:
             break
@@ -92,10 +92,20 @@ def AdditionalStats(itemAddStats, itemsDict):
    # itemAddStats = 0 None,1 None, 2 None, 3 +ATK, 4 +DEF, 5 None 
    # Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq   
     itemAddStats = [0, 0, 0, 0, 0, 0]
-    itemKeyList = [key for key in itemsDict]                                          
+    itemKeyList = [key for key in itemsDict]
+    itemPlayerPrimary = "" 
+    itemPlayerSecondary = ""                                         
     for i in itemKeyList:
         if itemsDict[i][11] >= 10:                                                  
             itemAddStats[3] += itemsDict[i][3]
-            itemAddStats[4] += itemsDict[i][4]     
+            itemAddStats[4] += itemsDict[i][4]
+        if itemsDict[i][11] == 11:
+            itemPlayerPrimary = itemsDict[i][2]
+        else:
+            itemPlayerPrimary = "Fists"
+        if itemsDict[i][11] == 12:
+            itemPlayerSecondary = itemsDict[i][2]
+        else:
+            itemPlayerSecondary = "Your Face"
 
-    return itemAddStats      
+    return itemAddStats, itemPlayerPrimary, itemPlayerSecondary

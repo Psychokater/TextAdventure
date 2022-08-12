@@ -150,7 +150,7 @@ def IngameMenu(playerName, startLocation, location):
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
-        itemAddStats = Stats.AdditionalStats(itemAddStats, itemsDict) 
+        itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
         playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
