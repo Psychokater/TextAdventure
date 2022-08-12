@@ -135,7 +135,7 @@ def EnemyItemSelection(itemsDict, enemyID):
     _itemEnemyItems = []
     itemEnemyItems = []
     itemEnemyAddStats = [0, 0, 0, 0, 0, 0, 0]
-    lootItemID = 0
+    lootItemID = 1
     itemKeyList = [key for key in itemsDict]                                          
     for i in itemKeyList:
         if  itemsDict[i][10] == 7:
@@ -151,8 +151,9 @@ def EnemyItemSelection(itemsDict, enemyID):
         _tempItemList = _tempItemListMedium
     elif enemyID > 1100:
         _tempItemList = _tempItemListHard
-
-    j = random.randint(0,len(_tempItemList))                                  # give Random Item from List as Lootitem
+    
+    j = random.randint(1,len(_tempItemList)-1)
+                                          # give Random Item from List as Lootitem
     lootItemID = _tempItemList[j]
 
     for y in range(1,7):                                                                                    
@@ -160,9 +161,10 @@ def EnemyItemSelection(itemsDict, enemyID):
                                                                               # from all choosen Items, append one of every type to enemyItems
             if itemsDict[k][11] == y or itemsDict[k][11] == (y + 10):
                 _tempItemListRandom.append(k)
-        o = random.randint(0,len(_tempItemListRandom))
-        _itemEnemyItems.append(_tempItemListRandom[o])
-        _tempItemListRandom = []
+        if bool(_tempItemListRandom) == True:
+            o = random.randint(0,len(_tempItemListRandom)-1)                
+            _itemEnemyItems.append(_tempItemListRandom[o])
+            _tempItemListRandom = []
 
     for s in _tempItemList:                                                   # Values for adding Stats to enemy    
         itemEnemyAddStats[3] += itemsDict[s][3]
