@@ -70,7 +70,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
-                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP)
+                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict)
                 break
             
             elif UserInputChoose == "2":
@@ -123,7 +123,7 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     return enemyID, selectedDict
 
 
-def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP):
+def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
     _lootItem = "lootItem" #(add Item later!!!)
