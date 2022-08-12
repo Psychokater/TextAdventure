@@ -98,15 +98,15 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     if encounterIndex <= 10:
         EncounterNothing()
 
-    elif encounterIndex > 10 and encounterIndex <= 33:
+    elif encounterIndex > 10 and encounterIndex <= 20:
         _luck = random.randint(1,len(enemyDictHard))
         enemyID = 1100 + _luck
         selectedDict = enemyDictHard
-    elif encounterIndex > 33 and encounterIndex <= 66:
+    elif encounterIndex > 21 and encounterIndex <= 52:
         _luck = random.randint(1,len(enemyDictMedium))
         enemyID = 1010 + _luck
         selectedDict = enemyDictMedium
-    elif encounterIndex > 66 and encounterIndex <= 100:
+    elif encounterIndex > 53 and encounterIndex <= 100:
         _luck = random.randint(1,len(enemyDictEasy))
         enemyID = 1000 + _luck
         selectedDict = enemyDictEasy
