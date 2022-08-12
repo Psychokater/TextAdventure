@@ -321,7 +321,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         print (itemsDict[i][j],end='\t')                                #           print Value in this line 
                     print()                                                             #   new Line of Inventory        
             print('------------------------------------------------------------------------\n')    
-            userInput = input("\n(1) Equip item \t(2) Unequip item \t(3) Remove item \t(4) Return\n")
+            userInput = input("\n(1) Equip item\t(2) Unequip item\t(3) Remove item\t(4) Return\n")
 ################################## 1 equip Item #############################   
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to equip: \n'))
