@@ -3,6 +3,8 @@ import random
 import Stats
 import Inventory
 
+
+
 def Encounter(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
  
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
@@ -77,7 +79,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
             elif UserInputChoose == "3": 
                 playerStats, playerStatPoints = Stats.StatMenu(
-                playerStats, playerStatPoints, playerName)
+                playerStats, playerStatPoints, playerName, itemsDict )
 
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
@@ -127,6 +129,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     _lootItem = "lootItem" #(add Item later!!!)
     _tempMoney = 0.00
     _tempExp = 0.00
+    itemAddStats = []
+    itemAddStats = Stats.AdditionalStats(itemAddStats, itemsDict) 
     
     while True:
 
@@ -162,12 +166,12 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3]} Points.")
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {playerStats[3] + itemAddStats[3]} Points.")
             # sleep(1)
             print(f"{selectedDict[enemyID][0]} defends himself with {selectedDict[enemyID][4]} Points.")
             # sleep(1)
-            if  selectedDict[enemyID][4] < playerStats[3]:                                                  # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (selectedDict[enemyID][4] - playerStats[3])                        # E_HP += E_DEF - P_ATK
+            if  selectedDict[enemyID][4] < (playerStats[3] + itemAddStats[3]):                                                  # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (selectedDict[enemyID][4] - (playerStats[3] + itemAddStats[3]))                        # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             if selectedDict[enemyID][2] < 0:                                                                    # HP < 0? Then HP 0
@@ -179,10 +183,10 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
                 print(f"{selectedDict[enemyID][0]} attacks you with {selectedDict[enemyID][3]} Points.")        # Enemy attacks second
                 # sleep(1)
-                print(f"You defend yourself with {playerStats[4]} Points.")
+                print(f"You defend yourself with {(playerStats[4] + itemAddStats[4])} Points.")
                 # sleep(1)
-                if playerStats[4] < selectedDict[enemyID][3]:                                                # E_DEF < P_ATK?
-                    playerStats[2] += (playerStats[4] - selectedDict[enemyID][3])                            # P_HP += P_DEF - E_ATK 
+                if (playerStats[4] + itemAddStats[4]) < selectedDict[enemyID][3]:                                                # E_DEF < P_ATK?
+                    playerStats[2] += ((playerStats[4] + itemAddStats[4]) - selectedDict[enemyID][3])                            # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
@@ -199,7 +203,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################ 3 Stats #################
 
         elif UserInputFight == "3":
-            playerStats, playerStatPoints = Stats.StatMenu(playerStats, playerStatPoints, playerName)
+            playerStats, playerStatPoints = Stats.StatMenu(
+                playerStats, playerStatPoints, playerName, itemsDict)
 
     ################ 4 Flee ################
 

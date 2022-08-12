@@ -1,11 +1,15 @@
-def StatMenu(playerStats, playerStatPoints, playerName):
+def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    itemAddStats = []
+    itemAddStats = AdditionalStats(itemAddStats, itemsDict) 
     while True:
         nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
         "\n------------------------------------------------------------------------")       
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
-            f"HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}"\
+            f"HP: {playerStats[2]}/{playerStats[1]}\n"\
+            f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
+            f"DEF: {playerStats[4]} + ({itemAddStats[4]}"\
             "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
@@ -21,8 +25,10 @@ def StatMenu(playerStats, playerStatPoints, playerName):
             else: print("\nCouldn't understand you?!")
     return playerStats, playerStatPoints
 
-def EditStats(playerStats, playerStatPoints, playerName):
-     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
+     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP    
+    itemAddStats = []
+    itemAddStats = AdditionalStats(itemAddStats, itemsDict) 
     while True:
         if playerStatPoints == 0:
             break
@@ -30,7 +36,9 @@ def EditStats(playerStats, playerStatPoints, playerName):
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
         "\n------------------------------------------------------------------------")    
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
-            f"HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}"\
+            f"HP: {playerStats[2]}/{playerStats[1]}\n"\
+            f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
+            f"DEF: {playerStats[4]} + ({itemAddStats[4]}"\
             "\n------------------------------------------------------------------------")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
         if userInput == "1":
@@ -79,3 +87,15 @@ def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
                 itemsDict[i][10] = itemsDict[i][9]    
         
     return playerStats, playerStatPoints, itemsDict
+
+def AdditionalStats(itemAddStats, itemsDict):   
+   # itemAddStats = 0 None,1 None, 2 None, 3 +ATK, 4 +DEF, 5 None 
+   # Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq   
+    itemAddStats = [0, 0, 0, 0, 0, 0]
+    itemKeyList = [key for key in itemsDict]                                          
+    for i in itemKeyList:
+        itemsDict[i][11] >= 10                                                  
+        itemAddStats[3] += itemsDict[i][3]
+        itemAddStats[4] += itemsDict[i][4]     
+
+    return itemAddStats      

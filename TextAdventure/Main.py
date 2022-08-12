@@ -108,7 +108,7 @@ def Start():
 def IngameMenu(playerName, startLocation, location):
     playerInventoryMoney = 50.00
     playerStatPoints = 1
-    playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
 
     itemsDict = {
     #      0   1        2            3     4       5      6         7        8       9       10     11
@@ -145,7 +145,9 @@ def IngameMenu(playerName, startLocation, location):
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
-        playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
+        itemAddStats = []
+        itemAddStats = Stats.AdditionalStats(itemAddStats, itemsDict) 
+        playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
@@ -155,7 +157,7 @@ def IngameMenu(playerName, startLocation, location):
                     itemsDict, playerName, playerInventoryMoney)
 
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
-                    playerStats, playerStatPoints, playerName)
+                    playerStats, playerStatPoints, playerName, itemsDict)
 
             case "4": MainMenu(playerName)
             case _: print("\nCouldn't understand you?!")
@@ -180,7 +182,7 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
     location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Encounter.Encounter(
     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
-    playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
+    playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
 
     return startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
@@ -234,7 +236,6 @@ def World(startLocation, location, direction):
         print("\nCouldn't understand you?!")
         return "x"
     return worldmap[i]
-
-
+                                        
 
 Main()
