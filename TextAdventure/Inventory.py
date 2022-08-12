@@ -23,7 +23,8 @@ def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 # Merchant (Print Merchant and PlayerInventory - Choose if Buy or Sell)
 def MerchantShop(itemsDict, playerName, playerInventoryMoney):
     PicMerchant()
-
+    merchantItemIDs = []
+    playerItemIDs = []
     while True:
         itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)

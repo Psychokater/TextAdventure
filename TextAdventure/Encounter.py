@@ -14,17 +14,17 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     sl = round(enemyLevel / 1.5)
 
     enemyDictEasy = {
-            1001 : ["Pack of Rats", enemyLevel, 2+sl, 1+sl, 0+sl, 1.00, PicRat],
-            1002 : ["Wolf", enemyLevel, 10+sl, 2+sl, 1+sl, 2.00, PicWolf],
-            1003 : ["Skeleton", enemyLevel, 5+sl, 2+sl, 2+sl, 2.00, PicSkeleton]
-            } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+            1001 : ["Pack of Rats", enemyLevel,     2+sl,    1+sl,   0+sl,   1.00,   PicRat],
+            1002 : ["Wolf",         enemyLevel,     5+sl,    2+sl,   2+sl,   2.00,   PicWolf],
+            1003 : ["Skeleton",     enemyLevel,     5+sl,    2+sl,   2+sl,   2.00,   PicSkeleton]
+            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
             
 
     enemyDictMedium = {
-            1011 : ["Ghost", enemyLevel, 15, 4, 5, 6.00, PicGhost],
-            1012 : ["Bandit", enemyLevel, 20, 6, 4, 8.00, PicBandit],
-            1013 : ["Troll", enemyLevel, 30, 2, 1, 8.00, PicTroll],
-            1014 : ["Centaur", enemyLevel, 20, 8, 10, 10.00, PicCentaur]
+            1011 : ["Ghost",        enemyLevel,     15,      4,     5,      6.00,   PicGhost],
+            1012 : ["Bandit",       enemyLevel, 20, 6, 4, 8.00, PicBandit],
+            1013 : ["Troll",        enemyLevel, 30, 2, 1, 8.00, PicTroll],
+            1014 : ["Centaur",      enemyLevel, 20, 8, 10, 10.00, PicCentaur]
             } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
     enemyDictHard = {
