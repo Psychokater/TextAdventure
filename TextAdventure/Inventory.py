@@ -283,9 +283,9 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                                 else: print("\nCouldn't understand you?!")
                             if playerStats[2] + itemsDict[i][5] <= playerStats[1]:       
                                 playerStats[2] += itemsDict[i][5]
-                                print(f"You got healed for {itemsDict[i][5]} Points, HP: {playerStats[2]}/{playerStats[1]}")                                
+                                print(f"You got healed for {itemsDict[i][5]} Points. HP: {playerStats[2]}/{playerStats[1]}")                                
                             else:
-                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points, HP: {playerStats[2]}/{playerStats[1]} ") 
+                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points. HP: {playerStats[2]}/{playerStats[1]} ") 
                                 playerStats[2] = playerStats[1]                                
                         
                             itemsDict[i][8] -= 1            
