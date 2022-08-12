@@ -2,7 +2,11 @@ def StatMenu(playerStats, playerStatPoints, playerName):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     while True:
         nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
-        print(f"\n{playerName}\tLVL {playerStats[0]}\nPoints: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\nHP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
+        print(f"\n{playerName}\tLVL {playerStats[0]}"\
+        "\n------------------------------------------------------------------------")       
+        print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
+            f"HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}"\
+            "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
             if userInput == "1":
@@ -23,7 +27,11 @@ def EditStats(playerStats, playerStatPoints, playerName):
         if playerStatPoints == 0:
             break
         nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
-        print(f"\n{playerName}\tLVL {playerStats[0]}\nPoints: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\nHP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}")
+        print(f"\n{playerName}\tLVL {playerStats[0]}"\
+        "\n------------------------------------------------------------------------")    
+        print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
+            f"HP: {playerStats[2]}/{playerStats[1]}\nATK: {playerStats[3]}\nDEF: {playerStats[4]}"\
+            "\n------------------------------------------------------------------------")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
         if userInput == "1":
             playerStats[1] += 10
