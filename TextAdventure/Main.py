@@ -41,10 +41,6 @@ import Inventory
 #
 
 
-merchantInventoryMoney = 200
-
-merchantInventoryItems = {"testitem":[1, 2, 3, 4]} ### maybe Random??!! Maybe add a counter for "Days" which increment with every Move()? More Days = More/Better Items (Monster Loot and Merchant)
-
 
 ### Main Game
 def Main():
