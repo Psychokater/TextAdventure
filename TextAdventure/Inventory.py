@@ -265,19 +265,33 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                     if userInputItemNumber == itemsDict[i][1]:
                         if itemsDict[i][11] > 0:
                             print(f"You can't use this {itemsDict[i][2]}")
-                            break  
-                        else:
+                            break
+                         #################################### Healitems #########################
+                         # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+                        if itemsDict[i][5] > 0:
+                            if playerStats[2] >= playerStats[1]:
+                                print(f"You already have full HP, do you really want to use {itemsDict[i][2]}?")
+                                userItemInput = input("(1) Yes!\t(2) No!")
+                                if userItemInput == "1":
+                                    itemsDict[i][8] -= 1            
+                                    if itemsDict[i][8] == 0:
+                                        itemsDict[i][1] = 0
+                                    print(f"You used {itemsDict[i][2]}")
+                                    break   
+                                elif userItemInput == "2":
+                                    break
+                                else: print("\nCouldn't understand you?!")
+                            if playerStats[2] + itemsDict[i][5] <= playerStats[1]:       
+                                playerStats[2] += itemsDict[i][5]
+                                print(f"You got healed for {itemsDict[i][5]} Points, HP: {playerStats[2]}/{playerStats[1]}")                                
+                            else:
+                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points, HP: {playerStats[2]}/{playerStats[1]} ") 
+                                playerStats[2] = playerStats[1]                                
+                        
                             itemsDict[i][8] -= 1            
                             if itemsDict[i][8] == 0:
                                 itemsDict[i][1] = 0    
-                        print(f"You used {itemsDict[i][2]}")
-                        if itemsDict[i][5] > 0:
-                            if playerStats[2] + itemsDict[i][5] <= playerStats[1]: 
-                                playerStats[2] += itemsDict[i][5]
-                                print(f"You got healed for {itemsDict[i][5]} Points")                             
-                            else:
-                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points") 
-                                playerStats[2] = playerStats[1]
+                        
                                                              
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
