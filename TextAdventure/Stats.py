@@ -9,7 +9,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
             f"HP: {playerStats[2]}/{playerStats[1]}\n"\
             f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
-            f"DEF: {playerStats[4]} + ({itemAddStats[4]}"\
+            f"DEF: {playerStats[4]} + ({itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
@@ -94,8 +94,8 @@ def AdditionalStats(itemAddStats, itemsDict):
     itemAddStats = [0, 0, 0, 0, 0, 0]
     itemKeyList = [key for key in itemsDict]                                          
     for i in itemKeyList:
-        itemsDict[i][11] >= 10                                                  
-        itemAddStats[3] += itemsDict[i][3]
-        itemAddStats[4] += itemsDict[i][4]     
+        if itemsDict[i][11] >= 10:                                                  
+            itemAddStats[3] += itemsDict[i][3]
+            itemAddStats[4] += itemsDict[i][4]     
 
     return itemAddStats      
