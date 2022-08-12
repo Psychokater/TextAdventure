@@ -107,7 +107,7 @@ def Start():
 
 def IngameMenu(playerName, startLocation, location):
     playerInventoryMoney = 50.00
-    playerStatPoints = 1
+    playerStatPoints = 4
     playerStats = [1, 20, 20, 4, 5, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
 
     itemsDict = {

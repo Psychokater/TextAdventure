@@ -8,8 +8,8 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
         "\n------------------------------------------------------------------------")       
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
             f"HP: {playerStats[2]}/{playerStats[1]}\n"\
-            f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
-            f"DEF: {playerStats[4]} + ({itemAddStats[4]})"\
+            f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
+            f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
@@ -19,7 +19,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
         else: 
             userInput = input(f"\n(1) Edit Stats ({playerStatPoints}P)\t(2) Return\n")
             if userInput == "1":
-                playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName)
+                playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName, itemsDict)
             elif userInput == "2":
                 break
             else: print("\nCouldn't understand you?!")
@@ -37,8 +37,8 @@ def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
         "\n------------------------------------------------------------------------")    
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
             f"HP: {playerStats[2]}/{playerStats[1]}\n"\
-            f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
-            f"DEF: {playerStats[4]} + ({itemAddStats[4]})"\
+            f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
+            f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
         if userInput == "1":
