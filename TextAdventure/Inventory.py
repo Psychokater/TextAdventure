@@ -279,7 +279,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
                 for i in itemKeyList:  
                     if userInputItemNumber == itemsDict[i][1]:
                         itemsDict[i][8] -= 1 
-                        print(f"\n{itemsDict[i][2]} has brought back to his owner!\n")           
+                        print(f"\n{itemsDict[i][2]} was brought back to his owner!\n")           
                         if itemsDict[i][8] == 0:
                             itemsDict[i][1] = 0
                         
@@ -354,7 +354,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                 for o in itemKeyList: 
                     if userInputItemNumber == itemsDict[o][1]:
                         if itemsDict[o][11] < 10:
-                            print(f"You can't unequip {itemsDict[i][2]}")
+                            print(f"You can't unequip {itemsDict[o][2]}")
                             # sleep(1)
                             break 
                         elif itemsDict[o][11] >= 10: 
@@ -369,7 +369,9 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                 for n in itemKeyList:  
                     if userInputItemNumber == itemsDict[n][1]:
                         itemsDict[n][8] -= 1
-                        print(f"\n{itemsDict[n][2]} has brought back to his owner!\n")            
+                        if itemsDict[n][11] >= 10:
+                            itemsDict[n][11] -= 10
+                        print(f"\n{itemsDict[n][2]} was brought back to his owner!\n")            
                         if itemsDict[n][8] == 0:
                             itemsDict[n][1] = 0                
                 # sleep(1)
