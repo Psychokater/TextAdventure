@@ -17,7 +17,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
                 break
             else: print("\nCouldn't understand you?!")
         else: 
-            userInput = input(f"\n(1) Edit Stats ({playerStatPoints}P)\t(2) Return\n")
+            userInput = input(f"\n(1) Edit Stats (+{playerStatPoints})\t(2) Return\n")
             if userInput == "1":
                 playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName, itemsDict)
             elif userInput == "2":
