@@ -38,7 +38,7 @@ def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
         print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
             f"HP: {playerStats[2]}/{playerStats[1]}\n"\
             f"ATK: {playerStats[3]} + ({itemAddStats[3]})\n"\
-            f"DEF: {playerStats[4]} + ({itemAddStats[4]}"\
+            f"DEF: {playerStats[4]} + ({itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
         if userInput == "1":
