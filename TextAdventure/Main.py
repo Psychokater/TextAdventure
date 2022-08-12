@@ -157,8 +157,8 @@ def IngameMenu(playerName, startLocation, location):
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
                     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
-            case "2": itemsDict = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerStats = Inventory.InventoryMenu(
+                    itemsDict, playerName, playerInventoryMoney, playerStats)
 
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName, itemsDict)

@@ -3,19 +3,19 @@ from math import ceil
 import os
 
 #ENTRYPOINT (Choose where to go -> Merchant, Wizard or Inventory)
-def ShopMenu(itemsDict, playerName, playerInventoryMoney):
+def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:   
         userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(4) Exit\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney)                                                           
             case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney)
-            case "3": itemsDict = InventoryMenu(itemsDict, playerName, playerInventoryMoney)                                                          
+            case "3": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "4": break
 
             case _: print("\nCouldn't understand you?!")
 
-    return itemsDict, playerInventoryMoney
+    return itemsDict, playerInventoryMoney, playerStats
 
 
 ####################################### MERCHANT SHOP ##################################
@@ -241,8 +241,8 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
 ####################################### INVENTORY ##################################
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 
-# PlayerInventory                      (Add "Equip" and "Use" function for later)
-def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
+# PlayerInventory                 
+def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     os.system('cls')
     playerItemIDs = []
 
@@ -270,7 +270,15 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
                             itemsDict[i][8] -= 1            
                             if itemsDict[i][8] == 0:
                                 itemsDict[i][1] = 0    
-                        print(f"You used {itemsDict[i][2]}")                                
+                        print(f"You used {itemsDict[i][2]}")
+                        if itemsDict[i][5] > 0:
+                            if playerStats[2] + itemsDict[i][5] <= playerStats[1]: 
+                                playerStats[2] += itemsDict[i][5]
+                                print(f"You got healed for {itemsDict[i][5]} Points")                             
+                            else:
+                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points") 
+                                playerStats[2] = playerStats[1]
+                                                             
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
                 userInputItemNumber = int (input ('Select item to remove: \n'))
@@ -291,7 +299,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney):
         elif userInput == "3": break
         else: print("\nCouldn't understand you?!")
     
-    return itemsDict
+    return itemsDict, playerStats
 
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney):

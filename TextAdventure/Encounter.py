@@ -37,7 +37,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         locationIndex = 1
     elif location == "the town":
         PicTheTown()
-        itemsDict, playerInventoryMoney = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney)
+        itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
         return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict   
     elif location == "the flatlands":
         locationIndex = 1
@@ -74,8 +74,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
                 break
             
             elif UserInputChoose == "2":
-                itemsDict = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney)  
+                itemsDict, playerStats = Inventory.InventoryMenu(
+                    itemsDict, playerName, playerInventoryMoney, playerStats)  
 
             elif UserInputChoose == "3": 
                 playerStats, playerStatPoints = Stats.StatMenu(
@@ -197,8 +197,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################ 2 Inventory ##############      
                   
         elif UserInputFight == "2":
-               itemsDict = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney)
+               itemsDict, playerStats = Inventory.InventoryMenu(
+                    itemsDict, playerName, playerInventoryMoney, playerStats)
 
     ################ 3 Stats #################
 
