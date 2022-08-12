@@ -93,19 +93,17 @@ def AdditionalStats(itemAddStats, itemsDict):
    # Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq   
     itemAddStats = [0, 0, 0, 0, 0, 0]
     itemKeyList = [key for key in itemsDict]
-    itemPlayerPrimary = "" 
-    itemPlayerSecondary = ""                                         
+    itemPlayerPrimary = "Fists" 
+    itemPlayerSecondary = "Your Face"                                         
     for i in itemKeyList:
         if itemsDict[i][11] >= 10:                                                  
             itemAddStats[3] += itemsDict[i][3]
             itemAddStats[4] += itemsDict[i][4]
         if itemsDict[i][11] == 11:
             itemPlayerPrimary = itemsDict[i][2]
-        else:
-            itemPlayerPrimary = "Fists"
+        
         if itemsDict[i][11] == 12:
             itemPlayerSecondary = itemsDict[i][2]
-        else:
-            itemPlayerSecondary = "Your Face"
+      
 
     return itemAddStats, itemPlayerPrimary, itemPlayerSecondary
