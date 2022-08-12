@@ -11,11 +11,12 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
     enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
+    sl = round(enemyLevel / 1.5)
 
     enemyDictEasy = {
-            1001 : ["Pack of Rats", enemyLevel, 2, 1, 0, 1.00, PicRat],
-            1002 : ["Wolf", enemyLevel, 10, 2, 1, 2.00, PicWolf],
-            1003 : ["Skeleton", enemyLevel, 5, 2, 2, 2.00, PicSkeleton]
+            1001 : ["Pack of Rats", enemyLevel, 2+sl, 1+sl, 0+sl, 1.00, PicRat],
+            1002 : ["Wolf", enemyLevel, 10+sl, 2+sl, 1+sl, 2.00, PicWolf],
+            1003 : ["Skeleton", enemyLevel, 5+sl, 2+sl, 2+sl, 2.00, PicSkeleton]
             } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
             
 
