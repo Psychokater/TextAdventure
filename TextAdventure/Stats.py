@@ -43,7 +43,7 @@ def EditStats(playerStats, playerStatPoints, playerName):
 
     return playerStats, playerStatPoints
 
-def LevelUp(playerStats, playerStatPoints, playerName):
+def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
     if playerStats[5] >= nextLevelExp:
@@ -54,6 +54,20 @@ def LevelUp(playerStats, playerStatPoints, playerName):
         else:
             playerStatPoints += 2
         print(f"\nYay, {playerName} got a new Level!")
+
+    #### Activate Items ####    
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+    itemKeyList = [key for key in itemsDict]   
+    _tempListMidLvl = [2, 5, 8]
+    _tempListHighLvl = [3, 6, 9]
+
+    if playerStats[0] == 10:
+        for i in itemKeyList:
+            if itemsDict[i][9] in _tempListMidLvl:     
+                itemsDict[i][10] = itemsDict[i][9]
+    if playerStats[0] == 20:
+        for i in itemKeyList:
+            if itemsDict[i][9] in _tempListHighLvl:
+                itemsDict[i][10] = itemsDict[i][9]    
         
-        
-    return playerStats, playerStatPoints
+    return playerStats, playerStatPoints, itemsDict
