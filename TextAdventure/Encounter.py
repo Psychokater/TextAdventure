@@ -166,11 +166,11 @@ def EnemyItemSelection(itemsDict, enemyID):
                 _itemEnemyItems.append(_tempItemListRandom[o])
                 _tempItemListRandom = []
 
-    for s in _tempItemList:                                                   # Values for adding Stats to enemy    
+    for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
         itemEnemyAddStats[3] += itemsDict[s][3]
         itemEnemyAddStats[4] += itemsDict[s][4]
 
-    for t in _tempItemList:
+    for t in _itemEnemyItems:
         itemEnemyItems.append(itemsDict[t][2])                                  # Names of enemy Items
             
 
