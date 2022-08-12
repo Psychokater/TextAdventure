@@ -153,12 +153,12 @@ def EnemyItemSelection(itemsDict, enemyID):
         _tempItemList = _tempItemListHard
     
     j = random.randint(1,len(_tempItemList)-1)
-                                          # give Random Item from List as Lootitem
+                                                                       # give Random Item from List as Lootitem
     lootItemID = _tempItemList[j]
 
     for y in range(1,7):                                                                                    
         for k in itemsDict:
-            if itemsDict[k][10] != 0:                                                              # from all choosen Items, append one of every type to enemyItems
+            if itemsDict[k][10] != 0:                                                      # from all choosen Items, append one of every type to enemyItems
                 if itemsDict[k][11] == y or itemsDict[k][11] == (y + 10):
                     _tempItemListRandom.append(k)
             if bool(_tempItemListRandom) == True:
@@ -223,7 +223,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         if UserInputFight == "1":                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {playerStats[3] + itemAddStats[3]} damage.")
             # sleep(1)
-            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[2]} and blocks {selectedDict[enemyID][4] + itemEnemyAddStats[4]} damage.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {selectedDict[enemyID][4] + itemEnemyAddStats[4]} damage.")
             # sleep(1)
             if  (selectedDict[enemyID][4] + itemEnemyAddStats[4]) < (playerStats[3] + itemAddStats[3]):                                                  # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += ((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) - (playerStats[3] + itemAddStats[3]))                        # E_HP += E_DEF - P_ATK
