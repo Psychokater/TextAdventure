@@ -168,13 +168,19 @@ def EnemyItemSelection(itemsDict, enemyID):
             o = random.randint(0,len(_tempItemListRandom)-1)                
             _itemEnemyItems.append(_tempItemListRandom[o])
             _tempItemListRandom = []
-       
-    for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
-        itemEnemyAddStats[3] += itemsDict[s][3]
-        itemEnemyAddStats[4] += itemsDict[s][4]
 
-    for t in _itemEnemyItems:
-        itemEnemyItems.append(itemsDict[t][2])                                  # Names of enemy Items
+    enemyWithoutEquipment = [1001, 1002, 1011]
+
+    if enemyID not in enemyWithoutEquipment:
+        for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
+            itemEnemyAddStats[3] += itemsDict[s][3]
+            itemEnemyAddStats[4] += itemsDict[s][4]
+
+    if enemyID in enemyWithoutEquipment:
+        itemEnemyItems = ["Claws", "Body"]
+    else:
+        for t in _itemEnemyItems:
+            itemEnemyItems.append(itemsDict[t][2])                                  # Names of enemy Items
             
 
     
