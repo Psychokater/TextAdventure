@@ -67,7 +67,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             UserInputChoose = input(""\
             f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
             f"----------- VS -----------\n"\
-            f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]+selectedDict[enemyID][1]*2}/{enemyMaxHP}\n\n"\
+            f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
 
             if UserInputChoose == "1":
