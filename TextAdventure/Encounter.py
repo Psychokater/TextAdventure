@@ -139,11 +139,11 @@ def EnemyItemSelection(itemsDict, enemyID):
     itemKeyList = [key for key in itemsDict]                                          
     for i in itemKeyList:
         if  itemsDict[i][10] == 7:
-            _tempItemListEasy.append[i]
+            _tempItemListEasy.append(i)
         elif itemsDict[i][10] == 8:
-            _tempItemListMedium.append[i]
+            _tempItemListMedium.append(i)
         elif itemsDict[i][10] == 9:
-            _tempItemListHard.append[i]
+            _tempItemListHard.append(i)
                                                                              # Choose witch Items (Easy, Medium, Hard)
     if enemyID <= 1010:
         _tempItemList = _tempItemListEasy
