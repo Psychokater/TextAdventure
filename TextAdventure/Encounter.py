@@ -156,10 +156,9 @@ def EnemyItemSelection(itemsDict, enemyID):
     lootItemID = _tempItemList[j]
 
     for y in range(1,7):                                                                                    
-        for k in _tempItemList:
-            for n in itemsDict[k][11]:                                        # from all choosen Items, append one of every type to enemyItems
-                if n == y or n == (y + 10):
-                    _tempItemListRandom.append(k)
+        for k in _tempItemList:                                             
+            if itemsDict[k][11] == y or itemsDict[k][11] == (y + 10):
+                _tempItemListRandom.append(k)
         o = random.randint(0,len(_tempItemListRandom))
         _itemEnemyItems.append(o)
         _tempItemListRandom = []
