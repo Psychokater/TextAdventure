@@ -147,7 +147,7 @@ def IngameMenu(playerName, startLocation, location):
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
         itemAddStats = Stats.AdditionalStats(itemAddStats, itemsDict) 
-        playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
+        playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
@@ -182,7 +182,7 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
     location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Encounter.Encounter(
     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
 
-    playerStats, playerStatPoints = Stats.LevelUp(playerStats, playerStatPoints, playerName)
+    playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
 
     return startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
