@@ -408,7 +408,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
                     if userInputItemNumber == itemsDict[o][1]:
-                         if userInputItemNumber == 0:
+                        if userInputItemNumber == 0:
                             print("\nCouldn't understand you?!")
                             break 
                         if itemsDict[o][11] < 10:
