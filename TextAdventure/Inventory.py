@@ -61,7 +61,10 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
             z += 1                                                              #   Enumerate + 1
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
             print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
-            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+            for j in range (0,len(itemsDict[i])):                
+                if j == 11:
+                    if itemsDict[i][j] > 10:
+                        print ("\u25cf",end='')                              #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue
@@ -273,7 +276,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
         elif userInput == "2":
             itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
             userInput = input("\n(1) Use\t(2) Remove from Inventory\t(3) Return\n")
-            os.system('cls')
+            #os.system('cls')
 ################ Items #### Use Item #################################
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to use: \n'))
@@ -372,7 +375,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                     print()                                                             #   new Line of Inventory        
             print('------------------------------------------------------------------------\n')    
             userInput = input("\n(1) Equip item\t(2) Unequip item\t(3) Remove item\t(4) Return\n")
-            os.system('cls')
+            #os.system('cls')
 ################################## 1 equip Item #############################   
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to equip: \n'))
@@ -403,7 +406,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
                 userInputItemNumber = int (input ('Select item to unequip: \n'))
-                os.system('cls')
+                #os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
@@ -422,7 +425,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
                 userInputItemNumber = int (input ('Select item to remove: \n'))
-                os.system('cls')
+                #os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
