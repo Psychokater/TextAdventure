@@ -12,6 +12,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
     enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
+    if enemyLevel == 0:
+        enemyLevel = 1
     sl = round(enemyLevel / 1.5)
 
     enemyDictEasy = {
