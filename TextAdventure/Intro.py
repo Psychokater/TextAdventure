@@ -63,7 +63,7 @@ def Intro():
       os.system('cls')
       break
 
-Intro()
+
   #### need function to "stop" the Loading Animation with Key Input!
 
 
