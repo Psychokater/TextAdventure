@@ -108,10 +108,15 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
 # +ItemPlayer -MoneyPlayer
 def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    
-    itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+    while True:
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
     os.system('cls')      
 
     itemKeyList = [key for key in itemsDict]
@@ -134,11 +139,16 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
 # -ItemPlayer +MoneyPlayer
 def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    
-    itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-    userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
-    os.system('cls')
+    while True: 
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == 0:
@@ -209,10 +219,16 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
 def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
-    itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
-    os.system('cls')
+    while True:
+        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        try:    
+            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][0]:
@@ -235,10 +251,16 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
 def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
-    itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-    itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-    userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
-    os.system('cls')
+    while True:    
+        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == 0:
@@ -273,8 +295,14 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
             #os.system('cls')
 ################ Items #### Use Item #################################
             if userInput == "1":
-                userInputItemNumber = int (input ('Select item to use:\t\t(0) Abort \n'))
-             
+                while True:
+                    try:
+                        userInputItemNumber = int (input ('Select item to use:\t\t(0) Abort \n'))
+                        break
+                    except ValueError:
+                        print("That's not a number, dumbass!")
+                        continue
+                os.system('cls')  
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList: 
                     if userInputItemNumber == itemsDict[i][1]:
@@ -313,8 +341,14 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                                                              
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
-                userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort \n'))
-                
+                while True:
+                    try:
+                        userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort \n'))
+                        break
+                    except ValueError:
+                        print("That's not a number, dumbass!")
+                        continue
+                os.system('cls')  
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList:  
                     if userInputItemNumber == itemsDict[i][1]:
@@ -368,8 +402,14 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
             #os.system('cls')
 ################################## 1 equip Item #############################   
             if userInput == "1":
-                userInputItemNumber = int (input ('Select item to equip:\t\t(0) Abort \n'))
-                
+                while True:
+                    try:
+                        userInputItemNumber = int (input ('Select item to equip:\t\t(0) Abort \n'))
+                        break
+                    except ValueError:
+                        print("That's not a number, dumbass!")
+                        continue
+                os.system('cls')      
                 itemKeyList = [key for key in itemsDict]
                 for j in itemKeyList: 
                     if userInputItemNumber == itemsDict[j][1]:
@@ -394,8 +434,14 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             break                        
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
-                userInputItemNumber = int (input ('Select item to unequip:\t\t(0) Abort\n'))
-                #os.system('cls')
+                while True:
+                    try:
+                        userInputItemNumber = int (input ('Select item to unequip:\t\t(0) Abort\n'))
+                        break
+                    except ValueError:
+                        print("That's not a number, dumbass!")
+                        continue
+                os.system('cls')  
                 
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
@@ -412,8 +458,14 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             # sleep(1)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
-                userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort\n'))
-                #os.system('cls')
+                while True:
+                    try:
+                        userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort\n'))
+                        break
+                    except ValueError:
+                        print("That's not a number, dumbass!")
+                        continue
+                os.system('cls')  
                 
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
