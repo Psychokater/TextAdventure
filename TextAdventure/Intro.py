@@ -1,5 +1,7 @@
 from time import sleep
 import os
+
+os.system('cls')
 def Intro():
   x = "░"
   i = 0
