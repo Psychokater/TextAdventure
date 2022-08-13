@@ -2,8 +2,6 @@
 from math import ceil
 import os
 
-from .Encounter import PicTheTown
-
 #ENTRYPOINT (Choose where to go -> Merchant, Wizard or Inventory)
 def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
@@ -479,3 +477,16 @@ def PicMerchant():
               \\_/        \\_/     
     """)    
 
+def PicTheTown():
+    print(""" 
+~         ~~          __
+       _T      .,,.    ~--~ ^^
+ ^^   // \                    ~
+      ][O]    ^^      ,-~ ~
+   /''-I_I         _II____
+__/_  /   \ ______/ ''   /'\_,__
+  | II--'''' \,--:--..,_/,.-{ },
+; '/__\,.--';|   |[] .-.| O{ _ }
+:' |  | []  -|   ''--:.;[,.'\,/
+'  |[]|,.--'' '',   ''-,.    |
+  ..    ..-''    ;       ''. ' """)

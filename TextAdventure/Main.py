@@ -46,7 +46,7 @@ import os
 ### Main Game
 def Main():
     playerName = ''
-    Intro.Intro()
+    #Intro.Intro()
     # sleep(2)
     MainMenu(playerName)    
     if playerName == '':
