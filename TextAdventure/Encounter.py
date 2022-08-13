@@ -12,8 +12,10 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
     enemyID = 0
+    _locations = [startLocation, "the town", "the forrest", "the flatlands", "the mountains", "the castle", "the islands"]
+    _locationIndexList = [1,          100,            1,             2,               6,              8,          10]
     enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
-    if enemyLevel == 0:
+    if enemyLevel <= 0:
         enemyLevel = 1
     sl = round(enemyLevel / 1.5)
 
@@ -35,33 +37,21 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             1103 : ["Dragon",       enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
             }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     
+    for i in range(0,len(_locations)):
+        if location == _locations[i]:
+            locationIndex = _locationIndexList[i]
+            if locationIndex == 100:
+                itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
+                return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict 
+            
+                
 
-    if location == startLocation:
-        locationIndex = 1
-    elif location == "the town":
-        itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
-        return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict   
-    elif location == "the flatlands":
-        locationIndex = 1
-    elif location == "the forrest":
-        locationIndex = 2
-    elif location == "the islands":
-        locationIndex = 6
-    elif location == "the mountains":
-        locationIndex = 8
-    elif location == "the castle":
-        locationIndex = 10
-    
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
     
- 
-
-
     if enemyID != 0:
-        
-        
+                
         enemyMaxHP = (selectedDict[enemyID][2])  
         (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:
@@ -89,6 +79,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
+                if playerInventoryMoney - (playerstats[0] * 2) < 0:
+                    playerInventoryMoney = 0
                 print(f"""\nYou managed to escape the fight, you used up {round(_temp,2)} gold to distract your enemy.
                 \nYou have {round(playerStats[2],2)} HP left.""")
                 break
@@ -132,7 +124,7 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     if selectedDictID == 3 and playerStats[0] < 20:
         EncounterLowLevel()        
         enemyID = 0
-    elif selectedDict == 2 and playerStats[0] < 10:
+    elif selectedDictID == 2 and playerStats[0] < 10:
         EncounterLowLevel()        
         enemyID = 0
 
@@ -187,13 +179,13 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
     if enemyID not in enemyWithoutEquipment:
         for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
             itemEnemyAddStats[3] += itemsDict[s][3]
-            itemEnemyAddStats[4] += itemsDict[s][4]
-
-    if enemyID in enemyWithoutEquipment:
-        itemEnemyItems = ["Claws", "Body"]
-    else:
+            itemEnemyAddStats[4] += itemsDict[s][4]      
+                                                                                         # Names of enemy Items
         for t in _itemEnemyItems:
-            itemEnemyItems.append(itemsDict[t][2])                                  # Names of enemy Items
+            itemEnemyItems.append(itemsDict[t][2])  
+
+    else: 
+        itemEnemyItems = ["Claws", "Body"]
             
 
     

@@ -1,3 +1,5 @@
+import os
+
 def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     itemAddStats = []
@@ -13,11 +15,13 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
             "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
             userInput = input("\n(1) Return\n")
+            os.system('cls')
             if userInput == "1":
                 break
             else: print("\nCouldn't understand you?!")
         else: 
             userInput = input(f"\n(1) Edit Stats (+{playerStatPoints})\t(2) Return\n")
+            os.system('cls')
             if userInput == "1":
                 playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName, itemsDict)
             elif userInput == "2":
@@ -41,6 +45,7 @@ def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
             f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
+        os.system('cls')
         if userInput == "1":
             playerStats[1] += 10
             playerStatPoints -= 1
