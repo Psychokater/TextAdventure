@@ -1,3 +1,4 @@
+from math import ceil
 import random
 # from time import sleep
 import Stats
@@ -29,13 +30,12 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             1012 : ["Bandit",       enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
             1013 : ["Troll",        enemyLevel,     12+sl,   6+sl,   4+sl,   8.00,   PicTroll],
             1014 : ["Centaur",      enemyLevel,     15+sl,   8+sl,   5+sl,  10.00,   PicCentaur]
-            } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
-
+            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     enemyDictHard = {
             1101 : ["Minotaur",     enemyLevel,     20+sl,   10+sl,  4+sl,  15.00,   PicMinotaur],
             1102 : ["Gryphon",      enemyLevel,     25+sl,   10+sl,  8+sl,  20.00,   PicGryphon],
             1103 : ["Dragon",       enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
-            }# Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     
 
     if location == startLocation:
@@ -56,7 +56,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID, selectedDict = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
+    enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
     
  
 
@@ -77,7 +77,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
-                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, )
+                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
                 break
             
             elif UserInputChoose == "2":
@@ -103,33 +103,44 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
     enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
     selectedDict = {}
+    _tempList = []
+    selectedDictID = 0
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     if encounterIndex <= 10:
         EncounterNothing()
 
     elif encounterIndex > 10 and encounterIndex <= 20:
-        _luck = random.randint(1,len(enemyDictHard))
-        enemyID = 1100 + _luck
+        _luck = random.randint(0,len(enemyDictHard)-1)
+        for i in enemyDictHard:
+            _tempList.append(i)
+        enemyID = _tempList[_luck]
         selectedDict = enemyDictHard
+        selectedDictID = 3        
     elif encounterIndex > 21 and encounterIndex <= 52:
-        _luck = random.randint(1,len(enemyDictMedium))
-        enemyID = 1010 + _luck
+        _luck = random.randint(0,len(enemyDictMedium)-1)
+        for i in enemyDictMedium:
+            _tempList.append(i)
+        enemyID = _tempList[_luck]
         selectedDict = enemyDictMedium
+        selectedDictID = 2
     elif encounterIndex > 53 and encounterIndex <= 100:
-        _luck = random.randint(1,len(enemyDictEasy))
-        enemyID = 1000 + _luck
+        _luck = random.randint(0,len(enemyDictEasy)-1)
+        for i in enemyDictEasy:
+            _tempList.append(i)
+        enemyID = _tempList[_luck]       
         selectedDict = enemyDictEasy
+        selectedDictID = 1
     
-    if selectedDict == enemyDictHard and playerStats[0] < 10:
+    if selectedDictID == 3 and playerStats[0] < 20:
         EncounterLowLevel()        
         enemyID = 0
-    elif selectedDict == enemyDictMedium and playerStats[0] < 5:
+    elif selectedDict == 2 and playerStats[0] < 10:
         EncounterLowLevel()        
         enemyID = 0
 
-    return enemyID, selectedDict
+    return enemyID, selectedDict, selectedDictID
 
-def EnemyItemSelection(itemsDict, enemyID):
+def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
 #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic 
     _tempItemList = []
@@ -150,11 +161,11 @@ def EnemyItemSelection(itemsDict, enemyID):
         elif itemsDict[i][10] == 9:
             _tempItemListHard.append(i)
                                                                              # Choose witch Items (Easy, Medium, Hard)
-    if enemyID <= 1010:
+    if selectedDictID == 1:
         _tempItemList = _tempItemListEasy
-    elif enemyID > 1010 and enemyID <= 1100:
+    elif selectedDictID == 2:
         _tempItemList = _tempItemListMedium
-    elif enemyID > 1100:
+    elif selectedDictID == 3:
         _tempItemList = _tempItemListHard
     
     j = random.randint(1,len(_tempItemList)-1)
@@ -190,14 +201,14 @@ def EnemyItemSelection(itemsDict, enemyID):
     
     return itemEnemyItems, itemEnemyAddStats, lootItemID  
 
-def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict):
+def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic   
     _tempMoney = 0.00
     _tempExp = 0.00
     itemAddStats = []
     itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
-    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID) 
+    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDictID) 
    
     while True:
 
