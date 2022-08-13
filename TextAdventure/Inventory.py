@@ -111,7 +111,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
     
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it:\\(0) Abort \n'))
+    userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
     os.system('cls')      
 
     itemKeyList = [key for key in itemsDict]
