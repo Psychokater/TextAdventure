@@ -19,7 +19,7 @@
 import random
 import Helpfile
 # from time import sleep
-#import Intro
+import Intro
 import Encounter
 import Stats
 import Inventory
@@ -46,7 +46,7 @@ import os
 ### Main Game
 def Main():
     playerName = ''
-    #Intro.Intro()
+    Intro.Intro()
     # sleep(2)
     MainMenu(playerName)    
     if playerName == '':
