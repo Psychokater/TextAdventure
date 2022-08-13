@@ -14,17 +14,18 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     sl = round(enemyLevel / 1.5)
 
     enemyDictEasy = {
-            1001 : ["Pack of Rats", enemyLevel,     2+sl,    1+sl,   0+sl,   1.00,   PicRat],
-            1002 : ["Wolf",         enemyLevel,     5+sl,    2+sl,   2+sl,   2.00,   PicWolf],
-            1003 : ["Skeleton",     enemyLevel,     5+sl,    2+sl,   2+sl,   2.00,   PicSkeleton]
+            1001 : ["Pack of Rats", enemyLevel,     4+sl,    2+sl,   1+sl,   1.00,   PicRat],
+            1002 : ["Bird",         enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
+            1003 : ["Wolf",         enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
+            1004 : ["Skeleton",     enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton]
             }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
             
 
     enemyDictMedium = {
-            1011 : ["Ghost",        enemyLevel,     15,      4,     5,      6.00,   PicGhost],
-            1012 : ["Bandit",       enemyLevel, 20, 6, 4, 8.00, PicBandit],
-            1013 : ["Troll",        enemyLevel, 30, 2, 1, 8.00, PicTroll],
-            1014 : ["Centaur",      enemyLevel, 20, 8, 10, 10.00, PicCentaur]
+            1011 : ["Ghost",        enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
+            1012 : ["Bandit",       enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
+            1013 : ["Troll",        enemyLevel,     12+sl,   6+sl,   4+sl,   8.00,   PicTroll],
+            1014 : ["Centaur",      enemyLevel,     15+sl,   8+sl,   5+sl,  10.00,   PicCentaur]
             } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
     enemyDictHard = {
@@ -169,7 +170,7 @@ def EnemyItemSelection(itemsDict, enemyID):
             _itemEnemyItems.append(_tempItemListRandom[o])
             _tempItemListRandom = []
 
-    enemyWithoutEquipment = [1001, 1002, 1011]
+    enemyWithoutEquipment = [1001, 1002, 1003, 1011]
 
     if enemyID not in enemyWithoutEquipment:
         for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
@@ -278,6 +279,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
             playerInventoryMoney -= (playerStats[0] * 2)
+            if playerInventoryMoney - (playerStats[0] * 2) <= 0:
+                playerInventoryMoney = 0
             _temp2 = (((selectedDict[enemyID][3] + itemEnemyAddStats[3]) / 2))
             playerStats[2] -= round(_temp2,2)
             if playerStats[2] < 0:
@@ -332,6 +335,16 @@ def PicWolf():
   `~--~\ )___,)/'               Bark
       (/\\\_  (/\\\_
        """)   
+
+def PicBird():
+    print("""
+'Everybody heard about the bird, bird is the word!'
+      ,~
+     ('v)__
+    (/ (``/
+     \__>' 
+      ^^
+    """)
 
 
 def PicSkeleton():
