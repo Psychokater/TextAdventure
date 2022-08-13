@@ -80,7 +80,7 @@ def Start():
     _startLocations = ["a small homestead", "a comfy cabin", "a small tent", "a cave"]
     # sleep(2)
     startLocation = _startLocations[random.randint(0,len(_startLocations)-1)]
-    location = "the flatlands"                                                                                                      # !!!!!!!!!!!!! CHANGE "the flatlands" TO "startLocation" FOR RELEASE!!!!!!!!!!!! ONLY FOR TESTING!!!!!!!!!!
+    location = startLocation ### FOR TESTING CHANGE THIS: ## CHANGE FROM "location = startLocation" TO "location = "the flatlands"  ONLY FOR TESTING!!!!!!
     while True:
         playerName = input("\nWhat's your name adventurer?\n").capitalize()
         os.system('cls')
