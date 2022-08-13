@@ -32,9 +32,9 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             } #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
     enemyDictHard = {
-            1101 : ["Minotaur", enemyLevel, 20, 10, 4, 15.00, PicMinotaur],
-            1102 : ["Gryphon", enemyLevel, 25, 10, 8, 20.00, PicGryphon],
-            1103 : ["Dragon", enemyLevel, 50, 20, 30, 30.00, PicDragon]
+            1101 : ["Minotaur",     enemyLevel,     20+sl,   10+sl,  4+sl,  15.00,   PicMinotaur],
+            1102 : ["Gryphon",      enemyLevel,     25+sl,   10+sl,  8+sl,  20.00,   PicGryphon],
+            1103 : ["Dragon",       enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
             }# Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
     
 
