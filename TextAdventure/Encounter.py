@@ -2,6 +2,7 @@ import random
 # from time import sleep
 import Stats
 import Inventory
+import os
 
 
 
@@ -71,6 +72,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             f"----------- VS -----------\n"\
             f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
+            os.system('cls')
 
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
@@ -222,12 +224,13 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
   
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
-
+        (selectedDict[enemyID][6]())
         UserInputFight = input(""\
         f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
         f"----------- VS -----------\n"\
         f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n")                                             # Fight (P = Player, E = Enemy)
+        os.system('cls')
         
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first

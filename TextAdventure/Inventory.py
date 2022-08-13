@@ -104,10 +104,11 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
 # +ItemPlayer -MoneyPlayer
 def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    os.system('cls')
+    
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))       
+    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
+    os.system('cls')      
 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:    
@@ -127,11 +128,11 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
 # -ItemPlayer +MoneyPlayer
 def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    os.system('cls')
+    
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
-
+    os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][1]:
@@ -146,7 +147,6 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
 
 #Wizard (Print Wizard and PlayerInventory - Choose if Buy or Sell)
 def WizardShop(itemsDict, playerName, playerInventoryMoney):
-    os.system('cls')
     PicWizard()
     wizardItemIDs = []
     playerItemIDs = []
@@ -204,7 +204,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
     userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
-
+    os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][0]:
@@ -228,7 +228,7 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
     userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
- 
+    os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][1]:
@@ -250,6 +250,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
         userInput = input("\n(1) Equipment\t(2) Items\t(3) Return\n")
+        os.system('cls')
 ################ Player Equipment ##########################
         if userInput == "1":
             itemsDict, playerItemIDs = PlayerEquipment(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
@@ -257,6 +258,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
         elif userInput == "2":
             itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
             userInput = input("\n(1) Use\t(2) Remove from Inventory\t(3) Return\n")
+            os.system('cls')
 ################ Items #### Use Item #################################
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to use: \n'))
@@ -273,6 +275,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                             if playerStats[2] >= playerStats[1]:
                                 print(f"You already have full HP, do you really want to use {itemsDict[i][2]}?")
                                 userItemInput = input("(1) Yes!\t(2) No!")
+                                os.system('cls')
                                 if userItemInput == "1":
                                     itemsDict[i][8] -= 1            
                                     if itemsDict[i][8] == 0:
@@ -345,6 +348,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                     print()                                                             #   new Line of Inventory        
             print('------------------------------------------------------------------------\n')    
             userInput = input("\n(1) Equip item\t(2) Unequip item\t(3) Remove item\t(4) Return\n")
+            os.system('cls')
 ################################## 1 equip Item #############################   
             if userInput == "1":
                 userInputItemNumber = int (input ('Select item to equip: \n'))
@@ -372,6 +376,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
                 userInputItemNumber = int (input ('Select item to unequip: \n'))
+                os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
@@ -387,6 +392,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
                 userInputItemNumber = int (input ('Select item to remove: \n'))
+                os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  

@@ -23,6 +23,7 @@ import Helpfile
 import Encounter
 import Stats
 import Inventory
+import os
 
 
 # MAP:
@@ -60,8 +61,10 @@ def MainMenu(playerName):
         while True:
             if playerName == "":
                 userInput = input('\n(1) New Game\t(2) Help\t(3) Exit\n')
+                os.system('cls')
             else:
                 userInput = input('\n(1) Continue\t(2) Help\t(3) Exit\n')
+                os.system('cls')
 
             match userInput:
                 case "1": break                        
@@ -80,6 +83,7 @@ def Start():
     location = "the flatlands"                                                                                                      # !!!!!!!!!!!!! CHANGE "the flatlands" TO "startLocation" FOR RELEASE!!!!!!!!!!!! ONLY FOR TESTING!!!!!!!!!!
     while True:
         playerName = input("\nWhat's your name adventurer?\n").capitalize()
+        os.system('cls')
         if playerName.isdigit():
             print ("Enter a real warrior name you're not a number! ")
             # sleep(2)
@@ -139,7 +143,7 @@ def IngameMenu(playerName, startLocation, location):
     1315:[(0),(0),"Platin Shield",  (0),   (15),   (0),    (25),    (5),     (0),    (3),    (0),   (2)],                         # IF itemsDict(10)  = 0 = Item is NOT in game!  
     1316:[(0),(0),"Knights Sword",  (15),  (0),    (0),    (30),    (5),     (0),    (3),    (0),   (1)],                        
     1017:[(0),(0),"Blueberries",    (0),   (0),    (4),    (2),     (10),    (0),    (7),    (7),   (0)],
-    
+
     #      0   1        2            3     4       5      6         7        8       9       10     11
     #                  Name         atk    def     hp      val      qnt      qnt      ID    ID_ON  use/eq                      
     #                                                                Max       P                                                 
@@ -163,6 +167,7 @@ def IngameMenu(playerName, startLocation, location):
         itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
         playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
+        os.system('cls')
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
                     startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
@@ -184,6 +189,7 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
     # sleep(1)
     while _temp == "x":
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\n").lower()
+        os.system('cls')
         direction = userInput[:1]
         _temp = World(startLocation, location, direction)        
         # sleep(2)        
