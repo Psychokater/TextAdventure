@@ -210,52 +210,26 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
 ### Move() <- World()
 def World(startLocation, location, direction): 
    
-    worldmap = [startLocation,"the town","the flatlands","the forrest","the islands","the mountains","the castle"]
-    
-    for i in range(0,7):
-        if worldmap[i] == location:
-            break
- 
-    if direction == "n":
-        if i == 0:
-            i += 3
-        elif i == 3:
-            i += 2
-        elif i == 5:
-            i += 1
-        else:
-            print("\nYou can't move there, try a different direction!")
-            return "x"
-      
-    elif direction == "e":
-        if i == 1 or i == 2 or i == 3:
-            i +=1
-        else:
-            print("\nYou can't move there, try a different direction!")
-            return "x"
+    compass = ["n","e","s","w"] 
 
-    elif direction == "s":
-        if i == 5:
-            i -= 2
-        elif i == 6:
-            i -= 3
-        elif i == 3:
-            i -= 3
-        else:
-            print("\nYou can't move there, try a different direction!")  
-            return "x"      
-   
-    elif direction == "w":
-        if i == 2 or i == 3 or i == 4:
-            i -= 1
-        else:
-            print("\nYou can't move there, try a different direction!")
-            return "x"
- 
+    worldmap = {
+    # Location                    North        East       South        West
+    startLocation   :   [     "the forrest",    0,          0,          0           ],
+    "the town"      :   [           0,     "the flatlands", 0,          0           ],
+    "the flatlands" :   [           0,      "the forrest",  0,      "the town"      ],
+    "the forrest"   :   [   "the mountains","the islands",  0,    "the flatlands"   ],
+    "the mountains" :   [      "the castle",    0,    "the forrest",    0           ],
+    "the castle"    :   [           0,          0,    "the mountains",  0           ],
+    "the islands"   :   [           0,          0,          0,      "the forrest"   ]
+    }
+
+    for i in range(0,3):
+        if compass[i] == direction:
+            return worldmap[location][i]
     else:
-        print("\nCouldn't understand you?!")
-        return "x"
-    return worldmap[i]
+        print("\nYou can't move there, try a different direction!")
+        return "x"  
+        
                                         
 
 Main()
