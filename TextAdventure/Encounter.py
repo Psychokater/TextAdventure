@@ -39,7 +39,6 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     if location == startLocation:
         locationIndex = 1
     elif location == "the town":
-        PicTheTown()
         itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
         return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict   
     elif location == "the flatlands":
@@ -231,7 +230,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
-        
+
     ################# 1 Attack ############    
         if UserInputFight == "1":                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {playerStats[3] + itemAddStats[3]} damage.")
@@ -587,17 +586,5 @@ def PicFairie():
     print("She thankfully took some of your gold in advance.")
     # sleep(2)
 
-def PicTheTown():
-    print(""" 
-~         ~~          __
-       _T      .,,.    ~--~ ^^
- ^^   // \                    ~
-      ][O]    ^^      ,-~ ~
-   /''-I_I         _II____
-__/_  /   \ ______/ ''   /'\_,__
-  | II--'''' \,--:--..,_/,.-{ },
-; '/__\,.--';|   |[] .-.| O{ _ }
-:' |  | []  -|   ''--:.;[,.'\,/
-'  |[]|,.--'' '',   ''-,.    |
-  ..    ..-''    ;       ''. ' """)
+
 
