@@ -111,14 +111,13 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
     
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
+    userInputItemNumber = int (input ('Pick an Item number to buy it:\\(0) Abort \n'))
     os.system('cls')      
 
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:    
         if userInputItemNumber == itemsDict[i][0]:
             if userInputItemNumber == 0:
-                print("\nCouldn't understand you?!")
                 break
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
@@ -138,12 +137,11 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
     
     itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-    userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
+    userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
     os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == 0:
-                print("\nCouldn't understand you?!")
                 break
         if userInputItemNumber == itemsDict[i][1]:
             playerInventoryMoney += itemsDict[i][6]
@@ -213,13 +211,12 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
     os.system('cls')
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-    userInputItemNumber = int (input ('Pick an Item number to buy it: \n'))
+    userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
     os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == itemsDict[i][0]:
             if userInputItemNumber == 0:
-                print("\nCouldn't understand you?!")
                 break
             if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
                 print("\nNot enough money, fool!\n")
@@ -240,12 +237,11 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
     os.system('cls')
     itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-    userInputItemNumber = int (input ('Pick an Item number to sell it: \n'))
+    userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
     os.system('cls')
     itemKeyList = [key for key in itemsDict]
     for i in itemKeyList:  
         if userInputItemNumber == 0:
-                print("\nCouldn't understand you?!")
                 break
         if userInputItemNumber == itemsDict[i][1]:
             playerInventoryMoney += itemsDict[i][6]
@@ -277,13 +273,12 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
             #os.system('cls')
 ################ Items #### Use Item #################################
             if userInput == "1":
-                userInputItemNumber = int (input ('Select item to use: \n'))
+                userInputItemNumber = int (input ('Select item to use:\t\t(0) Abort \n'))
              
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList: 
                     if userInputItemNumber == itemsDict[i][1]:
                         if userInputItemNumber == 0:
-                            print("\nCouldn't understand you?!")
                             break
                         if itemsDict[i][11] > 0:
                             print(f"You can't use this {itemsDict[i][2]}")
@@ -318,13 +313,12 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                                                              
 ############### Items #### Remove Item ##############################
             elif userInput == "2":            
-                userInputItemNumber = int (input ('Select item to remove: \n'))
+                userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort \n'))
                 
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList:  
                     if userInputItemNumber == itemsDict[i][1]:
-                        if userInputItemNumber == 0:
-                            print("\nCouldn't understand you?!")
+                        if userInputItemNumber == 0:                            
                             break
                         itemsDict[i][8] -= 1 
                         print(f"\n{itemsDict[i][2]} was brought back to his owner!\n")           
@@ -376,14 +370,13 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
             #os.system('cls')
 ################################## 1 equip Item #############################   
             if userInput == "1":
-                userInputItemNumber = int (input ('Select item to equip: \n'))
+                userInputItemNumber = int (input ('Select item to equip:\t\t(0) Abort \n'))
                 
                 itemKeyList = [key for key in itemsDict]
                 for j in itemKeyList: 
                     if userInputItemNumber == itemsDict[j][1]:
                         if userInputItemNumber == 0:
-                            print("\nCouldn't understand you?!")
-                            break 
+                            break
                         if itemsDict[j][11] == 0:
                             print(f"You can't equip {itemsDict[j][2]}")
                             # sleep(1)
@@ -403,14 +396,13 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             break                        
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
-                userInputItemNumber = int (input ('Select item to unequip: \n'))
+                userInputItemNumber = int (input ('Select item to unequip:\t\t(0) Abort\n'))
                 #os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for o in itemKeyList: 
                     if userInputItemNumber == itemsDict[o][1]:
-                        if userInputItemNumber == 0:
-                            print("\nCouldn't understand you?!")
+                        if userInputItemNumber == 0:                            
                             break 
                         if itemsDict[o][11] < 10:
                             print(f"You can't unequip {itemsDict[o][2]}")
@@ -422,14 +414,13 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             # sleep(1)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
-                userInputItemNumber = int (input ('Select item to remove: \n'))
+                userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort\n'))
                 #os.system('cls')
                 
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
                     if userInputItemNumber == itemsDict[n][1]:
                         if userInputItemNumber == 0:
-                            print("\nCouldn't understand you?!")
                             break 
                         itemsDict[n][8] -= 1
                         if itemsDict[n][11] >= 10:
