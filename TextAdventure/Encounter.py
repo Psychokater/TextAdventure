@@ -22,9 +22,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             1002 : ["Bird",         enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
             1003 : ["Wolf",         enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
             1004 : ["Skeleton",     enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton]
-            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
-            
-
+            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic       
     enemyDictMedium = {
             1011 : ["Ghost",        enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
             1012 : ["Bandit",       enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
@@ -168,7 +166,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
     elif selectedDictID == 3:
         _tempItemList = _tempItemListHard
     
-    j = random.randint(1,len(_tempItemList)-1)
+    j = random.randint(0,len(_tempItemList)-1)
                                                                        # give Random Item from List as Lootitem
     lootItemID = _tempItemList[j]
 
