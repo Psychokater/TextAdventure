@@ -348,9 +348,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
             for i in itemKeyList:
                 itemsDict[i][1] = 0                                                       #       i = Item ID
                 if itemsDict[i][8] > 0 and itemsDict[i][11] > 0:                      #   Quantity Player > 0 for that ItemID AND Equipable?
-                    if userInputItemNumber == 0:
-                        print("\nCouldn't understand you?!")
-                        break                      
+                            
                     itemsDict[i][1] = z                                                 #   Enumerate Itemline
                     z += 1                                                              #   Enumerate + 1
                     playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
