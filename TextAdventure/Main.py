@@ -112,7 +112,7 @@ def IngameMenu(playerName, startLocation, location):
     playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     itemsDict = {}
 
-    itemsDict = Items.itemsDict(itemsDict)
+    itemsDict = Items.Items(itemsDict)
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
