@@ -79,7 +79,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             elif UserInputChoose == "4": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
-                if playerInventoryMoney - (playerstats[0] * 2) < 0:
+                if playerInventoryMoney - (playerStats[0] * 2) < 0:
                     playerInventoryMoney = 0
                 print(f"""\nYou managed to escape the fight, you used up {round(_temp,2)} gold to distract your enemy.
                 \nYou have {round(playerStats[2],2)} HP left.""")
