@@ -36,14 +36,16 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
     luck = random.randint(1,100)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)                     
+    enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
+    
+                         
     
     if enemyID != 0:
                 
         enemyMaxHP = (selectedDict[enemyID][2])  
         (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
-        while True:
-            
+        while True:           
+
             UserInputChoose = input(""\
             f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
             f"----------- VS -----------\n"\
@@ -222,33 +224,51 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
 
-    ################# 1 Attack ############    
-        if UserInputFight == "1":                                                                           # Player attacks first
-            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {playerStats[3] + itemAddStats[3]} damage.")
+    ################# 1 Attack ###############
+        
+        if UserInputFight == "1":
+            blockChance = random.randint(0.75,1)
+            if blockChance >= 90:
+                blockMessage = "critical!"
+            critChance = random.randint(0,100)
+            if critChance >= 95:
+                critDmg = 1.5
+                critMessage = "critical!"
+            else:
+                critDmg = 1 
+                                                                                          # Player attacks first
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {(playerStats[3] + itemAddStats[3]) * critDmg} ({critMessage}) damage.")
             # sleep(1)
-            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {selectedDict[enemyID][4] + itemEnemyAddStats[4]} damage.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {(selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance} ({blockMessage}) damage.")
             # sleep(1)
-            if  (selectedDict[enemyID][4] + itemEnemyAddStats[4]) < (playerStats[3] + itemAddStats[3]):                                                  # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += ((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) - (playerStats[3] + itemAddStats[3]))                        # E_HP += E_DEF - P_ATK
+            if  ((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance) < ((playerStats[3] + itemAddStats[3]) * critDmg):                               # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - ((playerStats[3] + itemAddStats[3]) * critDmg)) # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
-            if selectedDict[enemyID][2] < 0:                                                                    # HP < 0? Then HP 0
+            if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
             print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][2]} HP left.")
             # sleep(2)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
-                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {selectedDict[enemyID][3] + itemEnemyAddStats[3]} damage.")        # Enemy attacks second
+                blockChance = random.randint(0.75,1)
+                critChance = random.randint(0,100)
+                if critChance >= 95:
+                    critDmg = 1.5
+                else:
+                    critDmg = 1 
+
+                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {(selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg} ({critMessage}) damage.")  # Enemy attacks second
                 # sleep(1)
-                print(f"You defend yourself with {itemPlayerSecondary} and block {(playerStats[4] + itemAddStats[4])} damage.")
+                print(f"You defend yourself with {itemPlayerSecondary} and block {((playerStats[4] + itemAddStats[4]) * blockChance)} ({blockMessage}) damage.")
                 # sleep(1)
-                if (playerStats[4] + itemAddStats[4]) < selectedDict[enemyID][3] + itemEnemyAddStats[3]:                                                # E_DEF < P_ATK?
-                    playerStats[2] += ((playerStats[4] + itemAddStats[4]) - (selectedDict[enemyID][3] + itemEnemyAddStats[3]))                 # P_HP += P_DEF - E_ATK 
+                if ((playerStats[4] + itemAddStats[4]) * blockChance) < (selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg:                       # E_DEF < P_ATK?
+                    playerStats[2] += (((playerStats[4] + itemAddStats[4]) * blockChance) - ((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg))  # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
-                    playerStats[2] = 0                                                                       # HP < 0? Then HP 0
+                    playerStats[2] = 0                                                                                                                  # HP < 0? Then HP 0
                 print(f"You have {playerStats[2]} HP left.")
                 # sleep(1)
 
