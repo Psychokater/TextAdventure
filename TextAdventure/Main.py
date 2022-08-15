@@ -47,8 +47,10 @@ import pickle
 
 ### Main Game
 def Main():
+    savePoints = ["Autosave"]
+    with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
+        savePoints = pickle.load(loadAllHandler)
     autoSave = 0
-    savePoints = [0]
     playerName = ""
     dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]   
     Intro.Intro()
@@ -61,31 +63,44 @@ def Main():
 def Save(dataSaveList):    
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
     if dataSaveList[0] == 0:    
-        with open('SaveFileAutosave.pickle', 'wb') as autoSave:
-            pickle.dump(dataSaveList, autoSave, protocol=pickle.HIGHEST_PROTOCOL)
-            dataSaveList[1][0] = autoSave                                                  #Add AutoSave to savePoints[0]        
+        saveFileAuto = dataSaveList[1][0]
+        with open(f"SaveFile_{saveFileAuto}.pickle", 'wb') as autoSaveHandler:
+            pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+            dataSaveList[1][0] = saveFileAuto                                                  #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
             userInput = input(f"\n(1) Save\t(2) Return\n")
             if userInput == "1":      
                 userInputFileName = input("\nSet a name for the savefile:\t\t(0) Abort\n")
                 if userInputFileName != "0":    
-                    with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as userInputFileName:
-                        pickle.dump(dataSaveList, userInputFileName, protocol=pickle.HIGHEST_PROTOCOL)
-                        dataSaveList[1][0].append(userInputFileName)
-                else: 
+                    with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
+                        pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+                        dataSaveList[1].append(userInputFileName)
+                    with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
+                        pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
+                    break
+                else:
+                    print("Couldn't understand you?\n") 
                     continue
             elif userInput == "2":
                 break
             else:
-                print("\nCouldn't understand you?")
+                print("\nCouldn't understand you?\n")
                 continue
 
-    return dataSaveList  
+    return dataSaveList
 
 
-def Load():
-    pass
+def Load(dataSaveList):
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
+    saveFileID = 1
+    for i in range(0, len(dataSaveList[1]-1)):
+        print(f"{saveFileID} - {dataSaveList[i]}")        
+    userInputNumber = input("Choose number to load: ")        
+    with open(f'SaveFile_{dataSaveList[1]([userInputNumber]-1)}.pickle', 'rb') as loadHandler: 
+        dataSaveList = pickle.load(loadHandler)
+    
+    return dataSaveList
 
 ### MainMENU: START/EXIT
 def MainMenu(dataSaveList): 
@@ -106,7 +121,7 @@ def MainMenu(dataSaveList):
             os.system('cls')
             match userInput:
                 case "1": break
-                case "2": Load()                                        
+                case "2": dataSaveList = Load(dataSaveList)                                        
                 case "3": Helpfile.HelpTxt()
                 case "4": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
@@ -117,7 +132,7 @@ def MainMenu(dataSaveList):
             match userInput:
                 case "1": dataSaveList[2] = ""; break
                 case "2": break
-                case "3": Load()
+                case "3": dataSaveList = Load(dataSaveList) 
                 case "4": dataSaveList = Save(
                     dataSaveList)                        
                 case "5": Helpfile.HelpTxt()
