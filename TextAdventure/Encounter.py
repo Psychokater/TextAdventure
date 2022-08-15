@@ -245,7 +245,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)} {blockMessage} damage.")
             # sleep(1)
             if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)) < (round((playerStats[3] + itemAddStats[3]) * critDmg,2)):                               # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance),2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2)) # E_HP += E_DEF - P_ATK
+                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2))) # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
