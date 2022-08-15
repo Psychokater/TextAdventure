@@ -227,7 +227,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################# 1 Attack ###############
         
         if UserInputFight == "1":
-            blockChance = random.randint(0.75,1)
+            blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
                 blockMessage = "critical!"
             critChance = random.randint(0,100)
@@ -252,7 +252,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
-                blockChance = random.randint(0.75,1)
+                blockChance = (random.randint(75,100))/100
                 critChance = random.randint(0,100)
                 if critChance >= 95:
                     critDmg = 1.5
