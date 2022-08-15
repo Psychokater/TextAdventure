@@ -90,12 +90,12 @@ def Save(dataSaveList):
                     userInputOverwrite = input("Choose slot for saving:\t\t(0) Abort\n")
                     if userInputOverwrite == "0":
                         break
-                    elif userInputOverwrite == str(saveFileID+1):
-                        userInputFileName = input("\nName your savepoint:\t\t(0) Abort\n")
+                    elif userInputOverwrite == str(saveFileID):
+                        userInputFileName = input("\nName your Slot:\t\t(0) Abort\n")
                         if userInputFileName != "0":    
                             with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                 pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-                                dataSaveList[1].append(userInputFileName)
+                                dataSaveList[1][saveFileID-1] = userInputFileName
                             with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
                                 pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                             break
@@ -104,7 +104,7 @@ def Save(dataSaveList):
                             continue
                     elif userInputOverwrite == "1":
                         print("You can't overwrite 'Autosave'!\n")
-                    elif userInputOverwrite <= str(saveFileID):
+                    elif userInputOverwrite < str(saveFileID-1):
                         userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
                         if userInputChoose == "1":
                             saveFileID = int(userInputOverwrite)                
@@ -137,7 +137,7 @@ def Save(dataSaveList):
                 print('------------------------------------------------------------------------\n')
                 userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
                 if userInputDelete != "0":
-                    dataSaveList[1][userInputDelete-1]
+                    dataSaveList[1][int(userInputDelete)-1]
                     break
                 else:
                     print("Couldn't understand you?\n") 
