@@ -88,10 +88,12 @@ def Save(dataSaveList):
                     print(f" {saveFileID}\t-\t<new slot>")
                     print('------------------------------------------------------------------------\n')
                     userInputOverwrite = input("Choose slot for saving:\t\t(0) Abort\n")
+                    os.system('cls')
                     if userInputOverwrite == "0":
                         break
                     elif userInputOverwrite == str(saveFileID):
                         userInputFileName = input("\nName your Slot:\t\t(0) Abort\n")
+                        os.system('cls')                       
                         if userInputFileName != "0":    
                             with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                 pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
@@ -106,9 +108,11 @@ def Save(dataSaveList):
                         print("You can't overwrite 'Autosave'!\n")
                     elif userInputOverwrite < str(saveFileID):
                         userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
+                        os.system('cls')
                         if userInputChoose == "1":
                             saveFileID = int(userInputOverwrite)                
                             userInputFileName = input("\nName your savepoint:\t\t(0) Abort\n")
+                            os.system('cls')
                             if userInputFileName != "0":    
                                 with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                     pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
@@ -136,6 +140,7 @@ def Save(dataSaveList):
                     saveFileID += 1
                 print('------------------------------------------------------------------------\n')
                 userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
+                os.system('cls')
                 if userInputDelete != "0":
                     dataSaveList[1][int(userInputDelete)-1]
                     break
@@ -160,7 +165,8 @@ def Load(dataSaveList):
         print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
         saveFileID += 1
     print('------------------------------------------------------------------------\n')        
-    userInputNumber = int(input("\nChoose number to load:\n"))        
+    userInputNumber = int(input("\nChoose number to load:\n"))
+    os.system('cls')        
     with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
         dataSaveList = pickle.load(loadHandler)
     
@@ -185,7 +191,7 @@ def MainMenu(dataSaveList):
             os.system('cls')
             match userInput:
                 case "1": break
-                case "2": dataSaveList = Load(dataSaveList)                                        
+                case "2": dataSaveList = Load(dataSaveList); break                                        
                 case "3": Helpfile.HelpTxt()
                 case "4": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
@@ -198,7 +204,7 @@ def MainMenu(dataSaveList):
                 case "2": break
                 case "3": dataSaveList = Save(
                     dataSaveList)                        
-                case "4": dataSaveList = Load(dataSaveList) 
+                case "4": dataSaveList = Load(dataSaveList) ; break
                 case "5": Helpfile.HelpTxt()
                 case "6": exit(f"\nGoodbye {dataSaveList[2]}")
                 case _: print("\nCouldn't understand you?!")
@@ -318,13 +324,13 @@ def World(startLocation, location, direction):
 
     worldmap = {
     # Location                    North        East       South        West
-    startLocation   :   [  "the forest",       0,          0,          0           ],
+    startLocation   :   [   "the forest",       0,          0,          0           ],
     "the town"      :   [           0,   "the flatlands",   0,          0           ],
-    "the flatlands" :   [           0,    "the forest",    0,       "the town"     ],
-    "the forest"   :   ["the mountains","the islands",startLocation,"the flatlands"],
-    "the mountains" :   [   "the castle",       0,    "the forest",    0           ],
+    "the flatlands" :   [           0,     "the forest",    0,       "the town"     ],
+    "the forest"    :   ["the mountains","the islands",startLocation,"the flatlands"],
+    "the mountains" :   [   "the castle",       0,    "the forest",     0           ],
     "the castle"    :   [           0,          0,    "the mountains",  0           ],
-    "the islands"   :   [           0,          0,          0,       "the forest"  ]
+    "the islands"   :   [           0,          0,          0,        "the forest"  ]
     }
 
     for i in range(0,4):
