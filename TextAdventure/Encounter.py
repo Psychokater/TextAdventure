@@ -227,19 +227,22 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################# 1 Attack ###############
         
         if UserInputFight == "1":
+            blockMessage = ""
+            critMessage = ""           
+            
             blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
-                blockMessage = "critical!"
+                blockMessage = "(crit)"
             critChance = random.randint(0,100)
             if critChance >= 95:
                 critDmg = 1.5
-                critMessage = "critical!"
+                critMessage = "(crit)"
             else:
                 critDmg = 1 
                                                                                           # Player attacks first
-            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {(playerStats[3] + itemAddStats[3]) * critDmg} ({critMessage}) damage.")
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {(playerStats[3] + itemAddStats[3]) * critDmg} {critMessage} damage.")
             # sleep(1)
-            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {(selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance} ({blockMessage}) damage.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {(selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance} {blockMessage} damage.")
             # sleep(1)
             if  ((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance) < ((playerStats[3] + itemAddStats[3]) * critDmg):                               # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += (((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - ((playerStats[3] + itemAddStats[3]) * critDmg)) # E_HP += E_DEF - P_ATK
@@ -254,17 +257,17 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
                 blockChance = (random.randint(75,100))/100
                 if blockChance >= 90:
-                    blockMessage = "critical!"                  
+                    blockMessage = "(crit)"
                 critChance = random.randint(0,100)
                 if critChance >= 95:
                     critDmg = 1.5
-                    critMessage = "critical!"
+                    critMessage = "(crit)"
                 else:
                     critDmg = 1 
 
-                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {(selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg} ({critMessage}) damage.")  # Enemy attacks second
+                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {(selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg} {critMessage} damage.")  # Enemy attacks second
                 # sleep(1)
-                print(f"You defend yourself with {itemPlayerSecondary} and block {((playerStats[4] + itemAddStats[4]) * blockChance)} ({blockMessage}) damage.")
+                print(f"You defend yourself with {itemPlayerSecondary} and block {((playerStats[4] + itemAddStats[4]) * blockChance)} {blockMessage} damage.")
                 # sleep(1)
                 if ((playerStats[4] + itemAddStats[4]) * blockChance) < (selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg:                       # E_DEF < P_ATK?
                     playerStats[2] += (((playerStats[4] + itemAddStats[4]) * blockChance) - ((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg))  # P_HP += P_DEF - E_ATK 
