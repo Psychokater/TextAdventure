@@ -129,7 +129,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
                 # sleep(1)
                 break     
             else: 
-                playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
+                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
                 itemsDict[i][8] += 1            
                 if itemsDict[i][8] == 0:
                     itemsDict[i][0] = 0
@@ -154,7 +154,7 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
         if userInputItemNumber == 0:
                 break
         if userInputItemNumber == itemsDict[i][1]:
-            playerInventoryMoney += itemsDict[i][6]
+            playerInventoryMoney += round(itemsDict[i][6],2)
             itemsDict[i][8] -= 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][1] = 0
@@ -239,7 +239,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
                 # sleep(1)
                 break
             else:
-                playerInventoryMoney -= itemsDict[i][6] * 1.5 + 2
+                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
                 itemsDict[i][8] += 1            
                 if itemsDict[i][8] == 0:
                     itemsDict[i][0] = 0
@@ -266,7 +266,7 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
         if userInputItemNumber == 0:
                 break
         if userInputItemNumber == itemsDict[i][1]:
-            playerInventoryMoney += itemsDict[i][6]
+            playerInventoryMoney += round(itemsDict[i][6],2)
             itemsDict[i][8] -= 1            
             if itemsDict[i][8] == 0:
                 itemsDict[i][1] = 0
