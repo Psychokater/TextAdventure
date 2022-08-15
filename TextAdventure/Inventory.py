@@ -1,6 +1,15 @@
 # from time import sleep
-from math import ceil
 import os
+
+
+
+#############################################################################################################################################################################
+#---------------------------------------------------------------------------------- MENUS ----------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+############################################################################# SHOP MENU (TOWN) #############################################################################
 
 #ENTRYPOINT (Choose where to go -> Merchant, Wizard or Inventory)
 def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
@@ -18,29 +27,30 @@ def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 
     return itemsDict, playerInventoryMoney, playerStats
 
+############################################################################# WANDERER MENU #############################################################################
 
-####################################### MERCHANT SHOP ##################################
-
-# Merchant (Print Merchant and PlayerInventory - Choose if Buy or Sell)
-def MerchantShop(itemsDict, playerName, playerInventoryMoney):
-    PicMerchant()
-    merchantItemIDs = []
-    playerItemIDs = []
+def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
-        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-
-        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Merchant\n")
-        os.system('cls')      
+        print("The sky gets dark... you feel the cold...\n")
+        userInput = input("\nWhat do you want to do?\n(1) Investigate\t(2) Inventory\t(4) Exit\n")      
+        os.system('cls')
         match userInput:
-            case "1": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
-            case "2": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerInventoryMoney = WandererShop(itemsDict, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "3": break
+
             case _: print("\nCouldn't understand you?!")
-    
-    return itemsDict, playerInventoryMoney
+
+    return itemsDict, playerInventoryMoney, playerStats
 
 
+#############################################################################################################################################################################
+#--------------------------------------------------------------------------------- PLAYER ----------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+############################################################################# PRINT PLAYER INVENTORY #############################################################################
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
@@ -72,210 +82,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
     print('------------------------------------------------------------------------\n')
     return itemsDict, playerItemIDs
     
-# print MerchantInventory + getting iD's
-def GetInventoryMerchant(itemsDict, merchantItemIDs):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print('Merchant:\n')
-    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
-    '------------------------------------------------------------------------')
-    z = 1   
-    
-    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
-    for i in itemKeyList:  
-        itemsDict[i][0] = 0                                                     #       i = Item ID
-        _tempListIndexValue = [1, 2, 3]                                         #       List of ID to Sell at Merchant
-        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
-            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
-            itemsDict[i][0] = z                                                 #       Enumerate Itemline
-            z += 1                                                              #   Enumerate + 1
-            merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
-            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
-                if j in _tempListIndexJ:                                        #
-                    continue                                                    #
-                if j == 6:                                                      #           if Index == "Value of Item":
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
-                    continue                                                    #
-                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
-                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
-                    continue                                                    #           
-                print (itemsDict[i][j],end='\t')                                #           print Value in this line
-                                                                                #   new Line of Inventory
-    print('------------------------------------------------------------------------\n')
-    return itemsDict, merchantItemIDs
-
-# +ItemPlayer -MoneyPlayer
-def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    while True:
-        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-        try:
-            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
-            break
-        except ValueError:
-            print("That's not a number, dumbass!")
-            continue
-    os.system('cls')      
-
-    itemKeyList = [key for key in itemsDict]
-    for i in itemKeyList:    
-        if userInputItemNumber == itemsDict[i][0]:
-            if userInputItemNumber == 0:
-                break
-            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
-                print("\nNot enough money, fool!\n")
-                # sleep(1)
-                break     
-            else: 
-                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
-                itemsDict[i][8] += 1            
-                if itemsDict[i][8] == 0:
-                    itemsDict[i][0] = 0
-
-    return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
-
-# -ItemPlayer +MoneyPlayer
-def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    while True: 
-        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-        try:
-            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
-            break
-        except ValueError:
-            print("That's not a number, dumbass!")
-            continue
-    os.system('cls')  
-    itemKeyList = [key for key in itemsDict]
-    for i in itemKeyList:  
-        if userInputItemNumber == 0:
-                break
-        if userInputItemNumber == itemsDict[i][1]:
-            playerInventoryMoney += round(itemsDict[i][6],2)
-            itemsDict[i][8] -= 1            
-            if itemsDict[i][8] == 0:
-                itemsDict[i][1] = 0
-                               
-    return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
-
-####################################### WIZARD SHOP ##################################
-
-#Wizard (Print Wizard and PlayerInventory - Choose if Buy or Sell)
-def WizardShop(itemsDict, playerName, playerInventoryMoney):
-    PicWizard()
-    wizardItemIDs = []
-    playerItemIDs = []
-    while True:
-        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-
-        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Wizard\n")      
-        os.system('cls')
-        match userInput:
-            case "1": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
-            case "2": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
-            case "3": break
-            case _: print("\nCouldn't understand you?!")
-
-    return itemsDict, playerInventoryMoney 
-
-# print MerchantInventory + getting iD's
-def GetInventoryWizard(itemsDict, wizardItemIDs):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print('Wizard:\n')
-    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
-    '------------------------------------------------------------------------')
-    z = 1                                         
-
-    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
-    for i in itemKeyList:  
-        itemsDict[i][0] = 0                                                     #       i = Item ID
-        _tempListIndexValue = [4, 5, 6]                                         #       List of ID to Sell at Merchant
-        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
-            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
-            itemsDict[i][0] = z                                                 #       Enumerate Itemline
-            z += 1                                                              #   Enumerate + 1
-            wizardItemIDs.append(i)                                             #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
-            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
-                if j in _tempListIndexJ:                                        #
-                    continue                                                    #
-                if j == 6:                                                      #           if Index == "Value of Item":
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
-                    continue                                                    #
-                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
-                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
-                    continue                                                    #           
-                print (itemsDict[i][j],end='\t')                                #           print Value in this line
-                                                                                #   new Line of Inventory
-    print('------------------------------------------------------------------------\n')
-    return itemsDict, wizardItemIDs
-
-# +ItemPlayer -MoneyPlayer
-def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    os.system('cls')
-    while True:
-        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-        try:    
-            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
-            break
-        except ValueError:
-            print("That's not a number, dumbass!")
-            continue
-    os.system('cls')  
-    itemKeyList = [key for key in itemsDict]
-    for i in itemKeyList:  
-        if userInputItemNumber == itemsDict[i][0]:
-            if userInputItemNumber == 0:
-                break
-            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
-                print("\nNot enough money, fool!\n")
-                # sleep(1)
-                break
-            else:
-                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
-                itemsDict[i][8] += 1            
-                if itemsDict[i][8] == 0:
-                    itemsDict[i][0] = 0
-       
-
-    return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
-
-# -ItemPlayer +MoneyPlayer
-def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
-      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    os.system('cls')
-    while True:    
-        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
-        try:
-            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
-            break
-        except ValueError:
-            print("That's not a number, dumbass!")
-            continue
-    os.system('cls')  
-    itemKeyList = [key for key in itemsDict]
-    for i in itemKeyList:  
-        if userInputItemNumber == 0:
-                break
-        if userInputItemNumber == itemsDict[i][1]:
-            playerInventoryMoney += round(itemsDict[i][6],2)
-            itemsDict[i][8] -= 1            
-            if itemsDict[i][8] == 0:
-                itemsDict[i][1] = 0
-                               
-    return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
-
-####################################### INVENTORY ##################################
-    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
-
+############################################################################# INVENTORY MENU #############################################################################
 # PlayerInventory                 
 def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     os.system('cls')
@@ -486,6 +293,374 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 
         return itemsDict, playerItemIDs
 
+
+
+#############################################################################################################################################################################
+#-------------------------------------------------------------------------------- MERCHANT ---------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+############################################################################### MERCHANT SHOP ###############################################################################
+
+# Merchant (Print Merchant and PlayerInventory - Choose if Buy or Sell)
+def MerchantShop(itemsDict, playerName, playerInventoryMoney):
+    PicMerchant()
+    merchantItemIDs = []
+    playerItemIDs = []
+    while True:
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Merchant\n")
+        os.system('cls')      
+        match userInput:
+            case "1": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
+            case "3": break
+            case _: print("\nCouldn't understand you?!")
+    
+    return itemsDict, playerInventoryMoney
+
+############################################################################# MERCHANT INVENTORY #############################################################################
+# print MerchantInventory + getting iD's
+def GetInventoryMerchant(itemsDict, merchantItemIDs):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    print('Merchant:\n')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
+    '------------------------------------------------------------------------')
+    z = 1   
+    
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:  
+        itemsDict[i][0] = 0                                                     #       i = Item ID
+        _tempListIndexValue = [1, 2, 3]                                         #       List of ID to Sell at Merchant
+        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
+            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
+            itemsDict[i][0] = z                                                 #       Enumerate Itemline
+            z += 1                                                              #   Enumerate + 1
+            merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                if j in _tempListIndexJ:                                        #
+                    continue                                                    #
+                if j == 6:                                                      #           if Index == "Value of Item":
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    continue                                                    #
+                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
+                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
+                    continue                                                    #           
+                print (itemsDict[i][j],end='\t')                                #           print Value in this line
+                                                                                #   new Line of Inventory
+    print('------------------------------------------------------------------------\n')
+    return itemsDict, merchantItemIDs
+
+############################################################################# BUY FROM MERCHANT #############################################################################
+# +ItemPlayer -MoneyPlayer
+def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    while True:
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')      
+
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:    
+        if userInputItemNumber == itemsDict[i][0]:
+            if userInputItemNumber == 0:
+                break
+            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+                print("\nNot enough money, fool!\n")
+                # sleep(1)
+                break     
+            else: 
+                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
+                itemsDict[i][8] += 1            
+                if itemsDict[i][8] == 0:
+                    itemsDict[i][0] = 0
+
+    return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
+
+############################################################################# SELL TO MERCHANT #############################################################################
+# -ItemPlayer +MoneyPlayer
+def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    while True: 
+        itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
+        if userInputItemNumber == 0:
+                break
+        if userInputItemNumber == itemsDict[i][1]:
+            playerInventoryMoney += round(itemsDict[i][6],2)
+            itemsDict[i][8] -= 1            
+            if itemsDict[i][8] == 0:
+                itemsDict[i][1] = 0
+                               
+    return itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney
+
+
+
+#############################################################################################################################################################################
+#--------------------------------------------------------------------------------- WIZARD ----------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+
+################################################################################ WIZARD SHOP ################################################################################
+
+#Wizard (Print Wizard and PlayerInventory - Choose if Buy or Sell)
+def WizardShop(itemsDict, playerName, playerInventoryMoney):
+    PicWizard()
+    wizardItemIDs = []
+    playerItemIDs = []
+    while True:
+        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Wizard\n")      
+        os.system('cls')
+        match userInput:
+            case "1": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
+            case "3": break
+            case _: print("\nCouldn't understand you?!")
+
+    return itemsDict, playerInventoryMoney 
+
+############################################################################# WIZARD INVENTORY #############################################################################
+# print MerchantInventory + getting iD's
+def GetInventoryWizard(itemsDict, wizardItemIDs):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    print('Wizard:\n')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
+    '------------------------------------------------------------------------')
+    z = 1                                         
+
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:  
+        itemsDict[i][0] = 0                                                     #       i = Item ID
+        _tempListIndexValue = [4, 5, 6]                                         #       List of ID to Sell at Merchant
+        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
+            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
+            itemsDict[i][0] = z                                                 #       Enumerate Itemline
+            z += 1                                                              #   Enumerate + 1
+            wizardItemIDs.append(i)                                             #   append Item ID to List of ItemID's
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                if j in _tempListIndexJ:                                        #
+                    continue                                                    #
+                if j == 6:                                                      #           if Index == "Value of Item":
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    continue                                                    #
+                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
+                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
+                    continue                                                    #           
+                print (itemsDict[i][j],end='\t')                                #           print Value in this line
+                                                                                #   new Line of Inventory
+    print('------------------------------------------------------------------------\n')
+    return itemsDict, wizardItemIDs
+
+############################################################################# BUY FROM WIZARD #############################################################################
+# +ItemPlayer -MoneyPlayer
+def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:
+        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        try:    
+            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
+        if userInputItemNumber == itemsDict[i][0]:
+            if userInputItemNumber == 0:
+                break
+            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+                print("\nNot enough money, fool!\n")
+                # sleep(1)
+                break
+            else:
+                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
+                itemsDict[i][8] += 1            
+                if itemsDict[i][8] == 0:
+                    itemsDict[i][0] = 0
+       
+
+    return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
+
+############################################################################# SELL TO WIZARD #############################################################################
+# -ItemPlayer +MoneyPlayer
+def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:    
+        itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
+        if userInputItemNumber == 0:
+                break
+        if userInputItemNumber == itemsDict[i][1]:
+            playerInventoryMoney += round(itemsDict[i][6],2)
+            itemsDict[i][8] -= 1            
+            if itemsDict[i][8] == 0:
+                itemsDict[i][1] = 0
+                               
+    return itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney
+
+
+
+
+#############################################################################################################################################################################
+#-------------------------------------------------------------------------------- WANDERER ---------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+############################################################################# WANDERER SHOP #############################################################################
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+#Wanderer (Print Wanderer and PlayerInventory - Choose if Buy or Sell)
+def WandererShop(itemsDict, playerName, playerInventoryMoney):
+    PicWanderer()
+    wandererItemIDs = []
+    playerItemIDs = []
+    while True:
+        itemsDict, wandererItemIDs = GetInventoryWizard(itemsDict, wandererItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Wizard\n")      
+        os.system('cls')
+        match userInput:
+            case "1": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
+            case "2": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
+            case "3": break
+            case _: print("\nCouldn't understand you?!")
+
+    return itemsDict, playerInventoryMoney 
+
+############################################################################# WANDERER INVENTORY #############################################################################
+    # print WandererInventory + getting iD's
+def GetInventoryWanderer(itemsDict, wandererItemIDs):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    print('Merchant:\n')
+    print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tPrice\tQuantity\n'\
+    '------------------------------------------------------------------------')
+    z = 1   
+    
+    itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
+    for i in itemKeyList:  
+        itemsDict[i][0] = 0                                                     #       i = Item ID
+        _tempListIndexValue = [10,11,12]                                        #       List of ID to Sell at Merchant
+        if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
+            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Merchant > 0
+            itemsDict[i][0] = z                                                 #       Enumerate Itemline
+            z += 1                                                              #   Enumerate + 1
+            wandererItemIDs.append(i)                                           #   append Item ID to List of ItemID's
+            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
+                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                if j in _tempListIndexJ:                                        #
+                    continue                                                    #
+                if j == 6:                                                      #           if Index == "Value of Item":
+                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    continue                                                    #
+                if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
+                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
+                    continue                                                    #           
+                print (itemsDict[i][j],end='\t')                                #           print Value in this line
+                                                                                #   new Line of Inventory
+    print('------------------------------------------------------------------------\n')
+    return itemsDict, wandererItemIDs
+
+############################################################################# BUY FROM WANDERER #############################################################################
+    # +ItemPlayer -MoneyPlayer
+def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:
+        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        try:    
+            userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
+        if userInputItemNumber == itemsDict[i][0]:
+            if userInputItemNumber == 0:
+                break
+            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+                print("\nNot enough money, fool!\n")
+                # sleep(1)
+                break
+            else:
+                playerInventoryMoney -= round(itemsDict[i][6] * 1.5 + 2,2)
+                itemsDict[i][8] += 1            
+                if itemsDict[i][8] == 0:
+                    itemsDict[i][0] = 0
+       
+
+    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
+
+############################################################################# SELL TO WANDERER #############################################################################
+# -ItemPlayer +MoneyPlayer
+def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:    
+        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
+            break
+        except ValueError:
+            print("That's not a number, dumbass!")
+            continue
+    os.system('cls')  
+    itemKeyList = [key for key in itemsDict]
+    for i in itemKeyList:  
+        if userInputItemNumber == 0:
+                break
+        if userInputItemNumber == itemsDict[i][1]:
+            playerInventoryMoney += round(itemsDict[i][6],2)
+            itemsDict[i][8] -= 1            
+            if itemsDict[i][8] == 0:
+                itemsDict[i][1] = 0
+                               
+    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
 # ######################################## Friends ################################################
 
 def PicWizard(): 
@@ -517,6 +692,25 @@ def PicMerchant():
         ;,_<|_--_----__----___--|\_
               \\_/        \\_/     
     """)    
+
+def PicWanderer():
+    print("""
+                    O 
+           ___      |    
+          / .-\   ./=}
+         |  |"|_/\/ |
+         ;  |-;| /_ |
+        / \_| |/ \  |
+       /      \/\(  @
+       |   /  |` )  |
+       /   \ _/     @
+      /--._/  \     |
+      `/|)    |     |
+        /     |     |
+      .'      |     |
+     /         \    |
+    (_.-.__.__./    /
+    """)
 
 def PicTheTown():
     print(""" 

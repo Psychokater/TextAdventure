@@ -1,6 +1,5 @@
-from math import ceil
 import random
-# from time import sleep
+from time import sleep
 import Stats
 import Inventory
 import Enemys
@@ -8,6 +7,13 @@ import os
 
 
 
+
+#############################################################################################################################################################################
+#-------------------------------------------------------------------------------- ENCOUNTER --------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+######################################################################### ENCOUNTER (luck + location) #######################################################################
 def Encounter(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
  
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
@@ -35,6 +41,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
                 
 
     luck = random.randint(1,100)
+    if luck >= 99:
+        itemsDict, playerInventoryMoney, playerStats = Inventory.WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
     
@@ -79,7 +87,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         
     return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
-
+############################################################################# SELECT ENEMY #############################################################################
 def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
     enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
     selectedDict = {}
@@ -89,7 +97,7 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     if encounterIndex <= 10:
         EncounterNothing()
 
-    elif encounterIndex > 10 and encounterIndex <= 20:
+    elif encounterIndex > 11 and encounterIndex <= 20:
         _luck = random.randint(0,len(enemyDictHard)-1)
         for i in enemyDictHard:
             _tempList.append(i)
@@ -120,6 +128,8 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
 
     return enemyID, selectedDict, selectedDictID
 
+
+############################################################################# ENEMY ITEMS #############################################################################
 def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
 #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic 
@@ -181,6 +191,15 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
     
     return itemEnemyItems, itemEnemyAddStats, lootItemID  
 
+
+
+#############################################################################################################################################################################
+#---------------------------------------------------------------------------------- FIGHT ----------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+
+
+################################################################################### FIGHT ###################################################################################
 def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic   
@@ -193,9 +212,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     while True:
 
         if playerStats[2] <= 0:                                                            	    # if player dead
-            # sleep(2)
+            sleep(2)
             PicDeath()
-            # sleep(4)
+            sleep(4)
             PicFairie()
             playerInventoryMoney -= playerInventoryMoney * 0.1
             playerStats[5] *= 0.25
@@ -214,8 +233,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             itemsDict[lootItemID][8] += 1            
             break
   
-    #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
-    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+        #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
+        #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
         (selectedDict[enemyID][6]())
         UserInputFight = input(""\
         f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
@@ -241,9 +260,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 critDmg = 1 
                                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {round((playerStats[3] + itemAddStats[3]) * critDmg)} {critMessage} damage.")
-            # sleep(1)
+            sleep(1)
             print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)} {blockMessage} damage.")
-            # sleep(1)
+            sleep(1)
             if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
             else:
@@ -251,7 +270,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
             print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][2]} HP left.")
-            # sleep(2)
+            sleep(2)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
@@ -266,9 +285,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                     critDmg = 1 
 
                 print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)} {critMessage} damage.")  # Enemy attacks second
-                # sleep(1)
+                sleep(1)
                 print(f"You defend yourself with {itemPlayerSecondary} and block {(round((playerStats[4] + itemAddStats[4]) * blockChance))} {blockMessage} damage.")
-                # sleep(1)
+                sleep(1)
                 if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
                     playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
                 else:   
@@ -276,7 +295,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 if playerStats[2] < 0:
                     playerStats[2] = 0                                                                                                                  # HP < 0? Then HP 0
                 print(f"You have {playerStats[2]} HP left.")
-                # sleep(1)
+                sleep(1)
 
     ################ 2 Inventory ##############      
                   
@@ -308,9 +327,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             print(f"but {selectedDict[enemyID][0]} got a hit on you. You received {round(_temp2,2)} dmg!")
             print(f"You have {playerStats[2]} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
-                # sleep(2)
+                sleep(2)
                 PicDeath()
-                # sleep(4)
+                sleep(4)
                 PicFairie()
                 playerInventoryMoney -= playerInventoryMoney * 0.1
                 playerStats[5] *= 0.25
@@ -323,14 +342,18 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
 
     return playerInventoryMoney, playerStats, playerStatPoints, location
 
-# ########################################## No Encounter ##################################
-
+################################################################################ NO ENCOUNTER ###############################################################################
 def EncounterLowLevel():
     print("'A dangerous sphere approaches you, but as you turn around, it disappears.\nMaybe you escaped your downfall this time.'")
 
 def EncounterNothing():
     print("Phew, nothing happened here.")
 
+
+
+#############################################################################################################################################################################
+#----------------------------------------------------------------------------------- PICS ----------------------------------------------------------------------------------#
+#############################################################################################################################################################################
 
 
 ######################################## Death ##################################################
