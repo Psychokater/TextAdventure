@@ -36,7 +36,7 @@ import pickle
 #     S                                 The Mountains
 #                                           I        
 #                                           I
-#        The Town --- The Flatlands --- The Forrest --- The Islands
+#        The Town --- The Flatlands --- The Forest --- The Islands
 #                                           I
 #                                           I
 #                                      Starting Area
@@ -258,13 +258,13 @@ def World(startLocation, location, direction):
 
     worldmap = {
     # Location                    North        East       South        West
-    startLocation   :   [  "the forrest",       0,          0,          0           ],
+    startLocation   :   [  "the forest",       0,          0,          0           ],
     "the town"      :   [           0,   "the flatlands",   0,          0           ],
-    "the flatlands" :   [           0,    "the forrest",    0,       "the town"     ],
-    "the forrest"   :   ["the mountains","the islands",startLocation,"the flatlands"],
-    "the mountains" :   [   "the castle",       0,    "the forrest",    0           ],
+    "the flatlands" :   [           0,    "the forest",    0,       "the town"     ],
+    "the forest"   :   ["the mountains","the islands",startLocation,"the flatlands"],
+    "the mountains" :   [   "the castle",       0,    "the forest",    0           ],
     "the castle"    :   [           0,          0,    "the mountains",  0           ],
-    "the islands"   :   [           0,          0,          0,       "the forrest"  ]
+    "the islands"   :   [           0,          0,          0,       "the forest"  ]
     }
 
     for i in range(0,4):
