@@ -69,20 +69,80 @@ def Save(dataSaveList):
             dataSaveList[1][0] = saveFileAuto                                                  #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
-            userInput = input(f"\n(1) Save\t(2) Return\n")
-            if userInput == "1":      
-                userInputFileName = input("\nSet a name for the savefile:\t\t(0) Abort\n")
-                if userInputFileName != "0":    
-                    with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
-                        pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-                        dataSaveList[1].append(userInputFileName)
-                    with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
-                        pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
+            saveFileID = 1
+            print(' Nr.\t\tSavefile'\
+                '\n------------------------------------------------------------------------')
+            for i in range(0, len(dataSaveList[1])):
+                print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
+                saveFileID += 1
+            print('------------------------------------------------------------------------\n')
+            userInput = input(f"\n(1) Save\t(2) Delete\t (3) Return\n")
+            if userInput == "1": 
+                while True:
+                    saveFileID = 1
+                    print(' Nr.\t\tSavefile'\
+                        '\n------------------------------------------------------------------------')
+                    for i in range(0, len(dataSaveList[1])):
+                        print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
+                        saveFileID += 1
+                    print(f" {saveFileID}\t-\t<new slot>")
+                    print('------------------------------------------------------------------------\n')
+                    userInputOverwrite = input("Choose slot for saving:\t\t(0) Abort\n")
+                    if userInputOverwrite == "0":
+                        break
+                    elif userInputOverwrite == str(saveFileID+1):
+                        userInputFileName = input("\nName your savepoint:\t\t(0) Abort\n")
+                        if userInputFileName != "0":    
+                            with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
+                                pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+                                dataSaveList[1].append(userInputFileName)
+                            with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
+                                pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
+                            break
+                        else:
+                            print("Couldn't understand you?\n") 
+                            continue
+                    elif userInputOverwrite == "1":
+                        print("You can't overwrite 'Autosave'!\n")
+                    elif userInputOverwrite <= str(saveFileID):
+                        userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
+                        if userInputChoose == "1":
+                            saveFileID = int(userInputOverwrite)                
+                            userInputFileName = input("\nName your savepoint:\t\t(0) Abort\n")
+                            if userInputFileName != "0":    
+                                with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
+                                    pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+                                    dataSaveList[1][saveFileID-1] = (userInputFileName)
+                                with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
+                                    pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
+                                break
+                            else:
+                                print("Couldn't understand you?\n") 
+                                continue
+                        elif userInputChoose == "2":
+                            continue
+                        else:
+                            print("Couldn't understand you?\n") 
+                            continue   
+                    else:
+                        print("Couldn't understand you?\n") 
+                        continue   
+            elif userInput == "2":
+                saveFileID = 1
+                print(' Nr.\t\tSavefile'\
+                    '\n------------------------------------------------------------------------')
+                for i in range(0, len(dataSaveList[1])):
+                    print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
+                    saveFileID += 1
+                print('------------------------------------------------------------------------\n')
+                userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
+                if userInputDelete != "0":
+                    dataSaveList[1][userInputDelete-1]
                     break
                 else:
                     print("Couldn't understand you?\n") 
-                    continue
-            elif userInput == "2":
+                    continue  
+            elif userInput == "3":
                 break
             else:
                 print("\nCouldn't understand you?\n")
@@ -131,14 +191,14 @@ def MainMenu(dataSaveList):
                 case _: print("\nCouldn't understand you?!")
 
         else:
-            userInput = input('\n(1) New Game\t(2) Continue\t(3) Load\t(4) Save\t(5) Help\t(6) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(6) Exit\n')
             os.system('cls')
             match userInput:
                 case "1": dataSaveList[2] = ""; break
                 case "2": break
-                case "3": dataSaveList = Load(dataSaveList) 
-                case "4": dataSaveList = Save(
+                case "3": dataSaveList = Save(
                     dataSaveList)                        
+                case "4": dataSaveList = Load(dataSaveList) 
                 case "5": Helpfile.HelpTxt()
                 case "6": exit(f"\nGoodbye {dataSaveList[2]}")
                 case _: print("\nCouldn't understand you?!")
