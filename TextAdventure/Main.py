@@ -104,7 +104,7 @@ def Save(dataSaveList):
                             continue
                     elif userInputOverwrite == "1":
                         print("You can't overwrite 'Autosave'!\n")
-                    elif userInputOverwrite < str(saveFileID-1):
+                    elif userInputOverwrite < str(saveFileID):
                         userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
                         if userInputChoose == "1":
                             saveFileID = int(userInputOverwrite)                
