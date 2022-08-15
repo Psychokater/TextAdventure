@@ -25,6 +25,7 @@ import Stats
 import Inventory
 import Items
 import os
+import pickle
 
 
 # MAP:
@@ -46,38 +47,94 @@ import os
 
 ### Main Game
 def Main():
-    playerName = ''
-    #Intro.Intro()
+    autoSave = 0
+    savePoints = [0]
+    playerName = ""
+    dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]   
+    Intro.Intro()
     # sleep(2)
-    MainMenu(playerName)    
-    if playerName == '':
-       playerName, startLocation, location = Start()
-    IngameMenu(playerName, startLocation, location)
+    dataSaveList = MainMenu(dataSaveList)    
+    if dataSaveList[2] == '':
+       dataSaveList = Start(dataSaveList)
+    IngameMenu(dataSaveList)
+
+def Save(dataSaveList):    
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
+    if dataSaveList[0] == 0:    
+        with open('SaveFileAutosave.pickle', 'wb') as autoSave:
+            pickle.dump(dataSaveList, autoSave, protocol=pickle.HIGHEST_PROTOCOL)
+            dataSaveList[1][0] = autoSave                                                  #Add AutoSave to savePoints[0]        
+    elif dataSaveList[0] == 1:
+        while True:
+            userInput = input(f"\n(1) Save\t(2) Return\n")
+            if userInput == "1":      
+                userInputFileName = input("\nSet a name for the savefile:\t\t(0) Abort\n")
+                if userInputFileName != "0":    
+                    with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as userInputFileName:
+                        pickle.dump(dataSaveList, userInputFileName, protocol=pickle.HIGHEST_PROTOCOL)
+                        dataSaveList[1][0].append(userInputFileName)
+                else: 
+                    continue
+            elif userInput == "2":
+                break
+            else:
+                print("\nCouldn't understand you?")
+                continue
+
+    return dataSaveList  
 
 
-
+def Load():
+    pass
 
 ### MainMENU: START/EXIT
-def MainMenu(playerName):
-        while True:
-            if playerName == "":
-                userInput = input('\n(1) New Game\t(2) Help\t(3) Exit\n')
-                os.system('cls')
-            else:
-                userInput = input('\n(1) Continue\t(2) Help\t(3) Exit\n')
-                os.system('cls')
+def MainMenu(dataSaveList): 
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]      
 
+    while True:
+        if dataSaveList[2] == "" and dataSaveList[0] == 0:
+            userInput = input('\n(1) New Game\t(2) Help\t(3) Exit\n')
+            os.system('cls')
             match userInput:
-                case "1": break                        
+                case "1": break                                          
                 case "2": Helpfile.HelpTxt()
-                case "3": exit(f"\nGoodbye {playerName}")
+                case "3": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
-            # sleep(2)   
+
+        elif dataSaveList[2] == "":
+            userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(4) Exit\n')
+            os.system('cls')
+            match userInput:
+                case "1": break
+                case "2": Load()                                        
+                case "3": Helpfile.HelpTxt()
+                case "4": exit(f"\nGoodbye")
+                case _: print("\nCouldn't understand you?!")
+
+        else:
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Load\t(4) Save\t(5) Help\t(6) Exit\n')
+            os.system('cls')
+            match userInput:
+                case "1": dataSaveList[2] = ""; break
+                case "2": break
+                case "3": Load()
+                case "4": dataSaveList = Save(
+                    dataSaveList)                        
+                case "5": Helpfile.HelpTxt()
+                case "6": exit(f"\nGoodbye {dataSaveList[2]}")
+                case _: print("\nCouldn't understand you?!")
+        # sleep(2)
+        dataSaveList[0] = 1
+    return dataSaveList       
 
 
 
 ### PICK A NAME, GET FIRST LOCATION (One Timer)
-def Start():
+def Start(dataSaveList):
+   #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
+    playerName = dataSaveList[2]
+    startLocation = dataSaveList[3]
+    location = dataSaveList[4]
     _startLocations = ["a small homestead", "a comfy cabin", "a small tent", "a cave"]
     # sleep(2)
     startLocation = _startLocations[random.randint(0,len(_startLocations)-1)]
@@ -99,25 +156,39 @@ def Start():
     print(f"\nWelcome to your first adventure {playerName}!")
     # sleep(2)
     print(f"\nYou wake up in {location}")
-    # sleep(2)
+    # sleep(2)    
+    dataSaveList[2] = playerName
+    dataSaveList[3] = startLocation
+    dataSaveList[4] = location
 
-    return playerName, startLocation, location
+    return dataSaveList
 
 
 # MAIN GAME LOOP --- MAIN DEKLARATIONS AND INITIALISATIONS!#
 
-def IngameMenu(playerName, startLocation, location):
+def IngameMenu(dataSaveList):
+   #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
+    playerName = dataSaveList[2]
     playerInventoryMoney = 5.00
+    startLocation = dataSaveList[3]
+    location = dataSaveList[4]
+    dataSaveList[5] = playerInventoryMoney 
     playerStatPoints = 0
-    playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
-    itemsDict = {}
-
+    dataSaveList[6] = playerStatPoints
+    playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+    dataSaveList[7] = playerStats
+    itemsDict = {}    
     itemsDict = Items.Items(itemsDict)
+    dataSaveList[8] = itemsDict
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
         itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
         playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
+        dataSaveList[0] = 0
+        dataSaveList = Save(dataSaveList)
+        dataSaveList[0] = 1
+
         userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
         os.system('cls')
         match userInput:
@@ -130,7 +201,7 @@ def IngameMenu(playerName, startLocation, location):
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName, itemsDict)
 
-            case "4": MainMenu(playerName)
+            case "4": dataSaveList = MainMenu(dataSaveList)
             case _: print("\nCouldn't understand you?!")
         
 
