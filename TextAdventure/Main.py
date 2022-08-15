@@ -94,10 +94,14 @@ def Save(dataSaveList):
 def Load(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
     saveFileID = 1
-    for i in range(0, len(dataSaveList[1]-1)):
-        print(f"{saveFileID} - {dataSaveList[i]}")        
-    userInputNumber = input("Choose number to load: ")        
-    with open(f'SaveFile_{dataSaveList[1]([userInputNumber]-1)}.pickle', 'rb') as loadHandler: 
+    print(' Nr.\t\tSavefile'\
+        '\n------------------------------------------------------------------------')
+    for i in range(0, len(dataSaveList[1])):
+        print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
+        saveFileID += 1
+    print('------------------------------------------------------------------------\n')        
+    userInputNumber = int(input("\nChoose number to load:\n"))        
+    with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
         dataSaveList = pickle.load(loadHandler)
     
     return dataSaveList
