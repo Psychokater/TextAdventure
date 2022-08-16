@@ -61,12 +61,16 @@ import pickle
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main():
-    savePoints = ["Autosave"]
-    with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
-        savePoints = pickle.load(loadAllHandler)
-    autoSave = 0
     playerName = ""
+    savePoints = ["Autosave"]
+    autoSave = 0
     dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]   
+    try:
+        with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
+            dataSaveList[1] = pickle.load(loadAllHandler)
+    except FileNotFoundError:        
+        with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
+            pickle.dump(savePoints, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
     Intro.Intro()
     # sleep(2)
     dataSaveList = MainMenu(dataSaveList)    
@@ -80,7 +84,7 @@ def MainMenu(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]      
 
     while True:
-        if dataSaveList[2] == "" and dataSaveList[1][1] == None and dataSaveList[0] == 0:
+        if dataSaveList[2] == "" and len(dataSaveList[1]) <= 1 and dataSaveList[0] == 0:
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
@@ -89,7 +93,7 @@ def MainMenu(dataSaveList):
                 case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
 
-        elif dataSaveList[2] == "" and dataSaveList[1][1] != None:
+        elif dataSaveList[2] == "" and len(dataSaveList[1]) > 1:
             userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
@@ -107,7 +111,7 @@ def MainMenu(dataSaveList):
                 case "2": break
                 case "3": dataSaveList = Save(
                     dataSaveList)                        
-                case "4": dataSaveList = Load(dataSaveList) ; break
+                case "4": dataSaveList = Load(dataSaveList); break
                 case "5": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye {dataSaveList[2]}")
                 case _: print("\nCouldn't understand you?!")
@@ -164,14 +168,14 @@ def IngameMenu(dataSaveList):
     dataSaveList[6] = playerStatPoints
     playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     dataSaveList[7] = playerStats
-    itemsDict = {}    
-    itemsDict = Items.Items(itemsDict)
+    itemsDict = {} 
     dataSaveList[8] = itemsDict
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
         itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
         playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
+        itemsDict = Items.Items(itemsDict)
         dataSaveList[0] = 0
         dataSaveList = Save(dataSaveList)
         dataSaveList[0] = 1
@@ -376,8 +380,14 @@ def Load(dataSaveList):
         userInputNumber = int(input("\nChoose number to load:\t\t(0) Abort\n"))
         os.system('cls')        
         if userInputNumber != "0":
+            if userInputNumber > len(dataSaveList[1]):
+                print("Selected slot is empty")
+                continue
+
             with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
                 dataSaveList = pickle.load(loadHandler)
+            with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
+                dataSaveList[1] = pickle.load(loadAllHandler)
             break
         else:
             break
