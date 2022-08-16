@@ -85,7 +85,7 @@ def MainMenu(dataSaveList):
 
     while True:
         if dataSaveList[2] == "" and len(dataSaveList[1]) == 0 and dataSaveList[0] == 0:
-            userInput = input('\n(1) New Game\t(2) Help\t(0) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
                 case "1": break                                          
@@ -94,7 +94,7 @@ def MainMenu(dataSaveList):
                 case _: print("\nCouldn't understand you?!")
 
         elif dataSaveList[2] == "" and len(dataSaveList[1]) == 1:
-            userInput = input('\n(1) New Game\t(2) Continue\t(3) Help\t(0) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
                 case "1": break
@@ -104,7 +104,7 @@ def MainMenu(dataSaveList):
                 case _: print("\nCouldn't understand you?!")
 
         elif dataSaveList[2] == "" and len(dataSaveList[1]) > 1:
-            userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(0) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
                 case "1": break
@@ -114,7 +114,7 @@ def MainMenu(dataSaveList):
                 case _: print("\nCouldn't understand you?!")
         
         elif dataSaveList[2] != "" and len(dataSaveList[1]) == 1:
-            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Help\t(0) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
                 case "1": break
@@ -125,7 +125,7 @@ def MainMenu(dataSaveList):
                 case _: print("\nCouldn't understand you?!")
 
         else:
-            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(0) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
                 case "1": dataSaveList[2] = ""; break
