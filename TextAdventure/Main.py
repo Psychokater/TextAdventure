@@ -64,6 +64,7 @@ import Items
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main():
+    Intro.Intro() 
     playerName = ""
     savePoints = []
     autoSave = 0
@@ -74,10 +75,11 @@ def Main():
             dataSaveList[1] = pickle.load(loadAllHandler)
     except FileNotFoundError:        
         with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
-            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-    Intro.Intro()  
+            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)     
     # sleep(2)
-    dataSaveList = MainMenu.MainMenu(dataSaveList)    
+    dataSaveList = MainMenu.MainMenu(dataSaveList)
+    if dataSaveList == "x":
+        sys.stdout.flush() ; os.execv(sys.executable, ['python3 '] + sys.argv) 
     if dataSaveList[2] == "":
        dataSaveList = Start(dataSaveList)
     IngameMenu(dataSaveList)

@@ -19,7 +19,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": return "x"                                         
+                case "1": break                                         
                 case "2": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
