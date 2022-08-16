@@ -93,7 +93,7 @@ def MainMenu(dataSaveList):
                 case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
 
-        elif dataSaveList[2] == "" and len(dataSaveList[1]) == 1:
+        elif len(dataSaveList[1]) == 1:
             userInput = input('\n(1) New Game\t(2) Continue\t(3) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
@@ -118,10 +118,10 @@ def MainMenu(dataSaveList):
             os.system('cls')
             match userInput:
                 case "1": dataSaveList[2] = ""; break
-                case "2": break
+                case "2": dataSaveList = LoadAutosave(dataSaveList); break
                 case "3": dataSaveList = Save(
                     dataSaveList)                        
-                case "4": dataSaveList = LoadAutosave(dataSaveList); break
+                case "4": dataSaveList = Load(dataSaveList); break
                 case "5": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye {dataSaveList[2]}")
                 case _: print("\nCouldn't understand you?!")
