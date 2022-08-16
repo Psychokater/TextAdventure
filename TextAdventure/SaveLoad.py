@@ -18,7 +18,7 @@ def Save(dataSaveList):
             if len(dataSaveList[1]) == 0:
                 dataSaveList[1].append(f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
             else:
-                dataSaveList[1] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
+                dataSaveList[1][0] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
         with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
             pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                                                                           #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
@@ -51,7 +51,7 @@ def Save(dataSaveList):
                         userInputFileName = input("\nName your slot:\t\t(0) Abort\n")
                         os.system('cls')                       
                         if userInputFileName != "0":    
-                            with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
+                            with open(f'SaveFile_{saveFileID}.pickle', 'wb') as manSaveHandler:
                                 pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
                                 dataSaveList[1].append(f"{userInputFileName} --- {dataSaveList[2]} --- {dataSaveList[4]}")
                             with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
@@ -72,7 +72,7 @@ def Save(dataSaveList):
                             userInputFileName = input("\nName your slot:\t\t(0) Abort\n")
                             os.system('cls')
                             if userInputFileName != "0":    
-                                with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
+                                with open(f'SaveFile_{saveFileID}.pickle', 'wb') as manSaveHandler:
                                     pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
                                     dataSaveList[1][saveFileID-1] = (f"{userInputFileName} --- {dataSaveList[2]} --- {dataSaveList[4]}")
                                 with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
@@ -132,7 +132,7 @@ def Load(dataSaveList):
                 print("Selected slot is empty")
                 continue
 
-            with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
+            with open(f'SaveFile_{saveFileID-1}.pickle', 'rb') as loadHandler: 
                 dataSaveList = pickle.load(loadHandler)
             with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
                 dataSaveList[1] = pickle.load(loadAllHandler)
@@ -145,7 +145,6 @@ def Load(dataSaveList):
 def LoadAutosave(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
 
-    saveFileID = 0 
     with open(f'SaveFile_Autosave.pickle', 'rb') as loadHandler: 
         dataSaveList = pickle.load(loadHandler)
     with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
