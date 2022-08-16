@@ -74,7 +74,7 @@ def Main():
     Intro.Intro()
     # sleep(2)
     dataSaveList = MainMenu(dataSaveList)    
-    if dataSaveList[2] == '':
+    if dataSaveList[2] == "":
        dataSaveList = Start(dataSaveList)
     IngameMenu(dataSaveList)
 
@@ -291,7 +291,8 @@ def Save(dataSaveList):
     if dataSaveList[0] == 0:
         with open(f"SaveFile_Autosafe.pickle", 'wb') as autoSaveHandler:
             pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-            dataSaveList[1][0] = "Autosave"                                                 #Add AutoSave to savePoints[0]        
+            if len(dataSaveList[1]) == 0:
+                dataSaveList[1].append("Autosave")                                                 #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
             saveFileID = 1
