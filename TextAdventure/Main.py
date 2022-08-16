@@ -17,7 +17,6 @@
 # -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils and Samo)     
 
 import random
-import Helpfile
 from time import sleep
 import Intro
 import Encounter
@@ -72,8 +71,8 @@ def Main():
             dataSaveList[1] = pickle.load(loadAllHandler)
     except FileNotFoundError:        
         with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
-            pickle.dump(savePoints, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-    Intro.Intro()
+            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+    Intro.Intro()  
     # sleep(2)
     dataSaveList = MainMenu.MainMenu(dataSaveList)    
     if dataSaveList[2] == "":
@@ -215,7 +214,7 @@ def World(startLocation, location, direction):
                 return worldmap[location][i]
         
     
-    print("\nYou can't move there, try a different direction!")
+    print("\nYou can't move there, try a different direction!\n")
     return "x"  
         
 

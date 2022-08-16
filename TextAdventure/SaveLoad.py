@@ -16,9 +16,11 @@ def Save(dataSaveList):
         with open(f"SaveFile_Autosave.pickle", 'wb') as autoSaveHandler:
             pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
             if len(dataSaveList[1]) == 0:
-                dataSaveList[1].append(f"Autosave {dataSaveList[2]} --- {dataSaveList[4]}")
+                dataSaveList[1].append(f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
             else:
-                dataSaveList[1] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")                                                                           #Add AutoSave to savePoints[0]        
+                dataSaveList[1] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
+        with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
+            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                                                                           #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
             saveFileID = 1

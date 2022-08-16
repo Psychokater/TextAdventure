@@ -14,7 +14,6 @@ import SaveLoad
 ### MainMENU: START/EXIT
 def MainMenu(dataSaveList): 
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]      
-
     while True:
         if dataSaveList[2] == "" and len(dataSaveList[1]) == 0 and dataSaveList[0] == 0:
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit Game\n')
