@@ -16,9 +16,9 @@ def Save(dataSaveList):
         with open(f"SaveFile_Autosave.pickle", 'wb') as autoSaveHandler:
             pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
             if len(dataSaveList[1]) == 0:
-                dataSaveList[1].append("Autosave")
+                dataSaveList[1].append(f"Autosave {dataSaveList[2]} --- {dataSaveList[4]}")
             else:
-                dataSaveList[1] = "Autosave"                                                                           #Add AutoSave to savePoints[0]        
+                dataSaveList[1] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")                                                                           #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
             saveFileID = 1
@@ -51,7 +51,7 @@ def Save(dataSaveList):
                         if userInputFileName != "0":    
                             with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                 pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-                                dataSaveList[1].append(userInputFileName)
+                                dataSaveList[1].append(f"{userInputFileName} --- {dataSaveList[2]} --- {dataSaveList[4]}")
                             with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
                                 pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                             break
@@ -72,7 +72,7 @@ def Save(dataSaveList):
                             if userInputFileName != "0":    
                                 with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                     pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-                                    dataSaveList[1][saveFileID-1] = (userInputFileName)
+                                    dataSaveList[1][saveFileID-1] = (f"{userInputFileName} --- {dataSaveList[2]} --- {dataSaveList[4]}")
                                 with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
                                     pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                                 break
