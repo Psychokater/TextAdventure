@@ -121,22 +121,23 @@ def Start(dataSaveList):
 def IngameMenu(dataSaveList):
    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
     playerName = dataSaveList[2]
-    playerInventoryMoney = 5.00
     startLocation = dataSaveList[3]
     location = dataSaveList[4]
-    dataSaveList[5] = playerInventoryMoney 
-    playerStatPoints = 0
-    dataSaveList[6] = playerStatPoints
+    itemsDict = dataSaveList[8]
+    playerInventoryMoney = 5.00
+    playerStatPoints = 0    
     playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    dataSaveList[7] = playerStats
-    itemsDict = {} 
-    dataSaveList[8] = itemsDict
+
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
         itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
         playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)
         itemsDict = Items.Items(itemsDict)
+        dataSaveList[5] = playerInventoryMoney 
+        dataSaveList[6] = playerStatPoints
+        dataSaveList[7] = playerStats
+        dataSaveList[8] = itemsDict
         dataSaveList[0] = 0
         dataSaveList = SaveLoad.Save(dataSaveList)
         dataSaveList[0] = 1
