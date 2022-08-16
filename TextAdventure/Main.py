@@ -15,18 +15,20 @@
 # -Inventory, Items, Merchant, Loot(?!) (Samo) half DONE
 # -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils) --- DONE
 # -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils and Samo)     
-
+import os
+import sys
 import random
+import pickle
 from time import sleep
+
 import Intro
+import MainMenu
+import SaveLoad
 import Encounter
 import Stats
 import Inventory
 import Items
-import os
-import pickle
-import MainMenu
-import SaveLoad
+
 
 
 
@@ -156,6 +158,8 @@ def IngameMenu(dataSaveList):
 
             case "0": dataSaveList = MainMenu.MainMenu(dataSaveList)
             case _: print("\nCouldn't understand you?!")
+        if dataSaveList == "x":
+            sys.stdout.flush() ; os.execv(sys.executable, ['python3 '] + sys.argv)
         
 
 
