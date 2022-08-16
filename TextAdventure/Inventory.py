@@ -15,13 +15,13 @@ import os
 def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         PicTheTown()   
-        userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(4) Exit\n")      
+        userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(0) Exit\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney)                                                           
             case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney)
             case "3": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
-            case "4": break
+            case "0": break
 
             case _: print("\nCouldn't understand you?!")
 
@@ -32,12 +32,12 @@ def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         print("The sky gets dark... you feel the cold...\n")
-        userInput = input("\nWhat do you want to do?\n(1) Investigate\t(2) Inventory\t(4) Exit\n")      
+        userInput = input("\nWhat do you want to do?\n(1) Investigate\t(2) Inventory\t(0) Exit\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = WandererShop(itemsDict, playerName, playerInventoryMoney)
             case "2": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
-            case "3": break
+            case "0": break
 
             case _: print("\nCouldn't understand you?!")
 
@@ -90,7 +90,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 
     while True:
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
-        userInput = input("\n(1) Equipment\t(2) Items\t(3) Return\n")
+        userInput = input("\n(1) Equipment\t(2) Items\t(0) Return\n")
         os.system('cls')
 ################ Player Equipment ##########################
         if userInput == "1":
@@ -167,7 +167,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                             itemsDict[i][1] = 0
                         
 ############### Items #### Break ####################################
-            elif userInput == "3":
+            elif userInput == "0":
                 break
             else: print("\nCouldn't understand you?!")
 ############### Break #####################
@@ -205,7 +205,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         print (itemsDict[i][j],end='\t')                                #           print Value in this line 
                     print()                                                             #   new Line of Inventory        
             print('------------------------------------------------------------------------\n')    
-            userInput = input("\n(1) Equip item\t(2) Unequip item\t(3) Remove item\t(4) Return\n")
+            userInput = input("\n(1) Equip item\t(2) Unequip item\t(3) Remove item\t(0) Return\n")
             #os.system('cls')
 ################################## 1 equip Item #############################   
             if userInput == "1":
@@ -287,7 +287,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                             itemsDict[n][1] = 0                
                 # sleep(1)
 ################################## 4 Return#### #############################     
-            elif userInput == "4":
+            elif userInput == "0":
                 break 
             else: print("\nCouldn't understand you?!")               
 
@@ -312,12 +312,12 @@ def MerchantShop(itemsDict, playerName, playerInventoryMoney):
         itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
 
-        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Merchant\n")
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Merchant\n")
         os.system('cls')      
         match userInput:
             case "1": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
             case "2": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
-            case "3": break
+            case "0": break
             case _: print("\nCouldn't understand you?!")
     
     return itemsDict, playerInventoryMoney
@@ -434,12 +434,12 @@ def WizardShop(itemsDict, playerName, playerInventoryMoney):
         itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
 
-        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Wizard\n")      
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Wizard\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
             case "2": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
-            case "3": break
+            case "0": break
             case _: print("\nCouldn't understand you?!")
 
     return itemsDict, playerInventoryMoney 
@@ -558,12 +558,12 @@ def WandererShop(itemsDict, playerName, playerInventoryMoney):
         itemsDict, wandererItemIDs = GetInventoryWizard(itemsDict, wandererItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
 
-        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(3) Leave Wizard\n")      
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Wizard\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
             case "2": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
-            case "3": break
+            case "0": break
             case _: print("\nCouldn't understand you?!")
 
     return itemsDict, playerInventoryMoney 

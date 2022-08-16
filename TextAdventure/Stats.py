@@ -28,11 +28,11 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
                 break
             else: print("\nCouldn't understand you?!")
         else: 
-            userInput = input(f"\n(1) Edit Stats (+{playerStatPoints})\t(2) Return\n")
+            userInput = input(f"\n(1) Edit Stats (+{playerStatPoints})\t(0) Return\n")
             os.system('cls')
             if userInput == "1":
                 playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName, itemsDict)
-            elif userInput == "2":
+            elif userInput == "0":
                 break
             else: print("\nCouldn't understand you?!")
     return playerStats, playerStatPoints
@@ -53,7 +53,7 @@ def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
             f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
             f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
-        userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (4) Return\n")
+        userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (0) Return\n")
         os.system('cls')
         if userInput == "1":
             playerStats[1] += 10
@@ -65,7 +65,7 @@ def EditStats(playerStats, playerStatPoints, playerName, itemsDict):
         elif userInput == "3":
             playerStats[4] += 1
             playerStatPoints -= 1
-        elif userInput == "4":
+        elif userInput == "0":
             break
         else:
             print("\nCouldn't understand you?!")        

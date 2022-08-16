@@ -81,26 +81,26 @@ def MainMenu(dataSaveList):
 
     while True:
         if dataSaveList[2] == "" and dataSaveList[0] == 0:
-            userInput = input('\n(1) New Game\t(2) Help\t(3) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
                 case "1": break                                          
                 case "2": Helpfile.HelpTxt()
-                case "3": exit(f"\nGoodbye")
+                case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
 
         elif dataSaveList[2] == "":
-            userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(4) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
                 case "1": break
                 case "2": dataSaveList = Load(dataSaveList); break                                        
                 case "3": Helpfile.HelpTxt()
-                case "4": exit(f"\nGoodbye")
+                case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
 
         else:
-            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(6) Exit\n')
+            userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
                 case "1": dataSaveList[2] = ""; break
@@ -109,7 +109,7 @@ def MainMenu(dataSaveList):
                     dataSaveList)                        
                 case "4": dataSaveList = Load(dataSaveList) ; break
                 case "5": Helpfile.HelpTxt()
-                case "6": exit(f"\nGoodbye {dataSaveList[2]}")
+                case "0": exit(f"\nGoodbye {dataSaveList[2]}")
                 case _: print("\nCouldn't understand you?!")
         # sleep(2)
         dataSaveList[0] = 1
@@ -176,7 +176,7 @@ def IngameMenu(dataSaveList):
         dataSaveList = Save(dataSaveList)
         dataSaveList[0] = 1
 
-        userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(4) Exit to main menu\n")
+        userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(0) Exit to main menu\n")
         os.system('cls')
         match userInput:
             case "1": startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
@@ -188,7 +188,7 @@ def IngameMenu(dataSaveList):
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName, itemsDict)
 
-            case "4": dataSaveList = MainMenu(dataSaveList)
+            case "0": dataSaveList = MainMenu(dataSaveList)
             case _: print("\nCouldn't understand you?!")
         
 
@@ -278,7 +278,7 @@ def Save(dataSaveList):
                 print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
                 saveFileID += 1
             print('------------------------------------------------------------------------\n')
-            userInput = input(f"\n(1) Save\t(2) Delete\t (3) Return\n")
+            userInput = input(f"\n(1) Save\t(2) Delete\t (0) Return\n")
             if userInput == "1": 
                 while True:
                     saveFileID = 1
@@ -301,7 +301,7 @@ def Save(dataSaveList):
                         if userInputFileName != "0":    
                             with open(f'SaveFile_{userInputFileName}.pickle', 'wb') as manSaveHandler:
                                 pickle.dump(dataSaveList, manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-                                dataSaveList[1][saveFileID-1] = userInputFileName
+                                dataSaveList[1].append(userInputFileName)
                             with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
                                 pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                             break
@@ -353,7 +353,7 @@ def Save(dataSaveList):
                 else:
                     print("Couldn't understand you?\n") 
                     continue  
-            elif userInput == "3":
+            elif userInput == "0":
                 break
             else:
                 print("\nCouldn't understand you?\n")
@@ -365,17 +365,22 @@ def Save(dataSaveList):
 ################################################################################## LOAD ##################################################################################
 def Load(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
-    saveFileID = 1
-    print(' Nr.\t\tSavefile'\
-        '\n------------------------------------------------------------------------')
-    for i in range(0, len(dataSaveList[1])):
-        print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
-        saveFileID += 1
-    print('------------------------------------------------------------------------\n')        
-    userInputNumber = int(input("\nChoose number to load:\n"))
-    os.system('cls')        
-    with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
-        dataSaveList = pickle.load(loadHandler)
+    while True: 
+        saveFileID = 1
+        print(' Nr.\t\tSavefile'\
+            '\n------------------------------------------------------------------------')
+        for i in range(0, len(dataSaveList[1])):
+            print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
+            saveFileID += 1
+        print('------------------------------------------------------------------------\n')        
+        userInputNumber = int(input("\nChoose number to load:\t\t(0) Abort\n"))
+        os.system('cls')        
+        if userInputNumber != "0":
+            with open(f'SaveFile_{dataSaveList[1][userInputNumber-1]}.pickle', 'rb') as loadHandler: 
+                dataSaveList = pickle.load(loadHandler)
+            break
+        else:
+            break
     
     return dataSaveList                                        
 

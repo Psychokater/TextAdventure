@@ -58,7 +58,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
             f"----------- VS -----------\n"\
             f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
-            f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(4) Flee\n")
+            f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(0) Flee\n")
             os.system('cls')
 
             if UserInputChoose == "1":
@@ -74,7 +74,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
                 playerStats, playerStatPoints = Stats.StatMenu(
                 playerStats, playerStatPoints, playerName, itemsDict )
 
-            elif UserInputChoose == "4": 
+            elif UserInputChoose == "0": 
                 _temp = (playerStats[0] * 2)
                 playerInventoryMoney -= (playerStats[0] * 2)
                 if playerInventoryMoney - (playerStats[0] * 2) < 0:
@@ -240,12 +240,13 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
         f"----------- VS -----------\n"\
         f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
-        f"(1) Attack\t(2) Inventory\t(3) Stats\t (4) Flee\n")                                             # Fight (P = Player, E = Enemy)
+        f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
 
     ################# 1 Attack ###############
         
         if UserInputFight == "1":
+            (selectedDict[enemyID][6]())
             blockMessage = ""
             critMessage = ""           
             
@@ -314,7 +315,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
     #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
 
-        elif UserInputFight == "4":                                                                         # Flee (loose Gold + Enemy
+        elif UserInputFight == "0":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
             playerInventoryMoney -= (playerStats[0] * 2)
             if playerInventoryMoney - (playerStats[0] * 2) <= 0:
