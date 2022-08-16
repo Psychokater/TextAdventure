@@ -12,6 +12,8 @@ import os
 #################################################################################### SAVE ####################################################################################
 def Save(dataSaveList):    
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
+
+####################################### AUTOSAVE    
     if dataSaveList[0] == 0:
         with open(f"SaveFile_Autosave.pickle", 'wb') as autoSaveHandler:
             pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
@@ -21,6 +23,7 @@ def Save(dataSaveList):
                 dataSaveList[1][0] = (f"Autosave --- {dataSaveList[2]} --- {dataSaveList[4]}")
         with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
             pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                                                                           #Add AutoSave to savePoints[0]        
+####################################### MANUAL SAVE    
     elif dataSaveList[0] == 1:
         while True:
             saveFileID = 1
@@ -41,13 +44,13 @@ def Save(dataSaveList):
                         saveFileID += 1
                     print(f" {saveFileID}\t-\t<new slot>")
                     print('------------------------------------------------------------------------\n')
-                    
+####################################### Choose Slot                    
                     userInputOverwrite = input("Choose slot for saving:\t\t(0) Abort\n")
                     os.system('cls')
                     if userInputOverwrite == "0":
                         continue
                     elif userInputOverwrite == str(saveFileID):
-                        
+####################################### Name Slot -> Save                        
                         userInputFileName = input("\nName your slot:\t\t(0) Abort\n")
                         os.system('cls')                       
                         if userInputFileName != "0":    
@@ -63,12 +66,12 @@ def Save(dataSaveList):
                     elif userInputOverwrite == "1":
                         print("You can't overwrite 'Autosave'!\n")
                     elif userInputOverwrite < str(saveFileID):
-                        
+####################################### Overwrite?                        
                         userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
                         os.system('cls')
                         if userInputChoose == "1":
                             saveFileID = int(userInputOverwrite)                
-                            
+####################################### Name Slot -> Save                          
                             userInputFileName = input("\nName your slot:\t\t(0) Abort\n")
                             os.system('cls')
                             if userInputFileName != "0":    
@@ -88,7 +91,8 @@ def Save(dataSaveList):
                             continue   
                     else:
                         print("Couldn't understand you?\n") 
-                        continue   
+                        continue 
+####################################### Delete Slot 
             elif userInput == "2":
                 saveFileID = 1
                 print(' Nr.\t\tSavefile'\
@@ -97,6 +101,7 @@ def Save(dataSaveList):
                     print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
                     saveFileID += 1
                 print('------------------------------------------------------------------------\n')
+#######################################  Choose Slot to delete                
                 userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
                 os.system('cls')
                 if userInputDelete != "0":
@@ -115,6 +120,7 @@ def Save(dataSaveList):
 
 
 ################################################################################## LOAD ##################################################################################
+####################################### LOAD MANUAL #######################################  
 def Load(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
     while True: 
@@ -125,13 +131,14 @@ def Load(dataSaveList):
             print(f" {saveFileID}\t-\t{dataSaveList[1][i]}")
             saveFileID += 1
         print('------------------------------------------------------------------------\n')        
+####################################### Choose Slot to Load       
         userInputNumber = int(input("\nChoose number to load:\t\t(0) Abort\n"))
         os.system('cls')        
         if userInputNumber != "0":
             if userInputNumber > len(dataSaveList[1]):
                 print("Selected slot is empty")
                 continue
-
+####################################### Load File
             with open(f'SaveFile_{saveFileID-1}.pickle', 'rb') as loadHandler: 
                 dataSaveList = pickle.load(loadHandler)
             with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
@@ -141,10 +148,10 @@ def Load(dataSaveList):
             break
     
     return dataSaveList    
-
+####################################### LOAD AUTOSAVE #######################################  
 def LoadAutosave(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
-
+####################################### Load File
     with open(f'SaveFile_Autosave.pickle', 'rb') as loadHandler: 
         dataSaveList = pickle.load(loadHandler)
     with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:

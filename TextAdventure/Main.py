@@ -81,7 +81,7 @@ def Main():
     IngameMenu(dataSaveList)
 
 
-################################################################################## START (only once) ##################################################################################
+############################################################################### START (only once) ############################################################################
 ### PICK A NAME, GET FIRST LOCATION (One Timer)
 def Start(dataSaveList):
    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
