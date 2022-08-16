@@ -65,7 +65,8 @@ def Main():
     playerName = ""
     savePoints = []
     autoSave = 0
-    dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]   
+    dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
     try:
         with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
             dataSaveList[1] = pickle.load(loadAllHandler)
