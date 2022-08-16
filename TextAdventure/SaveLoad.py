@@ -1,6 +1,8 @@
 import pickle
 import os
 
+
+
 #############################################################################################################################################################################
 #-------------------------------------------------------------------------------- SAVE/LOAD --------------------------------------------------------------------------------#
 #############################################################################################################################################################################
@@ -14,7 +16,9 @@ def Save(dataSaveList):
         with open(f"SaveFile_Autosave.pickle", 'wb') as autoSaveHandler:
             pickle.dump(dataSaveList, autoSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
             if len(dataSaveList[1]) == 0:
-                dataSaveList[1].append("Autosave")                                                 #Add AutoSave to savePoints[0]        
+                dataSaveList[1].append("Autosave")
+            else:
+                dataSaveList[1] = "Autosave"                                                                           #Add AutoSave to savePoints[0]        
     elif dataSaveList[0] == 1:
         while True:
             saveFileID = 1
