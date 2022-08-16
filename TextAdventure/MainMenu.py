@@ -19,7 +19,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": break                                         
+                case "1": break                                      
                 case "2": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
@@ -28,7 +28,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Continue\t(3) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": return "x"
+                case "1": break
                 case "2": dataSaveList = SaveLoad.LoadAutosave(dataSaveList); break                                        
                 case "3": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye")
@@ -38,7 +38,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Continue\t(3) Load\t(4) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": return "x"
+                case "1": break
                 case "2": dataSaveList = SaveLoad.LoadAutosave(dataSaveList); break
                 case "3": dataSaveList = SaveLoad.Load(dataSaveList); break                                        
                 case "4": Helpfile.HelpTxt()
