@@ -49,7 +49,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": return "x"
+                case "1": break
                 case "2": break
                 case "3": dataSaveList = SaveLoad.Save(dataSaveList)       
                 case "4": Helpfile.HelpTxt()
@@ -60,7 +60,7 @@ def MainMenu(dataSaveList):
             userInput = input('\n(1) New Game\t(2) Continue\t(3) Save\t(4) Load\t(5) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
-                case "1": return "x"
+                case "1": break
                 case "2": break
                 case "3": dataSaveList = SaveLoad.Save(dataSaveList)                        
                 case "4": dataSaveList = SaveLoad.Load(dataSaveList); break

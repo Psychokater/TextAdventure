@@ -64,36 +64,27 @@ import Items
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main():
-    while True:
-        Intro.Intro() 
-        playerName = ""
-        savePoints = []
-        autoSave = 0
-        dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]
-        #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
-        try:
-            with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
-                dataSaveList[1] = pickle.load(loadAllHandler)
-        except FileNotFoundError:        
-            with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
-                pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)     
-        # sleep(2)
-        dataSaveList = MainMenu.MainMenu(dataSaveList) 
-        if dataSaveList == "x":
-            sys.stdout.flush()
-            print("New Game")
-            sleep(2)
-            os.system('cls')
-            continue      
-        elif dataSaveList[2] == "":
-            dataSaveList = Start(dataSaveList)
-        newGame = IngameMenu(dataSaveList)
-        if newGame == "x":
-            sys.stdout.flush()
-            print("New Game")
-            sleep(2)
-            os.system('cls')
-            continue
+    
+    
+    playerName = ""
+    savePoints = []
+    autoSave = 0
+    dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], {}]
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
+    try:
+        with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
+            dataSaveList[1] = pickle.load(loadAllHandler)
+    except FileNotFoundError:        
+        with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
+            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+    Intro.Intro()     
+    # sleep(2)
+    dataSaveList = MainMenu.MainMenu(dataSaveList) 
+
+    if dataSaveList[2] == "":
+        dataSaveList = Start(dataSaveList)
+    IngameMenu(dataSaveList)
+
 
 
 ############################################################################### START (only once) ############################################################################
@@ -171,8 +162,6 @@ def IngameMenu(dataSaveList):
 
             case "0": dataSaveList = MainMenu.MainMenu(dataSaveList)
             case _: print("\nCouldn't understand you?!")
-        if dataSaveList == "x":
-            return "x"
         
 
 
