@@ -80,7 +80,7 @@ def MainMenu(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]      
 
     while True:
-        if dataSaveList[2] == "" and dataSaveList[0] == 0:
+        if dataSaveList[2] == "" and dataSaveList[1][1] == None and dataSaveList[0] == 0:
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:
@@ -89,7 +89,7 @@ def MainMenu(dataSaveList):
                 case "0": exit(f"\nGoodbye")
                 case _: print("\nCouldn't understand you?!")
 
-        elif dataSaveList[2] == "":
+        elif dataSaveList[2] == "" and dataSaveList[1][1] != None:
             userInput = input('\n(1) New Game\t(2) Load\t(3) Help\t(0) Exit\n')
             os.system('cls')
             match userInput:

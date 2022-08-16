@@ -98,7 +98,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 ################ Items ####################################
         elif userInput == "2":
             itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
-            userInput = input("\n(1) Use\t(2) Remove from Inventory\t(3) Return\n")
+            userInput = input("\n(1) Use\t(2) Remove from Inventory\t(0) Return\n")
             #os.system('cls')
 ################ Items #### Use Item #################################
             if userInput == "1":
@@ -123,7 +123,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                         if itemsDict[i][5] > 0:
                             if playerStats[2] >= playerStats[1]:
                                 print(f"You already have full HP, do you really want to use {itemsDict[i][2]}?")
-                                userItemInput = input("(1) Yes!\t(2) No!")
+                                userItemInput = input("(1) Yes!\t(2) No!\n")
                                 os.system('cls')
                                 if userItemInput == "1":
                                     itemsDict[i][8] -= 1            
@@ -171,7 +171,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                 break
             else: print("\nCouldn't understand you?!")
 ############### Break #####################
-        elif userInput == "3": break
+        elif userInput == "0": break
         else: print("\nCouldn't understand you?!")
     
     return itemsDict, playerStats
