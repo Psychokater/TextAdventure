@@ -84,8 +84,8 @@ def Main():
                 pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
         Intro.Intro()     
         # sleep(2)
-        dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame) 
-
+        
+        dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)
         if dataSaveList[2] == "":
             dataSaveList = Start(dataSaveList)
         newGame = IngameMenu(dataSaveList, newGame)
