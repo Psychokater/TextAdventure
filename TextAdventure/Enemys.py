@@ -10,26 +10,32 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel):
     droprateIncrease = round(enemyLevel / 3.5)
     
     enemyDictEasy = {
-            1001 : ["Pack of Rats", enemyLevel,     4+sl,    2+sl,   1+sl,   1.00,   PicRat],
-            1002 : ["Bird",         enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
-            1003 : ["Wolf",         enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
-            1004 : ["Skeleton",     enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton],
-            1005 : ["Minosaur",     enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicMinosaur],
-            1006 : ["CyClops",      enemyLevel,     7+sl,    3+sl,   2+sl,   2.00,   PicCyclops],
-            1007 : ["Scopion",      enemyLevel,     5+sl,    2+sl,   2+sl,   1.00,   PicScopion],
-            1008 : ["ApeMan",       enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan]
-            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic       
+            1001 : ["Pack of Rats",   enemyLevel,     4+sl,    2+sl,   1+sl,   1.00,   PicRat],
+            1002 : ["Bird",           enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
+            1003 : ["Wolf",           enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
+            1004 : ["Wild Cat",       enemyLevel,     5+sl,    4+sl,   1+sl,   2.00,   PicWildCat],
+            1005 : ["See Crab",       enemyLevel,     4+sl,    3+sl,   3+sl,   2.00,   PicSeeCrab],
+            1006 : ["Cave Bat",       enemyLevel,     2+sl,    3+sl,   1+sl,   1.00,   PicCaveBat],
+            1007 : ["Minosaur ",      enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicKleinosor],
+            1008 : ["Scopion",        enemyLevel,     5+sl,    2+sl,   2+sl,   1.00,   PicScopion],
+            1009 : ["Skeleton",       enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton],
+            1010 : ["Amatuar Warior", enemyLevel,     8+sl,    1+sl,   1+sl,   1.00,   PicAmatuerWarrior],
+            1011 : ["CyClops",        enemyLevel,     7+sl,    3+sl,   2+sl,   2.00,   PicCyclops],
+            1012 : ["ApeMan",         enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan],
+            1013 : ["Mutant Fox",     enemyLevel,     8+sl,    4+sl,   3+sl,   3.00,   PicMutantFox],
+            1014 : ["Nativ Cannibal", enemyLevel,     7+sl,    2+sl,   2+sl,   2.00,   PicNativCannibal]
+            }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     enemyDictMedium = {
-            1101 : ["Ghost",        enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
-            1102 : ["Bandit",       enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
-            1103 : ["Troll",        enemyLevel,     12+sl,   6+sl,   4+sl,   8.00,   PicTroll],
-            1108 : ["Centaur",      enemyLevel,     15+sl,   8+sl,   5+sl,  10.00,   PicCentaur]
-            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
+            1101 : ["Ghost",          enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
+            1102 : ["Bandit",         enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
+            1103 : ["Troll",          enemyLevel,     12+sl,   6+sl,   4+sl,   8.00,   PicTroll],
+            1108 : ["Centaur",        enemyLevel,     15+sl,   8+sl,   5+sl,  10.00,   PicCentaur]
+            }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     enemyDictHard = {
-            1201 : ["Minotaur",     enemyLevel,     20+sl,   10+sl,  4+sl,  15.00,   PicMinotaur],
-            1202 : ["Gryphon",      enemyLevel,     25+sl,   10+sl,  8+sl,  20.00,   PicGryphon],
-            1203 : ["Dragon",       enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
-            }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
+            1201 : ["Minotaur",       enemyLevel,     20+sl,   10+sl,  4+sl,  15.00,   PicMinotaur],
+            1202 : ["Gryphon",        enemyLevel,     25+sl,   10+sl,  8+sl,  20.00,   PicGryphon],
+            1203 : ["Dragon",         enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
+            }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     
     return enemyDictEasy, enemyDictMedium, enemyDictHard
 
@@ -50,6 +56,16 @@ def PicRat():
     
      ~~(  )8:>    <;3(  )~~
      """)
+###########################################################
+def PicBird():
+    print("""
+'Everybody heard about the bird, bird is the word!'
+      ,~
+     ('v)__
+    (/ (``/
+     \__>' 
+      ^^
+    """)
 ##########################################################
 def PicWolf():
     print("""
@@ -61,17 +77,82 @@ def PicWolf():
   `~--~\ )___,)/'               Bark
       (/\\\_  (/\\\_
        """)   
-###########################################################
-def PicBird():
-    print("""
-'Everybody heard about the bird, bird is the word!'
-      ,~
-     ('v)__
-    (/ (``/
-     \__>' 
-      ^^
-    """)
 
+###############################################################
+def PicWildCat():
+  print ("""
+  Big Meaaaaooowwwwwwww
+      ( \.
+       \ \.
+       / /                |\\
+      / /     .-`````-.   / ^`-.
+      \ \    /         \_/  {|} `o
+       \ \  /   .---.   \\ _  ,--'
+        \ \/   /     \,  \( `^^^
+         \   \/\      (\  )
+          \   ) \     ) \ \.
+           ) /__ \__  ) (\ \___
+          (___)))__))(__))(__)))""")
+#############################################################
+def PicSeeCrab():
+  print ("""
+This Time You will be the Meal 
+       ___     ___
+     .i .-'   `-. i.
+   .'   `/     \'  _`.
+   |,-../ o   o \.' `|
+(| |   /  _\ /_  \   | |)
+ \\\  (_.'.'"`.`._)  ///
+  \\`._(..:   :..)_.'//
+   \`.__\ .:-:. /__.'/
+    `-i-->.___.<--i-'
+    .'.-'/.=^=.\`-.`.
+   /.'  //     \\  `.\.
+  ||   ||       ||   ||
+  \)   ||       ||  (/
+       \)       (/     
+  """)
+#############################################################
+def PicCaveBat():
+  print ("""
+  Vampire bats that typically target large birds have been found to be sucking human blood now
+    =/\                 /\=
+    /  \'._  (\_/)  _.'/  \.
+   / .''._'--(o.o)--'_.''. \.
+  /.' _/ |`'=/ " \='`| \_ `.\.
+ /` .' `\;-,'\___/',-;/` '. '\.
+/.-' jgs   `\(-V-)/`       `-.\.
+`            "   "            `
+  """)
+############################################################################
+def PicKleinosor():
+  print ("""
+  If i got Bigger i will ea you 
+
+  oo`'._..---.___..-
+ (_,-.        ,..'`
+      `'.    ;
+         : :`
+        _;_;
+""")
+##############################################################
+def PicScopion():
+  print ("""
+  Life is too short for bad Vipes
+⠀⠀⢀⣤⣤⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢀⣿⣿⡿⠟⠿⠿⢿⣿⣷⣶⣤⣶⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⣿⣿⣿⠀⠀⠀⠀⠀⠙⠛⢻⣿⣿⣿⣿⣿⣦⣀⡀⢀⣀⡼⠀⠀⠀⠀⠀⠀⠀
+⠀⠙⢿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⢿⣿⣿⣦⣤⣤⣄⡀⠀⢀⣄⠉⠙⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠉⠛⢿⣿⣿⣿⣿⣿⣿⣧⣤⡟⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣩⣿⣿⣿⣿⣿⣿⣿⣿⣾⣏⢀⡤⠀⡿⣷⣶⣦⣄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠙⠋⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡿⠀⣿⣿⡿⣿⣿⡄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⠋⢉⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⠀⠘⣿⣿⢸⣿⣷⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢉⣬⡿⢿⣿⣿⠛⢿⠗⠀⠀⠀⠈⢿⠀⣿⣿⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠉⠀⠀⠈⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣿⣿⣶⣤⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀""")
 #######################################################
 def PicSkeleton():
     print("""
@@ -94,6 +175,111 @@ def PicSkeleton():
      
      """)
 
+#############################################################
+def PicAmatuerWarrior():
+  print("""
+  Give me Your Shield and the Loots
+
+     ,/|)
+     //&')
+     '')(
+      (( )
+      )( (
+      (=M=[)###########>
+      (( )
+      (( )_
+      ((__,) mrz
+  """)
+######################################################################
+def PicCyclops():
+  print ("""
+  Never seen someone handsome with one eye?
+  Stars… are my eyes!
+            _......._
+        .-'.'.'.'.'.'.`-.
+      .'.'.'.'.'.'.'.'.'.`.
+     /.'.'               '.)
+     |.'    _.--...--._     |
+     \    `._.-.....-._.'   /
+     |     _..- .-. -.._   |
+  .-.'    `.   ((@))  .'   '.-.
+ ( ^ \      `--.   .-'     / ^ )
+  \  /         .   .       \  /
+  /          .'     '.  .-    (
+ ( _.\    \ (_`-._.-'_)    /._\)
+  `-' \   ' .--.          / `-'
+      |  / /|_| `-._.'\   |
+      |   |       |_| |   /-.._
+  _..-\   `.--.______.'  |
+       \       .....     |
+        `.  .'      `.  /
+          \           .'
+           `-..___..-`""")
+  ###########################################################
+def PicApeMan():
+    print("""
+Its not evolution if you genetically engineer stuff.
+Genetic engineering becomes revolution just does not have the same ring to it.
+         ||
+        _;|
+       /__3
+      / /||
+     / / // .--.
+     \ \// / (OO)
+      \//  |( _ )
+      // \__/`-'\__
+     // \__      _ )
+ _.-'/    | ._._.|\ )
+(_.-'     |      \ \ )
+   .-._   /    o ) / /
+  /_ \ \ /   \__/ / /
+    \ \_/   / /  E_/
+     \     / /
+      `-._/-' """)
+##########################################################
+def PicMutantFox():
+  print ("""
+It was not my Desire to be Killer but your warm blood calls me 
+                  (\    /)
+                  |_)//(_|
+                  |4\_/4)(
+                 '( (_  -)D
+                   ) _)  /\,__
+                 _,\_._,/ /   `)
+    \.,_,,      ( _   ~ .   ,   )
+     \   (\      \(   \/  _)(    )
+      \   \\      )). _______>-.-`*
+       \( ,\\.-'  ' /    \/    |
+         '  \><)_'.)|/\/\/\/\/\|
+              \) ,( |\/\/\/\/\/|
+              ' ((  \    /\    /
+               ((((  \___\/___/)
+                ((,) /   ((()   )
+                  _//.   ((() ."
+          _____ //,/" ___ ((( ', ___
+                           ((  )
+                          _/,/'
+                        /,/," """)
+#############################################
+def PicNativCannibal():
+  print ("""
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠲⠦⠤⣄⣀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣀⠀⠀⠀⠀⠀⠘⠿⠟⠀⢤⠀⣠⣤⣄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⡆⠀⠀⠀⠀⢰⡖⠀⠀⠀⠀⠙⠿⠿⠓⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⠃⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣄⡉⠁⣠⡄⢀⣀⣼⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣰⣿⣿⠟⣿⣿⡿⠁⣴⣿⠁⡸⠿⠿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢰⡿⠋⠀⢰⠿⠋⡀⢈⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣿⡇⠀⠀⠠⠴⣾⣿⣿⣯⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠉⠁⠀⠀⢀⣀⣼⣿⡿⠿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠛⣿⠿⣄⠀⢠⣾⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣿⠀⠁⠀⠁⠀⠀⠉⢿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢀⣤⣤⣤⣤⣾⡿⠃⠀⠀⠀⠀⠀⠀⠘⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀
+  """)
+###########################################
 def PicGhost():
     print("""
     'What is your religion? Mine is Boo-ddhism'
@@ -106,7 +292,7 @@ def PicGhost():
    (__)  /
    `.__.'
     """)
-
+##########################################################
 def PicBandit():
     print("""
     'Broke into someones home last night, searching for money.
@@ -121,8 +307,7 @@ def PicBandit():
   ( /|| |
    \\ V\|
     """)
-
-
+##########################################################
 def PicTroll():
     print("""
     'How do you kill a troll?
@@ -146,7 +331,7 @@ def PicTroll():
  \\       \(
 
     """)
-
+##########################################################
 def PicCentaur():
     print("""
     'Shopping is quite a hassle.
@@ -166,7 +351,7 @@ def PicCentaur():
       `\\\\       ||
         )\\\      )\\
     """)
-
+##########################################################
 def PicMinotaur():
     print("""
     'I am so fuckin horny'
@@ -193,7 +378,7 @@ def PicMinotaur():
       /_/  \_\\
 
         """)
-
+##########################################################
 def PicGryphon():
     print(""" 
     'Yeah do not pretend we are free air carrier for some hobbits
@@ -212,7 +397,7 @@ def PicGryphon():
   __//   __;_`-  \ `;.__,;'
 ((,--,) (((,------;  `--'
 """)
-
+##########################################################
 def PicDragon():
     print("""
     'It does not do to leave a live dragon out of your calculations, if you live near him.'      
@@ -242,117 +427,4 @@ def PicDragon():
  \( `   <.,../`     `-.._   _,-`
                    
                    """)
-############################################################################
-def PicMinosaur():
-  print ("""
-  If I get bigger, I will eat you !
-
-  oo`'._..---.___..-
- (_,-.   ,    ,..'`
-      `'.    ;
-         : :`
-        _;_;
-""")
-######################################################################
-def PicCyclops():
-  print ("""
-  'Never seen someone handsome with one eye?
-  Stars… are my eyes!'
-            _......._
-        .-'.'.'.'.'.'.`-.
-      .'.'.'.'.'.'.'.'.'.`.
-     /.'.'               '.\\
-     |.'    _.--...--._     |
-     \    `._.-.....-._.'   /
-     |     _..- .-. -.._   |
-  .-.'    `.   ((@))  .'   '.-.
- ( ^ \      `--.   .-'     / ^ )
-  \  /         .   .       \  /
-  /          .'     '.  .-    \\
- ( _.\    \ (_`-._.-'_)    /._\)
-  `-' \   ' .--.          / `-'
-      |  / /|_| `-._.'\   |
-      |   |       |_| |   /-.._
-  _..-\   `.--.______.'  |
-       \       .....     |
-        `.  .'      `.  /
-          \           .'
-           `-..___..-`
-           """)
-##############################################################
-def PicScopion():
-  print ("""
-  'Life is too short for bad bad coffee'
-⠀⠀⢀⣤⣤⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⢀⣿⣿⡿⠟⠿⠿⢿⣿⣷⣶⣤⣶⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⣿⣿⣿⠀⠀⠀⠀⠀⠙⠛⢻⣿⣿⣿⣿⣿⣦⣀⡀⢀⣀⡼⠀⠀⠀⠀⠀⠀⠀
-⠀⠙⢿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠈⢿⣿⣿⣦⣤⣤⣄⡀⠀⢀⣄⠉⠙⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠉⠛⢿⣿⣿⣿⣿⣿⣿⣧⣤⡟⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣩⣿⣿⣿⣿⣿⣿⣿⣿⣾⣏⢀⡤⠀⡿⣷⣶⣦⣄⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠙⠋⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡿⠀⣿⣿⡿⣿⣿⡄⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠘⠋⢉⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⠀⠘⣿⣿⢸⣿⣷⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢉⣬⡿⢿⣿⣿⠛⢿⠗⠀⠀⠀⠈⢿⠀⣿⣿⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠉⠀⠀⠈⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣿⣿⣶⣤⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀
-⠀""")
-###############################################################
-def PicWildCat():
-  print ("""
-  'Big Meaaaaooowwwwwwww'
-      ( \\
-       \ \\
-       / /                |\\\\
-      / /     .-`````-.   / ^`-.
-      \ \    /         \_/  {|} `o
-       \ \  /   .---.   \\\\ _  ,--'
-        \ \/   /     \,  \( `^^^
-         \   \/\      (\  )
-          \   ) \     ) \ \\
-           ) /__ \__  ) (\ \___
-          (___)))__))(__))(__)))
-          """)
-  ###########################################################
-def PicApeMan():
-    print("""
-'Its not evolution if you genetically engineer stuff.
-Genetic engineering becomes revolution just does not have the same ring to it.'
-         ||
-        _;|
-       /__3
-      / /||
-     / / // .--.
-     \ \// / (OO)
-      \//  |( _ )
-      // \__/`-'\__
-     // \__      _ \\
- _.-'/    | ._._.|\ \\
-(_.-'     |      \ \ \\
-   .-._   /    o ) / /
-  /_ \ \ /   \__/ / /
-    \ \_/   / /  E_/
-     \     / /
-      `-._/-'
-       """)
-#############################################################
-def PicSeeCrab():
-  print ("""
-'This Time You will be the Meal' 
-       ___     ___
-     .i .-'   `-. i.
-   .'   `/     \'  _`.
-   |,-../ o   o \.' `|
-(| |   /  _\ /_  \   | |)
- \\\\\  (_.'.'"`.`._)  ///
-  \\\\`._(..:   :..)_.'//
-   \`.__\ .:-:. /__.'/
-    `-i-->.___.<--i-'
-    .'.-'/.=^=.\`-.`.
-   /.'  //     \\\\  `.\\
-  ||   ||       ||   ||
-  \)   ||       ||  (/
-       \)       (/     
-  """)
-#############################################################
+  ##############################################
