@@ -45,7 +45,7 @@ def MainMenu(dataSaveList, newGame):
             os.system('cls')
             match userInput:
                 case "1": newGame = True; break   
-                case "2": break
+                case "2": SaveLoad.LoadAutosave(dataSaveList); break
                 case "3": dataSaveList = SaveLoad.Load(dataSaveList); load = True; break                                        
                 case "4": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye")
@@ -56,7 +56,7 @@ def MainMenu(dataSaveList, newGame):
             os.system('cls')
             match userInput:
                 case "1": newGame = True; break     
-                case "2": break
+                case "2": dataSaveList = SaveLoad.LoadAutosave(dataSaveList); break
                 case "3": dataSaveList = SaveLoad.Save(dataSaveList); break       
                 case "4": Helpfile.HelpTxt()
                 case "0": exit(f"\nGoodbye")
@@ -67,7 +67,7 @@ def MainMenu(dataSaveList, newGame):
             os.system('cls')
             match userInput:
                 case "1": newGame = True; break       
-                case "2": break
+                case "2": SaveLoad.LoadAutosave(dataSaveList); break
                 case "3": dataSaveList = SaveLoad.Save(dataSaveList); break                        
                 case "4": dataSaveList = SaveLoad.Load(dataSaveList); load = True; break
                 case "5": Helpfile.HelpTxt()
