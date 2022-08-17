@@ -21,7 +21,7 @@ def MainMenu(dataSaveList, newGame):
     dataSaveList[0] = 1 
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]      
     while True:
-        if dataSaveList[2] == "" and len(dataSaveList[1]) == 0:
+        if dataSaveList[2] == "" and len(dataSaveList[1]) <= 1:
             userInput = input('\n(1) New Game\t(2) Help\t(0) Exit Game\n')
             os.system('cls')
             match userInput:
