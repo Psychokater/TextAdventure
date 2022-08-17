@@ -22,9 +22,9 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
             f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
         if playerStatPoints == 0:  
-            userInput = input("\n(1) Return\n")
+            userInput = input("\n01) Return\n")
             os.system('cls')
-            if userInput == "1":
+            if userInput == "0":
                 break
             else: print("\nCouldn't understand you?!")
         else: 
