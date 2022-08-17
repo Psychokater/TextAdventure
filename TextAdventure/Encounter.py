@@ -20,7 +20,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
     _locations = [startLocation, "the town", "the forest", "the flatlands", "the mountains", "the castle", "the islands"]
-    _locationIndexList = [1,          100,            1,             2,               6,              8,          10]
+    _locationIndexList = [1,          100,            1,             1,               1,              1,          1]
     enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
     if enemyLevel <= 0:
         enemyLevel = 1

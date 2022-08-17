@@ -49,9 +49,9 @@ import Items
 #                                                                                   I        
 #                                                                                   I
 #                                                The Town --- The Flatlands --- The Forest --- The Islands
-#                                                                                   I
-#                                                                                   I
-#                                                                              Starting Area
+#                                                                  I
+#                                                                  I
+#                                                             Starting Area
 #                                         
 #
 
@@ -232,10 +232,10 @@ def World(startLocation, location, direction):
 
     worldmap = {
     # Location                    North        East       South        West
-    startLocation   :   [   "the forest",       0,          0,          0           ],
+    startLocation   :   [   "the flatlands",    0,          0,          0           ],
     "the town"      :   [           0,   "the flatlands",   0,          0           ],
-    "the flatlands" :   [           0,     "the forest",    0,       "the town"     ],
-    "the forest"    :   ["the mountains","the islands",startLocation,"the flatlands"],
+    "the flatlands" :   [           0,     "the forest",startLocation,"the town"    ],
+    "the forest"    :   [  "the mountains","the islands",   0,       "the flatlands"],
     "the mountains" :   [   "the castle",       0,    "the forest",     0           ],
     "the castle"    :   [           0,          0,    "the mountains",  0           ],
     "the islands"   :   [           0,          0,          0,        "the forest"  ]
