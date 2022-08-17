@@ -90,17 +90,12 @@ def Main():
             newGame = False                
             # sleep(2)        
             dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)       
-            if newGame == True:
-                newGame = False
+            if newGame == True:               
                 dataSaveList[2] = ""
                 dataSaveList = Start(dataSaveList)
-        elif newGame == False:
-            dataSaveList[2] = ""
-            dataSaveList = Start(dataSaveList)                 
+                       
         newGame = IngameMenu(dataSaveList, newGame)
-        if newGame == True:           
-            newGame = False            
-            continue
+     
 
 
 
