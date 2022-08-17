@@ -98,8 +98,7 @@ def Main():
             dataSaveList[2] = ""
             dataSaveList = Start(dataSaveList)                 
         newGame = IngameMenu(dataSaveList, newGame)
-        if newGame == True:
-            sys.stdout.flush()
+        if newGame == True:           
             newGame = False            
             continue
 

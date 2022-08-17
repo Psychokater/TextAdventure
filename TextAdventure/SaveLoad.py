@@ -159,8 +159,8 @@ def Load(dataSaveList):
 def LoadAutosave(dataSaveList):
     #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
 ####################################### Load File
-    with open(f'SaveFile_Autosave.pickle', 'rb') as loadHandler: 
-        dataSaveList = pickle.load(loadHandler)
+    with open(f'SaveFile_Autosave.pickle', 'rb') as loadAutoHandler: 
+        dataSaveList = pickle.load(loadAutoHandler)
     with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
         dataSaveList[1] = pickle.load(loadAllHandler)
     

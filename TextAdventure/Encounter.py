@@ -261,9 +261,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 critDmg = 1 
                                                                                           # Player attacks first
             print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {round((playerStats[3] + itemAddStats[3]) * critDmg)} {critMessage} damage.")
-            sleep(1)
+            sleep(0.5)
             print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)} {blockMessage} damage.")
-            sleep(1)
+            sleep(0.5)
             if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
             else:
@@ -271,7 +271,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
             print(f"{selectedDict[enemyID][0]} has {selectedDict[enemyID][2]} HP left.")
-            sleep(2)
+            sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
 
@@ -286,9 +286,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                     critDmg = 1 
 
                 print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)} {critMessage} damage.")  # Enemy attacks second
-                sleep(1)
+                sleep(0.5)
                 print(f"You defend yourself with {itemPlayerSecondary} and block {(round((playerStats[4] + itemAddStats[4]) * blockChance))} {blockMessage} damage.")
-                sleep(1)
+                sleep(0.5)
                 if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
                     playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
                 else:   
