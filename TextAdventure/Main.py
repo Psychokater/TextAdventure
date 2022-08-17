@@ -24,7 +24,6 @@ import random
 import pickle
 from time import sleep
 
-import Intro
 import MainMenu
 import SaveLoad
 import Encounter
@@ -66,10 +65,10 @@ import Items
 
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
-def Main():
-    newGame = False
-    while True:
-        
+def Main(): 
+    newGame = True 
+    while True:  
+           
         itemsDict = {}
         itemsDict = Items.Items(itemsDict)
         playerInventoryMoney = 5.00
@@ -86,17 +85,22 @@ def Main():
         except FileNotFoundError:        
             with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
                 pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-        if newGame == False:
-            Intro.Intro()     
+        
+        if newGame == True:
+            newGame = False                
             # sleep(2)        
-            dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)
-            newGame = False
-        if dataSaveList[2] == "":
-            dataSaveList = Start(dataSaveList)
+            dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)       
+            if newGame == True:
+                newGame = False
+                dataSaveList[2] = ""
+                dataSaveList = Start(dataSaveList)
+        elif newGame == False:
+            dataSaveList[2] = ""
+            dataSaveList = Start(dataSaveList)                 
         newGame = IngameMenu(dataSaveList, newGame)
         if newGame == True:
             sys.stdout.flush()
-            newGame = True
+            newGame = False            
             continue
 
 
@@ -105,7 +109,7 @@ def Main():
 ############################################################################### START (only once) ############################################################################
 ### PICK A NAME, GET FIRST LOCATION (One Timer)
 def Start(dataSaveList):
-   #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
+    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
     playerName = dataSaveList[2]
     startLocation = dataSaveList[3]
     location = dataSaveList[4]
