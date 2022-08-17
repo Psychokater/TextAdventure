@@ -231,14 +231,14 @@ def World(startLocation, location, direction):
     compass = ["n","e","s","w"] 
 
     worldmap = {
-    # Location                    North        East       South        West
-    startLocation   :   [   "the flatlands",    0,          0,          0           ],
-    "the town"      :   [           0,   "the flatlands",   0,          0           ],
-    "the flatlands" :   [           0,     "the forest",startLocation,"the town"    ],
-    "the forest"    :   [  "the mountains","the islands",   0,       "the flatlands"],
-    "the mountains" :   [   "the castle",       0,    "the forest",     0           ],
-    "the castle"    :   [           0,          0,    "the mountains",  0           ],
-    "the islands"   :   [           0,          0,          0,        "the forest"  ]
+    # Location                    North                  East                 South                  West
+    startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ],
+    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
+    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ],
+    "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ],
+    "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ],
+    "the islands"   :   [           0          ,          0          ,          0          ,     "the forest"    ]
     }
 
     for i in range(0,4):
