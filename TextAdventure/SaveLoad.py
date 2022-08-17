@@ -65,6 +65,7 @@ def Save(dataSaveList):
                             continue
                     elif userInputOverwrite == "1":
                         print("You can't overwrite 'Autosave'!\n")
+                        continue
                     elif userInputOverwrite < str(saveFileID):
 ####################################### Overwrite?                        
                         userInputChoose = input("overwrite Slot? (1) Yes\t(2) No\n")
@@ -104,8 +105,14 @@ def Save(dataSaveList):
 #######################################  Choose Slot to delete                
                 userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
                 os.system('cls')
-                if userInputDelete != "0":
-                    dataSaveList[1][int(userInputDelete)-1]
+                if userInputDelete == "1":
+                        print("You can't delete 'Autosave'!\n")
+                        continue
+                elif userInputDelete != "0":                 
+                    dataSaveList[1].pop(int(userInputDelete)-1) 
+                    os.remove(f'SaveFile_{int(userInputDelete)}.pickle')
+                    with open('Savepoint_Status.pickle', 'wb') as allSaveHandler:
+                        pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL) 
                     break
                 else:
                     print("Couldn't understand you?\n") 
