@@ -66,7 +66,7 @@ import Items
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main(): 
-    newGame = True 
+    newGame = True    
     while True:  
            
         itemsDict = {}
@@ -89,16 +89,16 @@ def Main():
         if newGame == True:
             newGame = False                
             # sleep(2)        
-            dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)       
+            dataSaveList, newGame, load = MainMenu.MainMenu(dataSaveList, newGame)       
             if newGame == True:
                 newGame = False               
                 dataSaveList = Start(dataSaveList)
         elif newGame == False:        
             dataSaveList = Start(dataSaveList)                 
-        dataSaveList, newGame = IngameMenu(dataSaveList, newGame)
+        dataSaveList, newGame, load = IngameMenu(dataSaveList, newGame)
         if newGame == True:           
             newGame = False
-            del dataSaveList                        
+            del dataSaveList            
             continue
 
 
@@ -143,45 +143,46 @@ def Start(dataSaveList):
 ### Move, Inventory, Stats
 def IngameMenu(dataSaveList, newGame):
    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
-    playerName = dataSaveList[2]
-    startLocation = dataSaveList[3]
-    location = dataSaveList[4]
-    playerInventoryMoney = dataSaveList[5]
-    playerStatPoints = dataSaveList[6]
-    playerStats = dataSaveList[7]
-    itemsDict = dataSaveList[8]
+    while True:
+        playerName = dataSaveList[2]
+        startLocation = dataSaveList[3]
+        location = dataSaveList[4]
+        playerInventoryMoney = dataSaveList[5]
+        playerStatPoints = dataSaveList[6]
+        playerStats = dataSaveList[7]
+        itemsDict = dataSaveList[8]
 
-    while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
-        itemAddStats = []
-        itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
-        playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)        
-        dataSaveList[5] = playerInventoryMoney 
-        dataSaveList[6] = playerStatPoints
-        dataSaveList[7] = playerStats
-        dataSaveList[8] = itemsDict
-        dataSaveList[0] = 0
-        dataSaveList = SaveLoad.Save(dataSaveList)
-        dataSaveList[0] = 1
+        while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
+            itemAddStats = []
+            itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
+            playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)        
+            dataSaveList[5] = playerInventoryMoney 
+            dataSaveList[6] = playerStatPoints
+            dataSaveList[7] = playerStats
+            dataSaveList[8] = itemsDict
+            dataSaveList[0] = 0
+            dataSaveList = SaveLoad.Save(dataSaveList)
+            dataSaveList[0] = 1
 
-        userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(0) Exit to main menu\n")
-        os.system('cls')
-        if userInput == "1":
-            startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
-                    startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
-        elif userInput == "2":
-            itemsDict, playerStats = Inventory.InventoryMenu(
-                itemsDict, playerName, playerInventoryMoney, playerStats)  
-        elif userInput == "3":
-            playerStats, playerStatPoints = Stats.StatMenu(
-                    playerStats, playerStatPoints, playerName, itemsDict)  
-        elif userInput == "0":
-            dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame); 
-            if newGame == True:
-                dataSaveList.clear()
-                print(dataSaveList) 
-                return dataSaveList, newGame
-        else:
-            print("\nCouldn't understand you?!")        
+            userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(0) Exit to main menu\n")
+            os.system('cls')
+            if userInput == "1":
+                startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Move(
+                        startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
+            elif userInput == "2":
+                itemsDict, playerStats = Inventory.InventoryMenu(
+                    itemsDict, playerName, playerInventoryMoney, playerStats)  
+            elif userInput == "3":
+                playerStats, playerStatPoints = Stats.StatMenu(
+                        playerStats, playerStatPoints, playerName, itemsDict)  
+            elif userInput == "0":
+                dataSaveList, newGame, load = MainMenu.MainMenu(dataSaveList, newGame)                
+                if newGame == True:                 
+                    return dataSaveList, newGame, load
+                if load == True:
+                    break
+            else:
+                print("\nCouldn't understand you?!")        
         
     
         
