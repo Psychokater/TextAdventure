@@ -64,26 +64,35 @@ import Items
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main():
-    itemsDict = {}
-    itemsDict = Items.Items(itemsDict)
-    playerName = ""
-    savePoints = []
-    autoSave = 0
-    dataSaveList = [autoSave, savePoints, playerName, "", "", 0.00, 0, [], itemsDict]
-    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
-    try:
-        with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
-            dataSaveList[1] = pickle.load(loadAllHandler)
-    except FileNotFoundError:        
-        with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
-            pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-    Intro.Intro()     
-    # sleep(2)
-    dataSaveList = MainMenu.MainMenu(dataSaveList) 
+    while True:
+        newGame = False
+        itemsDict = {}
+        itemsDict = Items.Items(itemsDict)
+        playerInventoryMoney = 5.00
+        playerStatPoints = 0    
+        playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+        playerName = ""
+        savePoints = []
+        autoSave = 0
+        dataSaveList = [autoSave, savePoints, playerName, "", "", playerInventoryMoney, playerStatPoints, playerStats, itemsDict]
+        #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]    
+        try:
+            with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
+                dataSaveList[1] = pickle.load(loadAllHandler)
+        except FileNotFoundError:        
+            with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
+                pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
+        Intro.Intro()     
+        # sleep(2)
+        dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame) 
 
-    if dataSaveList[2] == "":
-        dataSaveList = Start(dataSaveList)
-    IngameMenu(dataSaveList)
+        if dataSaveList[2] == "":
+            dataSaveList = Start(dataSaveList)
+        newGame = IngameMenu(dataSaveList, newGame)
+        if newGame == True:
+            sys.stdout.flush()
+            continue
+
 
 
 
@@ -124,16 +133,15 @@ def Start(dataSaveList):
 
 ################################################################################## MENU (MOVE...) ##################################################################################
 ### Move, Inventory, Stats
-def IngameMenu(dataSaveList):
+def IngameMenu(dataSaveList, newGame):
    #dataSaveList = [0 autoSave, 1 savePoints, 2 playerName, 3 startLocation, 4 location, 5 playerInventoryMoney, 6 playerStatPoints, 7 playerStats, 8 itemsDict]
     playerName = dataSaveList[2]
     startLocation = dataSaveList[3]
     location = dataSaveList[4]
+    playerInventoryMoney = dataSaveList[5]
+    playerStatPoints = dataSaveList[6]
+    playerStats = dataSaveList[7]
     itemsDict = dataSaveList[8]
-    playerInventoryMoney = 5.00
-    playerStatPoints = 0    
-    playerStats = [1, 15, 15, 2, 1, 0.00] # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-
 
     while True:  # >>>>>>>>>> MAIN GAME LOOP <<<<<<<<<<<
         itemAddStats = []
@@ -160,8 +168,12 @@ def IngameMenu(dataSaveList):
             case "3": playerStats, playerStatPoints = Stats.StatMenu(
                     playerStats, playerStatPoints, playerName, itemsDict)
 
-            case "0": dataSaveList = MainMenu.MainMenu(dataSaveList)
+            case "0": dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)
             case _: print("\nCouldn't understand you?!")
+        if newGame == True:
+            break
+    return newGame
+        
         
 
 
