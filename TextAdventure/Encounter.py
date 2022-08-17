@@ -20,7 +20,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
     _locations = [startLocation, "the town", "the forest", "the flatlands", "the mountains", "the castle", "the islands"]
-    _locationIndexList = [1,          100,            1,             2,               6,              8,          10]
+    _locationIndexList = [1,          100,            1,             1,               1,              1,          1]
     enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
     if enemyLevel <= 0:
         enemyLevel = 1
@@ -41,7 +41,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
                 
 
     luck = random.randint(1,100)                                                    
-    if luck >= 70:                                                           ###! ONLY FOR TESTING!###
+    if luck >= 98:                                                          
         itemsDict, playerInventoryMoney, playerStats = Inventory.WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
