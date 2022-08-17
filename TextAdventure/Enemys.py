@@ -7,7 +7,7 @@
 
 def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel):
     sl = round(enemyLevel / 1.5)
-    droprateIncrease = round(enemyLevel / 3.5)
+    
     
     enemyDictEasy = {
             1001 : ["Pack of Rats",   enemyLevel,     4+sl,    2+sl,   1+sl,   1.00,   PicRat],
@@ -19,10 +19,10 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel):
             1007 : ["Minosaur ",      enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicMinosaur],
             1008 : ["Scorpion",       enemyLevel,     5+sl,    2+sl,   2+sl,   1.00,   PicScorpion],
             1009 : ["Skeleton",       enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton],
-            1010 : ["Amateur Warrior",enemyLevel,     8+sl,    1+sl,   1+sl,   1.00,   PicAmateurWarrior],
-            1011 : ["CyClops",        enemyLevel,     7+sl,    3+sl,   2+sl,   2.00,   PicCyclops],
+            1010 : ["Amateur Warrior",enemyLevel,     9+sl,    2+sl,   1+sl,   1.00,   PicAmateurWarrior],
+            1011 : ["CyClops",        enemyLevel,    10+sl,    1+sl,   3+sl,   2.00,   PicCyclops],
             1012 : ["ApeMan",         enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan],
-            1013 : ["Mutant Fox",     enemyLevel,     8+sl,    4+sl,   3+sl,   3.00,   PicMutantFox],
+            1013 : ["Mutant Fox",     enemyLevel,     8+sl,    4+sl,   2+sl,   3.00,   PicMutantFox],
             1014 : ["Native Cannibal",enemyLevel,     7+sl,    2+sl,   2+sl,   2.00,   PicNativeCannibal]
             }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     enemyDictMedium = {
