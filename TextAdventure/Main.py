@@ -67,8 +67,9 @@ import Items
 ################################################################################# MAIN GAME #################################################################################
 ### Main Game
 def Main():
+    newGame = False
     while True:
-        newGame = False
+        
         itemsDict = {}
         itemsDict = Items.Items(itemsDict)
         playerInventoryMoney = 5.00
@@ -85,15 +86,17 @@ def Main():
         except FileNotFoundError:        
             with open(f'Savepoint_Status.pickle', 'wb') as manSaveHandler:
                 pickle.dump(dataSaveList[1], manSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)
-        Intro.Intro()     
-        # sleep(2)
-        
-        dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)
+        if newGame == False:
+            Intro.Intro()     
+            # sleep(2)        
+            dataSaveList, newGame = MainMenu.MainMenu(dataSaveList, newGame)
+            newGame = False
         if dataSaveList[2] == "":
             dataSaveList = Start(dataSaveList)
         newGame = IngameMenu(dataSaveList, newGame)
         if newGame == True:
             sys.stdout.flush()
+            newGame = True
             continue
 
 
