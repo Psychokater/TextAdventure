@@ -7,14 +7,17 @@
 #                                  #
 #################################### 
 
-#----------------------------
-#           ToDo:  
-#----------------------------
+#----------------------------#
+#           ToDo             #
+#----------------------------#
 #
-# -Encounter (Minor Improvements) (Nils) --- DONE
-# -Inventory, Items, Merchant, Loot(?!) (Samo) half DONE
-# -Stats (Fix HP Bug, add Max HP, print HP in Stats and after fights)(Nils) --- DONE
-# -Encounter (add Monsters, add Merchant/Wanderer, edit Chances for Encounter, Chances for Gold) (Nils and Samo)     
+# - improving and refactoring Load/Save/MainMenu (Nils)
+# - add Items and Monsters (Samo)
+# - add more Locations and Dungeon (Nils)
+# 
+# ----------------------------#
+
+
 import os
 import sys
 import random
