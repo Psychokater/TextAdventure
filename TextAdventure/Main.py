@@ -156,6 +156,7 @@ def IngameMenu(dataSaveList, newGame):
             itemAddStats = []
             itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict) 
             playerStats, playerStatPoints, itemsDict = Stats.LevelUp(playerStats, playerStatPoints, playerName, itemsDict)        
+            dataSaveList[4] = location
             dataSaveList[5] = playerInventoryMoney 
             dataSaveList[6] = playerStatPoints
             dataSaveList[7] = playerStats
