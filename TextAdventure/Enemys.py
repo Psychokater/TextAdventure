@@ -14,10 +14,10 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel):
             1002 : ["Bird",         enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
             1003 : ["Wolf",         enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
             1004 : ["Skeleton",     enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton],
-            1005 : ["Kleinosor",    enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicKleinosor],
+            1005 : ["Minosaur",     enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicMinosaur],
             1006 : ["CyClops",      enemyLevel,     7+sl,    3+sl,   2+sl,   2.00,   PicCyclops],
             1007 : ["Scopion",      enemyLevel,     5+sl,    2+sl,   2+sl,   1.00,   PicScopion],
-            1004 : ["ApeMan",     enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan]
+            1008 : ["ApeMan",       enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan]
             }  #Enemy: 0 Name,       1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic       
     enemyDictMedium = {
             1101 : ["Ghost",        enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
@@ -243,12 +243,12 @@ def PicDragon():
                    
                    """)
 ############################################################################
-def PicKleinosor():
+def PicMinosaur():
   print ("""
-  If i got Bigger i will ea you 
+  If I get bigger, I will eat you !
 
   oo`'._..---.___..-
- (_,-.        ,..'`
+ (_,-.   ,    ,..'`
       `'.    ;
          : :`
         _;_;
@@ -256,19 +256,19 @@ def PicKleinosor():
 ######################################################################
 def PicCyclops():
   print ("""
-  Never seen someone handsome with one eye?
-  Stars… are my eyes!
+  'Never seen someone handsome with one eye?
+  Stars… are my eyes!'
             _......._
         .-'.'.'.'.'.'.`-.
       .'.'.'.'.'.'.'.'.'.`.
-     /.'.'               '.\
+     /.'.'               '.\\
      |.'    _.--...--._     |
      \    `._.-.....-._.'   /
      |     _..- .-. -.._   |
   .-.'    `.   ((@))  .'   '.-.
  ( ^ \      `--.   .-'     / ^ )
   \  /         .   .       \  /
-  /          .'     '.  .-    \
+  /          .'     '.  .-    \\
  ( _.\    \ (_`-._.-'_)    /._\)
   `-' \   ' .--.          / `-'
       |  / /|_| `-._.'\   |
@@ -277,11 +277,12 @@ def PicCyclops():
        \       .....     |
         `.  .'      `.  /
           \           .'
-           `-..___..-`""")
+           `-..___..-`
+           """)
 ##############################################################
 def PicScopion():
   print ("""
-  Life is too short for bad Vipes
+  'Life is too short for bad bad coffee'
 ⠀⠀⢀⣤⣤⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⢀⣿⣿⡿⠟⠿⠿⢿⣿⣷⣶⣤⣶⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⣿⣿⣿⠀⠀⠀⠀⠀⠙⠛⢻⣿⣿⣿⣿⣿⣦⣀⡀⢀⣀⡼⠀⠀⠀⠀⠀⠀⠀
@@ -295,27 +296,29 @@ def PicScopion():
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠉⠀⠀⠈⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣿⣿⣶⣤⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀⠀""")
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠛⠓⠀⠀⠀⠀⠀⠀⠀⠀
+⠀""")
 ###############################################################
 def PicWildCat():
   print ("""
-  Big Meaaaaooowwwwwwww
-      ( \
-       \ \
-       / /                |\\
+  'Big Meaaaaooowwwwwwww'
+      ( \\
+       \ \\
+       / /                |\\\\
       / /     .-`````-.   / ^`-.
       \ \    /         \_/  {|} `o
-       \ \  /   .---.   \\ _  ,--'
+       \ \  /   .---.   \\\\ _  ,--'
         \ \/   /     \,  \( `^^^
          \   \/\      (\  )
-          \   ) \     ) \ \
+          \   ) \     ) \ \\
            ) /__ \__  ) (\ \___
-          (___)))__))(__))(__)))""")
+          (___)))__))(__))(__)))
+          """)
   ###########################################################
 def PicApeMan():
     print("""
-Its not evolution if you genetically engineer stuff.
-Genetic engineering becomes revolution just does not have the same ring to it.
+'Its not evolution if you genetically engineer stuff.
+Genetic engineering becomes revolution just does not have the same ring to it.'
          ||
         _;|
        /__3
@@ -324,29 +327,30 @@ Genetic engineering becomes revolution just does not have the same ring to it.
      \ \// / (OO)
       \//  |( _ )
       // \__/`-'\__
-     // \__      _ \
- _.-'/    | ._._.|\ \
-(_.-'     |      \ \ \
+     // \__      _ \\
+ _.-'/    | ._._.|\ \\
+(_.-'     |      \ \ \\
    .-._   /    o ) / /
   /_ \ \ /   \__/ / /
     \ \_/   / /  E_/
      \     / /
-      `-._/-' """)
+      `-._/-'
+       """)
 #############################################################
 def PicSeeCrab():
   print ("""
-This Time You will be the Meal 
+'This Time You will be the Meal' 
        ___     ___
      .i .-'   `-. i.
    .'   `/     \'  _`.
    |,-../ o   o \.' `|
 (| |   /  _\ /_  \   | |)
- \\\  (_.'.'"`.`._)  ///
-  \\`._(..:   :..)_.'//
+ \\\\\  (_.'.'"`.`._)  ///
+  \\\\`._(..:   :..)_.'//
    \`.__\ .:-:. /__.'/
     `-i-->.___.<--i-'
     .'.-'/.=^=.\`-.`.
-   /.'  //     \\  `.\
+   /.'  //     \\\\  `.\\
   ||   ||       ||   ||
   \)   ||       ||  (/
        \)       (/     
