@@ -68,13 +68,15 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
             z += 1                                                              #   Enumerate + 1
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
             print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
-            for j in range (0,len(itemsDict[i])):                
+            for j in range (0,len(itemsDict[i])):
+                if j == 2:
+                    print('{:<15}'.format(itemsDict[i][j]),end='')                
                 if j == 11:
                     if itemsDict[i][j] > 10:
                         print ("\u25cf",end='')                     
                     elif itemsDict[i][j] > 0 and itemsDict[i][j] < 8:
                         print ("\u25cb",end='')                                 #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 2, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue
                                                                                 #
@@ -218,11 +220,13 @@ def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMon
             print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 if j == 11:
+                    if j == 2:
+                        print('{:<15}'.format(itemsDict[i][j]),end='')  
                     if itemsDict[i][j] > 10:
                         print ("\u25cf",end='') #"Equipped"
                     elif itemsDict[i][j] > 0 and itemsDict[i][j] < 8:
                         print ("\u25cb",end='') 
-                _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 2, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                   
                                                                                 #
@@ -372,7 +376,9 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
             merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
             print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
+                if j == 2:
+                    print('{:<15}'.format(itemsDict[i][j]),end='')                            #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
@@ -493,7 +499,9 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
             wizardItemIDs.append(i)                                             #   append Item ID to List of ItemID's
             print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
+                if j == 2:
+                    print('{:<15}'.format(itemsDict[i][j]),end='')                            #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
@@ -617,7 +625,9 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
             wandererItemIDs.append(i)                                           #   append Item ID to List of ItemID's
             print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                _tempListIndexJ = [0, 1, 8, 9, 10, 11]                          #           except for these Indexes!
+                _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
+                if j == 2:
+                    print('{:<15}'.format(itemsDict[i][j]),end='')                            #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
