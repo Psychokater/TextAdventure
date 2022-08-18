@@ -128,11 +128,12 @@ def Start(dataSaveList):
             continue
         else:
             break
-    # sleep(1)
+    sleep(1)
     print(f"\nWelcome to your first adventure {playerName}!")
-    # sleep(2)
+    sleep(2)
     print(f"\nYou wake up in {location}")
-    # sleep(2)    
+    PicStartFire()
+    sleep(2)    
     dataSaveList[2] = playerName
     dataSaveList[3] = startLocation
     dataSaveList[4] = location
@@ -212,8 +213,9 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
         # sleep(2)        
         if _temp != "x":
             location = _temp
+            _tempPic()
             break      
-    _tempPic()  
+      
     print(f"\nYou moved to {location}\n")       
     # sleep(2)
     
@@ -245,7 +247,7 @@ def World(startLocation, location, direction):
     for i in range(0,4):
         if compass[i] == direction:
             if worldmap[location][i] != 0:
-                return worldmap[location][i],worldmap[location][4]
+                return worldmap[location][i],worldmap[worldmap[location][i]][4]
         
     
     print("\nYou can't move there, try a different direction!\n")
