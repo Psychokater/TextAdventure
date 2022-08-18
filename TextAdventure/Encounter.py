@@ -22,14 +22,6 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     enemyID = 0
     _locations = [startLocation, "the town", "the forest", "the flatlands", "the mountains", "the castle", "the islands"]
     _locationIndexList = [1,          100,            1,             1,               1,              1,          1]
-    enemyLevel = random.randint(playerStats[0]-1, playerStats[0]+2)
-    if enemyLevel <= 0:
-        enemyLevel = 1
-    
-    enemyDictEasy = {}
-    enemyDictMedium = {}
-    enemyDictHard = {}
-    enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel)
 
     
     for i in range(0,len(_locations)):
@@ -45,7 +37,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     if luck >= 98:                                                          
         itemsDict, playerInventoryMoney, playerStats = Inventory.WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
     encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
-    enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard)
+    enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex)
     
                          
     
@@ -89,7 +81,13 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
 ############################################################################# SELECT ENEMY #############################################################################
-def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, enemyDictHard):       
+def EnemySelection(playerStats, encounterIndex):       
+    enemyDictEasy = {}
+    enemyDictMedium = {}
+    enemyDictHard = {}    
+    sl = 0
+
+    enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, sl)
     enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
     selectedDict = {}
     _tempList = []
@@ -126,6 +124,10 @@ def EnemySelection(playerStats, encounterIndex, enemyDictEasy, enemyDictMedium, 
     elif selectedDictID == 2 and playerStats[0] < 10:
         EncounterLowLevel()        
         enemyID = 0
+    
+    for i in selectedDict:
+        selectedDict[i][1] = random.randint(selectedDict[i][5],selectedDict[i][5] + 3)            
+        sl = (selectedDict[i][1] - selectedDict[i][5]) * round(selectedDict[i][5] * 0.5)  
 
     return enemyID, selectedDict, selectedDictID
 
