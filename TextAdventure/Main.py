@@ -11,9 +11,10 @@
 #           ToDo             #
 #----------------------------#
 #
-# - improving and refactoring Load/Save/MainMenu (Nils)
-# - add Items and Monsters (Samo)
+# - add Items and Monsters (Samo) on the way
 # - add more Locations and Dungeon (Nils)
+# - quests 
+# - Gates
 # 
 # ----------------------------#
 
@@ -94,7 +95,7 @@ def Main():
                 newGame = False               
                 dataSaveList = Start(dataSaveList)
         elif newGame == False:        
-            dataSaveList = Start(dataSaveList)                 
+            dataSaveList = Start(dataSaveList)              
         dataSaveList, newGame, load = IngameMenu(dataSaveList, newGame)
         if newGame == True:           
             newGame = False
@@ -164,8 +165,7 @@ def IngameMenu(dataSaveList, newGame):
             dataSaveList[8] = itemsDict
             dataSaveList[0] = 0
             dataSaveList = SaveLoad.Save(dataSaveList)
-            dataSaveList[0] = 1
-
+            dataSaveList[0] = 1            
             userInput = input("\nWhat to do now?\n(1) Move\t(2) Inventory\t(3) Stats\t(0) Exit to main menu\n")
             os.system('cls')
             if userInput == "1":
