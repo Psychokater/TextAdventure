@@ -236,7 +236,7 @@ def World(startLocation, location, direction):
     worldmap = {
     # Location                    North                  East                 South                  West
     startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
-    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
+    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTheTown],
     "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
     "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
     "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
@@ -354,6 +354,18 @@ def PicCastle():
 def PicIslands():
     print("make pic here")
 ########################################################################
-
+def PicTheTown():
+    print(""" 
+~         ~~          __
+       _T      .,,.    ~--~ ^^
+ ^^   // \                    ~
+      ][O]    ^^      ,-~ ~
+   /''-I_I         _II____
+__/_  /   \ ______/ ''   /'\_,__
+  | II--'''' \,--:--..,_/,.-{ },
+; '/__\,.--';|   |[] .-.| O{ _ }
+:' |  | []  -|   ''--:.;[,.'\,/
+'  |[]|,.--'' '',   ''-,.    |
+  ..    ..-''    ;       ''. ' """)
 
 Main()

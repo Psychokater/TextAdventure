@@ -14,7 +14,6 @@ from Colors import cl
 #ENTRYPOINT (Choose where to go -> Merchant, Wizard or Inventory)
 def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
-        PicTheTown()   
         userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(0) Leave Town\n")      
         os.system('cls')
         match userInput:
@@ -724,16 +723,15 @@ def PicWanderer():
     (_.-.__.__./    /
     """)
 
-def PicTheTown():
-    print(""" 
-~         ~~          __
-       _T      .,,.    ~--~ ^^
- ^^   // \                    ~
-      ][O]    ^^      ,-~ ~
-   /''-I_I         _II____
-__/_  /   \ ______/ ''   /'\_,__
-  | II--'''' \,--:--..,_/,.-{ },
-; '/__\,.--';|   |[] .-.| O{ _ }
-:' |  | []  -|   ''--:.;[,.'\,/
-'  |[]|,.--'' '',   ''-,.    |
-  ..    ..-''    ;       ''. ' """)
+
+
+
+
+
+
+
+
+
+
+
+
