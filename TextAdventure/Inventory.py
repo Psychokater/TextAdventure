@@ -72,7 +72,9 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
             for j in range (0,len(itemsDict[i])):                
                 if j == 11:
                     if itemsDict[i][j] > 10:
-                        print ("\u25cf",end='')                              #       for every Value Index of every Item
+                        print ("\u25cf",end='')                     
+                    elif itemsDict[i][j] > 0 and itemsDict[i][j] < 8:
+                        print ("\u25cb",end='')                                 #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue
@@ -94,7 +96,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
         os.system('cls')
 ################ Player Equipment ##########################
         if userInput == "1":
-            itemsDict, playerItemIDs = PlayerEquipment(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+            itemsDict, playerItemIDs = PlayerEquipment(itemsDict, playerItemIDs, playerName, playerInventoryMoneyplayerStats)
 ################ Items ####################################
         elif userInput == "2":
             itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
@@ -177,9 +179,9 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     return itemsDict, playerStats
 
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
-def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney):
+def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats):
         while True:
-            print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\n')
+            print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n\n')
             print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
             '------------------------------------------------------------------------')
             z = 1
@@ -198,6 +200,8 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         if j == 11:
                             if itemsDict[i][j] > 10:
                                 print ("\u25cf",end='') #"Equipped"
+                            elif itemsDict[i][j] > 0 and itemsDict[i][j] < 8:
+                                print ("\u25cb",end='') 
                         _tempListIndexJ = [0, 1, 7, 9, 10, 11]                          #           except for these Indexes!
                         if j in _tempListIndexJ:                                        #
                             continue                   
