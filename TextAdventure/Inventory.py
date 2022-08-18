@@ -112,12 +112,12 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                 except ValueError:
                     print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
                     continue
+                if userInputItemNumber == 0:
+                    break
                 os.system('cls')  
                 itemKeyList = [key for key in itemsDict]
                 for i in itemKeyList: 
-                    if userInputItemNumber == itemsDict[i][1]:
-                        if userInputItemNumber == 0:
-                            break
+                    if userInputItemNumber == itemsDict[i][1]:              
                         if itemsDict[i][11] > 0:
                             print(f"{cl.RED}You can't use{cl.RESET} {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}")
                             continue
@@ -181,12 +181,11 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                     print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
                     continue
                 os.system('cls')
-                
+                if userInputItemNumber == 0:
+                    break 
                 itemKeyList = [key for key in itemsDict]
                 for n in itemKeyList:  
-                    if userInputItemNumber == itemsDict[n][1]:
-                        if userInputItemNumber == 0:
-                            break 
+                    if userInputItemNumber == itemsDict[n][1]:                      
                         itemsDict[n][8] -= 1
                         if itemsDict[n][11] >= 10:
                             itemsDict[n][11] -= 10
@@ -251,12 +250,12 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney,
                     except ValueError:
                         print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
                         continue
-                    os.system('cls')      
+                    os.system('cls')
+                    if userInputItemNumber == 0:
+                        break      
                     itemKeyList = [key for key in itemsDict]
                     for j in itemKeyList: 
-                        if userInputItemNumber == itemsDict[j][1]:
-                            if userInputItemNumber == 0:
-                                break
+                        if userInputItemNumber == itemsDict[j][1]:                         
                             if itemsDict[j][11] >= 10:
                                 print(f"{cl.YELLOW}{itemsDict[j][2]}{cl.RESET} is already equipped!")
                                 # sleep(1)
@@ -280,12 +279,11 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney,
                         print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
                         continue
                     os.system('cls')  
-                    
+                    if userInputItemNumber == 0:                            
+                        break                     
                     itemKeyList = [key for key in itemsDict]
                     for o in itemKeyList: 
-                        if userInputItemNumber == itemsDict[o][1]:
-                            if userInputItemNumber == 0:                            
-                                break 
+                        if userInputItemNumber == itemsDict[o][1]:                          
                             if itemsDict[o][11] < 10:
                                 print(f"{cl.RED}You have already unequipped{cl.RESET} {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
                                 # sleep(1)
