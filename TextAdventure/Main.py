@@ -234,7 +234,7 @@ def World(startLocation, location, direction):
     worldmap = {
     # Location                    North                  East                 South                  West
     startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
-    "the Town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTown],
+    "the Town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
     "the Flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
     "the Forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
     "the Mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
