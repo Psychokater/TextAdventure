@@ -54,7 +54,7 @@ def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}\n')
+    print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
@@ -179,7 +179,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney):
         while True:
-            print(f'{playerName}\t\t\tGold:\t{playerInventoryMoney}\n')
+            print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\n')
             print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
             '------------------------------------------------------------------------')
             z = 1
@@ -346,7 +346,7 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    print(round(itemsDict[i][j]* 1.5 + 2,2),end='\t')                    #               Print "Value" of Item * 1.5 + 2
                     continue                                                    #
                 if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
                     print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Merchant Quantity")
@@ -376,7 +376,7 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
         if userInputItemNumber == itemsDict[i][0]:
             if userInputItemNumber == 0:
                 break
-            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+            if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                 print("\nNot enough money, fool!\n")
                 # sleep(1)
                 break     
@@ -468,7 +468,7 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    print(round(itemsDict[i][j]* 1.5 + 2,2),end='\t')                    #               Print "Value" of Item * 1.5 + 2
                     continue                                                    #
                 if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
                     print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Wizard Quantity")
@@ -498,7 +498,7 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
         if userInputItemNumber == itemsDict[i][0]:
             if userInputItemNumber == 0:
                 break
-            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+            if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                 print("\nNot enough money, fool!\n")
                 # sleep(1)
                 break
@@ -592,7 +592,7 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
-                    print(itemsDict[i][j]* 1.5 + 2,end='\t')                    #               Print "Value" of Item * 1.5 + 2
+                    print(round(itemsDict[i][j]* 1.5 + 2,2),end='\t')                    #               Print "Value" of Item * 1.5 + 2
                     continue                                                    #
                 if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
                     print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Wanderer Quantity")
@@ -622,7 +622,7 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
         if userInputItemNumber == itemsDict[i][0]:
             if userInputItemNumber == 0:
                 break
-            if playerInventoryMoney < itemsDict[i][6] * 1.5 + 2: 
+            if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                 print("\nNot enough money, fool!\n")
                 # sleep(1)
                 break
