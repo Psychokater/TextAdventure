@@ -179,8 +179,8 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
 
     if enemyID not in enemyWithoutEquipment:
         for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
-            itemEnemyAddStats[3] += itemsDict[s][3]
-            itemEnemyAddStats[4] += itemsDict[s][4]      
+            itemEnemyAddStats[3] += round(itemsDict[s][3] * 0.5)
+            itemEnemyAddStats[4] += round(itemsDict[s][4] * 0.5)     
                                                                                          # Names of enemy Items
         for t in _itemEnemyItems:
             itemEnemyItems.append(itemsDict[t][2])  
