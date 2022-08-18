@@ -216,7 +216,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             PicDeath()
             sleep(4)
             PicFairie()
-            playerInventoryMoney -= playerInventoryMoney * 0.1
+            playerInventoryMoney -= round(playerInventoryMoney * 0.1,2)
             playerStats[5] *= 0.25
             location = "the town"
             playerStats[2] = 1
@@ -260,12 +260,12 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             else:
                 critDmg = 1 
                                                                                           # Player attacks first
-            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {round((playerStats[3] + itemAddStats[3]) * critDmg)} {critMessage} damage.")
+            print(f"\nYou attack {selectedDict[enemyID][0]} with {itemPlayerPrimary} and did {round((playerStats[3] + itemAddStats[3]) * critDmg,2)} {critMessage} damage.")
             sleep(0.5)
-            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)} {blockMessage} damage.")
+            print(f"{selectedDict[enemyID][0]} defends himself with {itemEnemyItems[1]} and blocks {round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)} {blockMessage} damage.")
             sleep(0.5)
-            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
+            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg,2)):                               # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2))) # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
@@ -285,12 +285,12 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 else:
                     critDmg = 1 
 
-                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)} {critMessage} damage.")  # Enemy attacks second
+                print(f"{selectedDict[enemyID][0]} attacks you with {itemEnemyItems[0]} and did {round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg),2} {critMessage} damage.")  # Enemy attacks second
                 sleep(0.5)
-                print(f"You defend yourself with {itemPlayerSecondary} and block {(round((playerStats[4] + itemAddStats[4]) * blockChance))} {blockMessage} damage.")
+                print(f"You defend yourself with {itemPlayerSecondary} and block {(round((playerStats[4] + itemAddStats[4]) * blockChance,2))} {blockMessage} damage.")
                 sleep(0.5)
-                if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
-                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
+                if (round((playerStats[4] + itemAddStats[4]) * blockChance,2)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg),2):                       # E_DEF < P_ATK?
+                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance,2)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg,2)))  # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:
@@ -320,7 +320,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             playerInventoryMoney -= (playerStats[0] * 2)
             if playerInventoryMoney - (playerStats[0] * 2) <= 0:
                 playerInventoryMoney = 0
-            _temp2 = (((selectedDict[enemyID][3] + itemEnemyAddStats[3]) / 2))
+            _temp2 = (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) / 2,2))
             playerStats[2] -= round(_temp2,2)
             if playerStats[2] < 0:
                     playerStats[2] = 0 
@@ -332,7 +332,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 PicDeath()
                 sleep(4)
                 PicFairie()
-                playerInventoryMoney -= playerInventoryMoney * 0.1
+                playerInventoryMoney -= round(playerInventoryMoney * 0.1,2)
                 playerStats[5] *= 0.25
                 location = "the town"
                 playerStats[2] = 1
