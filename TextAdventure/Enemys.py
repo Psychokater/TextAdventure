@@ -1,45 +1,42 @@
+
+
+
 #############################################################################################################################################################################
 #--------------------------------------------------------------------------------- ENEMYS ----------------------------------------------------------------------------------#
 #############################################################################################################################################################################
 
 
 
-
-from random import randint, random
-
-
-def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel, sl):
+def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard):
   
-  sl = 0
-
   enemyDictEasy = {
-          1001 : ["Pack of Rats",   enemyLevel,     4+sl,    2+sl,   1+sl,   1.00,   PicRat],
-          1002 : ["Bird",           enemyLevel,     4+sl,    3+sl,   1+sl,   2.00,   PicBird],
-          1003 : ["Wolf",           enemyLevel,     6+sl,    4+sl,   2+sl,   2.00,   PicWolf],
-          1004 : ["Wild Cat",       enemyLevel,     5+sl,    4+sl,   1+sl,   2.00,   PicWildCat],
-          1005 : ["See Crab",       enemyLevel,     4+sl,    3+sl,   3+sl,   2.00,   PicSeeCrab],
-          1006 : ["Cave Bat",       enemyLevel,     2+sl,    3+sl,   1+sl,   1.00,   PicCaveBat],
-          1007 : ["Minosaur ",      enemyLevel,     5+sl,    2+sl,   1+sl,   1.00,   PicMinosaur],
-          1008 : ["Scorpion",       enemyLevel,     5+sl,    2+sl,   2+sl,   1.00,   PicScorpion],
-          1009 : ["Skeleton",       enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicSkeleton],
-          1010 : ["Amateur Warrior",enemyLevel,     9+sl,    2+sl,   1+sl,   1.00,   PicAmateurWarrior],
-          1011 : ["CyClops",        enemyLevel,    10+sl,    1+sl,   3+sl,   2.00,   PicCyclops],
-          1012 : ["ApeMan",         enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan],
-          1013 : ["Mutant Fox",     enemyLevel,     8+sl,    4+sl,   2+sl,   3.00,   PicMutantFox],
-          1014 : ["Native Cannibal",enemyLevel,     6+sl,    3+sl,   1+sl,   2.00,   PicNativeCannibal]
-          }  #Enemy: 0 Name,         1 LVL,         2 HP,     3 ATK,   4 DEF,   5 LVL, 6 Pic
-  enemyDictMedium = {
-          1101 : ["Ghost",          enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
-          1102 : ["Bandit",         enemyLevel,     10+sl,   4+sl,   2+sl,   8.00,   PicBandit],
-          1103 : ["Troll",          enemyLevel,     12+sl,   6+sl,   4+sl,   8.00,   PicTroll],
-          1108 : ["Centaur",        enemyLevel,     15+sl,   8+sl,   5+sl,  10.00,   PicCentaur]
-          }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
-  enemyDictHard = {
-          1201 : ["Minotaur",       enemyLevel,     20+sl,   10+sl,  4+sl,  15.00,   PicMinotaur],
-          1202 : ["Gryphon",        enemyLevel,     25+sl,   10+sl,  8+sl,  20.00,   PicGryphon],
-          1203 : ["Dragon",         enemyLevel,     50+sl,   20+sl,  12+sl, 30.00,   PicDragon]
-          }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
-  
+          1001 : ["Pack of Rats",      0,     4,    2,   1,   1.00,   PicRat],
+          1002 : ["Bird",              0,     4,    3,   1,   2.00,   PicBird],
+          1003 : ["Wolf",              0,     6,    4,   2,   2.00,   PicWolf],
+          1004 : ["Wild Cat",          0,     5,    4,   1,   2.00,   PicWildCat],
+          1005 : ["See Crab",          0,     4,    3,   3,   2.00,   PicSeeCrab],
+          1006 : ["Cave Bat",          0,     2,    3,   1,   1.00,   PicCaveBat],
+          1007 : ["Minosaur ",         0,     5,    2,   1,   1.00,   PicMinosaur],
+          1008 : ["Scorpion",          0,     5,    2,   2,   1.00,   PicScorpion],
+          1009 : ["Skeleton",          0,     8,    2,   2,   2.00,   PicSkeleton],
+          1010 : ["Amateur Warrior",   0,     9,    2,   1,   1.00,   PicAmateurWarrior],
+          1011 : ["CyClops",           0,    10,    1,   3,   2.00,   PicCyclops],
+          1012 : ["ApeMan",            0,     8,    2,   2,   2.00,   PicApeMan],
+          1013 : ["Mutant Fox",        0,     8,    4,   2,   3.00,   PicMutantFox],
+          1014 : ["Native Cannibal",   0,     6,    3,   1,   2.00,   PicNativeCannibal]
+          }  #Enemy: 0 Name,         1 LVL,   2 HP,   3 ATK,   4 DEF,   5 LVL, 6 Pic
+  enemyDictMedium = {   
+          1101 : ["Ghost",             0,     10,   4,   2,   6.00,   PicGhost],
+          1102 : ["Bandit",            0,     10,   4,   2,   8.00,   PicBandit],
+          1103 : ["Troll",             0,     12,   6,   4,   8.00,   PicTroll],
+          1108 : ["Centaur",           0,     15,   8,   5,  10.00,   PicCentaur]
+          }  #Enemy: 0 Name,         1 LVL,   2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
+  enemyDictHard = {   
+          1201 : ["Minotaur",          0,     20,   10,  4,  15.00,   PicMinotaur],
+          1202 : ["Gryphon",           0,     25,   10,  8,  20.00,   PicGryphon],
+          1203 : ["Dragon",            0,     50,   20, 12,  30.00,   PicDragon]
+          }  #Enemy: 0 Name,         1 LVL,   2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
+     
   return enemyDictEasy, enemyDictMedium, enemyDictHard
 
 
@@ -337,7 +334,7 @@ def PicTroll():
 ##########################################################
 def PicCentaur():
     print("""
-    'Shopping is quite a hassl.
+    'Shopping is quite a ha.
     Shirts are not the problem, 
     but how the fuck am I supposed to find fitting pants?'
                 __

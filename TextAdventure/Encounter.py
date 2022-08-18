@@ -81,14 +81,14 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
 
 ############################################################################# SELECT ENEMY #############################################################################
-def EnemySelection(playerStats, encounterIndex):       
+def EnemySelection(playerStats, encounterIndex):   
+    #Edit this function later to config chances for Encounter    
     enemyDictEasy = {}
     enemyDictMedium = {}
     enemyDictHard = {}    
-    sl = 0
 
-    enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, sl)
-    enemyID = 0                                                                                        #Edit this function later to config chances for Encounter
+    enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard)
+    enemyID = 0                                                                                      
     selectedDict = {}
     _tempList = []
     selectedDictID = 0
@@ -124,10 +124,11 @@ def EnemySelection(playerStats, encounterIndex):
     elif selectedDictID == 2 and playerStats[0] < 10:
         EncounterLowLevel()        
         enemyID = 0
-    
-    for i in selectedDict:
-        selectedDict[i][1] = random.randint(selectedDict[i][5],selectedDict[i][5] + 3)            
-        sl = (selectedDict[i][1] - selectedDict[i][5]) * round(selectedDict[i][5] * 0.5)  
+   
+    if enemyID != 0:
+        selectedDict[enemyID][1] = random.randint(selectedDict[enemyID][5],selectedDict[enemyID][5]+3)            
+        for i in range(2,5):
+            selectedDict[enemyID][i] += round((selectedDict[enemyID][1] - selectedDict[enemyID][5]) * (selectedDict[enemyID][5] * 0.5))  
 
     return enemyID, selectedDict, selectedDictID
 
