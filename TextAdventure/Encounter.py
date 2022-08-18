@@ -238,9 +238,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
         (selectedDict[enemyID][6]())
         UserInputFight = input(""\
-        f"\n{cl.BLUE}{playerName}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{playerStats[1]}{cl.RESET}\n"\
+        f"\n{cl.BLUE}{playerName}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
         f"----------- VS -----------\n"\
-        f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{enemyMaxHP}{cl.RESET}\nItems: {itemEnemyItems}\n\n"\
+        f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
 
@@ -261,17 +261,17 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             else:
                 critDmg = 1 
                                                                                           # Player attacks first
-            print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg,2)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
+            print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
             sleep(0.5)
-            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} defends himself with {cl.YELLOW}{itemEnemyItems[1]}{cl.RESET} and blocks {cl.BLUE}{round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
+            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} defends himself with {cl.YELLOW}{itemEnemyItems[1]}{cl.RESET} and blocks {cl.BLUE}{round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
             sleep(0.5)
-            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)) < (round((playerStats[3] + itemAddStats[3]) * critDmg,2)):                               # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2))) # E_HP += E_DEF - P_ATK
+            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
             else:
                 print("Attack blocked")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
-            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {round(selectedDict[enemyID][2],2)} HP left.")
+            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {round(selectedDict[enemyID][2])} HP left.")
             sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
@@ -286,12 +286,12 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 else:
                     critDmg = 1 
 
-                print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
+                print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
                 sleep(0.5)
-                print(f"You defend yourself with {cl.YELLOW}{itemPlayerSecondary}{cl.RESET} and block {cl.BLUE}{(round((playerStats[4] + itemAddStats[4]) * blockChance,2))}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
+                print(f"You defend yourself with {cl.YELLOW}{itemPlayerSecondary}{cl.RESET} and block {cl.BLUE}{(round((playerStats[4] + itemAddStats[4]) * blockChance))}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
                 sleep(0.5)
-                if (round((playerStats[4] + itemAddStats[4]) * blockChance,2)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)):                       # E_DEF < P_ATK?
-                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance,2)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg,2)))  # P_HP += P_DEF - E_ATK 
+                if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
+                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
                 else:   
                     print("Attack blocked")
                 if playerStats[2] < 0:

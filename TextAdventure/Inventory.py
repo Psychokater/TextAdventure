@@ -225,11 +225,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney,
                     if userInputItemNumber == itemsDict[j][1]:
                         if userInputItemNumber == 0:
                             break
-                        if itemsDict[j][11] == 0:
-                            print(f"{cl.RED}You can't equip{cl.RESET} {cl.YELLOW}{itemsDict[j][2]}{cl.RESET}")
-                            # sleep(1)
-                            continue 
-                        elif itemsDict[j][11] >= 10:
+                        if itemsDict[j][11] >= 10:
                             print(f"{cl.YELLOW}{itemsDict[j][2]}{cl.RESET} is already equipped!")
                             # sleep(1)
                             continue 
@@ -259,7 +255,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney,
                         if userInputItemNumber == 0:                            
                             break 
                         if itemsDict[o][11] < 10:
-                            print(f"{cl.RED}You can't unequip{cl.RESET} {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
+                            print(f"{cl.RED}You have already unequipped{cl.RESET} {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
                             # sleep(1)
                             continue 
                         elif itemsDict[o][11] >= 10: 
