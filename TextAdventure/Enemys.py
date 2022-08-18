@@ -23,7 +23,7 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard, enemyLevel):
             1011 : ["CyClops",        enemyLevel,    10+sl,    1+sl,   3+sl,   2.00,   PicCyclops],
             1012 : ["ApeMan",         enemyLevel,     8+sl,    2+sl,   2+sl,   2.00,   PicApeMan],
             1013 : ["Mutant Fox",     enemyLevel,     8+sl,    4+sl,   2+sl,   3.00,   PicMutantFox],
-            1014 : ["Native Cannibal",enemyLevel,     7+sl,    2+sl,   2+sl,   2.00,   PicNativeCannibal]
+            1014 : ["Native Cannibal",enemyLevel,     6+sl,    3+sl,   1+sl,   2.00,   PicNativeCannibal]
             }  #Enemy: 0 Name,         1 LVL,         2 HP,   3 ATK,   4 DEF,  5 Dropvalue, 6 Pic
     enemyDictMedium = {
             1101 : ["Ghost",          enemyLevel,     10+sl,   4+sl,   2+sl,   6.00,   PicGhost],
