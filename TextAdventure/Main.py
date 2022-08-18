@@ -233,13 +233,13 @@ def World(startLocation, location, direction):
 
     worldmap = {
     # Location                    North                  East                 South                  West
-    startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,],
-    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,],
-    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,],
-    "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,],
-    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,],
-    "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,],
-    "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,]
+    startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
+    "the Town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTown],
+    "the Flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
+    "the Forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
+    "the Mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
+    "the Castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
+    "the Islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands]
     }
 
     for i in range(0,4):
@@ -251,7 +251,19 @@ def World(startLocation, location, direction):
     print("\nYou can't move there, try a different direction!\n")
     return "x"  
         
-
-                            
+def PicStartFire():
+    print("make pic here")                         
+def PicTown():
+    print("make pic here")
+def PicFlatlands():
+    print("make pic here")
+def PicForest():
+    print("make pic here")
+def PicMountains():
+    print("make pic here")
+def PicCastle():
+    print("make pic here")
+def PicIslands():
+    print("make pic here")
 
 Main()
