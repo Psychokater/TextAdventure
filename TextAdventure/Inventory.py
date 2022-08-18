@@ -1,6 +1,6 @@
 # from time import sleep
 import os
-
+from Colors import cl
 
 
 #############################################################################################################################################################################
@@ -15,11 +15,11 @@ import os
 def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         PicTheTown()   
-        userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(0) Exit\n")      
+        userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(0) Leave Town\n")      
         os.system('cls')
         match userInput:
-            case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney)                                                           
-            case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney, playerStats)                                                           
+            case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney, playerStats)
             case "3": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "0": break
 
@@ -35,7 +35,7 @@ def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
         userInput = input("\nWhat do you want to do?\n(1) Investigate\t(2) Inventory\t(0) Exit\n")      
         os.system('cls')
         match userInput:
-            case "1": itemsDict, playerInventoryMoney = WandererShop(itemsDict, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerInventoryMoney = WandererShop(itemsDict, playerName, playerInventoryMoney, playerStats)
             case "2": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "0": break
 
@@ -52,9 +52,9 @@ def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 
 ############################################################################# PRINT PLAYER INVENTORY #############################################################################
 # print PlayerInventory + getting ID's
-def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney):
+def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\n')
+    print(f'{playerName}\t\t\tGold:\t{round(playerInventoryMoney,2)}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
@@ -89,7 +89,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
     playerItemIDs = []
 
     while True:
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats)
         userInput = input("\n(1) Equipment\t(2) Items\t(0) Return\n")
         os.system('cls')
 ################ Player Equipment ##########################
@@ -97,7 +97,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
             itemsDict, playerItemIDs = PlayerEquipment(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
 ################ Items ####################################
         elif userInput == "2":
-            itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+            itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
             userInput = input("\n(1) Use\t(2) Remove from Inventory\t(0) Return\n")
             #os.system('cls')
 ################ Items #### Use Item #################################
@@ -116,29 +116,29 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                         if userInputItemNumber == 0:
                             break
                         if itemsDict[i][11] > 0:
-                            print(f"You can't use this {itemsDict[i][2]}")
+                            print(f"You can't use this {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}")
                             break
                          #################################### Healitems #########################
                          # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
                         if itemsDict[i][5] > 0:
                             if playerStats[2] >= playerStats[1]:
-                                print(f"You already have full HP, do you really want to use {itemsDict[i][2]}?")
+                                print(f"You already have full HP, do you really want to use {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}?")
                                 userItemInput = input("(1) Yes!\t(2) No!\n")
                                 os.system('cls')
                                 if userItemInput == "1":
                                     itemsDict[i][8] -= 1            
                                     if itemsDict[i][8] == 0:
                                         itemsDict[i][1] = 0
-                                    print(f"You used {itemsDict[i][2]}")
-                                    break   
+                                    print(f"You used {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}")
+                                    continue   
                                 elif userItemInput == "2":
                                     break
                                 else: print("\nCouldn't understand you?!")
                             if playerStats[2] + itemsDict[i][5] <= playerStats[1]:       
                                 playerStats[2] += itemsDict[i][5]
-                                print(f"You got healed for {itemsDict[i][5]} Points. HP: {playerStats[2]}/{playerStats[1]}")                                
+                                print(f"You got healed for {cl.GREEN}{itemsDict[i][5]}{cl.RESET} Points. HP: {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}")                                
                             else:
-                                print(f"You got fully healed with {playerStats[1] - playerStats[2]} Points. HP: {playerStats[2]}/{playerStats[1]} ") 
+                                print(f"You got fully healed with {cl.GREEN}{playerStats[1] - playerStats[2]}{cl.RESET} Points. HP: {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}") 
                                 playerStats[2] = playerStats[1]                                
                         
                             itemsDict[i][8] -= 1            
@@ -162,7 +162,7 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                         if userInputItemNumber == 0:                            
                             break
                         itemsDict[i][8] -= 1 
-                        print(f"\n{itemsDict[i][2]} was brought back to his owner!\n")           
+                        print(f"\n{cl.YELLOW}{itemsDict[i][2]}{cl.RESET} was brought back to his owner!\n")           
                         if itemsDict[i][8] == 0:
                             itemsDict[i][1] = 0
                         
@@ -223,13 +223,13 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         if userInputItemNumber == 0:
                             break
                         if itemsDict[j][11] == 0:
-                            print(f"You can't equip {itemsDict[j][2]}")
+                            print(f"You can't equip {cl.YELLOW}{itemsDict[j][2]}{cl.RESET}")
                             # sleep(1)
-                            break 
+                            continue 
                         elif itemsDict[j][11] >= 10:
-                            print(f"{itemsDict[j][2]} item is already equipped!")
+                            print(f"{cl.YELLOW}{itemsDict[j][2]}{cl.RESET} is already equipped!")
                             # sleep(1)
-                            break 
+                            continue 
                         else:
                             itemsDict[j][11] += 10
                             for k in itemKeyList:
@@ -238,7 +238,7 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                                     break            
                 
                             print(f"You equipped {itemsDict[j][2]}")
-                            break                        
+                            continue                        
 ################################## 2 Equip Item #############################               
             elif userInput == "2":  
                 while True:
@@ -256,12 +256,13 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         if userInputItemNumber == 0:                            
                             break 
                         if itemsDict[o][11] < 10:
-                            print(f"You can't unequip {itemsDict[o][2]}")
+                            print(f"You can't unequip {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
                             # sleep(1)
-                            break 
+                            continue 
                         elif itemsDict[o][11] >= 10: 
                             itemsDict[o][11] -= 10
-                            print(f"You unequipped {itemsDict[o][2]}")
+                            print(f"You unequipped {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
+                            continue
                             # sleep(1)
 ################################## 3 Remove Item #############################                            
             elif userInput == "3":                         
@@ -282,9 +283,10 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
                         itemsDict[n][8] -= 1
                         if itemsDict[n][11] >= 10:
                             itemsDict[n][11] -= 10
-                        print(f"\n{itemsDict[n][2]} was brought back to his owner!\n")            
+                        print(f"\n{cl.YELLOW}{itemsDict[n][2]}{cl.RESET} was brought back to his owner!\n")                                   
                         if itemsDict[n][8] == 0:
-                            itemsDict[n][1] = 0                
+                            itemsDict[n][1] = 0
+                        continue                
                 # sleep(1)
 ################################## 4 Return#### #############################     
             elif userInput == "0":
@@ -304,19 +306,21 @@ def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney)
 ############################################################################### MERCHANT SHOP ###############################################################################
 
 # Merchant (Print Merchant and PlayerInventory - Choose if Buy or Sell)
-def MerchantShop(itemsDict, playerName, playerInventoryMoney):
+def MerchantShop(itemsDict, playerName, playerInventoryMoney, playerStats):
     PicMerchant()
     merchantItemIDs = []
     playerItemIDs = []
     while True:
         itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
 
         userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Merchant\n")
         os.system('cls')      
         match userInput:
-            case "1": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
-            case "2": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemBuy(
+                itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney, playerStats)
+            case "2": itemsDict, playerItemIDs, merchantItemIDs, playerInventoryMoney = MerchantItemSell(
+                itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney, playerStats)
             case "0": break
             case _: print("\nCouldn't understand you?!")
     
@@ -358,11 +362,11 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
 
 ############################################################################# BUY FROM MERCHANT #############################################################################
 # +ItemPlayer -MoneyPlayer
-def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
+def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     while True:
         itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
         try:
             userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
             break
@@ -390,11 +394,11 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
 
 ############################################################################# SELL TO MERCHANT #############################################################################
 # -ItemPlayer +MoneyPlayer
-def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney):
+def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     while True: 
         itemsDict, merchantItemIDs = GetInventoryMerchant(itemsDict, merchantItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
             userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))
             break
@@ -426,19 +430,21 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
 ################################################################################ WIZARD SHOP ################################################################################
 
 #Wizard (Print Wizard and PlayerInventory - Choose if Buy or Sell)
-def WizardShop(itemsDict, playerName, playerInventoryMoney):
+def WizardShop(itemsDict, playerName, playerInventoryMoney, playerStats):
     PicWizard()
     wizardItemIDs = []
     playerItemIDs = []
     while True:
         itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
 
         userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Wizard\n")      
         os.system('cls')
         match userInput:
-            case "1": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
-            case "2": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemBuy(
+                itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney, playerStats)
+            case "2": itemsDict, playerItemIDs, wizardItemIDs, playerInventoryMoney = WizardItemSell(
+                itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney, playerStats)
             case "0": break
             case _: print("\nCouldn't understand you?!")
 
@@ -480,12 +486,12 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
 
 ############################################################################# BUY FROM WIZARD #############################################################################
 # +ItemPlayer -MoneyPlayer
-def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
+def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:
         itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
         try:    
             userInputItemNumber = int (input ('Pick an Item number to buy it:\t\t(0) Abort \n'))
             break
@@ -513,12 +519,12 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
 
 ############################################################################# SELL TO WIZARD #############################################################################
 # -ItemPlayer +MoneyPlayer
-def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney):
+def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:    
         itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
             userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))
             break
@@ -550,19 +556,21 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
 ############################################################################# WANDERER SHOP #############################################################################
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 #Wanderer (Print Wanderer and PlayerInventory - Choose if Buy or Sell)
-def WandererShop(itemsDict, playerName, playerInventoryMoney):
+def WandererShop(itemsDict, playerName, playerInventoryMoney, playerStats):
     PicWanderer()
     wandererItemIDs = []
     playerItemIDs = []
     while True:
         itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
 
         userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Wanderer\n")      
         os.system('cls')
         match userInput:
-            case "1": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
-            case "2": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney)
+            case "1": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemBuy(
+                itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats)
+            case "2": itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney = WandererItemSell(
+                itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats)
             case "0": break
             case _: print("\nCouldn't understand you?!")
 
@@ -604,12 +612,12 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
 
 ############################################################################# BUY FROM WANDERER #############################################################################
     # +ItemPlayer -MoneyPlayer
-def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney):
+def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:
         itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
         try:    
             userInputItemNumber = int (input ('Pick an Item number to buy:\t\t(0) Abort \n'))
             break
@@ -637,12 +645,12 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
 
 ############################################################################# SELL TO WANDERER #############################################################################
 # -ItemPlayer +MoneyPlayer
-def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney):
+def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:    
         itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
-        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney)    
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
             userInputItemNumber = int (input ('Pick an Item number to sell:\t\(0) Abort \n'))
             break
