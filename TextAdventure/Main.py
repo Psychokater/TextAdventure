@@ -128,12 +128,12 @@ def Start(dataSaveList):
             continue
         else:
             break
-    sleep(1)
+    sleep(0.5)
     print(f"\nWelcome to your first adventure {playerName}!")
-    sleep(2)
+    sleep(0.5)
     print(f"\nYou wake up in {location}")
     PicStartFire()
-    sleep(2)    
+    sleep(0.5)    
     dataSaveList[2] = playerName
     dataSaveList[3] = startLocation
     dataSaveList[4] = location
