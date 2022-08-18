@@ -208,11 +208,12 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
             return startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
         os.system('cls')
         direction = userInput[:1]
-        _temp = World(startLocation, location, direction)        
+        _temp,_tempPic = World(startLocation, location, direction)        
         # sleep(2)        
         if _temp != "x":
             location = _temp
-            break        
+            break      
+    _tempPic()  
     print(f"\nYou moved to {location}\n")       
     # sleep(2)
     
@@ -232,19 +233,19 @@ def World(startLocation, location, direction):
 
     worldmap = {
     # Location                    North                  East                 South                  West
-    startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ],
-    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
-    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ],
-    "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ],
-    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ],
-    "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ],
-    "the islands"   :   [           0          ,          0          ,          0          ,     "the forest"    ]
+    startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,],
+    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,],
+    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,],
+    "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,],
+    "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,],
+    "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,]
     }
 
     for i in range(0,4):
         if compass[i] == direction:
             if worldmap[location][i] != 0:
-                return worldmap[location][i]
+                return worldmap[location][i],worldmap[location][4]
         
     
     print("\nYou can't move there, try a different direction!\n")
