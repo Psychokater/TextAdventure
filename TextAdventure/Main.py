@@ -234,12 +234,12 @@ def World(startLocation, location, direction):
     worldmap = {
     # Location                    North                  East                 South                  West
     startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
-    "the Town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
-    "the Flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
-    "the Forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
-    "the Mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
-    "the Castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
-    "the Islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands]
+    "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ],
+    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
+    "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
+    "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
+    "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands]
     }
 
     for i in range(0,4):
@@ -249,24 +249,20 @@ def World(startLocation, location, direction):
         
     
     print("\nYou can't move there, try a different direction!\n")
-    return "x"  
+    return "x", "0"  
         
 def PicStartFire():
-    print("""
-   ______
-  /     /\.
- /     /  \.
-/_____/----\_                           
-                     (                 ,&&&.
-                       )               .,.&& 
-                     (  (              \=__/
-                         )             ,'-'.
-                   (    (  ,,      _.__|/ /|
-                    ) /\ -((------((_|___/ |
-                  (  // | (`'      ((  `'--|
-                _ -.;_/ \\--._      \\ \-._/.
-               (_;-// | \ \-'.\    <_,\_\`--'|
-               ( `.__ _  ___,')      <_,-'__,'
+    print("""   
+                     (            
+                       )          
+                     (  (         
+                         )        
+                   (    (  ,,     
+                    ) /\ -((
+                  (  // | (`'     
+                _ -.;_/ \\--._    
+               (_;-// | \ \-'.\   
+               ( `.__ _  ___,')   
                 `'(_ )_)(_)_)'
 """)
 ########################################################################
