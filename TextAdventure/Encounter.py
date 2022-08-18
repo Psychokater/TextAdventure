@@ -225,8 +225,8 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         elif selectedDict[enemyID][2] <= 0:                                                         # if enemy dead
             print(f"\n--- {selectedDict[enemyID][0]} has been eleminated ---")
             # sleep(2)
-            _tempMoney += ((selectedDict[enemyID][3] + selectedDict[enemyID][2] + selectedDict[enemyID][5]) / 2)
-            _tempExp += (selectedDict[enemyID][5] * 100)
+            _tempMoney += (round((selectedDict[enemyID][3] + selectedDict[enemyID][2] + selectedDict[enemyID][5]) / 2,2))
+            _tempExp += (round(selectedDict[enemyID][5] * 100,2))
             print(f"\nYou received {itemsDict[lootItemID][2]}, {round(_tempMoney,2)} Gold and {round(_tempExp,2)} Experience.")
             playerInventoryMoney += _tempMoney
             playerStats[5] += _tempExp
@@ -239,7 +239,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         UserInputFight = input(""\
         f"\n{playerName}\t\tLVL {playerStats[0]}\tHP {playerStats[2]}/{playerStats[1]}\n"\
         f"----------- VS -----------\n"\
-        f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\n\n"\
+        f"{selectedDict[enemyID][0]}\t\tLVL {selectedDict[enemyID][1]}\tHP {selectedDict[enemyID][2]}/{enemyMaxHP}\nItems: {itemEnemyItems}\n\n"\
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
 
@@ -392,9 +392,9 @@ def PicDeath():
 
 def PicFairie():
     print("\nYour head feels dizzy.")
-    # sleep(2) 
+    sleep(2) 
     print("A beautiful (fully naked) fairie helps you back to the town.")
-    # sleep(4)
+    sleep(4)
     print("""
       .--.   _,
   .--;    \ /(_
@@ -421,7 +421,7 @@ def PicFairie():
     """)
 
     print("She thankfully took some of your gold in advance.")
-    # sleep(2)
+    sleep(2)
 
 
 
