@@ -404,12 +404,13 @@ def MerchantItemBuy(itemsDict, playerItemIDs, merchantItemIDs, playerName, playe
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue          
-        os.system('cls')    
+        os.system('cls') 
+        if userInputItemNumber == 0:
+            break   
         itemKeyList = [key for key in itemsDict]
         for i in itemKeyList:    
             if userInputItemNumber == itemsDict[i][0]:
-                if userInputItemNumber == 0:
-                    break
+           
                 if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                     print("\nNot enough money, fool!\n")
                     # sleep(1)
@@ -434,11 +435,11 @@ def MerchantItemSell(itemsDict, playerItemIDs, merchantItemIDs, playerName, play
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
+        if userInputItemNumber == 0:
+            break
         os.system('cls')  
         itemKeyList = [key for key in itemsDict]
         for i in itemKeyList:  
-            if userInputItemNumber == 0:
-                    break
             if userInputItemNumber == itemsDict[i][1]:
                 playerInventoryMoney += round(itemsDict[i][6],2)
                 itemsDict[i][8] -= 1            
@@ -528,12 +529,12 @@ def WizardItemBuy(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerInv
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
+        if userInputItemNumber == 0:
+            break
         os.system('cls')  
         itemKeyList = [key for key in itemsDict]
         for i in itemKeyList:  
-            if userInputItemNumber == itemsDict[i][0]:
-                if userInputItemNumber == 0:
-                    break
+            if userInputItemNumber == itemsDict[i][0]:               
                 if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                     print("\nNot enough money, fool!\n")
                     # sleep(1)
@@ -556,15 +557,15 @@ def WizardItemSell(itemsDict, playerItemIDs, wizardItemIDs, playerName, playerIn
         itemsDict, wizardItemIDs = GetInventoryWizard(itemsDict, wizardItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
-            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\(0) Abort \n'))            
+            userInputItemNumber = int (input ('Pick an Item number to sell it:\t\t(0) Abort \n'))            
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
+        if userInputItemNumber == 0:
+            break
         os.system('cls')  
         itemKeyList = [key for key in itemsDict]
-        for i in itemKeyList:  
-            if userInputItemNumber == 0:
-                    break
+        for i in itemKeyList:            
             if userInputItemNumber == itemsDict[i][1]:
                 playerInventoryMoney += round(itemsDict[i][6],2)
                 itemsDict[i][8] -= 1            
@@ -654,12 +655,12 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
-        os.system('cls')  
+        os.system('cls') 
+        if userInputItemNumber == 0:
+            break 
         itemKeyList = [key for key in itemsDict]
         for i in itemKeyList:  
-            if userInputItemNumber == itemsDict[i][0]:
-                if userInputItemNumber == 0:
-                    break
+            if userInputItemNumber == itemsDict[i][0]:             
                 if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                     print("\nNot enough money, fool!\n")
                     # sleep(1)
@@ -686,11 +687,11 @@ def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, play
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
+        if userInputItemNumber == 0:
+            break
         os.system('cls')  
         itemKeyList = [key for key in itemsDict]
-        for i in itemKeyList:  
-            if userInputItemNumber == 0:
-                    break
+        for i in itemKeyList:            
             if userInputItemNumber == itemsDict[i][1]:
                 playerInventoryMoney += round(itemsDict[i][6],2)
                 itemsDict[i][8] -= 1            
