@@ -1,6 +1,7 @@
 # from time import sleep
 import os
 from Colors import cl
+import Maps
 
 
 #############################################################################################################################################################################
@@ -12,14 +13,14 @@ from Colors import cl
 ############################################################################# SHOP MENU (TOWN) #############################################################################
 
 #ENTRYPOINT (Choose where to go -> Merchant, Wizard or Inventory)
-def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
+def ShopMenu(startLocation, location,itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         userInput = input("\nWhere do you want to go?\n(1) Merchant\t(2) Wizard \t(3) Inventory\t(0) Leave Town\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = MerchantShop(itemsDict, playerName, playerInventoryMoney, playerStats)                                                           
             case "2": itemsDict, playerInventoryMoney = WizardShop(itemsDict, playerName, playerInventoryMoney, playerStats)
-            case "3": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
+            case "3": itemsDict, playerStats = InventoryMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "0": break
 
             case _: print("\nCouldn't understand you?!")
@@ -28,14 +29,14 @@ def ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
 
 ############################################################################# WANDERER MENU #############################################################################
 
-def WandererMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
+def WandererMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats):
     while True:
         print("The sky gets dark... you feel the cold...\n")
         userInput = input("\nWhat do you want to do?\n(1) Investigate\t(2) Inventory\t(0) Move On\n")      
         os.system('cls')
         match userInput:
             case "1": itemsDict, playerInventoryMoney = WandererShop(itemsDict, playerName, playerInventoryMoney, playerStats);break
-            case "2": itemsDict, playerStats = InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
+            case "2": itemsDict, playerStats = InventoryMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
             case "0": break
 
             case _: print("\nCouldn't understand you?!")
@@ -87,7 +88,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
     
 ############################################################################# INVENTORY MENU #############################################################################
 # PlayerInventory                 
-def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
+def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats):
     os.system('cls')
     playerItemIDs = []
 
@@ -123,6 +124,8 @@ def InventoryMenu(itemsDict, playerName, playerInventoryMoney, playerStats):
                             continue
                         #################################### Healitems #########################
                         # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
+                        if itemsDict[i][2] == "Map":
+                            Maps.MapFlatlands(startLocation, location)
                         if itemsDict[i][5] > 0:
                             if playerStats[2] >= playerStats[1]:
                                 print(f"You already have full HP, do you really want to use {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}?")
