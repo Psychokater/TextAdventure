@@ -20,8 +20,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
     enemyID = 0
-    _locations = [startLocation, "the town", "the forest", "the flatlands", "the mountains", "the castle", "the islands"]
-    _locationIndexList = [1,          100,            1,            1,               1,            201,          1      ]
+    _locations = [startLocation, "the town", "the flatlands", "the forest", "the mountains", "the islands", "the castle"]
+    _locationIndexList = [1,          100,             1,              1,            1,             1,             201  ]
 
     
     for i in range(0,len(_locations)):
@@ -37,7 +37,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
                 
             if locationIndex == 100:
-                itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
+                itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)
                 return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict 
             
                 

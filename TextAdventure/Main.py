@@ -30,7 +30,7 @@ import Encounter
 import Stats
 import Inventory
 import Items
-
+import Maps
 
 
 
@@ -214,8 +214,8 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
             location = _temp
             _tempPic()
             break      
-      
     print(f"\nYou moved to {location}\n")       
+    #Maps.MapFlatlands(startLocation, location)
     # sleep(2)
     
     location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict = Encounter.Encounter(
@@ -247,40 +247,7 @@ def World(startLocation, location, direction):
         if compass[i] == direction:
             if worldmap[location][i] != 0:
                 return worldmap[location][i],worldmap[worldmap[location][i]][4]
-        a =[]
-    for i in range(0,len(worldmap)):
-        a.append[" "]
-        if location == worldmap[i] :
-            a[i] = "X" 
-        
-            
 
-    print (f'''
-                       ,-.^._                 _
-                     .'The Castel.        ,' ;
-          /`-.  ,----'   . {a[6]}   `-.   _  ,-.,'  `
-       _.'   `--'         .       `-' '-'      ;
-      :                  The Mountens         ;__,-.
-      ,'                     {a[5]}.               ;_,-',. ,--.
-     :                           .        Islands,--```    `--'
-     :                          .     ..{a[4]}   ;
-     :                           .   .      :
-     ;                            . .       :
-    (                         The Forrest    ;
-     `-.                       . .{a[3]}      ,'
-       ;                    . .             :
-     .'                    .         .-._,'
-   .'                     .          `.
-_.' The Town. . .The FlatLand       .__;
-`._     {a[1]}          . {a[2]}            ;
-   `.              .               :   
-     `.           .    ,..__,---._;   
-       `-.__Camp Fire:               
-            `.--.{a[0]};             
-                                     
-                                     
-                                     
-''') 
    
     
     print("\nYou can't move there, try a different direction!\n")
