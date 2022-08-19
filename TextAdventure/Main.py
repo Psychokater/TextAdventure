@@ -172,7 +172,7 @@ def IngameMenu(dataSaveList, newGame):
                         startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
             elif userInput == "2":
                 itemsDict, playerStats = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney, playerStats)  
+                    startLocation,location,itemsDict, playerName, playerInventoryMoney, playerStats)  
             elif userInput == "3":
                 playerStats, playerStatPoints = Stats.StatMenu(
                         playerStats, playerStatPoints, playerName, itemsDict)  
