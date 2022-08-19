@@ -48,9 +48,9 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         while True:           
 
             UserInputChoose = input(""\
-            f"\n{cl.BLUE}{playerName}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n"\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n"\
             f"----------- VS -----------\n"\
-            f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{selectedDict[enemyID][2]}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{selectedDict[enemyID][2]}/{enemyMaxHP}{cl.RESET}\n\n"\
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(0) Flee\n")
             os.system('cls')
 
@@ -241,9 +241,9 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
         (selectedDict[enemyID][6]())
         UserInputFight = input(""\
-        f"\n{cl.BLUE}{playerName}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
+        f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
         f"----------- VS -----------\n"\
-        f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
+        f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
         f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
         os.system('cls')
 

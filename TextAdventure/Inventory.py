@@ -218,13 +218,13 @@ def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMon
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
             print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
-                if j == 11:
-                    if j == 2:
-                        print('{:<15}'.format(itemsDict[i][j]),end='')  
+                if j == 11:                    
                     if itemsDict[i][j] > 10:
                         print ("\u25cf",end='') #"Equipped"
                     elif itemsDict[i][j] > 0 and itemsDict[i][j] < 8:
                         print ("\u25cb",end='') 
+                if j == 2:
+                        print('{:<15}'.format(itemsDict[i][j]),end='')          
                 _tempListIndexJ = [0, 1, 2, 7, 9, 10, 11]                          #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                   
