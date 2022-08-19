@@ -18,13 +18,15 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard):
           1006 : ["Cave Bat",          0,     2,    3,   1,   1.00,   PicCaveBat],
           1007 : ["Minosaur ",         0,     5,    2,   1,   1.00,   PicMinosaur],
           1008 : ["Scorpion",          0,     5,    2,   2,   1.00,   PicScorpion],
-          1009 : ["Skeleton",          0,     8,    2,   2,   2.00,   PicSkeleton],
-          1010 : ["Amateur Warrior",   0,     9,    2,   1,   1.00,   PicAmateurWarrior],
-          1011 : ["CyClops",           0,    10,    1,   3,   2.00,   PicCyclops],
-          1012 : ["ApeMan",            0,     8,    2,   2,   2.00,   PicApeMan],
-          1013 : ["Mutant Fox",        0,     8,    4,   2,   3.00,   PicMutantFox],
-          1014 : ["Native Cannibal",   0,     6,    3,   1,   2.00,   PicNativeCannibal]
-          }  #Enemy: 0 Name,         1 LVL,   2 HP,   3 ATK,   4 DEF,   5 LVL, 6 Pic
+          1009 : ["Alligator",         0,     6,    2,   3,   2.00,   PicAlligator],
+          1010 : ["Skeleton",          0,     8,    2,   2,   2.00,   PicSkeleton],
+          1011 : ["Amateur Warrior",   0,     9,    2,   1,   1.00,   PicAmateurWarrior],
+          1012 : ["CyClops",           0,    10,    1,   3,   2.00,   PicCyclops],
+          1013 : ["ApeMan",            0,     8,    2,   2,   2.00,   PicApeMan],
+          1014 : ["Mutant Fox",        0,     8,    4,   2,   3.00,   PicMutantFox],
+          1015 : ["Native Cannibal",   0,     6,    3,   1,   2.00,   PicNativeCannibal],
+          1016 : ["Creazy Monkey",     0,     5,    2,   1,   1.00,   PicCreazyMonkey]
+          }  #Enemy: 0 Name,         1 LVL, 2 HP,3 ATK,4 DEF, 5 LVL, 6 Pic
   enemyDictMedium = {   
           1101 : ["Ghost",             0,     10,   4,   2,   6.00,   PicGhost],
           1102 : ["Bandit",            0,     10,   4,   2,   8.00,   PicBandit],
@@ -100,7 +102,7 @@ def PicSeeCrab():
 ...you can hear what it's like to be attacked by a crab!' 
        ___     ___
      .i .-'   `-. i.
-   .'   `/     \'  _`.
+   .'   `/     \.  _`.
    |,-../ o   o \.' `|
 (| |   /  _\ /_  \   | |)
  \\\\\  (_.'.'"`.`._)  ///
@@ -118,7 +120,7 @@ def PicCaveBat():
   print ("""
   'Vampire bats that typically target large birds have been found to be sucking human blood now'
     =/\                 /\=
-    /  \\'._  (\_/)  _.'/  \.
+    /  \._   (\_/)  _.'/  \.
    / .''._'--(o.o)--'_.''. \.
   /.' _/ |`'=/ " \='`| \_ `.\.
  /` .' `\;-,'\___/',-;/` '. '\.
@@ -149,8 +151,18 @@ def PicScorpion():
      `-.{_{_{_{_{_{_{_{_//  -- 8;=- `
         `-:,_.:,_:,_:,.`\\._ ..'=- ,
             // // // //`-.`\`   .-'/
-     jgs   << << << <<    \ `--'  /----)
+           << << << <<    \ `--'  /----)
             ^  ^  ^  ^     `-.....--'''
+""")
+#######################################################
+def PicAlligator():
+  print ("""
+    _ _      (0)(0)-._  _.-'^^'^^'^^'^^'^^'--.
+   (.(.)----'`        ^^'                /^   ^^-._
+   (    `                 \             |    _    ^^-._
+    VvvvvvvVv~~`__,/.._>  /:/:/:/:/:/:/:/\  (_..,______^^-.
+     `^^^^^^^^`/  /   /  /`^^^^^^^^^>^^>^`>  >        _`)  )
+              (((`   (((`          (((`  (((`        `'--'^
 """)
 #######################################################
 def PicSkeleton():
@@ -248,8 +260,8 @@ def PicMutantFox():
                  _,\_._,/ /   `)
     \.,_,,      ( _   ~ .   ,   )
      \   (\      \(   \/  _)(    )
-      \   \\     ()  )). _______>-.-`*
-       \( ,\\ ..-'  ' /    \/    |
+      \   \\\\     ()  )). _______>-.-`*
+       \( ,\\\\ ..-'  ' /    \/    |
          '  \><)_'.)|/\/\/\/\/\|
               \) ,( |\/\/\/\/\/|
               ' ((  \    /\    /
@@ -261,25 +273,46 @@ def PicMutantFox():
                           _/,/'
                         /,/," 
                         """)
-#############################################
+###############################################
 def PicNativeCannibal():
   print ("""
-  'no time for unga bunga, got hunger!'
-             ██████████          
-            █ ░░░░░░░░ █          
-            ░░██░░░░██░░          
-             ░░░░░░░░░░          
-               ░░░░░░             
-          ░░░░░░░░░░░░░░░░        
-        ░░  ░░░░░░░░░░░░  ░░  
-      ░░    ░░░░░░░░░░░░    ░░
-            ▓▓▓▓▓▓▓▓▓▓▓▓      
-            ▒▒▒▒▒▒▒▒▒▒▒▒          
-            ▒▒▒▒    ▒▒▒▒          
-            ▒▒▒▒    ▒▒▒▒          
-            ▒▒▒▒    ▒▒▒▒          
+'no time for unga bunga, got hunger!'
+                   \\\\\|||///
+                 .  ======= 
+                / \| O   O |
+                \ / \`___'/ 
+                 #   _| |_
+                (#) ( . . )  
+                 #\//|   |\\\\ 
+                 #\/(  *  )/   
+                 #   =====  
+                 #   ( U ) 
+                 #   || ||
+                .#---'| |`----.
+                `#----' `-----'   
 """)
-####################################
+#################################################
+def PicCreazyMonkey():
+  print ("""
+The difference between monkey and chipmunk
+ ... is that monkey is (label) to meddle; to mess with; to interfere
+                  ___
+                 / _,\.
+                 \_\.
+      ,,,,    _,_)  #      /)
+     (= =)D__/    __/     //
+    C/^__)/     _(    ___//
+      \_,/  -.   '-._/,--'
+ _|_,  /           -//.
+ \_ \_/  -,._ _     ) )
+   \/    /    )    / /
+   \-__,/    (    ( (
+              \.__,-)\_
+               )\_ / -(
+              / -(////
+             ////
+  """)
+#################################################
 def PicGhost():
     print("""
     'What is your religion? Mine is Boo-ddhism'
