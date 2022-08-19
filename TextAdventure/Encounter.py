@@ -21,12 +21,21 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     locationIndex = 0
     enemyID = 0
     _locations = [startLocation, "the town", "the forest", "the flatlands", "the mountains", "the castle", "the islands"]
-    _locationIndexList = [1,          100,            1,             1,               1,              1,          1]
+    _locationIndexList = [1,          100,            1,            1,               1,            201,          1      ]
 
     
     for i in range(0,len(_locations)):
         if location == _locations[i]:
             locationIndex = _locationIndexList[i]
+            if locationIndex == 201 or locationIndex == 202 or locationIndex == 203:
+                locationIndex, itemsDict = DungeonSelection(
+                    locationIndex, itemsDict)
+                if locationIndex > 3:
+                    startLocation, location, locationIndex, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict = Dungeon(
+                        startLocation, location, locationIndex, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict)
+                    return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
+
+                
             if locationIndex == 100:
                 itemsDict, playerInventoryMoney, playerStats = Inventory.ShopMenu(itemsDict, playerName, playerInventoryMoney, playerStats)
                 return location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict 
@@ -97,21 +106,21 @@ def EnemySelection(playerStats, encounterIndex):
         EncounterNothing()
 
     elif encounterIndex > 11 and encounterIndex <= 20:
-        _luck = random.randint(0,len(enemyDictHard)-1)
+        _luck = random.randint(0,len(enemyDictHard)-2)
         for i in enemyDictHard:
             _tempList.append(i)
         enemyID = _tempList[_luck]
         selectedDict = enemyDictHard
         selectedDictID = 3        
     elif encounterIndex > 21 and encounterIndex <= 52:
-        _luck = random.randint(0,len(enemyDictMedium)-1)
+        _luck = random.randint(0,len(enemyDictMedium)-2)
         for i in enemyDictMedium:
             _tempList.append(i)
         enemyID = _tempList[_luck]
         selectedDict = enemyDictMedium
         selectedDictID = 2
     elif encounterIndex > 53 and encounterIndex <= 100:
-        _luck = random.randint(0,len(enemyDictEasy)-1)
+        _luck = random.randint(0,len(enemyDictEasy)-2)
         for i in enemyDictEasy:
             _tempList.append(i)
         enemyID = _tempList[_luck]       
@@ -134,7 +143,7 @@ def EnemySelection(playerStats, encounterIndex):
 
 
 ############################################################################# ENEMY ITEMS #############################################################################
-def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
+def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
 #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic 
     _tempItemList = []
@@ -142,6 +151,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
     _tempItemListMedium = []
     _tempItemListHard = []
     _tempItemListRandom = []
+    _tempItemListDungeon = []
     _itemEnemyItems = []
     itemEnemyItems = []
     itemEnemyAddStats = [0, 0, 0, 0, 0, 0, 0]
@@ -154,6 +164,8 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
             _tempItemListMedium.append(i)
         elif itemsDict[i][10] == 9:
             _tempItemListHard.append(i)
+        elif itemsDict[i][10] == 14+selectedDictID:
+            _tempItemListDungeon.append(i)
                                                                              # Choose witch Items (Easy, Medium, Hard)
     if selectedDictID == 1:
         _tempItemList = _tempItemListEasy
@@ -163,8 +175,11 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDictID):
         _tempItemList = _tempItemListHard
     
     j = random.randint(0,len(_tempItemList)-1)
-                                                                       # give Random Item from List as Lootitem
+    jd = random.randint(0,len(_tempItemListDungeon)-1)                              # give Random Item from List as Lootitem
     lootItemID = _tempItemList[j]
+    
+    if enemyID == sorted(selectedDict.keys())[-1]:                   # in Dungeons give random Item from Dungeonitems
+        lootItemID = _tempItemListDungeon[jd]                           # Bossloot!
 
     for y in range(1,7):                                                                                    
         
@@ -211,7 +226,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     _tempExp = 0.00
     itemAddStats = []
     itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
-    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDictID) 
+    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID) 
    
     while True:
 
@@ -240,12 +255,20 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
         #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
         #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
         (selectedDict[enemyID][6]())
-        UserInputFight = input(""\
-        f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
-        f"----------- VS -----------\n"\
-        f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
-        f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
-        os.system('cls')
+        if location == "dungeon castle" or location == "dungeon slumps" or location == "dungeon cave":
+            UserInputFight = input(""\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
+            f"----------- VS -----------\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Leave Dungeon\n")                                             # Fight (P = Player, E = Enemy)
+            os.system('cls')
+        else:
+            UserInputFight = input(""\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
+            f"----------- VS -----------\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
+            os.system('cls')
 
     ################# 1 Attack ###############
         
@@ -353,6 +376,82 @@ def EncounterLowLevel():
 
 def EncounterNothing():
     print("Phew, nothing happened here.")
+
+def DungeonSelection(locationIndex, itemsDict):
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+    i = locationIndex - 200
+    while True:
+        if locationIndex == 200 + i:       
+            if itemsDict[1900 + i][8] < 1:
+                print(f"There seems to be a Dungeon here, if you get {cl.YELLOW}{itemsDict[1900 + i][2]}{cl.RESET} you can enter.\n")
+                locationIndex = i
+                break
+            else:
+                userInput = input(f"There seems to be a Dungeon here,\nuse {cl.YELLOW}{itemsDict[1900 + i][2]}{cl.RESET} and enter Dungeon?\n(1) Yes\t(2) No\n")
+                os.system('cls')
+                if userInput == ("2"):
+                    locationIndex = i
+                    break
+                elif userInput == ("1"):
+                    locationIndex = 200 + i
+                    itemsDict[1900 + i][8] -= 1
+                    break          
+                else: 
+                    print("\nCouldn't understand you?!")
+                    continue         
+            
+    return locationIndex, itemsDict
+
+def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+    enemyID = 0
+    enemyDictEasy = {}
+    enemyDictMedium = {}
+    enemyDictHard = {}
+    enemyList = []
+    _tempEnemyList = []
+    _tempLocation = location
+    selectedDictID = 0
+    enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard)
+    # select enemyDict for DungeonLocation and get Enemies for Dungeon:
+    if locationIndex == 201:
+        selectedDict = enemyDictEasy
+        location = "dungeon castle"
+        selectedDictID = 1
+    elif locationIndex == 202:
+        selectedDict = enemyDictMedium
+        location = "dungeon slumps"
+        selectedDictID = 2
+    elif locationIndex == 203:
+        selectedDict = enemyDictHard
+        location = "dungeon cave"
+        selectedDictID = 3
+    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Level, 6 Pic
+    
+    # get ID's of all Enemys:    
+    for i in selectedDict:
+        _tempEnemyList.append(i) 
+    # get ID's of last 3 Enemys:
+    for j in range(len(_tempEnemyList)-3, len(_tempEnemyList)):
+        enemyList.append(_tempEnemyList[j])      
+    print(f"You now entered {location}")
+    # make enemys maxLVL + give them Stats:    
+    for enemyDict in enemyList:
+        selectedDict[enemyDict][1] = (selectedDict[enemyDict][5]+3)           
+        for k in range(2,5):
+            selectedDict[enemyDict][k] += round((selectedDict[enemyDict][1] - selectedDict[enemyDict][5]) * (selectedDict[enemyDict][5] * 0.5))
+    # fight Enemys:
+    for enemyID in enemyList:
+        os.system('cls')
+        enemyMaxHP = (selectedDict[enemyID][2])  
+        playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
+            playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
+
+    # Leave Dungeon:    
+    print(f"You left {location}, you are now in {_tempLocation}")
+    location = _tempLocation  
+
+    return startLocation, location, locationIndex, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict
 
 
 
