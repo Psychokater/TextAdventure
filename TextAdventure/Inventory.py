@@ -738,7 +738,7 @@ def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, play
         itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
-            userInputItemNumber = int (input ('Pick an Item number to sell:\t\(0) Abort \n'))           
+            userInputItemNumber = int (input ('Pick an Item number to sell:\t\t(0) Abort \n'))           
         except ValueError:
             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
             continue
