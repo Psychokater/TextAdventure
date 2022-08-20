@@ -77,9 +77,11 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
                 playerStats, playerStatPoints, playerName, itemsDict )
 
             elif UserInputChoose == "0": 
-                _temp = (playerStats[0] * 2)
-                playerInventoryMoney -= (playerStats[0] * 2)
-                if playerInventoryMoney - (playerStats[0] * 2) < 0:
+                _temp = round(playerStats[0] * 0.1 *(selectedDict[enemyID][1] - playerStats[0]),2)
+                if _temp < 0:
+                    _temp = 0  
+                playerInventoryMoney -= (_temp)
+                if playerInventoryMoney - (_temp) < 0:
                     playerInventoryMoney = 0
                 print(f"""\nYou managed to escape the fight, you used up {cl.RED}{round(_temp,2)}{cl.RESET} gold to distract your enemy.
                 \nYou have {cl.GREEN}{round(playerStats[2],2)}{cl.RESET} HP left.""")
@@ -250,9 +252,13 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
         elif selectedDict[enemyID][2] <= 0:                                                         # if enemy dead
             print(f"\n--- {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has been eleminated ---")
             # sleep(2)
-            _tempMoney += (round((selectedDict[enemyID][3] + selectedDict[enemyID][2] + selectedDict[enemyID][5]) / 2,2))
-            _tempExp += (round(selectedDict[enemyID][5] * 100,2))
+            _tempMoney += (round((selectedDict[enemyID][1] + selectedDict[enemyID][2] + selectedDict[enemyID][3] + selectedDict[enemyID][4]) / 9.6 ,2))
+            _tempExp += (round((selectedDict[enemyID][1] + 2 - playerStats[0]) * (selectedDict[enemyID][2] + selectedDict[enemyID][3])*9.4 ,2))
             print(f"\nYou received {cl.YELLOW}{itemsDict[lootItemID][2]}{cl.RESET}, {cl.YELLOW}{round(_tempMoney,2)}{cl.RESET} Gold and {cl.YELLOW}{round(_tempExp,2)}{cl.RESET} Experience.")
+            if _tempMoney < 0:
+                _tempMoney = 0
+            if _tempExp < 0:
+                _tempExp = 0
             playerInventoryMoney += _tempMoney
             playerStats[5] += _tempExp
             itemsDict[lootItemID][8] += 1            
@@ -349,11 +355,15 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
     #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
 
         elif UserInputFight == "0":                                                                         # Flee (loose Gold + Enemy
-            _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
-            playerInventoryMoney -= (playerStats[0] * 2)
-            if playerInventoryMoney - (playerStats[0] * 2) <= 0:
+            _temp1 = round(playerStats[0] * 0.1 *(selectedDict[enemyID][1] - playerStats[0]),2)
+            if _temp1 < 0:
+                _temp1 = 0                                                                   #        hits with 0.5 atk)
+            playerInventoryMoney -= (_temp1)
+            if playerInventoryMoney - (_temp1) <= 0:
                 playerInventoryMoney = 0
-            _temp2 = (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) / 2,2))
+            _temp2 = (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) / 2.5 ,2))
+            if _temp2 < 0:
+             _temp2 = 0
             playerStats[2] -= round(_temp2,2)
             if playerStats[2] < 0:
                     playerStats[2] = 0 
