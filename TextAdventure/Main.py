@@ -201,9 +201,10 @@ def IngameMenu(dataSaveList, newGame):
 ### Move() -> World()
 def Move(startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, playerName, itemsDict):
     _temp = "x"
-    print(f"\nLocation: {location}")
+    
     # sleep(1)
     while _temp == "x":
+        print(f"\nLocation: {location}")
         userInput = input("\nWhich direction do you want to go? \n'north' 'east' 'south' 'west'\t\t(0) Abort\n").lower()
         if userInput == "0":
             return startLocation, location, playerStats, playerStatPoints, playerInventoryMoney, itemsDict
