@@ -288,7 +288,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             (selectedDict[enemyID][6]())
             blockMessage = ""
             critMessage = ""           
-            
+            blockChance = 0
+            critChance = 0
             blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
                 blockMessage = "(crit)"
@@ -313,7 +314,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
-
+                blockChance = 0
+                critChance = 0
                 blockChance = (random.randint(75,100))/100
                 if blockChance >= 90:
                     blockMessage = "(crit)"
