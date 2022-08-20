@@ -1,5 +1,6 @@
 import pickle
 import os
+from Colors import cl
 
 
 
@@ -61,10 +62,10 @@ def Save(dataSaveList):
                                 pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                             break
                         else:
-                            print("Couldn't understand you?\n") 
+                            print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}") 
                             continue
                     elif userInputOverwrite == "1":
-                        print("You can't overwrite 'Autosave'!\n")
+                        print(f"{cl.RED}You can't overwrite 'Autosave'!{cl.RESET}\n")
                         continue
                     elif userInputOverwrite < str(saveFileID):
 ####################################### Overwrite?                        
@@ -83,15 +84,15 @@ def Save(dataSaveList):
                                     pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL)                        
                                 break
                             else:
-                                print("Couldn't understand you?\n") 
+                                print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}") 
                                 continue
                         elif userInputChoose == "2":
                             continue
                         else:
-                            print("Couldn't understand you?\n") 
+                            print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}") 
                             continue   
                     else:
-                        print("Couldn't understand you?\n") 
+                        print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}") 
                         continue 
 ####################################### Delete Slot 
             elif userInput == "2":
@@ -106,7 +107,7 @@ def Save(dataSaveList):
                 userInputDelete = input("\nChoose file to delete:\t\t(0) Abort\n")
                 os.system('cls')
                 if userInputDelete == "1":
-                        print("You can't delete 'Autosave'!\n")
+                        print(f"{cl.RED}You can't delete 'Autosave'!{cl.RESET}\n")
                         continue
                 elif userInputDelete != "0":                 
                     dataSaveList[1].pop(int(userInputDelete)-1) 
@@ -115,12 +116,12 @@ def Save(dataSaveList):
                         pickle.dump(dataSaveList[1], allSaveHandler, protocol=pickle.HIGHEST_PROTOCOL) 
                     break
                 else:
-                    print("Couldn't understand you?\n") 
+                    print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}") 
                     continue  
             elif userInput == "0":
                 break
             else:
-                print("\nCouldn't understand you?\n")
+                print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
                 continue
 
     return dataSaveList
@@ -143,16 +144,14 @@ def Load(dataSaveList):
         os.system('cls')        
         if userInputNumber != "0":
             if userInputNumber > len(dataSaveList[1]):
-                print("Selected slot is empty")
+                print(f"{cl.RED}Selected slot is empty{cl.RESET}")
                 continue
 ####################################### Load File            
             with open(f'SaveFile_{saveFileID-1}.pickle', 'rb') as loadHandler: 
                 dataSaveList = pickle.load(loadHandler)
             with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
                 dataSaveList[1] = pickle.load(loadAllHandler)
-            break
-        else:
-            break
+            break       
     
     return dataSaveList    
 ####################################### LOAD AUTOSAVE #######################################  

@@ -1,4 +1,5 @@
 import os
+from Colors import cl
 
 
 
@@ -58,7 +59,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
             if userInput == "0":
                 break
             else:
-                print("\nCouldn't understand you?!") 
+                print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
         else:
             userInput = input("\n(1) HP +10\t (2) Atk + 1\t (3) Def + 1\t (0) Return\n")
             os.system('cls')
@@ -75,7 +76,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
             elif userInput == "0":
                 break
             else:
-                print("\nCouldn't understand you?!")        
+                print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")       
            
 
     return playerStats, playerStatPoints
@@ -99,7 +100,7 @@ def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
             playerStatPoints += 4
         else:
             playerStatPoints += 2
-        print(f"\nYay, {playerName} got a new Level!")
+        print(f"\n{cl.GREEN}Yay, {playerName} got a new Level!{cl.RESET}")
 
     #### Activate Items ####    
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq

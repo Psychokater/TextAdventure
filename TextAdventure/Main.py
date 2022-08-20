@@ -23,6 +23,7 @@ import os
 import random
 import pickle
 from time import sleep
+from Colors import cl
 
 import MainMenu
 import SaveLoad
@@ -183,7 +184,7 @@ def IngameMenu(dataSaveList, newGame):
                 if load == True:
                     break
             else:
-                print("\nCouldn't understand you?!")        
+                print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")        
         
     
         
@@ -250,7 +251,7 @@ def World(startLocation, location, direction):
 
    
     
-    print("\nYou can't move there, try a different direction!\n")
+    print(f"\n{cl.RED}You can't move there, try a different direction!{cl.RESET}\n")
     return "x", "0"  
         
 def PicStartFire():
@@ -287,11 +288,13 @@ def PicFlatlands():
 ########################################################################
 
 def PicForest():
-    print("""              ⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    print("""       
+                           ⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
        ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^
       /|\/|\/|\ /|\    /\-_--\    /|\/|\ /|\/|\/|\ /|\/|\.
       /|\/|\/|\ /|\   /  \_-__\   /|\/|\ /|\/|\/|\ /|\/|\.
-      /|\/|\/|\ /|\   |[]| [] |   /|\/|\ /|\/|\/|\ /|\/|\ """)
+      /|\/|\/|\ /|\   |[]| [] |   /|\/|\ /|\/|\/|\ /|\/|\ 
+      """)
 ########################################################################
 
 def PicMountains():
@@ -311,10 +314,12 @@ def PicMountains():
 WWWWWWWWWIIIIIIIIIii;;::.;..;\WWWWWWWWIIIII;;..  :;IMIII;:::     :    \   
 WWWWWWWWWWWWWIIIIIIii;;::..;..;\WWWWWWWWIIII;::; :::::::::.....::       \
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXX
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXXXXXXXXXXXXXXXXXXXXX""")
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXXXXXXXXXXXXXXXXXXXXX
+""")
 ########################################################################
 def PicCastle():
     print("""
+
    /\                                                        /\.
   |  |                                                      |  |
  /----\                 Lord Dark's Keep                  /----\.
@@ -331,7 +336,8 @@ def PicCastle():
    |           |     |   |     (||)     |   |     |           |
    |           |     |   |      ||      |   |     |           |
  /''           |     |   |o     ||     o|   |     |           ''\.
-[_____________[_______]--'------''------'--[_______]_____________]""")
+[_____________[_______]--'------''------'--[_______]_____________]
+""")
 ########################################################################
 def PicIslands():
     print("""
@@ -346,7 +352,8 @@ def PicIslands():
         .        \ \     / /          .
    .      .    ..:\ \:::/ /:.     .     .
 ______________/ \__;\___/\;_/\________________________________
-YwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYw""")
+YwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYwYw
+""")
 ########################################################################
 def PicTheTown():
     print(""" 
@@ -360,7 +367,8 @@ __/_  /   \ ______/ ''   /'\_,__
 ; '/__\,.--';|   |[] .-.| O{ _ }
 :' |  | []  -|   ''--:.;[,.'\,/
 '  |[]|,.--'' '',   ''-,.    |
-  ..    ..-''    ;       ''. ' """)
+  ..    ..-''    ;       ''. '
+""")
 ##########################################################
 def PicGateWay():
     print ("""

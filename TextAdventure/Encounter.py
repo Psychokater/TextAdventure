@@ -294,7 +294,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
                 selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
             else:
-                print("Attack blocked")
+                print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
             print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {round(selectedDict[enemyID][2])} HP left.")
@@ -319,7 +319,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
                     playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
                 else:   
-                    print("Attack blocked")
+                    print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
                 if playerStats[2] < 0:
                     playerStats[2] = 0                                                                                                                  # HP < 0? Then HP 0
                 print(f"You have {cl.GREEN}{playerStats[2]}{cl.RESET} HP left.")
@@ -366,13 +366,13 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                 break
             break
         else: 
-            print("\nYou can't choose that?!")
+            print(f"\n{cl.RED}You can't choose that?!{cl.RESET}")
 
     return playerInventoryMoney, playerStats, playerStatPoints, location
 
 ################################################################################ NO ENCOUNTER ###############################################################################
 def EncounterLowLevel():
-    print("'A dangerous sphere approaches you, but as you turn around, it disappears.\nMaybe you escaped your downfall this time.'")
+    print("'A dangerous sphere approaches you, but as you turn around, it disappears.")
 
 def EncounterNothing():
     print("Phew, nothing happened here.")
@@ -397,7 +397,7 @@ def DungeonSelection(locationIndex, itemsDict):
                     itemsDict[1900 + i][8] -= 1
                     break          
                 else: 
-                    print("\nCouldn't understand you?!")
+                    print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
                     continue         
             
     return locationIndex, itemsDict
@@ -463,7 +463,7 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
 ######################################## Death ##################################################
 
 def PicDeath():
-    print("""
+    print(f"""
            
      .... NO! ...                  ... MNO! ...
    ..... MNO!! ...................... MNNOO! ...
@@ -488,7 +488,7 @@ def PicDeath():
       ...... OO! ................. ON! .......
          ................................
 
-          ---You have been defeated---
+          --- {cl.RED}You have been defeated{cl.RESET} ---
 
          """)
 
@@ -523,7 +523,7 @@ def PicFairie():
                          \_\\    
     """)
 
-    print("She thankfully took some of your gold in advance.")
+    print(f"She thankfully took some of your {cl.RED}gold{cl.RESET} in advance.")
     sleep(2)
 
 

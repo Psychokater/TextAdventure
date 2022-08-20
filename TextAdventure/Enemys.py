@@ -84,6 +84,7 @@ def PicWolf():
 def PicWildCat():
   print ("""
   'Big Meaaaaooowwwwwwww'
+
       ( \.
        \ \.
        / /                |\\\\
@@ -119,6 +120,7 @@ def PicSeeCrab():
 def PicCaveBat():
   print ("""
   'Vampire bats that typically target large birds have been found to be sucking human blood now'
+
     =/\                 /\=
     /  \._   (\_/)  _.'/  \.
    / .''._'--(o.o)--'_.''. \.
@@ -231,6 +233,7 @@ def PicApeMan():
     print("""
 'Its not evolution if you genetically engineer stuff.
 Genetic engineering becomes revolution just does not have the same ring to it.'
+
          ||
         _;|
        /__3
@@ -252,6 +255,7 @@ Genetic engineering becomes revolution just does not have the same ring to it.'
 def PicMutantFox():
   print ("""
 'It was not my desire to be killer but your blood calls me' 
+
                   (\    /)
                   |_)//(_|
                   |4\_/4)(
@@ -277,6 +281,7 @@ def PicMutantFox():
 def PicNativeCannibal():
   print ("""
 'no time for unga bunga, got hunger!'
+
                    \\\\\|||///
                  .  ======= 
                 / \| O   O |
@@ -330,6 +335,7 @@ def PicBandit():
     print("""
     'Broke into someones home last night, searching for money.
     He woke up, but started searching with me'
+    
   <=======]}======
     --.   /|
    _\\\"/_.'/
