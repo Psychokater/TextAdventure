@@ -221,7 +221,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
 ################################################################################### FIGHT ###################################################################################
 def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic   
+    #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic   
     _tempMoney = 0.00
     _tempExp = 0.00
     itemAddStats = []
@@ -253,7 +253,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
             break
   
         #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
-        #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+        #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
         (selectedDict[enemyID][6]())
         if location == "dungeon castle" or location == "dungeon slumps" or location == "dungeon cave":
             UserInputFight = input(""\
@@ -340,7 +340,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
     ################ 4 Flee ################
 
     #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
-    #EnemyDict:  0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic
+    #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
 
         elif UserInputFight == "0":                                                                         # Flee (loose Gold + Enemy
             _temp1 = (playerStats[0] * 2)                                                                   #        hits with 0.5 atk)
