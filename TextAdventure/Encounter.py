@@ -65,7 +65,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
 
             if UserInputChoose == "1":
                 playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
-                    playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
+                    startLocation, playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
                 break
             
             elif UserInputChoose == "2":
@@ -219,7 +219,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
 
 
 ################################################################################### FIGHT ###################################################################################
-def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID):
+def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID):
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
     #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic   
     _tempMoney = 0.00
@@ -329,7 +329,7 @@ def Fight(playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryM
                   
         elif UserInputFight == "2":
                itemsDict, playerStats = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney, playerStats)
+                    startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)
 
     ################ 3 Stats #################
 
@@ -445,7 +445,7 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
         os.system('cls')
         enemyMaxHP = (selectedDict[enemyID][2])  
         playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
-            playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
+            startLocation, playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
 
     # Leave Dungeon:    
     print(f"You left {location}, you are now in {_tempLocation}")
