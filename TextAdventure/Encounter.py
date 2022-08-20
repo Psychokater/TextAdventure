@@ -70,7 +70,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             
             elif UserInputChoose == "2":
                 itemsDict, playerStats = Inventory.InventoryMenu(
-                    itemsDict, playerName, playerInventoryMoney, playerStats)  
+                    startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)  
 
             elif UserInputChoose == "3": 
                 playerStats, playerStatPoints = Stats.StatMenu(
