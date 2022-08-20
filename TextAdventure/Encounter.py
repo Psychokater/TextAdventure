@@ -138,7 +138,7 @@ def EnemySelection(playerStats, encounterIndex):
             for i in range(2,5):
                 selectedDict[enemyID][i] += round((selectedDict[enemyID][1] - selectedDict[enemyID][5]) * (selectedDict[enemyID][5] * 0.5))
 
-        if (selectedDict[enemyID][1] - playerStats[0]) > 3:       
+        if enemyID != 0 and (selectedDict[enemyID][1] - playerStats[0]) > 3:       
             continue
         else:
             break  
