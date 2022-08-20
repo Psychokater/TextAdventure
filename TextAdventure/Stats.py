@@ -49,7 +49,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
         nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
         "\n------------------------------------------------------------------------")    
-        print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
+        print(f"Points: {cl.YELLOW}{playerStatPoints}{cl.RESET}\t\t\tEXP: {cl.YELLOW}{round(playerStats[5],2)}/{round(nextLevelExp,2)}{cl.RESET}\n\n"\
             f"HP: {playerStats[2]}/{playerStats[1]}\n"\
             f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
             f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\

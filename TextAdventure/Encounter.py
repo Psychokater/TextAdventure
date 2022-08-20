@@ -101,43 +101,49 @@ def EnemySelection(playerStats, encounterIndex):
     selectedDict = {}
     _tempList = []
     selectedDictID = 0
-    #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    if encounterIndex <= 10:
-        EncounterNothing()
+    #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP   
+    while True:
+        if encounterIndex <= 10:
+            _luck = random.randint(0,len(enemyDictHard)-2)
+            for i in enemyDictHard:
+                _tempList.append(i)
+            enemyID = _tempList[_luck]
+            selectedDict = enemyDictHard
+            selectedDictID = 3        
+        elif encounterIndex > 11 and encounterIndex <= 42:
+            _luck = random.randint(0,len(enemyDictMedium)-2)
+            for i in enemyDictMedium:
+                _tempList.append(i)
+            enemyID = _tempList[_luck]
+            selectedDict = enemyDictMedium
+            selectedDictID = 2
+        elif encounterIndex > 43 and encounterIndex <= 100:
+            _luck = random.randint(0,len(enemyDictEasy)-2)
+            for i in enemyDictEasy:
+                _tempList.append(i)
+            enemyID = _tempList[_luck]       
+            selectedDict = enemyDictEasy
+            selectedDictID = 1
 
-    elif encounterIndex > 11 and encounterIndex <= 20:
-        _luck = random.randint(0,len(enemyDictHard)-2)
-        for i in enemyDictHard:
-            _tempList.append(i)
-        enemyID = _tempList[_luck]
-        selectedDict = enemyDictHard
-        selectedDictID = 3        
-    elif encounterIndex > 21 and encounterIndex <= 52:
-        _luck = random.randint(0,len(enemyDictMedium)-2)
-        for i in enemyDictMedium:
-            _tempList.append(i)
-        enemyID = _tempList[_luck]
-        selectedDict = enemyDictMedium
-        selectedDictID = 2
-    elif encounterIndex > 53 and encounterIndex <= 100:
-        _luck = random.randint(0,len(enemyDictEasy)-2)
-        for i in enemyDictEasy:
-            _tempList.append(i)
-        enemyID = _tempList[_luck]       
-        selectedDict = enemyDictEasy
-        selectedDictID = 1
-    
-    if selectedDictID == 3 and playerStats[0] < 20:
-        EncounterLowLevel()        
-        enemyID = 0
-    elif selectedDictID == 2 and playerStats[0] < 10:
-        EncounterLowLevel()        
-        enemyID = 0
+        if selectedDictID == 3 and playerStats[0] < 20:
+            EncounterLowLevel()        
+            enemyID = 0
+            break
+        elif selectedDictID == 2 and playerStats[0] < 10:
+            EncounterLowLevel()        
+            enemyID = 0
+            break
+        if enemyID != 0:
+            selectedDict[enemyID][1] = random.randint(selectedDict[enemyID][5],selectedDict[enemyID][5]+3)            
+            for i in range(2,5):
+                selectedDict[enemyID][i] += round((selectedDict[enemyID][1] - selectedDict[enemyID][5]) * (selectedDict[enemyID][5] * 0.5))
+
+        if (selectedDict[enemyID][1] - playerStats[0]) > 3:       
+            continue
+        else:
+            break  
    
-    if enemyID != 0:
-        selectedDict[enemyID][1] = random.randint(selectedDict[enemyID][5],selectedDict[enemyID][5]+3)            
-        for i in range(2,5):
-            selectedDict[enemyID][i] += round((selectedDict[enemyID][1] - selectedDict[enemyID][5]) * (selectedDict[enemyID][5] * 0.5))  
+  
 
     return enemyID, selectedDict, selectedDictID
 

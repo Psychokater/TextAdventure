@@ -94,7 +94,7 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
 
     while True:
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats)
-        userInput = input("\n(1) Equip Item\t(2) Unequip Item\t(3) Use Item (4) Remove Items\t(0) Leave Inventory\n")
+        userInput = input("\n(1) Equip Item\t(2) Unequip Item\t(3) Use Item \t(4) Remove Items\t(0) Leave Inventory\n")
         os.system('cls')
 ################ Player Equipment ##########################
         if userInput == "1":            
