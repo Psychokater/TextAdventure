@@ -54,7 +54,7 @@ def WandererMenu(startLocation, location, itemsDict, playerName, playerInventory
 # print PlayerInventory + getting ID's
 def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
-    print(f'{cl.BLUE}{playerName}{cl.RESET}\t\t\tGold:\t{cl.BLUE}{round(playerInventoryMoney,2)}{cl.RESET}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n\n')
+    print(f'{cl.BLUE}{playerName}{cl.RESET}\t\t\tGold:\t{cl.BLUE}{round(playerInventoryMoney,2)}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
@@ -190,9 +190,9 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                                 else: print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
                             if playerStats[2] + itemsDict[i][5] <= playerStats[1]:       
                                 playerStats[2] += itemsDict[i][5]
-                                print(f"You got healed for {cl.GREEN}{itemsDict[i][5]}{cl.RESET} Points. HP: {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}")                                
+                                print(f"You got healed for {cl.GREEN}{itemsDict[i][5]}{cl.RESET} Points. HP: {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}")                                
                             else:
-                                print(f"You got fully healed with {cl.GREEN}{playerStats[1] - playerStats[2]}{cl.RESET} Points. HP: {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}") 
+                                print(f"You got fully healed with {cl.GREEN}{playerStats[1] - playerStats[2]}{cl.RESET} Points. HP: {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}") 
                                 playerStats[2] = playerStats[1]                                
                         
                             itemsDict[i][8] -= 1            
@@ -254,7 +254,7 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
 
 
 def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats):
-    print(f'{cl.BLUE}{playerName}{cl.RESET}\t\t\tGold:\t{cl.BLUE}{round(playerInventoryMoney,2)}{cl.RESET}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n\n')
+    print(f'{cl.BLUE}{playerName}{cl.RESET}\t\t\tGold:\t{cl.BLUE}{round(playerInventoryMoney,2)}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tValue\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1
