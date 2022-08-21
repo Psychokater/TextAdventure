@@ -189,11 +189,11 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
     if enemyID == sorted(selectedDict.keys())[-1]:                   # in Dungeons give random Item from Dungeonitems
         lootItemID = _tempItemListDungeon[jd]                           # Bossloot!
 
-    for y in range(1,7):                                                                                    
+    for y in range(1,3):                                                                                    
         
         for k in itemsDict:
            
-            if itemsDict[k][10] > 0:                                                      # from all choosen Items, append one of every type to enemyItems
+            if itemsDict[k][10] > 0 and itemsDict[k][10] < 15:                      # from all choosen Items, append one Primary and Secondary Equipment to enemyItems
                 if itemsDict[k][11] == y or itemsDict[k][11] == (y + 10):
                     _tempItemListRandom.append(k)
         if bool(_tempItemListRandom) == True:
@@ -205,8 +205,8 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
 
     if enemyID not in enemyWithoutEquipment:
         for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
-            itemEnemyAddStats[3] += round(itemsDict[s][3] * 0.5)
-            itemEnemyAddStats[4] += round(itemsDict[s][4] * 0.5)     
+            itemEnemyAddStats[3] += round(itemsDict[s][3])
+            itemEnemyAddStats[4] += round(itemsDict[s][4])     
                                                                                          # Names of enemy Items
         for t in _itemEnemyItems:
             itemEnemyItems.append(itemsDict[t][2])  
