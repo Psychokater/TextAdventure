@@ -215,8 +215,8 @@ def Move(startLocation, location, playerStats, playerStatPoints, playerInventory
         if _temp != "x":
             location = _temp
             _tempPic()
+            print(f"\nYou moved to {location}\n")       
             break      
-    print(f"\nYou moved to {location}\n")       
     #Maps.MapFlatlands(startLocation, location)
     # sleep(2)
     

@@ -10,22 +10,22 @@
 def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard):
   
   enemyDictEasy = {
-          1001 : ["Pack of Rats",      0,     4,    2,   1,   1,   PicRat],
-          1002 : ["Bird",              0,     4,    3,   1,   1,   PicBird],
-          1003 : ["Cave Bat",          0,     2,    3,   1,   2,   PicCaveBat],
-          1004 : ["Minosaur ",         0,     5,    2,   1,   2,   PicMinosaur],
-          1005 : ["Wild Cat",          0,     5,    4,   1,   3,   PicWildCat],
-          1006 : ["Scorpion",          0,     5,    2,   2,   3,   PicScorpion],
-          1007 : ["Wolf",              0,     6,    4,   2,   4,   PicWolf],
-          1008 : ["See Crab",          0,     4,    3,   3,   4,   PicSeeCrab],
-          1009 : ["Alligator",         0,     6,    2,   3,   5,   PicAlligator],
-          1010 : ["Crazy Monkey",      0,     5,    2,   1,   5,   PicCrazyMonkey],
-          1011 : ["Native Cannibal",   0,     6,    3,   1,   6,   PicNativeCannibal],
-          1012 : ["Amateur Warrior",   0,     9,    2,   1,   7,   PicAmateurWarrior],
-          1013 : ["Skeleton",          0,     8,    2,   2,   8,   PicSkeleton],
-          1014 : ["ApeMan",            0,     8,    2,   2,   9,   PicApeMan],
-          1015 : ["Mutant Fox",        0,     8,    4,   2,   9,   PicMutantFox],
-          1016 : ["CyClops",           0,    10,    1,   3,  10,   PicCyclops]
+          1001 : ["Pack of Rats",      0,     4,    3,   2,   1,   PicRat],
+          1002 : ["Bird",              0,     5,    4,   2,   1,   PicBird],
+          1003 : ["Cave Bat",          0,     6,    5,   1,   2,   PicCaveBat],
+          1004 : ["Minosaur ",         0,     8,    6,   3,   2,   PicMinosaur],
+          1005 : ["Wild Cat",          0,     8,    5,   2,   3,   PicWildCat],
+          1006 : ["Scorpion",          0,     5,    7,   3,   3,   PicScorpion],
+          1007 : ["Wolf",              0,    10,    8,   4,   4,   PicWolf],
+          1008 : ["See Crab",          0,     8,    5,   5,   4,   PicSeeCrab],
+          1009 : ["Alligator",         0,    12,   10,   6,   5,   PicAlligator],
+          1010 : ["Crazy Monkey",      0,     8,    5,   3,   5,   PicCrazyMonkey],
+          1011 : ["Native Cannibal",   0,    10,    7,   2,   6,   PicNativeCannibal],
+          1012 : ["Amateur Warrior",   0,    14,   12,   4,   7,   PicAmateurWarrior],
+          1013 : ["Skeleton",          0,    10,   12,   2,   8,   PicSkeleton],
+          1014 : ["ApeMan",            0,    12,    8,   4,   9,   PicApeMan],
+          1015 : ["Mutant Fox",        0,    15,   14,   5,   9,   PicMutantFox],
+          1016 : ["CyClops",           0,    18,   16,   6,  10,   PicCyclops]
           }  #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
   enemyDictMedium = {   
           1101 : ["Ghost",             0,     10,   4,   2,  11,   PicGhost],
