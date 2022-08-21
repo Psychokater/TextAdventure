@@ -300,6 +300,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             critMessage = "" 
             blockChance = 0
             critChance = 0
+            hitchance = 0
             blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
                 blockMessage = "(crit)"
@@ -310,11 +311,10 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 critMessage = "(crit)"
             else:
                 critDmg = 1 
-
-            hitchance = 0
-            hitchance = (random.randint(0,100))
+            
+            hitchance = (random.randint(1,101))
             if hitchance < 10:
-                critMessage = "(Miss)"
+                critMessage = "(miss)"
                 critDmg = 0
                                                                                           # Player attacks first
             print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg,2)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
@@ -335,6 +335,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 critMessage = ""        
                 blockChance = 0
                 critChance = 0
+                hitchance = 0
                 blockChance = (random.randint(75,100))/100
                 if blockChance >= 90:
                     blockMessage = "(crit)"
@@ -345,11 +346,10 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                     critMessage = "(crit)"
                 else:
                     critDmg = 1
-
-                hitchance = 0
-                hitchance = (random.randint(0,100))
+                
+                hitchance = (random.randint(1,101))
                 if hitchance < 10:
-                    critMessage = "(Miss)"
+                    critMessage = "(miss)"
                     critDmg = 0 
 
                 print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
