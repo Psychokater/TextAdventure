@@ -57,9 +57,9 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         while True:           
 
             UserInputChoose = input(""\
-            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{playerStats[2]}/{playerStats[1]}{cl.RESET}\n"\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
             f"----------- VS -----------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{selectedDict[enemyID][2]}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n\n"\
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(0) Flee\n")
             os.system('cls')
 
@@ -269,16 +269,16 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
         (selectedDict[enemyID][6]())
         if location == "dungeon castle" or location == "dungeon slumps" or location == "dungeon cave":
             UserInputFight = input(""\
-            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
             f"----------- VS -----------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n\n"\
             f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Leave Dungeon\n")                                             # Fight (P = Player, E = Enemy)
             os.system('cls')
         else:
             UserInputFight = input(""\
-            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2])}/{playerStats[1]}{cl.RESET}\n"\
+            f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{playerStats[1]}{cl.RESET}\n"\
             f"----------- VS -----------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2])}/{enemyMaxHP}{cl.RESET}\n\n"\
+            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n\n"\
             f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
             os.system('cls')
 
@@ -295,6 +295,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
                 blockMessage = "(crit)"
+            else:
+                blockChance = 1
             critChance = random.randint(0,100)
             if critChance >= 95:
                 critDmg = 1.5
@@ -302,17 +304,17 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             else:
                 critDmg = 1 
                                                                                           # Player attacks first
-            print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
+            print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg,2)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
             sleep(0.5)
-            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} defends himself with {cl.YELLOW}{itemEnemyItems[1]}{cl.RESET} and blocks {cl.BLUE}{round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
+            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} defends himself with {cl.YELLOW}{itemEnemyItems[1]}{cl.RESET} and blocks {cl.BLUE}{round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
             sleep(0.5)
-            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance)) < (round((playerStats[3] + itemAddStats[3]) * critDmg)):                               # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance) - (round((playerStats[3] + itemAddStats[3]) * critDmg))) # E_HP += E_DEF - P_ATK
+            if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)) < (round((playerStats[3] + itemAddStats[3]) * critDmg,2)):                               # P_DEF < E_ATK?
+                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2))) # E_HP += E_DEF - P_ATK
             else:
                 print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
-            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {cl.BLUE}{round(selectedDict[enemyID][2])}{cl.RESET} HP left.")
+            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {cl.BLUE}{round(selectedDict[enemyID][2],2)}{cl.RESET} HP left.")
             sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
@@ -321,6 +323,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 blockChance = (random.randint(75,100))/100
                 if blockChance >= 90:
                     blockMessage = "(crit)"
+                else:
+                    blockChance = 1
                 critChance = random.randint(0,100)
                 if critChance >= 95:
                     critDmg = 1.5
@@ -328,17 +332,17 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 else:
                     critDmg = 1 
 
-                print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
+                print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
                 sleep(0.5)
-                print(f"You defend yourself with {cl.YELLOW}{itemPlayerSecondary}{cl.RESET} and block {cl.BLUE}{(round((playerStats[4] + itemAddStats[4]) * blockChance))}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
+                print(f"You defend yourself with {cl.YELLOW}{itemPlayerSecondary}{cl.RESET} and block {cl.BLUE}{(round((playerStats[4] + itemAddStats[4]) * blockChance,2))}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
                 sleep(0.5)
-                if (round((playerStats[4] + itemAddStats[4]) * blockChance)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg)):                       # E_DEF < P_ATK?
-                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg)))  # P_HP += P_DEF - E_ATK 
+                if (round((playerStats[4] + itemAddStats[4]) * blockChance,2)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)):                       # E_DEF < P_ATK?
+                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance,2)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg,2)))  # P_HP += P_DEF - E_ATK 
                 else:   
                     print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
                 if playerStats[2] < 0:
                     playerStats[2] = 0                                                                                                                  # HP < 0? Then HP 0
-                print(f"You have {cl.GREEN}{playerStats[2]}{cl.RESET} HP left.")
+                print(f"You have {cl.GREEN}{round(playerStats[2],2)}{cl.RESET} HP left.")
                 sleep(1)
 
     ################ 2 Inventory ##############      
@@ -373,7 +377,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                     playerStats[2] = 0 
             print(f"You managed to flee while you distracted the enemy with {cl.RED}{round(_temp1,2)}{cl.RESET} gold,")
             print(f"but {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} got a hit on you. You received {cl.RED}{round(_temp2,2)}{cl.RESET} dmg!")
-            print(f"You have {cl.GREEN}{playerStats[2]}{cl.RESET} HP left.")
+            print(f"You have {cl.GREEN}{round(playerStats[2],2)}{cl.RESET} HP left.")
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
                 PicDeath()
