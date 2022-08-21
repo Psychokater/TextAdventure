@@ -297,7 +297,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             itemAddStats = []
             itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
             blockMessage = ""
-            critMessage = ""           
+            critMessage = "" 
             blockChance = 0
             critChance = 0
             blockChance = (random.randint(75,100))/100
@@ -310,6 +310,12 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 critMessage = "(crit)"
             else:
                 critDmg = 1 
+
+            hitchance = 0
+            hitchance = (random.randint(0,100))
+            if hitchance < 10:
+                critMessage = "(Miss)"
+                critDmg = 0
                                                                                           # Player attacks first
             print(f"\nYou attack {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} with {cl.YELLOW}{itemPlayerPrimary}{cl.RESET} and did {cl.YELLOW}{round((playerStats[3] + itemAddStats[3]) * critDmg,2)} {cl.YELLOW}{critMessage}{cl.RESET} damage.")
             sleep(0.5)
@@ -325,6 +331,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
+                blockMessage = ""
+                critMessage = ""        
                 blockChance = 0
                 critChance = 0
                 blockChance = (random.randint(75,100))/100
@@ -336,7 +344,13 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                     critDmg = 1.5
                     critMessage = "(crit)"
                 else:
-                    critDmg = 1 
+                    critDmg = 1
+
+                hitchance = 0
+                hitchance = (random.randint(0,100))
+                if hitchance < 10:
+                    critMessage = "(Miss)"
+                    critDmg = 0 
 
                 print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} attacks you with {cl.YELLOW}{itemEnemyItems[0]}{cl.RESET} and did {cl.RED}{round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)}{cl.RESET} {cl.YELLOW}{critMessage}{cl.RESET} damage.")  # Enemy attacks second
                 sleep(0.5)
