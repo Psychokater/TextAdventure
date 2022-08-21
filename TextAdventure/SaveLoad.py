@@ -146,9 +146,13 @@ def Load(dataSaveList):
             if userInputNumber > len(dataSaveList[1]):
                 print(f"{cl.RED}Selected slot is empty{cl.RESET}")
                 continue
-####################################### Load File            
-            with open(f'SaveFile_{saveFileID-1}.pickle', 'rb') as loadHandler: 
-                dataSaveList = pickle.load(loadHandler)
+####################################### Load File
+            elif userInputNumber == "1":
+                with open(f'SaveFile_Autosave.pickle', 'rb') as loadAutoHandler: 
+                    dataSaveList = pickle.load(loadAutoHandler) 
+            else:           
+                with open(f'SaveFile_{userInputNumber}.pickle', 'rb') as loadHandler: 
+                    dataSaveList = pickle.load(loadHandler)
             with open('Savepoint_Status.pickle', 'rb') as loadAllHandler:
                 dataSaveList[1] = pickle.load(loadAllHandler)
             break       
