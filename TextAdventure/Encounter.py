@@ -286,6 +286,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
         
         if UserInputFight == "1":
             (selectedDict[enemyID][6]())
+            itemAddStats = []
+            itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
             blockMessage = ""
             critMessage = ""           
             blockChance = 0
@@ -310,7 +312,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
                 selectedDict[enemyID][2] = 0
-            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {round(selectedDict[enemyID][2])} HP left.")
+            print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has {cl.BLUE}{round(selectedDict[enemyID][2])}{cl.RESET} HP left.")
             sleep(1)
 
             if selectedDict[enemyID][2] > 0:                                                                 # Enemy alive?
