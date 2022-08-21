@@ -226,6 +226,7 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
 ############### Break #####################
         elif userInput == "4":                                               
             while True:
+                itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
                 try:
                     userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort\n'))                        
                 except ValueError:
@@ -262,7 +263,7 @@ def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMon
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:
         itemsDict[i][1] = 0                                                       #       i = Item ID
-        if itemsDict[i][8] > 0 and itemsDict[i][11] > 0:                      #   Quantity Player > 0 for that ItemID AND Equipable?
+        if itemsDict[i][8] > 0 and itemsDict[i][11] > 0 and itemsDict[i][11] != 8 and itemsDict[i][11] != 9:  #   Quantity Player > 0 for that ItemID AND Equipable?
                     
             itemsDict[i][1] = z                                                 #   Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
