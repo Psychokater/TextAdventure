@@ -182,10 +182,18 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
     elif selectedDictID == 3:
         _tempItemList = _tempItemListHard
     
-    j = random.randint(0,len(_tempItemList)-1)
-    jd = random.randint(0,len(_tempItemListDungeon)-1)                              # give Random Item from List as Lootitem
-    lootItemID = _tempItemList[j]
+                                 # give Random Item from List as Lootitem
+    while True:
+        lootChanceEquipment = random.randint(1,3)
+        j = random.randint(0,len(_tempItemList)-1)
+        lootItemID = _tempItemList[j]
+        if itemsDict[lootItemID][11] > 0 and lootChanceEquipment < 3:
+            continue
+        else:
+            break
+
     
+    jd = random.randint(0,len(_tempItemListDungeon)-1) 
     if enemyID == sorted(selectedDict.keys())[-1]:                   # in Dungeons give random Item from Dungeonitems
         lootItemID = _tempItemListDungeon[jd]                           # Bossloot!
 
@@ -295,8 +303,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             blockChance = (random.randint(75,100))/100
             if blockChance >= 90:
                 blockMessage = "(crit)"
-            else:
-                blockChance = 1
+            
             critChance = random.randint(0,100)
             if critChance >= 95:
                 critDmg = 1.5
@@ -309,7 +316,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             print(f"{cl.RED}{selectedDict[enemyID][0]}{cl.RESET} defends himself with {cl.YELLOW}{itemEnemyItems[1]}{cl.RESET} and blocks {cl.BLUE}{round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
             sleep(0.5)
             if  (round((selectedDict[enemyID][4] + itemEnemyAddStats[4]) * blockChance,2)) < (round((playerStats[3] + itemAddStats[3]) * critDmg,2)):                               # P_DEF < E_ATK?
-                selectedDict[enemyID][2] += (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2) - (round((playerStats[3] + itemAddStats[3]) * critDmg,2))) # E_HP += E_DEF - P_ATK
+               selectedDict[enemyID][2] -= ((round((playerStats[3] + itemAddStats[3]) * critDmg,2)) - (round((selectedDict[enemyID][4]  + itemEnemyAddStats[4]) * blockChance,2))) # E_HP -= P_ATK - E_DEF
             else:
                 print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
             if selectedDict[enemyID][2] < 0:                                                                                                                  # HP < 0? Then HP 0
@@ -323,8 +330,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 blockChance = (random.randint(75,100))/100
                 if blockChance >= 90:
                     blockMessage = "(crit)"
-                else:
-                    blockChance = 1
+                
                 critChance = random.randint(0,100)
                 if critChance >= 95:
                     critDmg = 1.5
@@ -337,7 +343,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 print(f"You defend yourself with {cl.YELLOW}{itemPlayerSecondary}{cl.RESET} and block {cl.BLUE}{(round((playerStats[4] + itemAddStats[4]) * blockChance,2))}{cl.RESET} {cl.YELLOW}{blockMessage}{cl.RESET} damage.")
                 sleep(0.5)
                 if (round((playerStats[4] + itemAddStats[4]) * blockChance,2)) < (round((selectedDict[enemyID][3] + itemEnemyAddStats[3])  * critDmg,2)):                       # E_DEF < P_ATK?
-                    playerStats[2] += ((round((playerStats[4] + itemAddStats[4]) * blockChance,2)) - (round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg,2)))  # P_HP += P_DEF - E_ATK 
+                    playerStats[2] -= ((round((selectedDict[enemyID][3] + itemEnemyAddStats[3]) * critDmg,2)) - (round((playerStats[4] + itemAddStats[4]) * blockChance,2)))  # P_HP -= E_ATK - P_DEF 
                 else:   
                     print(f"{cl.YELLOW}Attack blocked{cl.RESET}")
                 if playerStats[2] < 0:
