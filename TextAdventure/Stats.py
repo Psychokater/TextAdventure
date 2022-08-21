@@ -123,7 +123,7 @@ def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
 def AdditionalStats(itemAddStats, itemsDict):   
    # itemAddStats = 0 None,1 None, 2 None, 3 +ATK, 4 +DEF, 5 None 
    # Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq   
-    itemAddStats = [0, 0, 0, 0, 0, 0]
+    itemAddStats = [0, 0, 0, 0.0, 0.0, 0]
     itemKeyList = [key for key in itemsDict]
     itemPlayerPrimary = "Fists" 
     itemPlayerSecondary = "Your Face"                                         
@@ -131,9 +131,9 @@ def AdditionalStats(itemAddStats, itemsDict):
         if itemsDict[i][11] >= 10:                                                  
             itemAddStats[3] += itemsDict[i][3]
             itemAddStats[4] += itemsDict[i][4]
+
         if itemsDict[i][11] == 11:
-            itemPlayerPrimary = itemsDict[i][2]
-        
+            itemPlayerPrimary = itemsDict[i][2]        
         if itemsDict[i][11] == 12:
             itemPlayerSecondary = itemsDict[i][2]
       

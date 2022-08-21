@@ -115,6 +115,9 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                         if itemsDict[j][11] >= 10:
                             print(f"{cl.YELLOW}{itemsDict[j][2]}{cl.RESET} is already equipped!")
                             # sleep(1)
+                            continue
+                        elif itemsDict[j][1] == 0:
+                            print(f"{cl.RED}That's not a valid selection!{cl.RESET}")
                             continue 
                         else:
                             itemsDict[j][11] += 10
@@ -149,6 +152,9 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                             print(f"{cl.RED}You have already unequipped{cl.RESET} {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
                             # sleep(1)
                             continue 
+                        elif itemsDict[j][1] == 0:
+                            print(f"{cl.RED}That's not a valid selection!{cl.RESET}")
+                            continue
                         elif itemsDict[o][11] >= 10: 
                             itemsDict[o][11] -= 10
                             print(f"You unequipped {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")

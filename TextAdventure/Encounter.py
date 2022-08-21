@@ -53,9 +53,10 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     if enemyID != 0:
                 
         enemyMaxHP = (selectedDict[enemyID][2])  
-        (selectedDict[enemyID][6]())                                                            # select Enemy with ID from Dict (Random) -> see EnemySelection()
+                                                                        # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:           
-
+            
+            (selectedDict[enemyID][6]()) 
             UserInputChoose = input(""\
             f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
             f"----------- VS -----------\n"\
@@ -243,9 +244,9 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
     itemAddStats = []
     itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
     itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID) 
-   
+    (selectedDict[enemyID][6]())
     while True:
-
+        
         if playerStats[2] <= 0:                                                            	    # if player dead
             sleep(2)
             PicDeath()
@@ -274,7 +275,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
   
         #PlayerStats: 0 Level, 1 HP 2 Atk, 3 Def, 4 Exp  
         #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
-        (selectedDict[enemyID][6]())
+        
         if location == "dungeon castle" or location == "dungeon slumps" or location == "dungeon cave":
             UserInputFight = input(""\
             f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
@@ -364,18 +365,21 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                     playerStats[2] = 0                                                                                                                  # HP < 0? Then HP 0
                 print(f"You have {cl.GREEN}{round(playerStats[2],2)}{cl.RESET} HP left.")
                 sleep(1)
+                
 
     ################ 2 Inventory ##############      
                   
         elif UserInputFight == "2":
-               itemsDict, playerStats = Inventory.InventoryMenu(
-                    startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)
+            itemsDict, playerStats = Inventory.InventoryMenu(
+                startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)
+            (selectedDict[enemyID][6]())
 
     ################ 3 Stats #################
 
         elif UserInputFight == "3":
             playerStats, playerStatPoints = Stats.StatMenu(
                 playerStats, playerStatPoints, playerName, itemsDict)
+            (selectedDict[enemyID][6]())
 
     ################ 4 Flee ################
 
