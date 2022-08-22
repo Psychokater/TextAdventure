@@ -210,7 +210,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
             _itemEnemyItems.append(_tempItemListRandom[o])
             _tempItemListRandom = []
 
-    enemyWithoutEquipment = [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008] ### chould be changed later after testing
+    enemyWithoutEquipment = [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009] ### chould be changed later after testing
 
     if enemyID not in enemyWithoutEquipment:
         for s in _itemEnemyItems:                                                   # Values for adding Stats to enemy    
