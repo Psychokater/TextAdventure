@@ -638,17 +638,17 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
         for i in itemKeyList:  
             if userInputItemNumber == itemsDict[i][0]:
                 if itemsDict[i][10] == 13:                                                                     ### TEST for GEMS!
-                    if itemsDict[3906][8] >= 5:
+                    if itemsDict[1906][8] >= 5:
                         itemsDict[i][8] += 1            
-                        itemsDict[3906][8] -= 5
+                        itemsDict[1906][8] -= 5
                     else: 
-                        print(f"{cl.RED}\nNot enough {itemsDict[3906][2]}, fool!{cl.RESET}\n")
+                        print(f"{cl.RED}\nNot enough {itemsDict[1906][2]}, fool!{cl.RESET}\n")
                 elif itemsDict[i][10] == 14:
-                    if itemsDict[3907][8] >= 5:
+                    if itemsDict[2907][8] >= 5:
                         itemsDict[i][8] += 1            
-                        itemsDict[3907][8] -= 5
+                        itemsDict[2907][8] -= 5
                     else: 
-                        print(f"{cl.RED}\nNot enough {itemsDict[3908][2]}, fool!{cl.RESET}\n")
+                        print(f"{cl.RED}\nNot enough {itemsDict[2908][2]}, fool!{cl.RESET}\n")
                 elif itemsDict[i][10] == 15:
                     if itemsDict[3908][8] >= 5:
                         itemsDict[i][8] += 1            
