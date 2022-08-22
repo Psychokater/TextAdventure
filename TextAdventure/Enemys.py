@@ -17,7 +17,7 @@ def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard):
           1005 : ["Wild Cat",          0,    10,    5,   2,   3,   PicWildCat],
           1006 : ["Scorpion",          0,     8,    7,   4,   3,   PicScorpion],
           1007 : ["Wolf",              0,    14,    8,   5,   4,   PicWolf],
-          1008 : ["See Crab",          0,    12,    5,   6,   4,   PicSeeCrab],
+          1008 : ["Sea Crab",          0,    12,    5,   6,   4,   PicSeeCrab],
           1009 : ["Alligator",         0,    16,   10,   7,   5,   PicAlligator],
           1010 : ["Crazy Monkey",      0,    12,    5,   4,   5,   PicCrazyMonkey],
           1011 : ["Native Cannibal",   0,    18,    7,   3,   6,   PicNativeCannibal],
