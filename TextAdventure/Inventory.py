@@ -177,6 +177,13 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                         # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
                         if itemsDict[i][2] == "Map":
                             Maps.MapFlatlands(startLocation, location)
+                        if itemsDict[i] == 3904:
+                            playerStats[5] += 500
+                            print(f"You got 500 experience from {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}")
+                            itemsDict[i][8] -= 1            
+                            if itemsDict[i][8] == 0:
+                                itemsDict[i][1] = 0
+                            continue
                         if itemsDict[i][5] > 0:
                             if playerStats[2] >= playerStats[1]:
                                 print(f"You already have full HP, do you really want to use {cl.YELLOW}{itemsDict[i][2]}{cl.RESET}?")
