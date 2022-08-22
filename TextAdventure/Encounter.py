@@ -284,7 +284,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             _tempMoney += (round((selectedDict[enemyID][1] + selectedDict[enemyID][2] + selectedDict[enemyID][3] + selectedDict[enemyID][4]) / 9.6 ,2))
             if _tempMoney < 0:
                 _tempMoney = 0.00
-            _tempExp += (round(((selectedDict[enemyID][1] + 3 - playerStats[0]) ** 1.25)) * (selectedDict[enemyID][2] + (selectedDict[enemyID][3]*3) + (selectedDict[enemyID][4]*2)) ,2))
+            _tempExp += (round(((selectedDict[enemyID][1] + 3 - playerStats[0]) ** 1.25) * (selectedDict[enemyID][2] + (selectedDict[enemyID][3]*3) + (selectedDict[enemyID][4]*2)) ,2))
             if _tempExp < 0:
                 _tempExp = 0.00
             print(f"\nYou received {cl.YELLOW}{itemsDict[lootItemID][2]}{cl.RESET}, {cl.YELLOW}{round(_tempMoney,2)}{cl.RESET} Gold and {cl.YELLOW}{round(_tempExp,2)}{cl.RESET} Experience.")
