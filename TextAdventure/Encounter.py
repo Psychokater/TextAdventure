@@ -498,6 +498,10 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
         enemyMaxHP = (selectedDict[enemyID][2])  
         playerInventoryMoney, playerStats, playerStatPoints, location = Fight(
             startLocation, playerStats, playerStatPoints, selectedDict, enemyID, playerInventoryMoney, location, playerName, enemyMaxHP, itemsDict, selectedDictID)
+        if location == "the town":
+            location = _tempLocation
+            _tempLocation = "the town"
+            break
 
     # Leave Dungeon:    
     print(f"You left {location}, you are now in {_tempLocation}")
