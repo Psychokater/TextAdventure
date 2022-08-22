@@ -173,7 +173,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
             _tempItemListMedium.append(i)
         elif itemsDict[i][10] == 9:
             _tempItemListHard.append(i)
-        elif itemsDict[i][10] == 14+selectedDictID:
+        elif itemsDict[i][10] == 15+selectedDictID:
             _tempItemListDungeon.append(i)
                                                                              # Choose witch Items (Easy, Medium, Hard)
     if selectedDictID == 1:
@@ -202,7 +202,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
         
         for k in itemsDict:
            
-            if itemsDict[k][10] > 0 and itemsDict[k][10] < 15:                      # from all choosen Items, append one Primary and Secondary Equipment to enemyItems
+            if itemsDict[k][10] > 0 and itemsDict[k][10] < 16:                      # from all choosen Items, append one Primary and Secondary Equipment to enemyItems
                 if itemsDict[k][11] == y or itemsDict[k][11] == (y + 10):
                     _tempItemListRandom.append(k)
         if bool(_tempItemListRandom) == True:
@@ -502,6 +502,19 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
             location = _tempLocation
             _tempLocation = "the town"
             break
+        else:
+            if location == "dungeon castle":                                                                    #GIVE GEMS
+                i = random.randint(1,2)
+                itemsDict[3906][8] += i
+                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
+            if location == "dungeon slumps":
+                i = random.randint(1,2)
+                itemsDict[3907][8] += i
+                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
+            if location == "dungeon cave":
+                i = random.randint(1,2)
+                itemsDict[3908][8] += i
+                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
 
     # Leave Dungeon:    
     print(f"You left {location}, you are now in {_tempLocation}")

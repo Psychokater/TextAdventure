@@ -128,10 +128,7 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                             print(f"You equipped {itemsDict[j][2]}")
                             continue                
 ################ Items ####################################
-        # elif userInput == "2":
-        #     itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
-        #     userInput = input("\n(1) Use\t(2) Remove from Inventory\t(0) Return\n")
-            #os.system('cls')
+
 ################ Items #### Use Item #################################
         elif userInput == "2":  
             while True:
@@ -291,96 +288,6 @@ def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMon
             print()                                                             #   new Line of Inventory        
     print('------------------------------------------------------------------------\n')
     return itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats  
-
-# def PlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats):
-#     os.system('cls')
-#     while True:
-#         itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats = GetPlayerEquipment(
-#             itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats)   
-#         userInput = input("\n(1) Equip item\t(2) Unequip item\t(0) Return\n")
-#         os.system('cls')
-################################## 1 Equip Item #############################   
-        # if userInput == "1":
-        #     while True:
-        #         itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats = GetPlayerEquipment(
-        #             itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats)                       
-        #         try:
-        #             userInputItemNumber = int (input ('Select item to equip:\t\t(0) Abort \n'))                        
-        #         except ValueError:
-        #             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
-        #             continue
-        #         os.system('cls')
-        #         if userInputItemNumber == 0:
-        #             break      
-        #         itemKeyList = [key for key in itemsDict]
-        #         for j in itemKeyList: 
-        #             if userInputItemNumber == itemsDict[j][1]:                         
-        #                 if itemsDict[j][11] >= 10:
-        #                     print(f"{cl.YELLOW}{itemsDict[j][2]}{cl.RESET} is already equipped!")
-        #                     # sleep(1)
-        #                     continue 
-        #                 else:
-        #                     itemsDict[j][11] += 10
-        #                     for k in itemKeyList:
-        #                         if itemsDict[j][11] == itemsDict[k][11] and j != k:
-        #                             itemsDict[k][11] -= 10
-                
-        #                     print(f"You equipped {itemsDict[j][2]}")
-        #                     continue                        
-################################## 2 Unequip Item #############################               
-        # elif userInput == "2":  
-        #     while True:
-        #         itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats = GetPlayerEquipment(
-        #             itemsDict , playerItemIDs, playerName, playerInventoryMoney, playerStats)   
-        #         try:
-        #             userInputItemNumber = int (input ('Select item to unequip:\t\t(0) Abort\n'))                        
-        #         except ValueError:
-        #             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
-        #             continue
-        #         os.system('cls')  
-        #         if userInputItemNumber == 0:                            
-        #             break                     
-        #         itemKeyList = [key for key in itemsDict]
-        #         for o in itemKeyList: 
-        #             if userInputItemNumber == itemsDict[o][1]:                          
-        #                 if itemsDict[o][11] < 10:
-        #                     print(f"{cl.RED}You have already unequipped{cl.RESET} {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
-        #                     # sleep(1)
-        #                     continue 
-        #                 elif itemsDict[o][11] >= 10: 
-        #                     itemsDict[o][11] -= 10
-        #                     print(f"You unequipped {cl.YELLOW}{itemsDict[o][2]}{cl.RESET}")
-        #                     continue                                
-                            # sleep(1)
-################################## 3 Remove Item #############################                            
-        # elif userInput == "3":                         
-        #     while True:
-        #         try:
-        #             userInputItemNumber = int (input ('Select item to remove:\t\t(0) Abort\n'))                        
-        #         except ValueError:
-        #             print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
-        #             continue
-        #         os.system('cls')
-                
-        #         itemKeyList = [key for key in itemsDict]
-        #         for n in itemKeyList:  
-        #             if userInputItemNumber == itemsDict[n][1]:
-        #                 if userInputItemNumber == 0:
-        #                     break 
-        #                 itemsDict[n][8] -= 1
-        #                 if itemsDict[n][11] >= 10:
-        #                     itemsDict[n][11] -= 10
-        #                 print(f"\n{cl.YELLOW}{itemsDict[n][2]}{cl.RESET} was brought back to his owner!\n")                                   
-        #                 if itemsDict[n][8] == 0:
-        #                     itemsDict[n][1] = 0
-                                        
-            # sleep(1)
-################################## 4 Return#### #############################     
-    #     elif userInput == "0":
-    #         break 
-    #     else: print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")               
-
-    # return itemsDict, playerItemIDs
 
 
 
@@ -680,7 +587,7 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:  
         itemsDict[i][0] = 0                                                     #       i = Item ID
-        _tempListIndexValue = [10,11,12]                                        #       List of ID to Sell at Wanderer
+        _tempListIndexValue = [10,11,12,13,14,15]                               #       List of ID to Sell at Wanderer
         if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
             (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Wanderer > 0
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
@@ -690,7 +597,7 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
                 if j == 2:
-                    print('{:<15}'.format(itemsDict[i][j]),end='')                            #           except for these Indexes!
+                    print('{:<15}'.format(itemsDict[i][j]),end='')                    #           except for these Indexes!
                 if j in _tempListIndexJ:                                        #
                     continue                                                    #
                 if j == 6:                                                      #           if Index == "Value of Item":
@@ -722,8 +629,28 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
             break 
         itemKeyList = [key for key in itemsDict]
         for i in itemKeyList:  
-            if userInputItemNumber == itemsDict[i][0]:             
-                if playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
+            if userInputItemNumber == itemsDict[i][0]:
+                if itemsDict[i][10] == 13:                                                                     ### TEST for GEMS!
+                    if itemsDict[3906][8] >= 5:
+                        itemsDict[i][8] += 1            
+                        itemsDict[3906][8] -= 5
+                    else: 
+                        print(f"{cl.RED}\nNot enough {itemsDict[3906][2]}, fool!{cl.RESET}\n")
+                elif itemsDict[i][10] == 14:
+                    if itemsDict[3907][8] >= 5:
+                        itemsDict[i][8] += 1            
+                        itemsDict[3907][8] -= 5
+                    else: 
+                        print(f"{cl.RED}\nNot enough {itemsDict[3908][2]}, fool!{cl.RESET}\n")
+                elif itemsDict[i][10] == 15:
+                    if itemsDict[3908][8] >= 5:
+                        itemsDict[i][8] += 1            
+                        itemsDict[3908][8] -= 5
+                    else: 
+                        print(f"{cl.RED}\nNot enough {itemsDict[3906][2]}, fool!{cl.RESET}\n")
+
+                                                                                                                 ### BUY
+                elif playerInventoryMoney < round(itemsDict[i][6] * 1.5 + 2,2): 
                     print(f"{cl.RED}\nNot enough money, fool!{cl.RESET}\n")
                     # sleep(1)
                     continue

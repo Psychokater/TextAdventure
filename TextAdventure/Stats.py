@@ -76,8 +76,8 @@ def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
     #### Activate Items ####    
     #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
     itemKeyList = [key for key in itemsDict]   
-    _tempListMidLvl = [2, 5, 8, 11]
-    _tempListHighLvl = [3, 6, 9, 12]
+    _tempListMidLvl = [2, 5, 8, 11, 14, 17]
+    _tempListHighLvl = [3, 6, 9, 12, 15, 18]
 
     if playerStats[0] == 10:
         for i in itemKeyList:
