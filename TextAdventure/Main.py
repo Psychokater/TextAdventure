@@ -240,12 +240,12 @@ def World(startLocation, location, direction):
     "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTheTown],
     "the flatlands" :   [      "green land"    ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
     "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
-    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,    "the desert"    ,PicMountains],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,     "the desert"    ,PicMountains],
     "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
     "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands],
-    "green land"    :   [     "the desert"    ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
-    "the desert"   :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
-    "the lake"      :   [           0          ,          0          ,     "the desert"   ,          0          ,PicTheLake],
+    "green land"    :   [     "the desert"     ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
+    "the desert"    :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
+    "the lake"      :   [           0          ,          0          ,     "the desert"    ,          0          ,PicTheLake],
 
     }
 
@@ -276,53 +276,65 @@ def PicStartFire():
 ########################################################################
 
 def PicGreenLand():
-    print("""
-
-
-
-
-
-
-
-
-
-
-
-
-""")
+    print(f"""
+           ,                        '           .        '        ,  
+   .            .        '       .         ,         
+                                                   .       '     +
+       +          {cl.YELLOW}.-'''''-.{cl.RESET}     
+                {cl.YELLOW}.'         `.{cl.RESET}    +     .     ________||
+       ___     {cl.YELLOW}:             :{cl.RESET}      |       /        ||  .     '___
+  ____/   \   {cl.YELLOW}:               :{cl.RESET}    ||.    _/      || ||\_______/   \.
+ /         \  {cl.YELLOW}:      {cl.RESET}_/|{cl.YELLOW}      :{cl.RESET}    `|| __/      ,.|| ||             \.
+/  ,   '  . \  {cl.YELLOW}:   ={cl.RESET}/_/{cl.YELLOW}      :{cl.RESET}      |'_______     || ||  ||   .      \.
+    |        \__{cl.YELLOW}`.{cl.RESET}_/ |{cl.YELLOW}     .'{cl.RESET}    ___|        \__  \.\||  ||...    ,   \.
+   l|,   '   (   /  ,|{cl.YELLOW}...-'{cl.RESET}        \   '   ,     __\||_//___          
+ ___|____     \_/^\/||__    ,    .  ,__             ||//    \    .  ,
+           _/~  `""~`"` \_           ''(       ....,||/       '   
+ ..,...  __/  -'/  `-._ `\_\__        | \           ||  _______   .
+              '`  `\   \  \-.\        /(_1_,..      || /
+                                            ______/"###""")
 ########################################################################
 
 def PicTheLake():
-    print("""
+    print(f"""
+                  _
+             .''.' \    _  __
+ ___         './    '. ' `'  `
+    '._______.'       \.
+                       '.__________
+                                   '-.____________
+ _________________________________________________'.__________________
+{cl.BLUE}                                      ____________.'
+                         __________.-'
+      _______          .'                  
+ ___.'       '.       /               {cl.RESET}'-._{cl.BLUE}        
+             .'\    .' ._,.__,        {cl.RESET}____\____.o.{cl.BLUE}
+             '..'._/                 {cl.RESET}'-._______.-'{cl.BLUE}
+                                     .-'_______'-.
+                                         _/    'o'
+                                      .-'
 
-
-
-
-
-
-
-
-
-
-
-
-""")
+{cl.RESET}""")
 ########################################################################
 
 def PicTheDesert():
-    print("""
-
-
-
-
-
-
-
-
-
-
-
-
+    print(f"""
+                                        __
+                 ,-_                  (`  ).
+                 |-_'-,              (     ).
+                 |-_'-'           _(        '`.
+        _        |-_'/        .=(`(      .     )
+       /;-,_     |-_'        (     (.__.:-`-_.'
+      /-.-;,-,___|'          `(       ) )
+     /;-;-;-;_;_/|\_ _ _ _ _   ` __.:'   )
+        x_( __`|_P_|`-;-;-;,|        `--'
+        |\ \    _||   `-;-;-'
+        | \`   -_|.      '-'
+        | /   /-_| `
+        |/   ,'-_|  \.
+        /____|'-_|___\.
+{cl.GREEN} _..,____]__|_\-_'|_[___,.._
+'                          ``'--,..,.{cl.RESET}
 """)
 ########################################################################
 
