@@ -277,22 +277,22 @@ def PicStartFire():
 
 def PicTheDesert():
     print(f"""
-           ,                        '           .        '        ,  
-   .            .        '       .         ,         
-                                                   .       '     +
-       +          {cl.YELLOW}.-'''''-.{cl.RESET}     
-                {cl.YELLOW}.'         `.{cl.RESET}    +     .     ________||
-       ___     {cl.YELLOW}:             :{cl.RESET}      |       /        ||  .     '___
-  ____/   \   {cl.YELLOW}:               :{cl.RESET}    ||.    _/      || ||\_______/   \.
- /         \  {cl.YELLOW}:      {cl.RESET}_/|{cl.YELLOW}      :{cl.RESET}    `|| __/      ,.|| ||             \.
-/  ,   '  . \  {cl.YELLOW}:   ={cl.RESET}/_/{cl.YELLOW}      :{cl.RESET}      |'_______     || ||  ||   .      \.
-    |        \__{cl.YELLOW}`.{cl.RESET}_/ |{cl.YELLOW}     .'{cl.RESET}    ___|        \__  \.\||  ||...    ,   \.
-   l|,   '   (   /  ,|{cl.YELLOW}...-'{cl.RESET}        \   '   ,     __\||_//___          
- ___|____     \_/^\/||__    ,    .  ,__             ||//    \    .  ,
-           _/~  `""~`"` \_           ''(       ....,||/       '   
- ..,...  __/  -'/  `-._ `\_\__        | \           ||  _______   .
-              '`  `\   \  \-.\        /(_1_,..      || /
-                                            ______/"###""")
+               ,                        '           .        '        ,                     .        '
+       .            .        '       .         ,         
+                                                       .       '     +          .        '
+           +          {cl.YELLOW}.-'''''-.{cl.RESET}       '     +
+                    {cl.YELLOW}.'         `.{cl.RESET}    +     .             
+           ___     {cl.YELLOW}:             :{cl.RESET}                        .     '                  .    '     +      '
+      ____/   \   {cl.YELLOW}:               :{cl.RESET}      .              ||
+     /         \  {cl.YELLOW}:      {cl.RESET}_/|{cl.YELLOW}      :{cl.RESET}    `           ,.|| ||             
+    /  ,   '  . \  {cl.YELLOW}:    {cl.RESET}/_/{cl.YELLOW}      :{cl.RESET}       '           || || ||   .                     .        '
+        |        \  {cl.YELLOW}`.{cl.RESET}_/ |{cl.YELLOW}     .'{cl.RESET}                    \\\\ || ||...    ,     '     +
+       ;|,   '   (   /  ,|{cl.YELLOW}...-'{cl.RESET}            '   ,      \\\\|| //             
+     ___|____     \_/^\/||__             __.________,.  ||//         .  ,  '     +
+               _/~  `""~`"` \_           ''(       ..\.,||/       '                         .        '
+     ..,...  __/  -'/  `-._ `\_\__          \           ||``\___,.__.____
+                  '`  `\   \  \-.\          /_:_,..     || ____/         \\________Î.,___________,.
+                                                ______/"###""")
 ########################################################################
 
 def PicTheLake():
