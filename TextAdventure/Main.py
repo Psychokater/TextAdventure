@@ -238,14 +238,14 @@ def World(startLocation, location, direction):
     # Location                    North                  East                 South                  West
     startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
     "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTheTown],
-    "the flatlands" :   [      "Green Land"    ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
+    "the flatlands" :   [      "green land"    ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
     "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
-    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,    "The Dessert"    ,PicMountains],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,    "the desert"    ,PicMountains],
     "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
     "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands],
-    "Green Land"    :   [     "The Dessert"    ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
-    "The Dessert"   :   [      "The Lake"      ,   "the mountains"   ,     "Green Land"    ,          0          ,PicTheDessret],
-    "The Lake"      :   [           0          ,          0          ,     "The Dessert"   ,          0          ,PicTheLake],
+    "green land"    :   [     "the desert"    ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
+    "the dessert"   :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
+    "the lake"      :   [           0          ,          0          ,     "the desert"   ,          0          ,PicTheLake],
 
     }
 
@@ -309,7 +309,7 @@ def PicTheLake():
 """)
 ########################################################################
 
-def PicTheDessret():
+def PicTheDesert():
     print("""
 
 

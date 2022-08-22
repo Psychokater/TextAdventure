@@ -20,8 +20,8 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP 
     locationIndex = 0
     enemyID = 0
-    _locations = [startLocation, "the town", "the flatlands", "the forest", "the mountains", "the islands", "the castle"]
-    _locationIndexList = [1,          100,             1,              1,            1,             1,             201  ]
+    _locations = [startLocation, "the town", "the flatlands", "the forest", "the mountains", "the islands", "the castle","green land","the desert","the lake"]
+    _locationIndexList = [1,          100,             1,              1,            1,             1,             201,        1,           1,          1    ]
 
     
     for i in range(0,len(_locations)):
