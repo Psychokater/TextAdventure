@@ -244,7 +244,7 @@ def World(startLocation, location, direction):
     "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
     "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands],
     "green land"    :   [     "the desert"    ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
-    "the dessert"   :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
+    "the desert"   :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
     "the lake"      :   [           0          ,          0          ,     "the desert"   ,          0          ,PicTheLake],
 
     }
