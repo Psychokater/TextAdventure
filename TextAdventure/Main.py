@@ -265,11 +265,11 @@ def PicStartFire():
                        )          
                      (  (          
                          )        
-                   (    ({cl.RESET}  ,,     
-                    {cl.RED}){cl.RESET} {cl.MAGNETA}/\{cl.RESET} -{cl.RED}(({cl.RESET}
-                  {cl.RED}({cl.RESET} {cl.MAGNETA} // |{cl.RESET} {cl.RED}({cl.RESET}`'     
-                _ -.;{cl.LYELLOW}_/ \\{cl.RESET}--._    
-               (_;-{cl.LYELLOW}// | \ \{cl.RESET}-'.\   
+                   (    ({cl.RESET}       
+                    {cl.RED}){cl.RESET} {cl.YELLOW}/\  {cl.RESET}{cl.RED}({cl.RESET}
+                  {cl.RED}({cl.RESET} {cl.YELLOW} //\  {cl.RESET} {cl.RED}({cl.RESET}     
+                _ -.;{cl.MAGENTA}_/ \\{cl.RESET}--._    
+               (_;-{cl.MAGENTA}// | \ \{cl.RESET}-'.\   
                ( `.__ _  ___,')   
                 `'(_ )_)(_)_)'
 """)
