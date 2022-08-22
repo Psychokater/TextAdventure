@@ -502,19 +502,21 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
             location = _tempLocation
             _tempLocation = "the town"
             break
-        else:
+
+        if len(enemyList < 1):
             if location == "dungeon castle":                                                                    #GIVE GEMS
                 i = random.randint(1,2)
                 itemsDict[3906][8] += i
                 print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
-            if location == "dungeon slumps":
+            elif location == "dungeon slumps":
                 i = random.randint(1,2)
                 itemsDict[3907][8] += i
-                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
-            if location == "dungeon cave":
+                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3907][2]}{cl.RESET}")
+            elif location == "dungeon cave":
                 i = random.randint(1,2)
                 itemsDict[3908][8] += i
-                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3906][2]}{cl.RESET}")
+                print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3908][2]}{cl.RESET}")
+
 
     # Leave Dungeon:    
     print(f"You left {location}, you are now in {_tempLocation}")
