@@ -20,15 +20,15 @@ def MapFlatlands(startLocation, location):
       ,' . {a[10]}      . .        {a[5]} .              ;_,-',. ,--.
      :   .       .               .      . The Islands -```    `--'
      :  The Desert               .     .    {a[4]} ;
-     :    {a[9]}                  .   .      :
+     :    {a[9]}                    .   .      :
      ;       .                    . .       :
     (         .               The Forest    ;
      `-.       .               .  {a[3]}      ,'
        ;    Green Land        .              :
-     .'         {a[8]}      .         . .-._,'
+     .'       {a[8]}          .         . .-._,'
    .'               .     .          `.
 _.' The Town . . The Flatlands       .__;
-`._     {a[1]}      . {a[2]}             ;
+`._     {a[1]}        . {a[2]}             ;
    `.              .               :..'
      `.           .    ,..__,---._;   
        `-.__{startLocation} ;               
