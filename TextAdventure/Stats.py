@@ -50,7 +50,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
         "\n------------------------------------------------------------------------")    
         print(f"Points: {cl.YELLOW}{playerStatPoints}{cl.RESET}\t\t\tEXP: {cl.YELLOW}{round(playerStats[5],2)}/{round(nextLevelExp,2)}{cl.RESET}\n\n"\
-            f"HP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n"\
+            f"HP: {round(playerStats[2],2)}/{round(playerStats[1],2)}\n"\
             f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
             f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
             "\n------------------------------------------------------------------------")
