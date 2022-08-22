@@ -262,7 +262,11 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             print(f"\n--- {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} has been eleminated ---")
             # sleep(2)
             _tempMoney += (round((selectedDict[enemyID][1] + selectedDict[enemyID][2] + selectedDict[enemyID][3] + selectedDict[enemyID][4]) / 9.6 ,2))
+            if _tempMoney < 0:
+                _tempMoney = 0.00
             _tempExp += (round((selectedDict[enemyID][1] + 2 - playerStats[0]) * (selectedDict[enemyID][2] + selectedDict[enemyID][3])*9.4 ,2))
+            if _tempExp < 0:
+                _tempExp = 0.00
             print(f"\nYou received {cl.YELLOW}{itemsDict[lootItemID][2]}{cl.RESET}, {cl.YELLOW}{round(_tempMoney,2)}{cl.RESET} Gold and {cl.YELLOW}{round(_tempExp,2)}{cl.RESET} Experience.")
             if _tempMoney < 0:
                 _tempMoney = 0
