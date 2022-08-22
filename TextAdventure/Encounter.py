@@ -426,6 +426,8 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             print(f"You managed to flee while you distracted the enemy with {cl.RED}{round(_temp1,2)}{cl.RESET} gold,")
             print(f"but {cl.RED}{selectedDict[enemyID][0]}{cl.RESET} got a hit on you. You received {cl.RED}{round(_temp2,2)}{cl.RESET} dmg!")
             print(f"You have {cl.GREEN}{round(playerStats[2],2)}{cl.RESET} HP left.")
+            if location == "dungeon castle" or location == "dungeon slumps" or location == "dungeon cave":
+                location = "leave dungeon"
             if playerStats[2] <= 0:                                                                        # if player dead (from 1 atk)
                 sleep(2)
                 PicDeath()
@@ -521,7 +523,7 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
         if location == "the town":
             location = _tempLocation
             _tempLocation = "the town"
-            break    
+            break         
 
        
     if location == "dungeon castle":                                                                    #GIVE GEMS
@@ -536,7 +538,9 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
         i = random.randint(1,2)
         itemsDict[3908][8] += i
         print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3908][2]}{cl.RESET}")
-
+    if location == "leave dungeon":
+            location = "the dungeon"
+            
 
     # Leave Dungeon:    
     print(f"You left {location}, you are now in {_tempLocation}")
