@@ -8,35 +8,6 @@ from Colors import cl
 #############################################################################################################################################################################
 
 
-############################################################################# STATMENU #############################################################################
-# def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
-    # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    # itemAddStats = []
-    # itemAddStats, itemPlayerPrimary, itemPlayerSecondary  = AdditionalStats(itemAddStats, itemsDict) 
-    # while True:
-    #     nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
-    #     print(f"\n{playerName}\tLVL {playerStats[0]}"\
-    #     "\n------------------------------------------------------------------------")       
-    #     print(f"Points: {playerStatPoints}\t\t\tEXP: {round(playerStats[5],2)}/{round(nextLevelExp,2)}\n\n"\
-    #         f"HP: {playerStats[2]}/{playerStats[1]}\n"\
-    #         f"ATK: {playerStats[3]} (+{itemAddStats[3]})\n"\
-    #         f"DEF: {playerStats[4]} (+{itemAddStats[4]})"\
-    #         "\n------------------------------------------------------------------------")
-        # if playerStatPoints == 0:  
-        #     userInput = input("\n(0) Return\n")
-        #     os.system('cls')
-        #     if userInput == "0":
-        #         break
-        #     else: print("\nCouldn't understand you?!")
-         
-        # userInput = input(f"\n(1) Edit Stats (+{playerStatPoints})\t(0) Return\n")
-        # os.system('cls')
-    #     # if userInput == "1":
-    #     playerStats, playerStatPoints = EditStats(playerStats, playerStatPoints, playerName, itemsDict)
-    #     # elif userInput == "0":
-    #         # break
-    #     # else: print("\nCouldn't understand you?!")
-    # return playerStats, playerStatPoints
 
 ############################################################################# EDIT STATS #############################################################################
 def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
@@ -92,7 +63,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
 ################################################################################### LEVEL UP ################################################################################
 def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
+    nextLevelExp = round((200*(playerStats[0]**1.25)),2)
     if playerStats[5] >= nextLevelExp:
         playerStats[5] -= nextLevelExp
         playerStats[0] += 1
