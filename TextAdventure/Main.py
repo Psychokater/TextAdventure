@@ -260,16 +260,16 @@ def World(startLocation, location, direction):
     return "x", "0"  
         
 def PicStartFire():
-    print("""   
-                     (            
+    print(f"""   
+                     {cl.RED}(            
                        )          
                      (  (          
                          )        
-                   (    (  ,,     
-                    ) /\ -((
-                  (  // | (`'     
-                _ -.;_/ \\--._    
-               (_;-// | \ \-'.\   
+                   (    ({cl.RESET}  ,,     
+                    {cl.RED}){cl.RESET} {cl.MAGNETA}/\{cl.RESET} -{cl.RED}(({cl.RESET}
+                  {cl.RED}({cl.RESET} {cl.MAGNETA} // |{cl.RESET} {cl.RED}({cl.RESET}`'     
+                _ -.;{cl.CYAN}_/ \\{cl.RESET}--._    
+               (_;-{cl.CYAN}// | \ \{cl.RESET}-'.\   
                ( `.__ _  ___,')   
                 `'(_ )_)(_)_)'
 """)
