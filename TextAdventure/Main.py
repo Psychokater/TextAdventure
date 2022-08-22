@@ -238,11 +238,15 @@ def World(startLocation, location, direction):
     # Location                    North                  East                 South                  West
     startLocation   :   [    "the flatlands"   ,          0          ,          0          ,          0          ,PicStartFire],
     "the town"      :   [           0          ,  "the flatlands"    ,          0          ,          0          ,PicTheTown],
-    "the flatlands" :   [           0          ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
+    "the flatlands" :   [      "Green Land"    ,    "the forest"     ,    startLocation    ,      "the town"     ,PicFlatlands],
     "the forest"    :   [    "the mountains"   ,    "the islands"    ,          0          ,   "the flatlands"   ,PicForest],
-    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,          0          ,PicMountains],
+    "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,    "The Dessert"    ,PicMountains],
     "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
-    "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands]
+    "the islands"   :   [           0          ,          0          ,          0          ,    "the forest"     ,PicIslands],
+    "Green Land"    :   [     "The Dessert"    ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
+    "The Dessert"   :   [      "The Lake"      ,   "the mountains"   ,     "Green Land"    ,          0          ,PicTheDessret],
+    "The Lake"      :   [           0          ,          0          ,     "The Dessert"   ,          0          ,PicTheLake],
+
     }
 
     for i in range(0,4):
@@ -268,6 +272,57 @@ def PicStartFire():
                (_;-// | \ \-'.\   
                ( `.__ _  ___,')   
                 `'(_ )_)(_)_)'
+""")
+########################################################################
+
+def PicGreenLand():
+    print("""
+
+
+
+
+
+
+
+
+
+
+
+
+""")
+########################################################################
+
+def PicTheLake():
+    print("""
+
+
+
+
+
+
+
+
+
+
+
+
+""")
+########################################################################
+
+def PicTheDessret():
+    print("""
+
+
+
+
+
+
+
+
+
+
+
+
 """)
 ########################################################################
 
