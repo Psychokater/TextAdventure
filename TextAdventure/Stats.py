@@ -17,7 +17,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
     while True:
         
         
-        nextLevelExp = playerStats[0] * round((100*(playerStats[0]**1.5)),2)
+        nextLevelExp = playerStats[0] * round(((playerStats[0]**1.25)*200),2)
         print(f"\n{playerName}\tLVL {playerStats[0]}"\
         "\n------------------------------------------------------------------------")    
         print(f"Points: {cl.YELLOW}{playerStatPoints}{cl.RESET}\t\t\tEXP: {cl.YELLOW}{round(playerStats[5],2)}/{round(nextLevelExp,2)}{cl.RESET}\n\n"\
@@ -63,7 +63,7 @@ def StatMenu(playerStats, playerStatPoints, playerName, itemsDict):
 ################################################################################### LEVEL UP ################################################################################
 def LevelUp(playerStats, playerStatPoints, playerName, itemsDict):
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP
-    nextLevelExp = round((200*(playerStats[0]**1.25)),2)
+    nextLevelExp = round(((playerStats[0]**1.25)*200),2)
     if playerStats[5] >= nextLevelExp:
         playerStats[5] -= nextLevelExp
         playerStats[0] += 1
