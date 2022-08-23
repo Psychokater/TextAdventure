@@ -297,9 +297,9 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             sleep(4)
             PicFairie()
             playerInventoryMoney -= round(playerInventoryMoney * 0.1,2)
-            playerStats[5] *= 0.25
+            playerStats[5] -= playerStats[5] * 0.25
             location = "the town"
-            playerStats[2] = 1
+            playerStats[2] = playerStats[1] * 0.25
             break
 
         elif selectedDict[enemyID][2] <= 0:                                                         # if enemy dead
@@ -613,10 +613,9 @@ def PicDeath():
 
 
 def PicFairie():
-    print("\nYour head feels dizzy.")
+    print(f"\nYour head feels dizzy, you lost some {cl.RED}experience{cl.RESET}.")
     sleep(2) 
-    print("A beautiful (fully naked) fairie helps you back to the town.")
-    sleep(4)
+    print("A beautiful (fully naked) fairie helps you back to the town.")    
     print("""
       .--.   _,
   .--;    \ /(_
@@ -641,7 +640,7 @@ def PicFairie():
                         \ )
                          \_\\    
     """)
-
+    sleep(2)
     print(f"She thankfully took some of your {cl.RED}gold{cl.RESET} in advance.")
     sleep(2)
 
