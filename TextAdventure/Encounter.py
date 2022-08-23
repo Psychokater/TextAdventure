@@ -61,7 +61,20 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 1:
             rank = f"{cl.BLUE}(advanced){cl.RESET}"
         elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 0:
-            rank = f"{cl.GREEN}(normal){cl.RESET}"        
+            rank = f"{cl.GREEN}(normal){cl.RESET}" 
+
+        strength = ""
+        if selectedDict[enemyID][4] > playerStats[4]:
+            strength = f"{cl.RED}\u25cf{cl.RESET}"
+        elif selectedDict[enemyID][3] > playerStats[1]:
+            strength = f"{cl.RED}\u25cf{cl.RESET}"
+        elif selectedDict[enemyID][3] < playerStats[4]:
+            strength = f"{cl.GREEN}\u25cf{cl.RESET}"        
+        else:    
+            strength = f"{cl.YELLOW}\u25cf{cl.RESET}"
+
+
+
         enemyMaxHP = (selectedDict[enemyID][2])  
                                                                         # select Enemy with ID from Dict (Random) -> see EnemySelection()
         while True:           
@@ -70,7 +83,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             UserInputChoose = input(""\
             f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
             f"---------------------- VS ----------------------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n{rank}\n\n"\
+            f"{strength}{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n {rank}\n\n"\
             f"What do you want to do now?\n(1) Fight\t(2) Inventory\t(3) Stats\t(0) Flee\n")
             os.system('cls')
 
@@ -304,14 +317,14 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             UserInputFight = input(""\
             f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}\n"\
             f"---------------------- VS ----------------------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n{rank}\n\n"\
+            f"{strength}{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n {rank}\n\n"\
             f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Leave Dungeon\n")                                             # Fight (P = Player, E = Enemy)
             os.system('cls')
         else:
             UserInputFight = input(""\
             f"\n{cl.BLUE}{'{:<15}'.format(playerName)}{cl.RESET}\t\t\tLVL {cl.BLUE}{playerStats[0]}{cl.RESET}\tHP {cl.GREEN}{round(playerStats[2],2)}/{playerStats[1]}{cl.RESET}\n"\
             f"---------------------- VS ----------------------\n"\
-            f"{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n{rank}\n\n"\
+            f"{strength}{cl.RED}{'{:<15}'.format(selectedDict[enemyID][0])}{cl.RESET}\t\tLVL {cl.BLUE}{selectedDict[enemyID][1]}{cl.RESET}\tHP {cl.BLUE}{round(selectedDict[enemyID][2],2)}/{round(enemyMaxHP,2)}{cl.RESET}\n {rank}\n\n"\
             f"(1) Attack\t(2) Inventory\t(3) Stats\t (0) Flee\n")                                             # Fight (P = Player, E = Enemy)
             os.system('cls')
 
