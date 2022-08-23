@@ -47,5 +47,7 @@ _.' The Town . . The Flatlands       .__;
      `.           .    ,..__,---._;   
        `-.__{startLocation} ;               
             `.--.{a[0]} ;             
-
+ 	
+\u2694
 ''') 
+
