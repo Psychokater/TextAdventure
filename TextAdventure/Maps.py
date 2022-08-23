@@ -16,14 +16,14 @@ def MapFlatlands(startLocation, location):
                      .'The Castle .        
           /`-.  ,----'   {a[7]}.  `-.   _  ,-.,
        _.'   `--'              .       `-' '-'  ;
-      :  The Lake        .  .  . The Mountains__,-.
-      ,' .{a[10]}    .           .  {a[5]}         ;,--.
-     :   .       .               .      The Islands `--'_  ,-.
-     :  The Desert               .     .  {a[6]} ;  ,-.`-' '-'
-     :    {a[9]}                  .   .      :      '-'
-     ;       .                    . .       :
-    (         .               The Forest    ;
-     `-.       .               .{a[3]}      ,'
+      :  The Lake        .  .  . The Mountains  ''--.
+      ,' .{a[10]}    .            . {a[4]}           ;,--.
+     :   .       .              .       . The Islands `--'_  ,-.
+     :  The Desert            .       .      . {a[5]},-. `-' '-'
+     :    {a[9]}             .      .        .      :'-'
+     ;       .               .   .     mystic ruins:
+    (         .         The Forest        {a[4]} ;
+     `-.       .          {a[3]}             ,'
        ;    Green Land        .              :
      .'       {a[8]}          .       . .-._,'
    .'             .          .        `.
@@ -49,8 +49,8 @@ _.' The Town . . The Flatlands       .__;
 #                                                                  I                I
 #                                                                  I                I
 #                                                The Town --- The Flatlands --- The Forest --- The Islands
-#                                                                  I
-#                                                                  I
-#                                                             Starting Area
+#                                                                  I                               I
+#                                                                  I                               I
+#                                                             Starting Area                    mystic ruins                    
 #                                         
 #
