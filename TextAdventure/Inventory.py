@@ -43,6 +43,20 @@ def WandererMenu(startLocation, location, itemsDict, playerName, playerInventory
 
     return itemsDict, playerInventoryMoney, playerStats
 
+######################################################################### DRAGONS MERCHANT MENU #########################################################################
+
+def DragonMerchantMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats):
+    while True:        
+        userInput = input("\nWhat do you want to do?\n(1) Dragon Merchant\t(2) Inventory\t(0) Leave Mystic Stones\n")      
+        os.system('cls')
+        match userInput:
+            case "1": itemsDict, playerInventoryMoney = DragonMerchantShop(itemsDict, playerName, playerInventoryMoney, playerStats);break
+            case "2": itemsDict, playerStats = InventoryMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)                                                          
+            case "0": break
+
+            case _: print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
+
+    return itemsDict, playerInventoryMoney, playerStats
 
 #############################################################################################################################################################################
 #--------------------------------------------------------------------------------- PLAYER ----------------------------------------------------------------------------------#
@@ -618,6 +632,105 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
     print('------------------------------------------------------------------------\n')
     ###############################################
           #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+   
+    return itemsDict, wandererItemIDs
+
+############################################################################# BUY FROM WANDERER #############################################################################
+    # +ItemPlayer -MoneyPlayer
+def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:
+        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
+        try:    
+            userInputItemNumber = int (input ('Pick an Item number to buy:\t\t(0) Abort \n'))            
+        except ValueError:
+            print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
+            continue
+        os.system('cls') 
+        if userInputItemNumber == 0:
+            break 
+        itemKeyList = [key for key in itemsDict]
+        for i in itemKeyList:  
+            if userInputItemNumber == itemsDict[i][0]:              
+
+                                                                                                                 ### BUY
+                if playerInventoryMoney < round(itemsDict[i][6] * 1.6 ,2): 
+                    print(f"{cl.RED}\nNot enough money, fool!{cl.RESET}\n")
+                    # sleep(1)
+                    continue
+                else:
+                    playerInventoryMoney -= round(itemsDict[i][6] * 1.6 ,2)
+                    itemsDict[i][8] += 1            
+                    if itemsDict[i][8] == 0:
+                        itemsDict[i][0] = 0
+       
+
+    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
+
+############################################################################# SELL TO WANDERER #############################################################################
+# -ItemPlayer +MoneyPlayer
+def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
+      #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+    os.system('cls')
+    while True:    
+        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
+        try:
+            userInputItemNumber = int (input ('Pick an Item number to sell:\t\t(0) Abort \n'))           
+        except ValueError:
+            print(f"\n{cl.RED}That's not a number, dumbass!{cl.RESET}")
+            continue
+        os.system('cls')
+        if userInputItemNumber == 0:
+            break         
+        itemKeyList = [key for key in itemsDict]
+        for i in itemKeyList:            
+            if userInputItemNumber == itemsDict[i][1]:
+                playerInventoryMoney += round(itemsDict[i][6],2)
+                itemsDict[i][8] -= 1            
+                if itemsDict[i][8] == 0:
+                    itemsDict[i][1] = 0
+                               
+    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
+
+
+
+#############################################################################################################################################################################
+#---------------------------------------------------------------------------- DRAGON MERCHANT ------------------------------------------------------------------------------#
+#############################################################################################################################################################################
+
+############################################################################# DRAGON MERCHANT SHOP #############################################################################
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
+#DragonMerchant (Print DragonMerchant and PlayerInventory - Choose if Buy or Sell)
+def DragonMerchantShop(itemsDict, playerName, playerInventoryMoney, playerStats):
+    os.system('cls')
+    PicDragonMerchant()
+    dragonMerchantItemIDs = []
+    playerItemIDs = []
+    while True:
+        itemsDict, dragonMerchantItemIDs = GetInventoryDragonMerchant(itemsDict, dragonMerchantItemIDs)
+        itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
+
+        userInput = input("\nWhat whould you like ?\n(1) Buy\t\t(2) Sell\t(0) Leave Dragon Merchant\n")      
+        os.system('cls')
+        match userInput:
+            case "1": itemsDict, playerItemIDs, dragonMerchantItemIDs, playerInventoryMoney = DragonMerchantItemBuy(
+                itemsDict, playerItemIDs, dragonMerchantItemIDs, playerName, playerInventoryMoney, playerStats)
+            case "2": itemsDict, playerItemIDs, dragonMerchantItemIDs, playerInventoryMoney = DragonMerchantItemSell(
+                itemsDict, playerItemIDs, dragonMerchantItemIDs, playerName, playerInventoryMoney, playerStats)
+            case "0": break
+            case _: print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
+
+    return itemsDict, playerInventoryMoney 
+
+############################################################################# DRAGON MERCHANT INVENTORY #############################################################################
+    # print DragonMerchantInventory + getting iD's
+def GetInventoryDragonMerchant(itemsDict, dragonMerchantItemIDs):
+    #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
+   
+    print('Dragon Merchant:\n')
     print('  Nr.\t\tItem\t\tATK\tDEF\tHeal\tGems\tQuantity\n'\
     '------------------------------------------------------------------------')
     z = 1   
@@ -625,12 +738,12 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
     itemKeyList = [key for key in itemsDict]                                    # for every Item in itemsDictionary  
     for i in itemKeyList:  
         itemsDict[i][0] = 0                                                     #       i = Item ID
-        _tempListIndexValue = [13,14,15]                               #       List of ID to Sell at Wanderer
+        _tempListIndexValue = [13]                                               #       List of ID to Sell at DragonMerchant
         if itemsDict[i][10] in _tempListIndexValue and (                        #       If Item ID of selected Item is activated AND ->
-            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity Wanderer > 0
+            (itemsDict[i][7] - itemsDict[i][8]) > 0):                           #       Item Quantity DragonMerchant > 0
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
-            wandererItemIDs.append(i)                                           #   append Item ID to List of ItemID's
+            dragonMerchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
             print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
@@ -642,20 +755,20 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
                     print("5",end='\t')                    #               Print "Value" of Item * 1.5 + 2
                     continue                                                    #
                 if j == 7:                                                      #           if Index == "MaxQuantity" of Item:
-                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "Wanderer Quantity")
+                    print(itemsDict[i][j] - itemsDict[i][8])                    #           print "MaxQuantity" (for "DragonMerchant Quantity")
                     continue                                                    #           
                 print (itemsDict[i][j],end='\t')                                #           print Value in this line
                                                                                 #   new Line of Inventory
     print('------------------------------------------------------------------------\n')
-    return itemsDict, wandererItemIDs
+    return itemsDict, dragonMerchantItemIDs
 
-############################################################################# BUY FROM WANDERER #############################################################################
+############################################################################# BUY FROM DRAGON MERCHANT #############################################################################
     # +ItemPlayer -MoneyPlayer
-def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
+def DragonMerchantItemBuy(itemsDict, playerItemIDs, dragonMerchantItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:
-        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, dragonMerchantItemIDs = GetInventoryDragonMerchant(itemsDict, dragonMerchantItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)
         try:    
             userInputItemNumber = int (input ('Pick an Item number to buy:\t\t(0) Abort \n'))            
@@ -699,15 +812,15 @@ def WandererItemBuy(itemsDict, playerItemIDs, wandererItemIDs, playerName, playe
                         itemsDict[i][0] = 0
        
 
-    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
+    return itemsDict, playerItemIDs, dragonMerchantItemIDs, playerInventoryMoney
 
-############################################################################# SELL TO WANDERER #############################################################################
+############################################################################# SELL TO DRAGN MERCHANT #############################################################################
 # -ItemPlayer +MoneyPlayer
-def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, playerInventoryMoney, playerStats):
+def DragonMerchantItemSell(itemsDict, playerItemIDs, dragonMerchantItemIDs, playerName, playerInventoryMoney, playerStats):
       #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6 Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq 
     os.system('cls')
     while True:    
-        itemsDict, wandererItemIDs = GetInventoryWanderer(itemsDict, wandererItemIDs)
+        itemsDict, dragonMerchantItemIDs = GetInventoryDragonMerchant(itemsDict, dragonMerchantItemIDs)
         itemsDict, playerItemIDs = GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMoney, playerStats)    
         try:
             userInputItemNumber = int (input ('Pick an Item number to sell:\t\t(0) Abort \n'))           
@@ -725,7 +838,10 @@ def WandererItemSell(itemsDict, playerItemIDs, wandererItemIDs, playerName, play
                 if itemsDict[i][8] == 0:
                     itemsDict[i][1] = 0
                                
-    return itemsDict, playerItemIDs, wandererItemIDs, playerInventoryMoney
+    return itemsDict, playerItemIDs, dragonMerchantItemIDs, playerInventoryMoney
+
+
+
 # ######################################## Friends ################################################
 
 def PicWizard(): 
@@ -776,7 +892,21 @@ def PicWanderer():
      /         \    |
     (_.-.__.__./    /
     """)
-
+def PicDragonMerchant():
+    print("""
+        ,     \    /      ,        
+       / \    )\__/(     / \       
+      /   \  (_\  /_)   /   \      
+ ____/_____\__\@  @/___/_____\____ 
+|             |\../|              |
+|              \VV/               |
+|        --  MERCHANT  --         |
+|_________________________________|
+ |    /\ /      \\\\       \ /\    | 
+ |  /   V        ))       V   \  | 
+ |/     `       //        '     \| 
+ `              V                '
+ """)
 
 
 

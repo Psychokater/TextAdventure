@@ -3,7 +3,7 @@ from Colors import cl
 
 def MapFlatlands(startLocation, location):
     flatlandsList = [startLocation, "the town", "the flatlands",
-    "the forest", "the mountains", "the islands", "the castle","green land","the desert","the lake"]
+    "the forest", "the mountains", "the islands", "mystic ruins", "the castle","green land","the desert","the lake"]
     
     a = []
     for i in range(0,len(flatlandsList)):
@@ -14,12 +14,12 @@ def MapFlatlands(startLocation, location):
     print (f'''
                        ,-.^._                 
                      .'The Castle .        
-          /`-.  ,----'   {a[6]}.  `-.   _  ,-.,
+          /`-.  ,----'   {a[7]}.  `-.   _  ,-.,
        _.'   `--'              .       `-' '-'  ;
       :  The Lake        .  .  . The Mountains__,-.
       ,' .{a[10]}    .           .  {a[5]}         ;,--.
      :   .       .               .      The Islands `--'_  ,-.
-     :  The Desert               .     .  {a[4]} ;  ,-.`-' '-'
+     :  The Desert               .     .  {a[6]} ;  ,-.`-' '-'
      :    {a[9]}                  .   .      :      '-'
      ;       .                    . .       :
     (         .               The Forest    ;
