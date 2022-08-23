@@ -214,9 +214,9 @@ def InventoryMenu(startLocation, location, itemsDict, playerName, playerInventor
                                 else: print(f"\n{cl.RED}Couldn't understand you?!{cl.RESET}")
                             if playerStats[2] + itemsDict[i][5] <= playerStats[1]:       
                                 playerStats[2] += itemsDict[i][5]
-                                print(f"You got healed for {cl.GREEN}{round(itemsDict[i][5],2)}{cl.RESET} Points.")                             
+                                print(f"You got healed for {cl.GREEN}{round(itemsDict[i][5] ,2)}{cl.RESET} Points.")                             
                             else:
-                                print(f"You got fully healed with {cl.GREEN}{playerStats[1] - playerStats[2]}{cl.RESET} Points. HP: {cl.GREEN}{round(playerStats[2],2)}/{round(playerStats[1],2)}{cl.RESET}") 
+                                print(f"You got fully healed with {cl.GREEN}{round(playerStats[1] - playerStats[2] ,2)}{cl.RESET} Points.") 
                                 playerStats[2] = playerStats[1]                                
                         
                             itemsDict[i][8] -= 1            
