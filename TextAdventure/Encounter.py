@@ -65,14 +65,14 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
             rank = f"{cl.GREEN}(normal){cl.RESET}" 
 
         strength = ""
-        if selectedDict[enemyID][4] > playerStats[3]:
+        if selectedDict[enemyID][1] - playerStats[0] == 3:
+            strength = f"{cl.MAGENTA}\u25cf{cl.RESET}"
+        elif selectedDict[enemyID][1] - playerStats[0] == 2:
             strength = f"{cl.RED}\u25cf{cl.RESET}"
-        elif selectedDict[enemyID][3] > playerStats[1]:
-            strength = f"{cl.RED}\u25cf{cl.RESET}"
-        elif selectedDict[enemyID][3] < playerStats[4]:
-            strength = f"{cl.GREEN}\u25cf{cl.RESET}"        
+        elif selectedDict[enemyID][1] - playerStats[0] == 1:
+            strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
         else:    
-            strength = f"{cl.YELLOW}\u25cf{cl.RESET}"
+            strength = f"{cl.GREEN}\u25cf{cl.RESET}"
 
         enemyMaxHP = (selectedDict[enemyID][2])  
                                                                         # select Enemy with ID from Dict (Random) -> see EnemySelection()
@@ -279,15 +279,15 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
         rank = f"{cl.GREEN}(normal){cl.RESET}" 
 
     strength = ""
-    if selectedDict[enemyID][4] > playerStats[3]:
+    if selectedDict[enemyID][1] - playerStats[0] == 3:
+        strength = f"{cl.MAGENTA}\u25cf{cl.RESET}"
+    elif selectedDict[enemyID][1] - playerStats[0] == 2:
         strength = f"{cl.RED}\u25cf{cl.RESET}"
-    elif selectedDict[enemyID][3] > playerStats[1]:
-        strength = f"{cl.RED}\u25cf{cl.RESET}"
-    elif selectedDict[enemyID][3] < playerStats[4]:
-        strength = f"{cl.GREEN}\u25cf{cl.RESET}"        
+    elif selectedDict[enemyID][1] - playerStats[0] == 1:
+        strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
     else:    
-        strength = f"{cl.YELLOW}\u25cf{cl.RESET}"
-        
+        strength = f"{cl.GREEN}\u25cf{cl.RESET}"
+
     enemyMaxHP = (selectedDict[enemyID][2])  
     while True:
                 
