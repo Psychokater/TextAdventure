@@ -270,13 +270,23 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
     (selectedDict[enemyID][6]())
     rank = ""
     if selectedDict[enemyID][1] - selectedDict[enemyID][5] == 3:
-        rank = f"{cl.RED}\u25cf{cl.RESET}"
+        rank = f"{cl.MAGENTA}(epic){cl.RESET}"
     elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 2:
-        rank = f"{cl.YELLOW}\u25cf{cl.RESET}"
+        rank = f"{cl.YELLOW}(elite){cl.RESET}"
     elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 1:
-        rank = f"{cl.BLUE}\u25cf{cl.RESET}"
+        rank = f"{cl.BLUE}(advanced){cl.RESET}"
     elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 0:
-        rank = f"{cl.GREEN}\u25cf{cl.RESET}"        
+        rank = f"{cl.GREEN}(normal){cl.RESET}" 
+
+    strength = ""
+    if selectedDict[enemyID][4] > playerStats[4]:
+        strength = f"{cl.RED}\u25cf{cl.RESET}"
+    elif selectedDict[enemyID][3] > playerStats[1]:
+        strength = f"{cl.RED}\u25cf{cl.RESET}"
+    elif selectedDict[enemyID][3] < playerStats[4]:
+        strength = f"{cl.GREEN}\u25cf{cl.RESET}"        
+    else:    
+        strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
     enemyMaxHP = (selectedDict[enemyID][2])  
     while True:
                 
