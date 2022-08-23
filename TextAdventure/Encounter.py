@@ -54,25 +54,9 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
     # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP   
     if enemyID != 0:
         
-        rank = ""
-        if selectedDict[enemyID][1] - selectedDict[enemyID][5] == 3:
-            rank = f"{cl.MAGENTA}(epic){cl.RESET}"
-        elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 2:
-            rank = f"{cl.YELLOW}(elite){cl.RESET}"
-        elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 1:
-            rank = f"{cl.BLUE}(advanced){cl.RESET}"
-        elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 0:
-            rank = f"{cl.GREEN}(normal){cl.RESET}" 
-
+        rank = ""    
         strength = ""
-        if selectedDict[enemyID][1] - playerStats[0] == 3:
-            strength = f"{cl.MAGENTA}\u25cf{cl.RESET}"
-        elif selectedDict[enemyID][1] - playerStats[0] == 2:
-            strength = f"{cl.RED}\u25cf{cl.RESET}"
-        elif selectedDict[enemyID][1] - playerStats[0] == 1:
-            strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
-        else:    
-            strength = f"{cl.GREEN}\u25cf{cl.RESET}"
+        rank, strength = Ranking(selectedDict, playerStats, enemyID)
 
         enemyMaxHP = (selectedDict[enemyID][2])  
                                                                         # select Enemy with ID from Dict (Random) -> see EnemySelection()
@@ -173,8 +157,34 @@ def EnemySelection(playerStats, encounterIndex):
     return enemyID, selectedDict, selectedDictID
 
 
+def Ranking(selectedDict, playerStats, enemyID):
+    
+    rank = ""
+    strength = ""
+    
+    if selectedDict[enemyID][1] - selectedDict[enemyID][5] == 3:
+        rank = f"{cl.MAGENTA}(epic){cl.RESET}"
+    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 2:
+        rank = f"{cl.YELLOW}(elite){cl.RESET}"
+    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 1:
+        rank = f"{cl.BLUE}(advanced){cl.RESET}"
+    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 0:
+        rank = f"{cl.GREEN}(normal){cl.RESET}" 
+
+    
+    if selectedDict[enemyID][1] - playerStats[0] == 3:
+        strength = f"{cl.MAGENTA}\u25cf{cl.RESET}"
+    elif selectedDict[enemyID][1] - playerStats[0] == 2:
+        strength = f"{cl.RED}\u25cf{cl.RESET}"
+    elif selectedDict[enemyID][1] - playerStats[0] == 1:
+        strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
+    else:    
+        strength = f"{cl.GREEN}\u25cf{cl.RESET}"
+
+    return rank, strength
+
 ############################################################################# ENEMY ITEMS #############################################################################
-def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
+def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID, playerStats):
 #Items: 0 Enum Merch, 1 Enum Player, 2 ItemName, 3 ATK, 4 DEF, 5 HEAL, 6  Value, 7 QntMAX, 8 QntPlayer, 9 ID, 10 ID_ON, 11 use/eq
 #Enemy: 0 Name, 1 LVL, 2 HP, 3 ATK, 4 DEF, 5 Dropvalue, 6 Pic 
     _tempItemList = []
@@ -187,6 +197,9 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
     itemEnemyItems = []
     itemEnemyAddStats = [0, 0, 0, 0, 0, 0, 0]
     lootItemID = 1
+    rank = ""    
+    strength = ""
+    rank, strength = Ranking(selectedDict, playerStats, enemyID)
     itemKeyList = [key for key in itemsDict]                                          
     for i in itemKeyList:
         if  itemsDict[i][10] == 7:
@@ -207,10 +220,18 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID):
     
                                  # give Random Item from List as Lootitem
     while True:
-        lootChanceEquipment = random.randint(1,3)
+        
+        if strength == f"{cl.MAGENTA}\u25cf{cl.RESET}" and rank == f"{cl.MAGENTA}(epic){cl.RESET}":
+            lootChanceEquipment = 1
+        elif strength == f"{cl.RED}\u25cf{cl.RESET}":
+            lootChanceEquipment = random.randint(1,3)
+        elif strength == f"{cl.YELLOW}\u25cf{cl.RESET}":
+            lootChanceEquipment = random.randint(1,5)
+        else:
+            lootChanceEquipment = random.randint(1,10)
         j = random.randint(0,len(_tempItemList)-1)
         lootItemID = _tempItemList[j]
-        if itemsDict[lootItemID][11] > 0 and lootChanceEquipment < 3:
+        if itemsDict[lootItemID][11] > 0 and lootChanceEquipment == 1:
             continue
         else:
             break
@@ -265,28 +286,13 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
     _tempExp = 0.00
     itemAddStats = []
     itemAddStats, itemPlayerPrimary, itemPlayerSecondary = Stats.AdditionalStats(itemAddStats, itemsDict)
-    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID) 
+    itemEnemyItems, itemEnemyAddStats, lootItemID  = EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID, playerStats) 
     (selectedDict[enemyID][6]())
-    
     rank = ""
-    if selectedDict[enemyID][1] - selectedDict[enemyID][5] == 3:
-        rank = f"{cl.MAGENTA}(epic){cl.RESET}"
-    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 2:
-        rank = f"{cl.YELLOW}(elite){cl.RESET}"
-    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 1:
-        rank = f"{cl.BLUE}(advanced){cl.RESET}"
-    elif selectedDict[enemyID][1] - selectedDict[enemyID][5] == 0:
-        rank = f"{cl.GREEN}(normal){cl.RESET}" 
-
     strength = ""
-    if selectedDict[enemyID][1] - playerStats[0] == 3:
-        strength = f"{cl.MAGENTA}\u25cf{cl.RESET}"
-    elif selectedDict[enemyID][1] - playerStats[0] == 2:
-        strength = f"{cl.RED}\u25cf{cl.RESET}"
-    elif selectedDict[enemyID][1] - playerStats[0] == 1:
-        strength = f"{cl.YELLOW}\u25cf{cl.RESET}"        
-    else:    
-        strength = f"{cl.GREEN}\u25cf{cl.RESET}"
+
+    rank, strength = Ranking(selectedDict, playerStats, enemyID)
+
 
     enemyMaxHP = (selectedDict[enemyID][2])  
     while True:
