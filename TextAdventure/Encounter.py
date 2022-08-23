@@ -231,7 +231,7 @@ def EnemyItemSelection(itemsDict, enemyID, selectedDict, selectedDictID, playerS
             lootChanceEquipment = random.randint(1,10)
         j = random.randint(0,len(_tempItemList)-1)
         lootItemID = _tempItemList[j]
-        if itemsDict[lootItemID][11] > 0 and lootChanceEquipment == 1:
+        if itemsDict[lootItemID][11] > 0 and lootChanceEquipment != 1:
             continue
         else:
             break
