@@ -7,34 +7,34 @@ def MapFlatlands(startLocation, location):
     
     a = []
     for i in range(0,len(flatlandsList)):
-        a.append(" ")
+        a.append("      ")
         if location == flatlandsList[i] :
-            a[i] = f"{cl.RED}X{cl.RESET}" 
+            a[i] = f"{cl.RED}  X   {cl.RESET}" 
 
     print (f'''
-                       ,-.^._                 _
-                     .'The Castle .        ,' ;
-          /`-.  ,----'   . {a[6]}   `-.   _  ,-.,
-       _.'   `--'         .       `-' '-'      ;
-      :  The Lake    . .     The Mountains     ;__,-.
-      ,' . {a[10]}      . .        {a[5]} .              ;_,-',. ,--.
-     :   .       .               .      . The Islands -```    `--'
-     :  The Desert               .     .    {a[4]} ;
-     :    {a[9]}                    .   .      :
+                       ,-.^._                 
+                     .'The Castle .        
+          /`-.  ,----'   {a[6]}.  `-.   _  ,-.,
+       _.'   `--'              .       `-' '-'  ;
+      :  The Lake        .  .  . The Mountains__,-.
+      ,' .{a[10]}    .           .  {a[5]}         ;,--.
+     :   .       .               .      The Islands `--'_  ,-.
+     :  The Desert               .     .  {a[4]} ;  ,-.`-' '-'
+     :    {a[9]}                  .   .      :      '-'
      ;       .                    . .       :
     (         .               The Forest    ;
-     `-.       .               .  {a[3]}      ,'
+     `-.       .               .{a[3]}      ,'
        ;    Green Land        .              :
-     .'       {a[8]}          .         . .-._,'
-   .'               .     .          `.
+     .'       {a[8]}          .       . .-._,'
+   .'             .          .        `.
 _.' The Town . . The Flatlands       .__;
-`._     {a[1]}        . {a[2]}             ;
-   `.              .               :..'
+`._ {a[1]}         {a[2]}             ;
+   `.              .              :..'
      `.           .    ,..__,---._;   
-       `-.__{startLocation} ;               
-            `.--.{a[0]} ;             
+       `-._. {startLocation} ;               
+            `.-{a[0]}-.;```             
 
-''') 
+''')
 
 
 # MAP:
