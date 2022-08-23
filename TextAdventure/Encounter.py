@@ -563,7 +563,7 @@ def Dungeon(startLocation, location, locationIndex, playerStats, playerStatPoint
         itemsDict[3908][8] += i
         print(f"\nYou received {i}x {cl.YELLOW}{itemsDict[3908][2]}{cl.RESET}")
     if location == "leave dungeon":
-            location = "the dungeon"
+        location = "the dungeon"
             
 
     # Leave Dungeon:    
