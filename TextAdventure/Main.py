@@ -220,7 +220,7 @@ def World(startLocation, location, direction):
     "the mountains" :   [      "the castle"    ,          0          ,    "the forest"     ,     "the desert"    ,PicMountains],
     "the castle"    :   [           0          ,          0          ,   "the mountains"   ,          0          ,PicCastle],
     "the islands"   :   [           0          ,          0          ,    "mystic stones"  ,    "the forest"     ,PicIslands],
-    "mystic stones" :   [           0          ,          0          ,          0          ,   "mystic stones"   ,PicMysticStones],
+    "mystic stones" :   [     "the islands"    ,          0          ,          0          ,          0          ,PicMysticStones],
     "green land"    :   [     "the desert"     ,          0          ,   "the flatlands"   ,          0          ,PicGreenLand],
     "the desert"    :   [      "the lake"      ,   "the mountains"   ,     "green land"    ,          0          ,PicTheDesert],
     "the lake"      :   [           0          ,          0          ,     "the desert"    ,          0          ,PicTheLake],
