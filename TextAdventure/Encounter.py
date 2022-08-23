@@ -468,9 +468,9 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
                 sleep(4)
                 PicFairie()
                 playerInventoryMoney -= round(playerInventoryMoney * 0.1,2)
-                playerStats[5] *= 0.25
+                playerStats[5] -= playerStats[5] * 0.25
                 location = "the town"
-                playerStats[2] = 1
+                playerStats[2] = playerStats[1] * 0.25
                 break
             break
         else: 
