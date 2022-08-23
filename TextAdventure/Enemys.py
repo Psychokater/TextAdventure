@@ -10,33 +10,33 @@
 def Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard):
   
   enemyDictEasy = {
-          1001 : ["Pack of Rats",      0,     4,    3,   2,   1,   PicRat],
-          1002 : ["Bird",              0,     5,    4,   2,   1,   PicBird],
-          1003 : ["Cave Bat",          0,     6,    5,   1,   2,   PicCaveBat],
-          1004 : ["Minosaur ",         0,     8,    6,   3,   2,   PicMinosaur],
-          1005 : ["Wild Cat",          0,    10,    5,   2,   3,   PicWildCat],
-          1006 : ["Scorpion",          0,    12,    7,   4,   3,   PicScorpion],
-          1007 : ["Wolf",              0,    14,    8,   5,   4,   PicWolf],
-          1008 : ["Sea Crab",          0,    14,    5,   6,   4,   PicSeeCrab],
-          1009 : ["Alligator",         0,    16,   10,   7,   5,   PicAlligator],
-          1010 : ["Crazy Monkey",      0,    14,    6,   4,   5,   PicCrazyMonkey],
-          1011 : ["Native Cannibal",   0,    18,    7,   3,   6,   PicNativeCannibal],
-          1012 : ["Amateur Warrior",   0,    24,   12,   7,   7,   PicAmateurWarrior],
-          1013 : ["Skeleton",          0,    17,   14,   3,   8,   PicSkeleton],
-          1014 : ["ApeMan",            0,    20,   16,   5,   9,   PicApeMan],
-          1015 : ["Mutant Fox",        0,    18,   17,   6,   9,   PicMutantFox],
-          1016 : ["CyClops",           0,    24,   18,   8,  10,   PicCyclops]
+          1001 : ["Pack of Rats",      0,     4.0,    3.0,   2.0,   1,   PicRat],
+          1002 : ["Bird",              0,     5.0,    4.0,   2.0,   1,   PicBird],
+          1003 : ["Cave Bat",          0,     6.0,    5.0,   1.0,   2,   PicCaveBat],
+          1004 : ["Minosaur ",         0,     8.0,    6.0,   3.0,   2,   PicMinosaur],
+          1005 : ["Wild Cat",          0,    10.0,    5.0,   2.0,   3,   PicWildCat],
+          1006 : ["Scorpion",          0,    12.0,    7.0,   4.0,   3,   PicScorpion],
+          1007 : ["Wolf",              0,    14.0,    8.0,   5.0,   4,   PicWolf],
+          1008 : ["Sea Crab",          0,    14.0,    5.0,   6.0,   4,   PicSeeCrab],
+          1009 : ["Alligator",         0,    16.0,   10.0,   7.0,   5,   PicAlligator],
+          1010 : ["Crazy Monkey",      0,    14.0,    6.0,   4.0,   5,   PicCrazyMonkey],
+          1011 : ["Native Cannibal",   0,    18.0,    7.0,   3.0,   6,   PicNativeCannibal],
+          1012 : ["Amateur Warrior",   0,    24.0,   12.0,   7.0,   7,   PicAmateurWarrior],
+          1013 : ["Skeleton",          0,    17.0,   14.0,   3.0,   8,   PicSkeleton],
+          1014 : ["ApeMan",            0,    20.0,   16.0,   5.0,   9,   PicApeMan],
+          1015 : ["Mutant Fox",        0,    18.0,   17.0,   6.0,   9,   PicMutantFox],
+          1016 : ["CyClops",           0,    24.0,   18.0,   8.0,  10,   PicCyclops]
           }  #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
   enemyDictMedium = {   
-          1101 : ["Ghost",             0,     10,   4,   2,  11,   PicGhost],
-          1102 : ["Bandit",            0,     10,   4,   2,  14,   PicBandit],
-          1103 : ["Troll",             0,     12,   6,   4,  16,   PicTroll],
-          1104 : ["Centaur",           0,     15,   8,   5,  20,   PicCentaur]
+          1101 : ["Ghost",             0,     10.0,   4.0,   2.0,  11,   PicGhost],
+          1102 : ["Bandit",            0,     10.0,   4.0,   2.0,  14,   PicBandit],
+          1103 : ["Troll",             0,     12.0,   6.0,   4.0,  16,   PicTroll],
+          1104 : ["Centaur",           0,     15.0,   8.0,   5.0,  20,   PicCentaur]
           }  #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
   enemyDictHard = {   
-          1201 : ["Minotaur",          0,     20,   10,  4,  22,   PicMinotaur],
-          1202 : ["Gryphon",           0,     25,   10,  8,  24,   PicGryphon],
-          1203 : ["Dragon",            0,     50,   20, 12,  30,   PicDragon]
+          1201 : ["Minotaur",          0,     20.0,   10.0,  4.0,  22,   PicMinotaur],
+          1202 : ["Gryphon",           0,     25.0,   10.0,  8.0,  24,   PicGryphon],
+          1203 : ["Dragon",            0,     50.0,   20.0, 12.0,  30,   PicDragon]
           }  #Enemy: 0 Name,        1 LVL+, 2 HP, 3 ATK, 4 DEF, 5 LVL, 6 Pic
      
   return enemyDictEasy, enemyDictMedium, enemyDictHard

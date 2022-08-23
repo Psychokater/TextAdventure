@@ -319,7 +319,7 @@ def Fight(startLocation, playerStats, playerStatPoints, selectedDict, enemyID, p
             if _tempMoney < 0:
                 _tempMoney = 0.00
             if  playerStats[0]  - selectedDict[enemyID][1] > 2:
-                _tempExp = 0
+                _tempExp = 0.00
             else:
                 _tempExp += (round(((selectedDict[enemyID][1] + 3 - playerStats[0]) ** 1.25) * (selectedDict[enemyID][2] + (selectedDict[enemyID][3]*3) + (selectedDict[enemyID][4]*2)) ,2))
             if _tempExp < 0:
