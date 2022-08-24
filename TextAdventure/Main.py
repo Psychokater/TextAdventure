@@ -333,12 +333,12 @@ def PicFlatlands():
 ########################################################################
 
 def PicForest():
-    print("""       
-                           .:
-       ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^
-      /|\/|\/|\ /|\    /\-_--\    /|\/|\ /|\/|\/|\ /|\/|\.
-      /|\/|\/|\ /|\   /  \_-__\   /|\/|\ /|\/|\/|\ /|\/|\.
-      /|\/|\/|\ /|\   |[]| [] |   /|\/|\ /|\/|\/|\ /|\/|\ 
+    print(f"""       
+                                               .:
+       {cl.GREEN}^  ^  ^   ^{cl.RESET}      ___I_      {cl.GREEN}^  ^   ^  ^  ^   ^  ^{cl.RESET}
+      {cl.GREEN}/|\/|\/|\ /|\{cl.RESET}    /\-_--\    {cl.GREEN}/|\/|\ /|\/|\/|\ /|\/|\.{cl.RESET}
+      {cl.GREEN}/|\/|\/|\ /|\{cl.RESET}   /  \_-__\   {cl.GREEN}/|\/|\ /|\/|\/|\ /|\/|\.{cl.RESET}
+      {cl.GREEN}/|\/|\/|\ /|\{cl.RESET}   |[]| [] |   {cl.GREEN}/|\/|\ /|\/|\/|\ /|\/|\ {cl.RESET}
       """)
 ########################################################################
 
@@ -354,12 +354,12 @@ def PicMountains():
      /WWWWWIIIIi;..      \__/WWWIIII:.. \____ .   .  /MMI:  \   * .
  . _/WWWWWIIIi;;;:...:   ;\WWWWWWIIIII;.     \     /MMWII;   \    .  .     .
   /WWWWWIWIiii;;;.:.. :   ;\WWWWWIII;;;::     \___/MMWIIII;   \              .
- /WWWWWIIIIiii;;::.... :   ;|WWWWWWII;;::.:      :;IMWIIIII;:   \___     *
-/WWWWWWWWWIIIIIWIIii;;::;..;\WWWWWWIII;;;:::...    ;IMIII;;     ::  \     .
-WWWWWWWWWIIIIIIIIIii;;::.;..;\WWWWWWWWIIIII;;..  :;IMIII;:::     :    \   
-WWWWWWWWWWWWWIIIIIIii;;::..;..;\WWWWWWWWIIII;::; :::::::::.....::       \
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXX
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXXXXXXXXXXXXXXXXXXXXX
+ /WWWWWIIIIiii;;::.... :   ;|WWWWWWII;;::.:      :;IMWIIIII;:   \___     *  
+/WWWWWWWWWIIIIIWIIii;;::;..;\WWWWWWIII;;;:::...    ;IMIII;;     ::  \ 
+WWWWWWWWWIIIIIIIIIii;;::.;..;\WWWWWWWWIIIII;;..  :;IMIII;:::     :    \ XXXXXXXXXXXX
+WWWWWWWWWWWWWIIIIIIii;;::..;..;\WWWWWWWWIIII;::; :::::::::.....::       \.XXXXXXXXXXXXXXX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXXXXXXXXXXXXXXX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 """)
 ########################################################################
 def PicCastle():
@@ -367,8 +367,8 @@ def PicCastle():
 
    /\                                                        /\.
   |  |                                                      |  |
- /----\                 Lord Dark's Keep                  /----\.
-[______]            Where Brave Knights Tremble          [______]
+ /----\                 Lord Dark's Keep                   /----\.
+[______]            Where Brave Knights Tremble           [______]
  |    |         _____                        _____         |    |
  |[]  |        [     ]                      [     ]        |  []|
  |    |       [_______][ ][ ][ ][][ ][ ][ ][_______]       |    |

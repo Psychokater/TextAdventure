@@ -6,4 +6,6 @@ class cl:
     WHITE   = "\033[97m"
     MAGENTA = "\033[95m"
     CYAN    = "\033[96m"
+    U_LINE  = "\033[4m"
+
     RESET   =  '\033[0m' #RESET COLOR Nice
