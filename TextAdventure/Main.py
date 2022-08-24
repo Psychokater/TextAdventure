@@ -11,12 +11,10 @@
 #           ToDo             #
 #----------------------------#
 #
-# - add Items and Monsters (Samo) on the way
-# - add more Locations and Dungeon (Nils)
-# - quests 
-# - Gates
-# 
-# ----------------------------#
+# add something...
+#
+#
+#----------------------------#
 
 
 import os
