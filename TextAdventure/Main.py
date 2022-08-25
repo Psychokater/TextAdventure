@@ -107,7 +107,7 @@ def Start(dataSaveList):
         else:
             break
     sleep(0.5)
-    print(f"\nWelcome to your first adventure {playerName}!")
+    print(f"\nWelcome to a new adventure {playerName}!")
     sleep(0.5)
     print(f"\nYou wake up in {location}")
     PicStartFire()
