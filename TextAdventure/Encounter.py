@@ -51,7 +51,7 @@ def Encounter(startLocation, location, playerStats, playerStatPoints, playerInve
         luck = random.randint(1,100)                                                   
     if luck >= 98:                                                          
         itemsDict, playerInventoryMoney, playerStats = Inventory.WandererMenu(startLocation, location, itemsDict, playerName, playerInventoryMoney, playerStats)
-    encounterIndex = round(luck - (luck * (playerStats[0]) * 0.01) - locationIndex)             # high = good, low = bad, max = 100 (lvl 1, location 1)    
+    encounterIndex = locationIndex            # high = good, low = bad, max = 100 (lvl 1, location 1)    
     enemyID, selectedDict, selectedDictID = EnemySelection(playerStats, encounterIndex)
     
    
@@ -109,7 +109,8 @@ def EnemySelection(playerStats, encounterIndex):
     #Edit this function later to config chances for Encounter    
     enemyDictEasy = {}
     enemyDictMedium = {}
-    enemyDictHard = {}    
+    enemyDictHard = {}   
+    locationIndex = 0 
 
     enemyDictEasy, enemyDictMedium, enemyDictHard = Enemys.Enemys(enemyDictEasy, enemyDictMedium, enemyDictHard)
     enemyID = 0                                                                                      
@@ -118,21 +119,21 @@ def EnemySelection(playerStats, encounterIndex):
     selectedDictID = 0
     #PlayerStats: # Playerstats = 0 Level, 1 MAX HP, 2 HP, 3 ATK, 4 DEF, 5 EXP   
     while True:
-        if encounterIndex <= 10:
+        if encounterIndex == 3:
             _luck = random.randint(0,len(enemyDictHard)-2)
             for i in enemyDictHard:
                 _tempList.append(i)
             enemyID = _tempList[_luck]
             selectedDict = enemyDictHard
             selectedDictID = 3        
-        elif encounterIndex > 11 and encounterIndex <= 42:
+        elif encounterIndex == 2:
             _luck = random.randint(0,len(enemyDictMedium)-2)
             for i in enemyDictMedium:
                 _tempList.append(i)
             enemyID = _tempList[_luck]
             selectedDict = enemyDictMedium
             selectedDictID = 2
-        elif encounterIndex > 43 and encounterIndex <= 100:
+        elif encounterIndex == 1:
             _luck = random.randint(0,len(enemyDictEasy)-2)
             for i in enemyDictEasy:
                 _tempList.append(i)
