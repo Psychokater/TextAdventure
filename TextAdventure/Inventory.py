@@ -82,7 +82,7 @@ def GetInventoryPlayer(itemsDict, playerItemIDs, playerName, playerInventoryMone
             itemsDict[i][1] = z                                                 #   Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
-            print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
+            print('\u2009 ',itemsDict[i][1],end=' ======>\t')                        #   print Enumerate
             for j in range (0,len(itemsDict[i])):
                 if j == 2:
                     print('{:<15}'.format(itemsDict[i][j]),end='')                
@@ -292,7 +292,7 @@ def GetPlayerEquipment(itemsDict , playerItemIDs, playerName, playerInventoryMon
             itemsDict[i][1] = z                                                 #   Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             playerItemIDs.append(i)                                             #   append Item ID to List of ItemID's
-            print('\u2009 ',itemsDict[i][1],end='\t:\t')                        #   print Enumerate
+            print('\u2009 ',itemsDict[i][1],end=' ======>\t')                        #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 if j == 11:                    
                     if itemsDict[i][j] > 10:
@@ -360,7 +360,7 @@ def GetInventoryMerchant(itemsDict, merchantItemIDs):
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             merchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            print ('\u2009 ',itemsDict[i][0],end=' ======>\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
                 if j == 2:
@@ -487,7 +487,7 @@ def GetInventoryWizard(itemsDict, wizardItemIDs):
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             wizardItemIDs.append(i)                                             #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            print ('\u2009 ',itemsDict[i][0],end=' ======>\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
                 if j == 2:
@@ -614,7 +614,7 @@ def GetInventoryWanderer(itemsDict, wandererItemIDs):
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             wandererItemIDs.append(i)                                           #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            print ('\u2009 ',itemsDict[i][0],end=' ======>\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
                 if j == 2:
@@ -744,7 +744,7 @@ def GetInventoryDragonMerchant(itemsDict, dragonMerchantItemIDs):
             itemsDict[i][0] = z                                                 #       Enumerate Itemline
             z += 1                                                              #   Enumerate + 1
             dragonMerchantItemIDs.append(i)                                           #   append Item ID to List of ItemID's
-            print ('\u2009 ',itemsDict[i][0],end='\t:\t')                       #   print Enumerate
+            print ('\u2009 ',itemsDict[i][0],end=' ======>\t')                       #   print Enumerate
             for j in range (0,len(itemsDict[i])):                               #       for every Value Index of every Item
                 _tempListIndexJ = [0, 1, 2, 8, 9, 10, 11]
                 if j == 2:
