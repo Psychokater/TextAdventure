@@ -22,6 +22,7 @@ import random
 import pickle
 from time import sleep
 from Colors import cl
+from Intro import IntroAnimation
 
 import MainMenu
 import SaveLoad
@@ -91,6 +92,7 @@ def Start(dataSaveList):
     # sleep(2)
     startLocation = _startLocations[random.randint(0,len(_startLocations)-1)]
     location = startLocation ### FOR TESTING CHANGE THIS: ## CHANGE FROM "location = startLocation" TO "location = "the flatlands"  ONLY FOR TESTING!!!!!!
+    IntroAnimation()
     while True:
         playerName = input("\nWhat's your name adventurer?\n").capitalize()
         os.system('cls')
