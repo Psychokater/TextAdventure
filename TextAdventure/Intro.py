@@ -1,6 +1,6 @@
 from time import sleep
 import os
-
+from Colors import cl 
 os.system('cls')
 def Intro():
   # x = "░"
@@ -241,22 +241,30 @@ def IntroAnimation():
   """)
   sleep(8)
   os.system('cls')
-  print("""
-
-
-
+  for i in range(0,5):
+    os.system('cls')
+    print("""
                               .
                              / \\
                             _\ /_
                   .     .  (,'v`.)  .     .
                   \)   ( )  ,' `.  ( )   (/
-                    \`. / `-'     `-' \ ,'/
+                   \`. / `-'     `-' \ ,'/
                     : '    _______    ' :
                     |  _,-'  ,-.  `-._  |
                     |,' ( )__`-'__( ) `.|
-                    (|,-,'-._   _.-`.-.|)
-                    /  /<( ° ) ( ° )>\  \\
-                    :  :     | |     :  :
+                    (|,-,'-._   _.-`.-.|) """)
+    if i == 0:
+        print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
+    if i == 1:
+        print(f"                    /  /<({cl.RED}°{cl.RESET}  ) ({cl.RED}°{cl.RESET}  )>\  \\")
+    if i == 2:
+        print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
+    if i == 3:
+        print(f"                    /  /<(  {cl.RED}°{cl.RESET}) (  {cl.RED}°{cl.RESET})>\  \\")
+    if i == 4:
+        print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
+    print("""                    :  :     | |     :  :
                     |  |     ; :     |  |
                     |  |    (.-.)    |  |
                     |  |  ,' ___ `.  |  |
@@ -266,11 +274,11 @@ def IntroAnimation():
                     `.  ;`._________,':  ,'
                   ,' `/               \\'`.
                         `------.------'     
-
-
   ...he became mad as his whole new kingdom sunk into chaos...
-
-  """)
+    """)
+  
+    sleep(0.08)
+  
   sleep(8)
   os.system('cls')
   print("""
