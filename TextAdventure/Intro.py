@@ -241,7 +241,7 @@ def IntroAnimation():
   """)
   sleep(8)
   os.system('cls')
-  for i in range(0,5):
+  for i in range(0,10):
     os.system('cls')
     print("""
                               .
@@ -254,15 +254,15 @@ def IntroAnimation():
                     |  _,-'  ,-.  `-._  |
                     |,' ( )__`-'__( ) `.|
                     (|,-,'-._   _.-`.-.|) """)
-    if i == 0:
+    if i == 0 or  i == 5:
         print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
-    if i == 1:
+    if i == 1 or  i == 6:
         print(f"                    /  /<({cl.RED}°{cl.RESET}  ) ({cl.RED}°{cl.RESET}  )>\  \\")
-    if i == 2:
+    if i == 2 or  i == 7:
         print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
-    if i == 3:
+    if i == 3 or  i == 8:
         print(f"                    /  /<(  {cl.RED}°{cl.RESET}) (  {cl.RED}°{cl.RESET})>\  \\")
-    if i == 4:
+    if i == 4 or  i == 9:
         print(f"                    /  /<( {cl.RED}°{cl.RESET} ) ( {cl.RED}°{cl.RESET} )>\  \\")
     print("""                    :  :     | |     :  :
                     |  |     ; :     |  |
@@ -277,9 +277,9 @@ def IntroAnimation():
   ...he became mad as his whole new kingdom sunk into chaos...
     """)
   
-    sleep(0.08)
+    sleep(0.9)
   
-  sleep(8)
+  sleep(4)
   os.system('cls')
   print("""
 
