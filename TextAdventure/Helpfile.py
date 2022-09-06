@@ -3,7 +3,7 @@ def HelpTxt():
 
 ####################################
 #                                  # 
-#  Author: Nils aka Psychokater    #
+#  Author: Nils aka TrilemmaGrande #
 #  CoAuthor: Samo aka Samoooooooo  #
 #                                  #
 #################################### 
